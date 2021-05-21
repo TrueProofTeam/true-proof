@@ -1,5 +1,7 @@
 # Triceratops Team Agreement
 
+[Back to ReadMe](/README.md)
+
 ## Team members
 
 Seamus Brown
@@ -44,3 +46,5 @@ Our working hours are 9am - 5pm Pacific time. Anyone can work outside of the exp
 - How often will you merge feature branches into dev? Whenever necessary
 - Notify team members on discord when you need your PR reviewed.
 - Use code reviews or comments on PRs to make comments about code.
+
+[Back to ReadMe](/README.md)
