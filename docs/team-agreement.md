@@ -1,6 +1,6 @@
 # Triceratops Team Agreement
 
-# Team members
+## Team members
 
 Seamus Brown
 Barret Nance
@@ -8,17 +8,17 @@ Cristian Robles
 Edward Hou
 Stephen Webber
 
-# Communication plan
+## Communication plan
 
 Our main channel of communication is our team discord's channel. When people are not on Discord, Slack is our second option to try and reach out to people. Remo can be used to meet with TAs and get help.
 
 Daily standup with TAs: we'll touch base for 15 minutes to 30 minutes each day to talk about our progress on tasks or features and what needs to be done.
 
-# Working hours
+## Working hours
 
 Our working hours are 9am - 5pm Pacific time. Anyone can work outside of the expected working hours. There is no expectation that people be available or working outside of working hours. However it's highly probable that people will be working or reachable outside working outside of working hours on any given day.
 
-# Conflict plan
+## Conflict plan
 
 - When there's disagreements, put it to a majority vote. If a minority of members strongly disagrees with the majority or if we are at a stand still we bring each case to the instructor to resolve the issue.
 - Try not to interrupt when we disagree so that we actually have a genuine opportunity to understand where the other person is coming from.
@@ -27,14 +27,14 @@ Our working hours are 9am - 5pm Pacific time. Anyone can work outside of the exp
 - Hard vetoing: Everyone has the ability to resolve a conflict by articulating whatever idea they feel very strongly about and why. The group will commit to incorporating that idea with a reasonable compromise.
 - We hope and expect not to use these processes and resolve our conflicts as casually as possible. We collectively commit to falling back on these processes if we need to.
 
-# Team communication guidelines
+## Team communication guidelines
 
 - When we are discussing on the project, iterating through everyone to hear their ideas
 - We are all committed to giving everyone their fair chance to talk.
 - Don’t hesitate to say something and bring it up to the group, or leave things unsaid.
 - If someone feels like another member of the group could contribute more or may not be included, they are to directly ask that person for input.
 
-# Git Process
+## Git Process
 
 - Main branch gets deployed
 - Work is completed on semantically named feature branches

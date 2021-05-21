@@ -1,4 +1,4 @@
-## User Stories
+# User Stories
 
 As a user, I want an Android app to enter my TDD information so that I can calculate it without consulting crusty old tables.
 
@@ -7,7 +7,6 @@ As a logged-in user I want to see my previous batch calculations.
 As a logged-in user, I want to store my TDD measuring equipment so I can easily reference how measurements were made.
 
 As a non-logged-in user, I want to be able to use the tables to calculate totals.
-
 
 ## Feature Tasks
 
@@ -30,12 +29,11 @@ This app gives users a better way to calculate and store TDD values, a vast impr
 
 No other viable competition exists that is also up-to-date and as feature-ful.
 
-
 ### Scope
 
 This Android app will provide a means for users to enter and calculate TDD totals for distilled batches.
 
-The user will be able to store their equipment used and previous batch data. 
+The user will be able to store their equipment used and previous batch data.
 
 The user will be able to share/export their batch calculations as a file.
 
@@ -61,7 +59,7 @@ Enable paid feature for API use.
 
 ## Data Flow
 
-Main Activity --> User is presented with option 1: login/signup 
+Main Activity --> User is presented with option 1: login/signup
 option 2: TDD form for guest-level data entry
 
 TDD Activity --> User can input data and select Submit.
