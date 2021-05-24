@@ -6,7 +6,7 @@ import android.os.Bundle;
 
 import com.trueproof.trueproof.R;
 
-public class NewBatch extends AppCompatActivity {
+public class NewBatchActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
