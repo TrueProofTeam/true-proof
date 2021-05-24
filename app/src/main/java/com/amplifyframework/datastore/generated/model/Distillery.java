@@ -22,11 +22,11 @@ import static com.amplifyframework.core.model.query.predicate.QueryField.field;
 public final class Distillery implements Model {
   public static final QueryField ID = field("Distillery", "id");
   public static final QueryField NAME = field("Distillery", "name");
-  public static final QueryField DSP = field("Distillery", "DSP");
+  public static final QueryField DSP_ID = field("Distillery", "dspID");
   public static final QueryField USERS = field("Distillery", "users");
   private final @ModelField(targetType="ID", isRequired = true) String id;
   private final @ModelField(targetType="String") String name;
-  private final @ModelField(targetType="String") String DSP;
+  private final @ModelField(targetType="String") String dspID;
   private final @ModelField(targetType="String") List<String> users;
   private final @ModelField(targetType="Batch") @HasMany(associatedWith = "distillery", type = Batch.class) List<Batch> batches = null;
   public String getId() {
@@ -37,8 +37,8 @@ public final class Distillery implements Model {
       return name;
   }
   
-  public String getDsp() {
-      return DSP;
+  public String getDspId() {
+      return dspID;
   }
   
   public List<String> getUsers() {
@@ -49,10 +49,10 @@ public final class Distillery implements Model {
       return batches;
   }
   
-  private Distillery(String id, String name, String DSP, List<String> users) {
+  private Distillery(String id, String name, String dspID, List<String> users) {
     this.id = id;
     this.name = name;
-    this.DSP = DSP;
+    this.dspID = dspID;
     this.users = users;
   }
   
@@ -66,7 +66,7 @@ public final class Distillery implements Model {
       Distillery distillery = (Distillery) obj;
       return ObjectsCompat.equals(getId(), distillery.getId()) &&
               ObjectsCompat.equals(getName(), distillery.getName()) &&
-              ObjectsCompat.equals(getDsp(), distillery.getDsp()) &&
+              ObjectsCompat.equals(getDspId(), distillery.getDspId()) &&
               ObjectsCompat.equals(getUsers(), distillery.getUsers());
       }
   }
@@ -76,7 +76,7 @@ public final class Distillery implements Model {
     return new StringBuilder()
       .append(getId())
       .append(getName())
-      .append(getDsp())
+      .append(getDspId())
       .append(getUsers())
       .toString()
       .hashCode();
@@ -88,7 +88,7 @@ public final class Distillery implements Model {
       .append("Distillery {")
       .append("id=" + String.valueOf(getId()) + ", ")
       .append("name=" + String.valueOf(getName()) + ", ")
-      .append("DSP=" + String.valueOf(getDsp()) + ", ")
+      .append("dspID=" + String.valueOf(getDspId()) + ", ")
       .append("users=" + String.valueOf(getUsers()))
       .append("}")
       .toString();
@@ -128,14 +128,14 @@ public final class Distillery implements Model {
   public CopyOfBuilder copyOfBuilder() {
     return new CopyOfBuilder(id,
       name,
-      DSP,
+      dspID,
       users);
   }
   public interface BuildStep {
     Distillery build();
     BuildStep id(String id) throws IllegalArgumentException;
     BuildStep name(String name);
-    BuildStep dsp(String dsp);
+    BuildStep dspId(String dspId);
     BuildStep users(List<String> users);
   }
   
@@ -143,7 +143,7 @@ public final class Distillery implements Model {
   public static class Builder implements BuildStep {
     private String id;
     private String name;
-    private String DSP;
+    private String dspID;
     private List<String> users;
     @Override
      public Distillery build() {
@@ -152,7 +152,7 @@ public final class Distillery implements Model {
         return new Distillery(
           id,
           name,
-          DSP,
+          dspID,
           users);
     }
     
@@ -163,8 +163,8 @@ public final class Distillery implements Model {
     }
     
     @Override
-     public BuildStep dsp(String dsp) {
-        this.DSP = dsp;
+     public BuildStep dspId(String dspId) {
+        this.dspID = dspId;
         return this;
     }
     
@@ -197,10 +197,10 @@ public final class Distillery implements Model {
   
 
   public final class CopyOfBuilder extends Builder {
-    private CopyOfBuilder(String id, String name, String dsp, List<String> users) {
+    private CopyOfBuilder(String id, String name, String dspId, List<String> users) {
       super.id(id);
       super.name(name)
-        .dsp(dsp)
+        .dspId(dspId)
         .users(users);
     }
     
@@ -210,8 +210,8 @@ public final class Distillery implements Model {
     }
     
     @Override
-     public CopyOfBuilder dsp(String dsp) {
-      return (CopyOfBuilder) super.dsp(dsp);
+     public CopyOfBuilder dspId(String dspId) {
+      return (CopyOfBuilder) super.dspId(dspId);
     }
     
     @Override

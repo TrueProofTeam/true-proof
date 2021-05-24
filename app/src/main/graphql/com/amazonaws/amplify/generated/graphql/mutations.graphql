@@ -6,7 +6,7 @@ mutation CreateDistillery(
   createDistillery(input: $input, condition: $condition) {
     id
     name
-    DSP
+    dspID
     users
     batches {
       items {
@@ -39,7 +39,7 @@ mutation UpdateDistillery(
   updateDistillery(input: $input, condition: $condition) {
     id
     name
-    DSP
+    dspID
     users
     batches {
       items {
@@ -72,7 +72,7 @@ mutation DeleteDistillery(
   deleteDistillery(input: $input, condition: $condition) {
     id
     name
-    DSP
+    dspID
     users
     batches {
       items {
@@ -114,7 +114,7 @@ mutation CreateBatch(
     distillery {
       id
       name
-      DSP
+      dspID
       users
       batches {
         nextToken
@@ -166,7 +166,7 @@ mutation UpdateBatch(
     distillery {
       id
       name
-      DSP
+      dspID
       users
       batches {
         nextToken
@@ -218,7 +218,7 @@ mutation DeleteBatch(
     distillery {
       id
       name
-      DSP
+      dspID
       users
       batches {
         nextToken
@@ -281,7 +281,7 @@ mutation CreateMeasurement(
       distillery {
         id
         name
-        DSP
+        dspID
         users
         _version
         _deleted
@@ -329,7 +329,7 @@ mutation UpdateMeasurement(
       distillery {
         id
         name
-        DSP
+        dspID
         users
         _version
         _deleted
@@ -377,7 +377,7 @@ mutation DeleteMeasurement(
       distillery {
         id
         name
-        DSP
+        dspID
         users
         _version
         _deleted

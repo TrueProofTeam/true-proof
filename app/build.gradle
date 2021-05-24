@@ -46,8 +46,12 @@ dependencies {
 
     implementation "com.google.dagger:hilt-android:$hilt_version"
     annotationProcessor "com.google.dagger:hilt-compiler:$hilt_version"
-    implementation 'com.amplifyframework:aws-api:1.17.4'
+
+    implementation 'com.amplifyframework:core:1.17.5'
+    implementation 'com.amplifyframework:aws-auth-cognito:1.17.5'
+    implementation 'com.amplifyframework:aws-api:1.17.5'
     implementation 'com.amplifyframework:aws-datastore:1.17.4'
+
     implementation "androidx.lifecycle:lifecycle-viewmodel:$lifecycle_version" // ViewModel
     implementation "androidx.lifecycle:lifecycle-livedata:$lifecycle_version" // LiveData
     implementation "androidx.lifecycle:lifecycle-runtime:$lifecycle_version" // Lifecycles only (without ViewModel or LiveData)
