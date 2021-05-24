@@ -1,21 +1,26 @@
 # this is an auto generated file. This will be overwritten
-mutation CreateBlog(
-  $input: CreateBlogInput!
-  $condition: ModelBlogConditionInput
+mutation CreateDistillery(
+  $input: CreateDistilleryInput!
+  $condition: ModelDistilleryConditionInput
 ) {
-  createBlog(input: $input, condition: $condition) {
+  createDistillery(input: $input, condition: $condition) {
     id
     name
-    posts {
+    DSP
+    users
+    batches {
       items {
         id
-        title
-        blogID
+        distilleryID
+        batchIdentifier
+        batchNumber
+        status
+        type
+        createdAt
+        updatedAt
         _version
         _deleted
         _lastChangedAt
-        createdAt
-        updatedAt
       }
       nextToken
       startedAt
@@ -27,23 +32,28 @@ mutation CreateBlog(
     updatedAt
   }
 }
-mutation UpdateBlog(
-  $input: UpdateBlogInput!
-  $condition: ModelBlogConditionInput
+mutation UpdateDistillery(
+  $input: UpdateDistilleryInput!
+  $condition: ModelDistilleryConditionInput
 ) {
-  updateBlog(input: $input, condition: $condition) {
+  updateDistillery(input: $input, condition: $condition) {
     id
     name
-    posts {
+    DSP
+    users
+    batches {
       items {
         id
-        title
-        blogID
+        distilleryID
+        batchIdentifier
+        batchNumber
+        status
+        type
+        createdAt
+        updatedAt
         _version
         _deleted
         _lastChangedAt
-        createdAt
-        updatedAt
       }
       nextToken
       startedAt
@@ -55,23 +65,28 @@ mutation UpdateBlog(
     updatedAt
   }
 }
-mutation DeleteBlog(
-  $input: DeleteBlogInput!
-  $condition: ModelBlogConditionInput
+mutation DeleteDistillery(
+  $input: DeleteDistilleryInput!
+  $condition: ModelDistilleryConditionInput
 ) {
-  deleteBlog(input: $input, condition: $condition) {
+  deleteDistillery(input: $input, condition: $condition) {
     id
     name
-    posts {
+    DSP
+    users
+    batches {
       items {
         id
-        title
-        blogID
+        distilleryID
+        batchIdentifier
+        batchNumber
+        status
+        type
+        createdAt
+        updatedAt
         _version
         _deleted
         _lastChangedAt
-        createdAt
-        updatedAt
       }
       nextToken
       startedAt
@@ -83,18 +98,25 @@ mutation DeleteBlog(
     updatedAt
   }
 }
-mutation CreatePost(
-  $input: CreatePostInput!
-  $condition: ModelPostConditionInput
+mutation CreateBatch(
+  $input: CreateBatchInput!
+  $condition: ModelBatchConditionInput
 ) {
-  createPost(input: $input, condition: $condition) {
+  createBatch(input: $input, condition: $condition) {
     id
-    title
-    blogID
-    blog {
+    distilleryID
+    batchIdentifier
+    batchNumber
+    status
+    type
+    createdAt
+    updatedAt
+    distillery {
       id
       name
-      posts {
+      DSP
+      users
+      batches {
         nextToken
         startedAt
       }
@@ -104,16 +126,21 @@ mutation CreatePost(
       createdAt
       updatedAt
     }
-    comments {
+    measurements {
       items {
         id
-        postID
-        content
+        batchID
+        temperature
+        hydrometer
+        temperatureCorrection
+        hydrometerCorrection
+        note
+        flag
+        createdAt
+        updatedAt
         _version
         _deleted
         _lastChangedAt
-        createdAt
-        updatedAt
       }
       nextToken
       startedAt
@@ -121,22 +148,27 @@ mutation CreatePost(
     _version
     _deleted
     _lastChangedAt
-    createdAt
-    updatedAt
   }
 }
-mutation UpdatePost(
-  $input: UpdatePostInput!
-  $condition: ModelPostConditionInput
+mutation UpdateBatch(
+  $input: UpdateBatchInput!
+  $condition: ModelBatchConditionInput
 ) {
-  updatePost(input: $input, condition: $condition) {
+  updateBatch(input: $input, condition: $condition) {
     id
-    title
-    blogID
-    blog {
+    distilleryID
+    batchIdentifier
+    batchNumber
+    status
+    type
+    createdAt
+    updatedAt
+    distillery {
       id
       name
-      posts {
+      DSP
+      users
+      batches {
         nextToken
         startedAt
       }
@@ -146,16 +178,21 @@ mutation UpdatePost(
       createdAt
       updatedAt
     }
-    comments {
+    measurements {
       items {
         id
-        postID
-        content
+        batchID
+        temperature
+        hydrometer
+        temperatureCorrection
+        hydrometerCorrection
+        note
+        flag
+        createdAt
+        updatedAt
         _version
         _deleted
         _lastChangedAt
-        createdAt
-        updatedAt
       }
       nextToken
       startedAt
@@ -163,22 +200,27 @@ mutation UpdatePost(
     _version
     _deleted
     _lastChangedAt
-    createdAt
-    updatedAt
   }
 }
-mutation DeletePost(
-  $input: DeletePostInput!
-  $condition: ModelPostConditionInput
+mutation DeleteBatch(
+  $input: DeleteBatchInput!
+  $condition: ModelBatchConditionInput
 ) {
-  deletePost(input: $input, condition: $condition) {
+  deleteBatch(input: $input, condition: $condition) {
     id
-    title
-    blogID
-    blog {
+    distilleryID
+    batchIdentifier
+    batchNumber
+    status
+    type
+    createdAt
+    updatedAt
+    distillery {
       id
       name
-      posts {
+      DSP
+      users
+      batches {
         nextToken
         startedAt
       }
@@ -188,16 +230,21 @@ mutation DeletePost(
       createdAt
       updatedAt
     }
-    comments {
+    measurements {
       items {
         id
-        postID
-        content
+        batchID
+        temperature
+        hydrometer
+        temperatureCorrection
+        hydrometerCorrection
+        note
+        flag
+        createdAt
+        updatedAt
         _version
         _deleted
         _lastChangedAt
-        createdAt
-        updatedAt
       }
       nextToken
       startedAt
@@ -205,121 +252,149 @@ mutation DeletePost(
     _version
     _deleted
     _lastChangedAt
-    createdAt
-    updatedAt
   }
 }
-mutation CreateComment(
-  $input: CreateCommentInput!
-  $condition: ModelCommentConditionInput
+mutation CreateMeasurement(
+  $input: CreateMeasurementInput!
+  $condition: ModelMeasurementConditionInput
 ) {
-  createComment(input: $input, condition: $condition) {
+  createMeasurement(input: $input, condition: $condition) {
     id
-    postID
-    post {
+    batchID
+    temperature
+    hydrometer
+    temperatureCorrection
+    hydrometerCorrection
+    note
+    flag
+    createdAt
+    updatedAt
+    batch {
       id
-      title
-      blogID
-      blog {
+      distilleryID
+      batchIdentifier
+      batchNumber
+      status
+      type
+      createdAt
+      updatedAt
+      distillery {
         id
         name
+        DSP
+        users
         _version
         _deleted
         _lastChangedAt
         createdAt
         updatedAt
       }
-      comments {
+      measurements {
         nextToken
         startedAt
       }
       _version
       _deleted
       _lastChangedAt
-      createdAt
-      updatedAt
     }
-    content
     _version
     _deleted
     _lastChangedAt
-    createdAt
-    updatedAt
   }
 }
-mutation UpdateComment(
-  $input: UpdateCommentInput!
-  $condition: ModelCommentConditionInput
+mutation UpdateMeasurement(
+  $input: UpdateMeasurementInput!
+  $condition: ModelMeasurementConditionInput
 ) {
-  updateComment(input: $input, condition: $condition) {
+  updateMeasurement(input: $input, condition: $condition) {
     id
-    postID
-    post {
+    batchID
+    temperature
+    hydrometer
+    temperatureCorrection
+    hydrometerCorrection
+    note
+    flag
+    createdAt
+    updatedAt
+    batch {
       id
-      title
-      blogID
-      blog {
+      distilleryID
+      batchIdentifier
+      batchNumber
+      status
+      type
+      createdAt
+      updatedAt
+      distillery {
         id
         name
+        DSP
+        users
         _version
         _deleted
         _lastChangedAt
         createdAt
         updatedAt
       }
-      comments {
+      measurements {
         nextToken
         startedAt
       }
       _version
       _deleted
       _lastChangedAt
-      createdAt
-      updatedAt
     }
-    content
     _version
     _deleted
     _lastChangedAt
-    createdAt
-    updatedAt
   }
 }
-mutation DeleteComment(
-  $input: DeleteCommentInput!
-  $condition: ModelCommentConditionInput
+mutation DeleteMeasurement(
+  $input: DeleteMeasurementInput!
+  $condition: ModelMeasurementConditionInput
 ) {
-  deleteComment(input: $input, condition: $condition) {
+  deleteMeasurement(input: $input, condition: $condition) {
     id
-    postID
-    post {
+    batchID
+    temperature
+    hydrometer
+    temperatureCorrection
+    hydrometerCorrection
+    note
+    flag
+    createdAt
+    updatedAt
+    batch {
       id
-      title
-      blogID
-      blog {
+      distilleryID
+      batchIdentifier
+      batchNumber
+      status
+      type
+      createdAt
+      updatedAt
+      distillery {
         id
         name
+        DSP
+        users
         _version
         _deleted
         _lastChangedAt
         createdAt
         updatedAt
       }
-      comments {
+      measurements {
         nextToken
         startedAt
       }
       _version
       _deleted
       _lastChangedAt
-      createdAt
-      updatedAt
     }
-    content
     _version
     _deleted
     _lastChangedAt
-    createdAt
-    updatedAt
   }
 }

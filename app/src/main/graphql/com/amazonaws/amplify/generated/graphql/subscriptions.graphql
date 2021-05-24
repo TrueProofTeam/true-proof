@@ -1,18 +1,23 @@
 # this is an auto generated file. This will be overwritten
-subscription OnCreateBlog {
-  onCreateBlog {
+subscription OnCreateDistillery {
+  onCreateDistillery {
     id
     name
-    posts {
+    DSP
+    users
+    batches {
       items {
         id
-        title
-        blogID
+        distilleryID
+        batchIdentifier
+        batchNumber
+        status
+        type
+        createdAt
+        updatedAt
         _version
         _deleted
         _lastChangedAt
-        createdAt
-        updatedAt
       }
       nextToken
       startedAt
@@ -24,20 +29,25 @@ subscription OnCreateBlog {
     updatedAt
   }
 }
-subscription OnUpdateBlog {
-  onUpdateBlog {
+subscription OnUpdateDistillery {
+  onUpdateDistillery {
     id
     name
-    posts {
+    DSP
+    users
+    batches {
       items {
         id
-        title
-        blogID
+        distilleryID
+        batchIdentifier
+        batchNumber
+        status
+        type
+        createdAt
+        updatedAt
         _version
         _deleted
         _lastChangedAt
-        createdAt
-        updatedAt
       }
       nextToken
       startedAt
@@ -49,20 +59,25 @@ subscription OnUpdateBlog {
     updatedAt
   }
 }
-subscription OnDeleteBlog {
-  onDeleteBlog {
+subscription OnDeleteDistillery {
+  onDeleteDistillery {
     id
     name
-    posts {
+    DSP
+    users
+    batches {
       items {
         id
-        title
-        blogID
+        distilleryID
+        batchIdentifier
+        batchNumber
+        status
+        type
+        createdAt
+        updatedAt
         _version
         _deleted
         _lastChangedAt
-        createdAt
-        updatedAt
       }
       nextToken
       startedAt
@@ -74,15 +89,22 @@ subscription OnDeleteBlog {
     updatedAt
   }
 }
-subscription OnCreatePost {
-  onCreatePost {
+subscription OnCreateBatch {
+  onCreateBatch {
     id
-    title
-    blogID
-    blog {
+    distilleryID
+    batchIdentifier
+    batchNumber
+    status
+    type
+    createdAt
+    updatedAt
+    distillery {
       id
       name
-      posts {
+      DSP
+      users
+      batches {
         nextToken
         startedAt
       }
@@ -92,16 +114,21 @@ subscription OnCreatePost {
       createdAt
       updatedAt
     }
-    comments {
+    measurements {
       items {
         id
-        postID
-        content
+        batchID
+        temperature
+        hydrometer
+        temperatureCorrection
+        hydrometerCorrection
+        note
+        flag
+        createdAt
+        updatedAt
         _version
         _deleted
         _lastChangedAt
-        createdAt
-        updatedAt
       }
       nextToken
       startedAt
@@ -109,19 +136,24 @@ subscription OnCreatePost {
     _version
     _deleted
     _lastChangedAt
-    createdAt
-    updatedAt
   }
 }
-subscription OnUpdatePost {
-  onUpdatePost {
+subscription OnUpdateBatch {
+  onUpdateBatch {
     id
-    title
-    blogID
-    blog {
+    distilleryID
+    batchIdentifier
+    batchNumber
+    status
+    type
+    createdAt
+    updatedAt
+    distillery {
       id
       name
-      posts {
+      DSP
+      users
+      batches {
         nextToken
         startedAt
       }
@@ -131,16 +163,21 @@ subscription OnUpdatePost {
       createdAt
       updatedAt
     }
-    comments {
+    measurements {
       items {
         id
-        postID
-        content
+        batchID
+        temperature
+        hydrometer
+        temperatureCorrection
+        hydrometerCorrection
+        note
+        flag
+        createdAt
+        updatedAt
         _version
         _deleted
         _lastChangedAt
-        createdAt
-        updatedAt
       }
       nextToken
       startedAt
@@ -148,19 +185,24 @@ subscription OnUpdatePost {
     _version
     _deleted
     _lastChangedAt
-    createdAt
-    updatedAt
   }
 }
-subscription OnDeletePost {
-  onDeletePost {
+subscription OnDeleteBatch {
+  onDeleteBatch {
     id
-    title
-    blogID
-    blog {
+    distilleryID
+    batchIdentifier
+    batchNumber
+    status
+    type
+    createdAt
+    updatedAt
+    distillery {
       id
       name
-      posts {
+      DSP
+      users
+      batches {
         nextToken
         startedAt
       }
@@ -170,16 +212,21 @@ subscription OnDeletePost {
       createdAt
       updatedAt
     }
-    comments {
+    measurements {
       items {
         id
-        postID
-        content
+        batchID
+        temperature
+        hydrometer
+        temperatureCorrection
+        hydrometerCorrection
+        note
+        flag
+        createdAt
+        updatedAt
         _version
         _deleted
         _lastChangedAt
-        createdAt
-        updatedAt
       }
       nextToken
       startedAt
@@ -187,112 +234,140 @@ subscription OnDeletePost {
     _version
     _deleted
     _lastChangedAt
-    createdAt
-    updatedAt
   }
 }
-subscription OnCreateComment {
-  onCreateComment {
+subscription OnCreateMeasurement {
+  onCreateMeasurement {
     id
-    postID
-    post {
+    batchID
+    temperature
+    hydrometer
+    temperatureCorrection
+    hydrometerCorrection
+    note
+    flag
+    createdAt
+    updatedAt
+    batch {
       id
-      title
-      blogID
-      blog {
+      distilleryID
+      batchIdentifier
+      batchNumber
+      status
+      type
+      createdAt
+      updatedAt
+      distillery {
         id
         name
+        DSP
+        users
         _version
         _deleted
         _lastChangedAt
         createdAt
         updatedAt
       }
-      comments {
+      measurements {
         nextToken
         startedAt
       }
       _version
       _deleted
       _lastChangedAt
-      createdAt
-      updatedAt
     }
-    content
     _version
     _deleted
     _lastChangedAt
-    createdAt
-    updatedAt
   }
 }
-subscription OnUpdateComment {
-  onUpdateComment {
+subscription OnUpdateMeasurement {
+  onUpdateMeasurement {
     id
-    postID
-    post {
+    batchID
+    temperature
+    hydrometer
+    temperatureCorrection
+    hydrometerCorrection
+    note
+    flag
+    createdAt
+    updatedAt
+    batch {
       id
-      title
-      blogID
-      blog {
+      distilleryID
+      batchIdentifier
+      batchNumber
+      status
+      type
+      createdAt
+      updatedAt
+      distillery {
         id
         name
+        DSP
+        users
         _version
         _deleted
         _lastChangedAt
         createdAt
         updatedAt
       }
-      comments {
+      measurements {
         nextToken
         startedAt
       }
       _version
       _deleted
       _lastChangedAt
-      createdAt
-      updatedAt
     }
-    content
     _version
     _deleted
     _lastChangedAt
-    createdAt
-    updatedAt
   }
 }
-subscription OnDeleteComment {
-  onDeleteComment {
+subscription OnDeleteMeasurement {
+  onDeleteMeasurement {
     id
-    postID
-    post {
+    batchID
+    temperature
+    hydrometer
+    temperatureCorrection
+    hydrometerCorrection
+    note
+    flag
+    createdAt
+    updatedAt
+    batch {
       id
-      title
-      blogID
-      blog {
+      distilleryID
+      batchIdentifier
+      batchNumber
+      status
+      type
+      createdAt
+      updatedAt
+      distillery {
         id
         name
+        DSP
+        users
         _version
         _deleted
         _lastChangedAt
         createdAt
         updatedAt
       }
-      comments {
+      measurements {
         nextToken
         startedAt
       }
       _version
       _deleted
       _lastChangedAt
-      createdAt
-      updatedAt
     }
-    content
     _version
     _deleted
     _lastChangedAt
-    createdAt
-    updatedAt
   }
 }
