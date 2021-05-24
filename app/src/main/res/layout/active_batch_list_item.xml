@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="100dp">
+
+    <TextView
+        android:id="@+id/textViewBatchNumberBatchListItem"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Batch no. 1501"
+        tools:layout_editor_absoluteX="260dp"
+        tools:layout_editor_absoluteY="28dp" />
+
+    <TextView
+        android:id="@+id/batchTypeBatchListItem"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Whiskey"
+        tools:layout_editor_absoluteX="52dp"
+        tools:layout_editor_absoluteY="27dp" />
+
+    <TextView
+        android:id="@+id/completedAtBatchListItem"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Completed at 11/12/31"
+        tools:layout_editor_absoluteX="97dp"
+        tools:layout_editor_absoluteY="60dp" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
