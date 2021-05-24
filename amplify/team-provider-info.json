@@ -10,6 +10,11 @@
       "StackName": "amplify-trueproof-staging-205459",
       "StackId": "arn:aws:cloudformation:us-west-2:307204380984:stack/amplify-trueproof-staging-205459/ce9dd6d0-ba76-11eb-b2c7-02fa2bc4ef37",
       "AmplifyAppId": "d33qyp8rfgv25m"
+    },
+    "categories": {
+      "auth": {
+        "trueproof228d7488": {}
+      }
     }
   }
 }
