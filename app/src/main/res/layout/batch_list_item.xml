@@ -1,61 +1,42 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/fragmentBatchListItem"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="100dp">
+
 
     <TextView
-        android:id="@+id/batchTypeBatchListItem2"
+        android:id="@+id/batchNumberActiveBatchListItem"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginEnd="52dp"
+        android:text="Batch no. 1501"
+        app:layout_constraintBottom_toBottomOf="@+id/batchTypeActiveBatchListItem"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/batchTypeActiveBatchListItem"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <TextView
+        android:id="@+id/batchTypeActiveBatchListItem"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="52dp"
+        android:layout_marginTop="24dp"
         android:text="Whiskey"
-        tools:layout_editor_absoluteX="52dp"
-        tools:layout_editor_absoluteY="27dp" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/completedAtBatchListItem2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
         android:text="Completed at 11/12/31"
-        tools:layout_editor_absoluteX="97dp"
-        tools:layout_editor_absoluteY="60dp" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/batchTypeActiveBatchListItem" />
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="match_parent"
-        android:layout_height="100dp">
 
-        <TextView
-            android:id="@+id/batchNumberActiveBatchListItem"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Batch no. 1501"
-            tools:layout_editor_absoluteX="260dp"
-            tools:layout_editor_absoluteY="28dp" />
-
-        <TextView
-            android:id="@+id/batchTypeActiveBatchListItem"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Whiskey"
-            tools:layout_editor_absoluteX="52dp"
-            tools:layout_editor_absoluteY="27dp" />
-
-        <TextView
-            android:id="@+id/startedAtActiveBatchListItem"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Completed at 11/12/31"
-            tools:layout_editor_absoluteX="97dp"
-            tools:layout_editor_absoluteY="60dp" />
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
-
-    <TextView
-        android:id="@+id/textViewBatchNumberBatchListItem2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Batch no. 1501"
-        tools:layout_editor_absoluteX="260dp"
-        tools:layout_editor_absoluteY="28dp" />
 </androidx.constraintlayout.widget.ConstraintLayout>
