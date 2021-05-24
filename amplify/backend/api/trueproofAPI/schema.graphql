@@ -1,20 +1,43 @@
-type Blog @model {
-  id: ID!
-  name: String!
-  posts: [Post] @connection(keyName: "byBlog", fields: ["id"])
+type Distillery @model
+{
+id: ID!
+name: String
+DSP: String
+users: [String]
+batches: [Batch] @connection(keyName: "byDistillery", fields: ["id"])
 }
 
-type Post @model @key(name: "byBlog", fields: ["blogID"]) {
-  id: ID!
-  title: String!
-  blogID: ID!
-  blog: Blog @connection(fields: ["blogID"])
-  comments: [Comment] @connection(keyName: "byPost", fields: ["id"])
+type Batch @model
+@key(name: "byDistillery", fields: ["distilleryID"])
+{
+id: ID!
+distilleryID: ID!
+batchIdentifier: String
+batchNumber: Int
+status: Status
+type: String
+createdAt: AWSDateTime
+updatedAt: AWSDateTime
+distillery: Distillery @connection(fields: ["distilleryID"])
+measurements: [Measurement] @connection(keyName: "byBatch", fields: ["id"])
 }
 
-type Comment @model @key(name: "byPost", fields: ["postID", "content"]) {
-  id: ID!
-  postID: ID!
-  post: Post @connection(fields: ["postID"])
-  content: String!
+type Measurement @model
+@key(name: "byBatch", fields: ["batchID"])
+{
+id: ID!
+batchID: ID!
+temperature: Int!
+hydrometer: Int!
+temperatureCorrection: Int!
+hydrometerCorrection: Int!
+note: String
+flag: Boolean
+createdAt: AWSDateTime
+updatedAt: AWSDateTime
+batch: Batch @connection(fields: ["batchID"])
+}
+enum Status {
+ACTIVE,
+COMPLETE
 }

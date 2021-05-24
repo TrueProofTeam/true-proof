@@ -1,11 +1,11 @@
 # this is an auto generated file. This will be overwritten
-query SyncBlogs(
-  $filter: ModelBlogFilterInput
+query SyncDistilleries(
+  $filter: ModelDistilleryFilterInput
   $limit: Int
   $nextToken: String
   $lastSync: AWSTimestamp
 ) {
-  syncBlogs(
+  syncDistilleries(
     filter: $filter
     limit: $limit
     nextToken: $nextToken
@@ -14,7 +14,9 @@ query SyncBlogs(
     items {
       id
       name
-      posts {
+      DSP
+      users
+      batches {
         nextToken
         startedAt
       }
@@ -28,20 +30,25 @@ query SyncBlogs(
     startedAt
   }
 }
-query GetBlog($id: ID!) {
-  getBlog(id: $id) {
+query GetDistillery($id: ID!) {
+  getDistillery(id: $id) {
     id
     name
-    posts {
+    DSP
+    users
+    batches {
       items {
         id
-        title
-        blogID
+        distilleryID
+        batchIdentifier
+        batchNumber
+        status
+        type
+        createdAt
+        updatedAt
         _version
         _deleted
         _lastChangedAt
-        createdAt
-        updatedAt
       }
       nextToken
       startedAt
@@ -53,16 +60,18 @@ query GetBlog($id: ID!) {
     updatedAt
   }
 }
-query ListBlogs(
-  $filter: ModelBlogFilterInput
+query ListDistillerys(
+  $filter: ModelDistilleryFilterInput
   $limit: Int
   $nextToken: String
 ) {
-  listBlogs(filter: $filter, limit: $limit, nextToken: $nextToken) {
+  listDistillerys(filter: $filter, limit: $limit, nextToken: $nextToken) {
     items {
       id
       name
-      posts {
+      DSP
+      users
+      batches {
         nextToken
         startedAt
       }
@@ -76,13 +85,13 @@ query ListBlogs(
     startedAt
   }
 }
-query SyncPosts(
-  $filter: ModelPostFilterInput
+query SyncBatches(
+  $filter: ModelBatchFilterInput
   $limit: Int
   $nextToken: String
   $lastSync: AWSTimestamp
 ) {
-  syncPosts(
+  syncBatches(
     filter: $filter
     limit: $limit
     nextToken: $nextToken
@@ -90,40 +99,52 @@ query SyncPosts(
   ) {
     items {
       id
-      title
-      blogID
-      blog {
+      distilleryID
+      batchIdentifier
+      batchNumber
+      status
+      type
+      createdAt
+      updatedAt
+      distillery {
         id
         name
+        DSP
+        users
         _version
         _deleted
         _lastChangedAt
         createdAt
         updatedAt
       }
-      comments {
+      measurements {
         nextToken
         startedAt
       }
       _version
       _deleted
       _lastChangedAt
-      createdAt
-      updatedAt
     }
     nextToken
     startedAt
   }
 }
-query GetPost($id: ID!) {
-  getPost(id: $id) {
+query GetBatch($id: ID!) {
+  getBatch(id: $id) {
     id
-    title
-    blogID
-    blog {
+    distilleryID
+    batchIdentifier
+    batchNumber
+    status
+    type
+    createdAt
+    updatedAt
+    distillery {
       id
       name
-      posts {
+      DSP
+      users
+      batches {
         nextToken
         startedAt
       }
@@ -133,16 +154,21 @@ query GetPost($id: ID!) {
       createdAt
       updatedAt
     }
-    comments {
+    measurements {
       items {
         id
-        postID
-        content
+        batchID
+        temperature
+        hydrometer
+        temperatureCorrection
+        hydrometerCorrection
+        note
+        flag
+        createdAt
+        updatedAt
         _version
         _deleted
         _lastChangedAt
-        createdAt
-        updatedAt
       }
       nextToken
       startedAt
@@ -150,50 +176,53 @@ query GetPost($id: ID!) {
     _version
     _deleted
     _lastChangedAt
-    createdAt
-    updatedAt
   }
 }
-query ListPosts(
-  $filter: ModelPostFilterInput
+query ListBatchs(
+  $filter: ModelBatchFilterInput
   $limit: Int
   $nextToken: String
 ) {
-  listPosts(filter: $filter, limit: $limit, nextToken: $nextToken) {
+  listBatchs(filter: $filter, limit: $limit, nextToken: $nextToken) {
     items {
       id
-      title
-      blogID
-      blog {
+      distilleryID
+      batchIdentifier
+      batchNumber
+      status
+      type
+      createdAt
+      updatedAt
+      distillery {
         id
         name
+        DSP
+        users
         _version
         _deleted
         _lastChangedAt
         createdAt
         updatedAt
       }
-      comments {
+      measurements {
         nextToken
         startedAt
       }
       _version
       _deleted
       _lastChangedAt
-      createdAt
-      updatedAt
     }
     nextToken
     startedAt
   }
 }
-query SyncComments(
-  $filter: ModelCommentFilterInput
+query SyncMeasurements(
+  $filter: ModelMeasurementFilterInput
   $limit: Int
   $nextToken: String
   $lastSync: AWSTimestamp
 ) {
-  syncComments(
+  syncMeasurements(
     filter: $filter
     limit: $limit
     nextToken: $nextToken
@@ -201,88 +230,114 @@ query SyncComments(
   ) {
     items {
       id
-      postID
-      post {
+      batchID
+      temperature
+      hydrometer
+      temperatureCorrection
+      hydrometerCorrection
+      note
+      flag
+      createdAt
+      updatedAt
+      batch {
         id
-        title
-        blogID
+        distilleryID
+        batchIdentifier
+        batchNumber
+        status
+        type
+        createdAt
+        updatedAt
         _version
         _deleted
         _lastChangedAt
-        createdAt
-        updatedAt
       }
-      content
       _version
       _deleted
       _lastChangedAt
-      createdAt
-      updatedAt
     }
     nextToken
     startedAt
   }
 }
-query GetComment($id: ID!) {
-  getComment(id: $id) {
+query GetMeasurement($id: ID!) {
+  getMeasurement(id: $id) {
     id
-    postID
-    post {
+    batchID
+    temperature
+    hydrometer
+    temperatureCorrection
+    hydrometerCorrection
+    note
+    flag
+    createdAt
+    updatedAt
+    batch {
       id
-      title
-      blogID
-      blog {
+      distilleryID
+      batchIdentifier
+      batchNumber
+      status
+      type
+      createdAt
+      updatedAt
+      distillery {
         id
         name
+        DSP
+        users
         _version
         _deleted
         _lastChangedAt
         createdAt
         updatedAt
       }
-      comments {
+      measurements {
         nextToken
         startedAt
       }
       _version
       _deleted
       _lastChangedAt
-      createdAt
-      updatedAt
     }
-    content
     _version
     _deleted
     _lastChangedAt
-    createdAt
-    updatedAt
   }
 }
-query ListComments(
-  $filter: ModelCommentFilterInput
+query ListMeasurements(
+  $filter: ModelMeasurementFilterInput
   $limit: Int
   $nextToken: String
 ) {
-  listComments(filter: $filter, limit: $limit, nextToken: $nextToken) {
+  listMeasurements(filter: $filter, limit: $limit, nextToken: $nextToken) {
     items {
       id
-      postID
-      post {
+      batchID
+      temperature
+      hydrometer
+      temperatureCorrection
+      hydrometerCorrection
+      note
+      flag
+      createdAt
+      updatedAt
+      batch {
         id
-        title
-        blogID
+        distilleryID
+        batchIdentifier
+        batchNumber
+        status
+        type
+        createdAt
+        updatedAt
         _version
         _deleted
         _lastChangedAt
-        createdAt
-        updatedAt
       }
-      content
       _version
       _deleted
       _lastChangedAt
-      createdAt
-      updatedAt
     }
     nextToken
     startedAt
