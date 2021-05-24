@@ -9,6 +9,9 @@ import com.amplifyframework.auth.cognito.AWSCognitoAuthPlugin;
 import com.amplifyframework.core.Amplify;
 import com.amplifyframework.datastore.AWSDataStorePlugin;
 
+import dagger.hilt.android.HiltAndroidApp;
+
+@HiltAndroidApp
 public class TrueProofApplication extends Application {
     @Override
     public void onCreate() {
