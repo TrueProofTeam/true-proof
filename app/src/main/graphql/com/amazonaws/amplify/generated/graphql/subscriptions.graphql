@@ -3,7 +3,7 @@ subscription OnCreateDistillery {
   onCreateDistillery {
     id
     name
-    DSP
+    dspID
     users
     batches {
       items {
@@ -33,7 +33,7 @@ subscription OnUpdateDistillery {
   onUpdateDistillery {
     id
     name
-    DSP
+    dspID
     users
     batches {
       items {
@@ -63,7 +63,7 @@ subscription OnDeleteDistillery {
   onDeleteDistillery {
     id
     name
-    DSP
+    dspID
     users
     batches {
       items {
@@ -102,7 +102,7 @@ subscription OnCreateBatch {
     distillery {
       id
       name
-      DSP
+      dspID
       users
       batches {
         nextToken
@@ -151,7 +151,7 @@ subscription OnUpdateBatch {
     distillery {
       id
       name
-      DSP
+      dspID
       users
       batches {
         nextToken
@@ -200,7 +200,7 @@ subscription OnDeleteBatch {
     distillery {
       id
       name
-      DSP
+      dspID
       users
       batches {
         nextToken
@@ -260,7 +260,7 @@ subscription OnCreateMeasurement {
       distillery {
         id
         name
-        DSP
+        dspID
         users
         _version
         _deleted
@@ -305,7 +305,7 @@ subscription OnUpdateMeasurement {
       distillery {
         id
         name
-        DSP
+        dspID
         users
         _version
         _deleted
@@ -350,7 +350,7 @@ subscription OnDeleteMeasurement {
       distillery {
         id
         name
-        DSP
+        dspID
         users
         _version
         _deleted

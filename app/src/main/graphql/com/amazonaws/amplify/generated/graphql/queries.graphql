@@ -14,7 +14,7 @@ query SyncDistilleries(
     items {
       id
       name
-      DSP
+      dspID
       users
       batches {
         nextToken
@@ -34,7 +34,7 @@ query GetDistillery($id: ID!) {
   getDistillery(id: $id) {
     id
     name
-    DSP
+    dspID
     users
     batches {
       items {
@@ -69,7 +69,7 @@ query ListDistillerys(
     items {
       id
       name
-      DSP
+      dspID
       users
       batches {
         nextToken
@@ -109,7 +109,7 @@ query SyncBatches(
       distillery {
         id
         name
-        DSP
+        dspID
         users
         _version
         _deleted
@@ -142,7 +142,7 @@ query GetBatch($id: ID!) {
     distillery {
       id
       name
-      DSP
+      dspID
       users
       batches {
         nextToken
@@ -196,7 +196,7 @@ query ListBatchs(
       distillery {
         id
         name
-        DSP
+        dspID
         users
         _version
         _deleted
@@ -284,7 +284,7 @@ query GetMeasurement($id: ID!) {
       distillery {
         id
         name
-        DSP
+        dspID
         users
         _version
         _deleted

@@ -417,7 +417,7 @@
                         "defaultValue": null
                     },
                     {
-                        "name": "DSP",
+                        "name": "dspID",
                         "description": null,
                         "type": {
                             "kind": "INPUT_OBJECT",
@@ -1060,7 +1060,7 @@
                         "deprecationReason": null
                     },
                     {
-                        "name": "DSP",
+                        "name": "dspID",
                         "description": null,
                         "args": [],
                         "type": {
@@ -2651,7 +2651,7 @@
                         "defaultValue": null
                     },
                     {
-                        "name": "DSP",
+                        "name": "dspID",
                         "description": null,
                         "type": {
                             "kind": "SCALAR",
@@ -2706,7 +2706,7 @@
                         "defaultValue": null
                     },
                     {
-                        "name": "DSP",
+                        "name": "dspID",
                         "description": null,
                         "type": {
                             "kind": "INPUT_OBJECT",
@@ -2799,7 +2799,7 @@
                         "defaultValue": null
                     },
                     {
-                        "name": "DSP",
+                        "name": "dspID",
                         "description": null,
                         "type": {
                             "kind": "SCALAR",

@@ -2,7 +2,7 @@ type Distillery @model
 {
 id: ID!
 name: String
-DSP: String
+dspID: String
 users: [String]
 batches: [Batch] @connection(keyName: "byDistillery", fields: ["id"])
 }
