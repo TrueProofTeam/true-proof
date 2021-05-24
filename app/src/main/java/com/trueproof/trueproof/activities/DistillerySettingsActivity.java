@@ -7,7 +7,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.trueproof.trueproof.R;
 
 public class DistillerySettingsActivity extends AppCompatActivity {
-
+    static final String TAG = "TrueProof.DistillerySettingsActivity";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

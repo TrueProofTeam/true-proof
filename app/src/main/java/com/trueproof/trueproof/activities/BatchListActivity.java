@@ -13,7 +13,7 @@ import dagger.hilt.android.AndroidEntryPoint;
 
 @AndroidEntryPoint
 public class BatchListActivity extends AppCompatActivity {
-    static final private String TAG = "BatchListActivity";
+    static final private String TAG = "TrueProof.BatchListActivity";
     private BatchListViewModel batchListViewModel;
 
     @Override

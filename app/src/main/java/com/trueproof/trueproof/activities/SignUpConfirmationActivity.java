@@ -7,7 +7,7 @@ import android.os.Bundle;
 import com.trueproof.trueproof.R;
 
 public class SignUpConfirmationActivity extends AppCompatActivity {
-
+    static final String TAG = "TrueProof.SignUpConfirmationActivity";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

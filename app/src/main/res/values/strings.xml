@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">True Proof</string>
+    <string name="signUpTitle">Fill in the information below to make a new account with our app!</string>
+    <string name="signUpText">Sign Up</string>
+    <string name="emailText">Email</string>
+    <string name="confirmationEmailText">Confirm Email</string>
+    <string name="reTypeEmailText">Re-Type Email</string>
+    <string name="passwordText">Password</string>
 </resources>

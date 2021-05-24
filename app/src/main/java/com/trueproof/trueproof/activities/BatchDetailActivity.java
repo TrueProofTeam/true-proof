@@ -7,6 +7,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.trueproof.trueproof.R;
 
 public class BatchDetailActivity extends AppCompatActivity {
+    static final String TAG = "TrueProof.BatchDetailActivity";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

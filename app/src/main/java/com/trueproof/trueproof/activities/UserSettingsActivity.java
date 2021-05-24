@@ -7,7 +7,7 @@ import android.os.Bundle;
 import com.trueproof.trueproof.R;
 
 public class UserSettingsActivity extends AppCompatActivity {
-
+    static final String TAG = "TrueProof.UserSettingsActivity";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

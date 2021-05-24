@@ -7,7 +7,7 @@ import android.os.Bundle;
 import com.trueproof.trueproof.R;
 
 public class TakeMeasurementActivity extends AppCompatActivity {
-
+    static final String TAG = "TrueProof.TakeMeasurementActivity";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
