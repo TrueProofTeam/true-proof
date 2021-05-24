@@ -6,6 +6,17 @@
         android:layout_height="match_parent"
         tools:context=".activities.BatchDetailActivity">
 
+    <TextView
+            android:text="Distillery and DSP"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/textViewBatchDetaildsp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginTop="8dp" />
+
     <ImageButton
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -31,12 +42,13 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/textViewTitleBatchDetail"
-            app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintEnd_toEndOf="parent"
             android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-            android:textSize="20sp" />
+            android:textSize="20sp"
+            app:layout_constraintTop_toBottomOf="@+id/textViewBatchDetaildsp"
+            android:layout_marginTop="8dp" />
 
     <TextView
             android:text="Type"
