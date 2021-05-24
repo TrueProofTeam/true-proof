@@ -1,18 +1,162 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".activities.MainActivity">
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".activities.MainActivity">
 
     <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Hello World!"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Temperature units in °F"
+            android:id="@+id/textView13"
+            app:layout_constraintTop_toTopOf="@+id/editTextHydrometerCorrectionMain"
+            app:layout_constraintBottom_toBottomOf="@+id/editTextHydrometerCorrectionMain"
+            app:layout_constraintEnd_toStartOf="@+id/editTextHydrometerCorrectionMain"
+            android:layout_marginEnd="16dp" />
+
+    <Button
+            android:text="Log in to save your data"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/buttonLoginMain"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginTop="8dp"
+            android:layout_marginStart="8dp" />
+
+    <com.google.android.material.chip.Chip
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/chipTemperatureMain"
+            app:layout_constraintTop_toBottomOf="@+id/textViewTitleMain"
+            android:layout_marginTop="8dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginEnd="16dp" />
+
+    <TextView
+            android:text="Quick Proofing Calculator"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/textViewTitleMain"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/buttonLoginMain"
+            android:layout_marginTop="16dp"
+            android:textSize="30sp"
+            android:textAppearance="@style/TextAppearance.AppCompat.Large" />
+
+    <TextView
+            android:text="Temperature units in °F"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/textViewTemperatureMain"
+            app:layout_constraintEnd_toStartOf="@+id/chipTemperatureMain"
+            android:layout_marginEnd="24dp"
+            app:layout_constraintTop_toTopOf="@+id/chipTemperatureMain"
+            app:layout_constraintBottom_toBottomOf="@+id/chipTemperatureMain" />
+
+    <TextView
+            android:text="Temperature Correction"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/textViewTempCorrectionMain"
+            app:layout_constraintEnd_toStartOf="@+id/editTextTemperatureMain"
+            android:layout_marginEnd="16dp"
+            app:layout_constraintTop_toTopOf="@+id/editTextTemperatureMain"
+            app:layout_constraintBottom_toBottomOf="@+id/editTextTemperatureMain" />
+
+    <TextView
+            android:text="Hydrometer"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/textViewHydrometerMain"
+            app:layout_constraintTop_toTopOf="@+id/editTextTempCorrectionMain"
+            app:layout_constraintBottom_toBottomOf="@+id/editTextTempCorrectionMain"
+            app:layout_constraintEnd_toStartOf="@+id/editTextTempCorrectionMain"
+            android:layout_marginEnd="16dp" />
+
+    <TextView
+            android:text="Hydrometer Correction"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/textViewHydrometerCorrectionMain"
+            app:layout_constraintTop_toTopOf="@+id/editTextHydrometerMain"
+            app:layout_constraintBottom_toBottomOf="@+id/editTextHydrometerMain"
+            app:layout_constraintEnd_toStartOf="@+id/editTextHydrometerMain"
+            android:layout_marginEnd="16dp" />
+
+    <TextView
+            android:text="Proof at 60°F"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/textViewProofMain"
+            app:layout_constraintTop_toTopOf="@+id/textViewCalculatedProofMain"
+            app:layout_constraintBottom_toBottomOf="@+id/textViewCalculatedProofMain"
+            app:layout_constraintEnd_toStartOf="@+id/textViewCalculatedProofMain"
+            android:layout_marginEnd="16dp" />
+
+    <TextView
+            android:text="Terms of Use"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/textViewTermsOfUseMain"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginBottom="8dp" />
+
+    <EditText
+            android:text="68.7"
+            android:layout_width="129dp"
+            android:layout_height="40dp"
+            android:id="@+id/editTextTemperatureMain"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/chipTemperatureMain"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="16dp" />
+
+    <EditText
+            android:text="0.1"
+            android:layout_width="129dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/editTextTempCorrectionMain"
+            app:layout_constraintTop_toBottomOf="@+id/editTextTemperatureMain"
+            android:layout_marginTop="16dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginEnd="16dp" />
+
+    <EditText
+            android:text="50.35"
+            android:layout_width="129dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/editTextHydrometerMain"
+            app:layout_constraintTop_toBottomOf="@+id/editTextTempCorrectionMain"
+            android:layout_marginTop="16dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginEnd="16dp" />
+
+    <EditText
+            android:text="0.00"
+            android:layout_width="129dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/editTextHydrometerCorrectionMain"
+            app:layout_constraintTop_toBottomOf="@+id/editTextHydrometerMain"
+            android:layout_marginTop="16dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginEnd="16dp" />
+
+    <TextView
+            android:text="76.4"
+            android:layout_width="129dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/textViewCalculatedProofMain"
+            app:layout_constraintTop_toBottomOf="@+id/editTextHydrometerCorrectionMain"
+            android:layout_marginTop="16dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginEnd="16dp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
