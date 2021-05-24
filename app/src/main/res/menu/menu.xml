@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+<item
+    android:title="Settings"
+    android:id="@+id/nav_settings"
+    />
+
+    <item
+        android:title="Batch List"
+        android:id="@+id/nav_batch_list"
+        />
+    <item
+        android:title="Quick Calculator"
+        android:id="@+id/nav_quick_calculator"
+        />
+
+</menu>
