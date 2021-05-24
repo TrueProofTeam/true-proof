@@ -1,8 +1,8 @@
 package com.trueproof.trueproof.activities;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.os.Bundle;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.trueproof.trueproof.R;
 
