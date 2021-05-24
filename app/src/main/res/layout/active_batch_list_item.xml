@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="100dp">
+
+    <TextView
+        android:id="@+id/batchNumberActiveBatchListItem"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Batch no. 1501"
+        tools:layout_editor_absoluteX="260dp"
+        tools:layout_editor_absoluteY="16dp" />
+
+    <TextView
+        android:id="@+id/batchTypeActiveBatchListItem"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Whiskey"
+        tools:layout_editor_absoluteX="41dp"
+        tools:layout_editor_absoluteY="16dp" />
+
+    <TextView
+        android:id="@+id/startedAtActiveBatchListItem"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="8:24am today"
+        tools:layout_editor_absoluteX="105dp"
+        tools:layout_editor_absoluteY="41dp" />
+
+    <TextView
+        android:id="@+id/startedAtTextActiveBatchListItem"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Started at:"
+        tools:layout_editor_absoluteX="29dp"
+        tools:layout_editor_absoluteY="41dp" />
+
+    <TextView
+        android:id="@+id/lastMeasurementTextActiveBatchListItem"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Last Measurement:"
+        tools:layout_editor_absoluteX="59dp"
+        tools:layout_editor_absoluteY="78dp" />
+
+    <TextView
+        android:id="@+id/measuredProofActiveBatchListItem"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="101.1 proof"
+        tools:layout_editor_absoluteX="260dp"
+        tools:layout_editor_absoluteY="58dp" />
+
+    <TextView
+        android:id="@+id/measuredAtTimeActiveBatchListItem"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="10:06:21 am today"
+        tools:layout_editor_absoluteX="223dp"
+        tools:layout_editor_absoluteY="79dp" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
