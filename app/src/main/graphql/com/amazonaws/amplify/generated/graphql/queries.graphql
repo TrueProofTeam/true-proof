@@ -158,6 +158,7 @@ query GetBatch($id: ID!) {
       items {
         id
         batchID
+        trueProof
         temperature
         hydrometer
         temperatureCorrection
@@ -231,6 +232,7 @@ query SyncMeasurements(
     items {
       id
       batchID
+      trueProof
       temperature
       hydrometer
       temperatureCorrection
@@ -264,6 +266,7 @@ query GetMeasurement($id: ID!) {
   getMeasurement(id: $id) {
     id
     batchID
+    trueProof
     temperature
     hydrometer
     temperatureCorrection
@@ -314,6 +317,7 @@ query ListMeasurements(
     items {
       id
       batchID
+      trueProof
       temperature
       hydrometer
       temperatureCorrection
