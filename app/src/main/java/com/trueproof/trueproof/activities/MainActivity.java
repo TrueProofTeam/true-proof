@@ -5,6 +5,8 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -17,7 +19,7 @@ import dagger.hilt.android.AndroidEntryPoint;
 
 @AndroidEntryPoint
 public class MainActivity extends AppCompatActivity {
-    static final String TAG = "MainActivity";
+    static final String TAG = "TrueProof.MainActivity";
 
     @Inject
     TestDependencyInjection testDependencyInjection;
@@ -26,7 +28,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
+        initializeLoginButton();
         Log.i(TAG, "onCreate: " + testDependencyInjection.hello());
     }
     @Override
@@ -42,4 +44,18 @@ public class MainActivity extends AppCompatActivity {
         if (menuItem.getItemId() == R.id.nav_quick_calculator)MainActivity.this.startActivity(new Intent(MainActivity.this, TakeMeasurementActivity.class));
         return true;
         }
+
+    void initializeLoginButton() {
+        Button loginButton = findViewById(R.id.buttonLoginMain);
+
+        loginButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, LogInActivity.class);
+                startActivity(intent);
+            }
+        });
+
+
+    }
     }
