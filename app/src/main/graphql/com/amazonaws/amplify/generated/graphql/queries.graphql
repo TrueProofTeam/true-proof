@@ -44,6 +44,7 @@ query GetDistillery($id: ID!) {
         batchNumber
         status
         type
+        completedAt
         createdAt
         updatedAt
         _version
@@ -104,6 +105,7 @@ query SyncBatches(
       batchNumber
       status
       type
+      completedAt
       createdAt
       updatedAt
       distillery {
@@ -137,6 +139,7 @@ query GetBatch($id: ID!) {
     batchNumber
     status
     type
+    completedAt
     createdAt
     updatedAt
     distillery {
@@ -165,6 +168,7 @@ query GetBatch($id: ID!) {
         hydrometerCorrection
         note
         flag
+        takenAt
         createdAt
         updatedAt
         _version
@@ -192,6 +196,7 @@ query ListBatchs(
       batchNumber
       status
       type
+      completedAt
       createdAt
       updatedAt
       distillery {
@@ -239,6 +244,7 @@ query SyncMeasurements(
       hydrometerCorrection
       note
       flag
+      takenAt
       createdAt
       updatedAt
       batch {
@@ -248,6 +254,7 @@ query SyncMeasurements(
         batchNumber
         status
         type
+        completedAt
         createdAt
         updatedAt
         _version
@@ -273,6 +280,7 @@ query GetMeasurement($id: ID!) {
     hydrometerCorrection
     note
     flag
+    takenAt
     createdAt
     updatedAt
     batch {
@@ -282,6 +290,7 @@ query GetMeasurement($id: ID!) {
       batchNumber
       status
       type
+      completedAt
       createdAt
       updatedAt
       distillery {
@@ -324,6 +333,7 @@ query ListMeasurements(
       hydrometerCorrection
       note
       flag
+      takenAt
       createdAt
       updatedAt
       batch {
@@ -333,6 +343,7 @@ query ListMeasurements(
         batchNumber
         status
         type
+        completedAt
         createdAt
         updatedAt
         _version
@@ -342,6 +353,70 @@ query ListMeasurements(
       _version
       _deleted
       _lastChangedAt
+    }
+    nextToken
+    startedAt
+  }
+}
+query SyncUsers(
+  $filter: ModelUserFilterInput
+  $limit: Int
+  $nextToken: String
+  $lastSync: AWSTimestamp
+) {
+  syncUsers(
+    filter: $filter
+    limit: $limit
+    nextToken: $nextToken
+    lastSync: $lastSync
+  ) {
+    items {
+      id
+      email
+      defaultTemperatureUnit
+      defaultTemperatureCorrection
+      defaultHydrometerCorrection
+      _version
+      _deleted
+      _lastChangedAt
+      createdAt
+      updatedAt
+    }
+    nextToken
+    startedAt
+  }
+}
+query GetUser($id: ID!) {
+  getUser(id: $id) {
+    id
+    email
+    defaultTemperatureUnit
+    defaultTemperatureCorrection
+    defaultHydrometerCorrection
+    _version
+    _deleted
+    _lastChangedAt
+    createdAt
+    updatedAt
+  }
+}
+query ListUsers(
+  $filter: ModelUserFilterInput
+  $limit: Int
+  $nextToken: String
+) {
+  listUsers(filter: $filter, limit: $limit, nextToken: $nextToken) {
+    items {
+      id
+      email
+      defaultTemperatureUnit
+      defaultTemperatureCorrection
+      defaultHydrometerCorrection
+      _version
+      _deleted
+      _lastChangedAt
+      createdAt
+      updatedAt
     }
     nextToken
     startedAt

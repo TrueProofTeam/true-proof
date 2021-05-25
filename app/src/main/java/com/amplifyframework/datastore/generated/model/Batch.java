@@ -28,6 +28,7 @@ public final class Batch implements Model {
   public static final QueryField BATCH_NUMBER = field("Batch", "batchNumber");
   public static final QueryField STATUS = field("Batch", "status");
   public static final QueryField TYPE = field("Batch", "type");
+  public static final QueryField COMPLETED_AT = field("Batch", "completedAt");
   public static final QueryField CREATED_AT = field("Batch", "createdAt");
   public static final QueryField UPDATED_AT = field("Batch", "updatedAt");
   public static final QueryField DISTILLERY = field("Batch", "distilleryID");
@@ -36,6 +37,7 @@ public final class Batch implements Model {
   private final @ModelField(targetType="Int") Integer batchNumber;
   private final @ModelField(targetType="Status") Status status;
   private final @ModelField(targetType="String") String type;
+  private final @ModelField(targetType="AWSDateTime") Temporal.DateTime completedAt;
   private final @ModelField(targetType="AWSDateTime") Temporal.DateTime createdAt;
   private final @ModelField(targetType="AWSDateTime") Temporal.DateTime updatedAt;
   private final @ModelField(targetType="Distillery") @BelongsTo(targetName = "distilleryID", type = Distillery.class) Distillery distillery;
@@ -60,6 +62,10 @@ public final class Batch implements Model {
       return type;
   }
   
+  public Temporal.DateTime getCompletedAt() {
+      return completedAt;
+  }
+  
   public Temporal.DateTime getCreatedAt() {
       return createdAt;
   }
@@ -76,12 +82,13 @@ public final class Batch implements Model {
       return measurements;
   }
   
-  private Batch(String id, String batchIdentifier, Integer batchNumber, Status status, String type, Temporal.DateTime createdAt, Temporal.DateTime updatedAt, Distillery distillery) {
+  private Batch(String id, String batchIdentifier, Integer batchNumber, Status status, String type, Temporal.DateTime completedAt, Temporal.DateTime createdAt, Temporal.DateTime updatedAt, Distillery distillery) {
     this.id = id;
     this.batchIdentifier = batchIdentifier;
     this.batchNumber = batchNumber;
     this.status = status;
     this.type = type;
+    this.completedAt = completedAt;
     this.createdAt = createdAt;
     this.updatedAt = updatedAt;
     this.distillery = distillery;
@@ -100,6 +107,7 @@ public final class Batch implements Model {
               ObjectsCompat.equals(getBatchNumber(), batch.getBatchNumber()) &&
               ObjectsCompat.equals(getStatus(), batch.getStatus()) &&
               ObjectsCompat.equals(getType(), batch.getType()) &&
+              ObjectsCompat.equals(getCompletedAt(), batch.getCompletedAt()) &&
               ObjectsCompat.equals(getCreatedAt(), batch.getCreatedAt()) &&
               ObjectsCompat.equals(getUpdatedAt(), batch.getUpdatedAt()) &&
               ObjectsCompat.equals(getDistillery(), batch.getDistillery());
@@ -114,6 +122,7 @@ public final class Batch implements Model {
       .append(getBatchNumber())
       .append(getStatus())
       .append(getType())
+      .append(getCompletedAt())
       .append(getCreatedAt())
       .append(getUpdatedAt())
       .append(getDistillery())
@@ -130,6 +139,7 @@ public final class Batch implements Model {
       .append("batchNumber=" + String.valueOf(getBatchNumber()) + ", ")
       .append("status=" + String.valueOf(getStatus()) + ", ")
       .append("type=" + String.valueOf(getType()) + ", ")
+      .append("completedAt=" + String.valueOf(getCompletedAt()) + ", ")
       .append("createdAt=" + String.valueOf(getCreatedAt()) + ", ")
       .append("updatedAt=" + String.valueOf(getUpdatedAt()) + ", ")
       .append("distillery=" + String.valueOf(getDistillery()))
@@ -168,6 +178,7 @@ public final class Batch implements Model {
       null,
       null,
       null,
+      null,
       null
     );
   }
@@ -178,6 +189,7 @@ public final class Batch implements Model {
       batchNumber,
       status,
       type,
+      completedAt,
       createdAt,
       updatedAt,
       distillery);
@@ -189,6 +201,7 @@ public final class Batch implements Model {
     BuildStep batchNumber(Integer batchNumber);
     BuildStep status(Status status);
     BuildStep type(String type);
+    BuildStep completedAt(Temporal.DateTime completedAt);
     BuildStep createdAt(Temporal.DateTime createdAt);
     BuildStep updatedAt(Temporal.DateTime updatedAt);
     BuildStep distillery(Distillery distillery);
@@ -201,6 +214,7 @@ public final class Batch implements Model {
     private Integer batchNumber;
     private Status status;
     private String type;
+    private Temporal.DateTime completedAt;
     private Temporal.DateTime createdAt;
     private Temporal.DateTime updatedAt;
     private Distillery distillery;
@@ -214,6 +228,7 @@ public final class Batch implements Model {
           batchNumber,
           status,
           type,
+          completedAt,
           createdAt,
           updatedAt,
           distillery);
@@ -240,6 +255,12 @@ public final class Batch implements Model {
     @Override
      public BuildStep type(String type) {
         this.type = type;
+        return this;
+    }
+    
+    @Override
+     public BuildStep completedAt(Temporal.DateTime completedAt) {
+        this.completedAt = completedAt;
         return this;
     }
     
@@ -284,12 +305,13 @@ public final class Batch implements Model {
   
 
   public final class CopyOfBuilder extends Builder {
-    private CopyOfBuilder(String id, String batchIdentifier, Integer batchNumber, Status status, String type, Temporal.DateTime createdAt, Temporal.DateTime updatedAt, Distillery distillery) {
+    private CopyOfBuilder(String id, String batchIdentifier, Integer batchNumber, Status status, String type, Temporal.DateTime completedAt, Temporal.DateTime createdAt, Temporal.DateTime updatedAt, Distillery distillery) {
       super.id(id);
       super.batchIdentifier(batchIdentifier)
         .batchNumber(batchNumber)
         .status(status)
         .type(type)
+        .completedAt(completedAt)
         .createdAt(createdAt)
         .updatedAt(updatedAt)
         .distillery(distillery);
@@ -313,6 +335,11 @@ public final class Batch implements Model {
     @Override
      public CopyOfBuilder type(String type) {
       return (CopyOfBuilder) super.type(type);
+    }
+    
+    @Override
+     public CopyOfBuilder completedAt(Temporal.DateTime completedAt) {
+      return (CopyOfBuilder) super.completedAt(completedAt);
     }
     
     @Override

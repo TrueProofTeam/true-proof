@@ -383,6 +383,129 @@
                         },
                         "isDeprecated": false,
                         "deprecationReason": null
+                    },
+                    {
+                        "name": "syncUsers",
+                        "description": null,
+                        "args": [
+                            {
+                                "name": "filter",
+                                "description": null,
+                                "type": {
+                                    "kind": "INPUT_OBJECT",
+                                    "name": "ModelUserFilterInput",
+                                    "ofType": null
+                                },
+                                "defaultValue": null
+                            },
+                            {
+                                "name": "limit",
+                                "description": null,
+                                "type": {
+                                    "kind": "SCALAR",
+                                    "name": "Int",
+                                    "ofType": null
+                                },
+                                "defaultValue": null
+                            },
+                            {
+                                "name": "nextToken",
+                                "description": null,
+                                "type": {
+                                    "kind": "SCALAR",
+                                    "name": "String",
+                                    "ofType": null
+                                },
+                                "defaultValue": null
+                            },
+                            {
+                                "name": "lastSync",
+                                "description": null,
+                                "type": {
+                                    "kind": "SCALAR",
+                                    "name": "AWSTimestamp",
+                                    "ofType": null
+                                },
+                                "defaultValue": null
+                            }
+                        ],
+                        "type": {
+                            "kind": "OBJECT",
+                            "name": "ModelUserConnection",
+                            "ofType": null
+                        },
+                        "isDeprecated": false,
+                        "deprecationReason": null
+                    },
+                    {
+                        "name": "getUser",
+                        "description": null,
+                        "args": [
+                            {
+                                "name": "id",
+                                "description": null,
+                                "type": {
+                                    "kind": "NON_NULL",
+                                    "name": null,
+                                    "ofType": {
+                                        "kind": "SCALAR",
+                                        "name": "ID",
+                                        "ofType": null
+                                    }
+                                },
+                                "defaultValue": null
+                            }
+                        ],
+                        "type": {
+                            "kind": "OBJECT",
+                            "name": "User",
+                            "ofType": null
+                        },
+                        "isDeprecated": false,
+                        "deprecationReason": null
+                    },
+                    {
+                        "name": "listUsers",
+                        "description": null,
+                        "args": [
+                            {
+                                "name": "filter",
+                                "description": null,
+                                "type": {
+                                    "kind": "INPUT_OBJECT",
+                                    "name": "ModelUserFilterInput",
+                                    "ofType": null
+                                },
+                                "defaultValue": null
+                            },
+                            {
+                                "name": "limit",
+                                "description": null,
+                                "type": {
+                                    "kind": "SCALAR",
+                                    "name": "Int",
+                                    "ofType": null
+                                },
+                                "defaultValue": null
+                            },
+                            {
+                                "name": "nextToken",
+                                "description": null,
+                                "type": {
+                                    "kind": "SCALAR",
+                                    "name": "String",
+                                    "ofType": null
+                                },
+                                "defaultValue": null
+                            }
+                        ],
+                        "type": {
+                            "kind": "OBJECT",
+                            "name": "ModelUserConnection",
+                            "ofType": null
+                        },
+                        "isDeprecated": false,
+                        "deprecationReason": null
                     }
                 ],
                 "inputFields": null,
@@ -1289,6 +1412,16 @@
                         "defaultValue": null
                     },
                     {
+                        "name": "completedAt",
+                        "description": null,
+                        "type": {
+                            "kind": "INPUT_OBJECT",
+                            "name": "ModelStringInput",
+                            "ofType": null
+                        },
+                        "defaultValue": null
+                    },
+                    {
                         "name": "createdAt",
                         "description": null,
                         "type": {
@@ -1591,7 +1724,7 @@
                 "fields": [
                     {
                         "name": "id",
-                        "description": null,
+                        "description": "id is generated by the builder",
                         "args": [],
                         "type": {
                             "kind": "NON_NULL",
@@ -1670,8 +1803,20 @@
                         "deprecationReason": null
                     },
                     {
-                        "name": "createdAt",
+                        "name": "completedAt",
                         "description": null,
+                        "args": [],
+                        "type": {
+                            "kind": "SCALAR",
+                            "name": "AWSDateTime",
+                            "ofType": null
+                        },
+                        "isDeprecated": false,
+                        "deprecationReason": null
+                    },
+                    {
+                        "name": "createdAt",
+                        "description": "createdAt and updatedAt are automatically populated by the Amplify GraphQL API on create and update",
                         "args": [],
                         "type": {
                             "kind": "SCALAR",
@@ -1910,6 +2055,16 @@
                         "type": {
                             "kind": "INPUT_OBJECT",
                             "name": "ModelBooleanInput",
+                            "ofType": null
+                        },
+                        "defaultValue": null
+                    },
+                    {
+                        "name": "takenAt",
+                        "description": null,
+                        "type": {
+                            "kind": "INPUT_OBJECT",
+                            "name": "ModelStringInput",
                             "ofType": null
                         },
                         "defaultValue": null
@@ -2201,7 +2356,7 @@
                 "fields": [
                     {
                         "name": "id",
-                        "description": null,
+                        "description": "id is generated by the builder",
                         "args": [],
                         "type": {
                             "kind": "NON_NULL",
@@ -2336,8 +2491,20 @@
                         "deprecationReason": null
                     },
                     {
-                        "name": "createdAt",
+                        "name": "takenAt",
                         "description": null,
+                        "args": [],
+                        "type": {
+                            "kind": "SCALAR",
+                            "name": "AWSDateTime",
+                            "ofType": null
+                        },
+                        "isDeprecated": false,
+                        "deprecationReason": null
+                    },
+                    {
+                        "name": "createdAt",
+                        "description": "createdAt and updatedAt are automatically populated by the Amplify GraphQL API on create and update",
                         "args": [],
                         "type": {
                             "kind": "SCALAR",
@@ -2409,6 +2576,361 @@
                             "ofType": {
                                 "kind": "SCALAR",
                                 "name": "AWSTimestamp",
+                                "ofType": null
+                            }
+                        },
+                        "isDeprecated": false,
+                        "deprecationReason": null
+                    }
+                ],
+                "inputFields": null,
+                "interfaces": [],
+                "enumValues": null,
+                "possibleTypes": null
+            },
+            {
+                "kind": "INPUT_OBJECT",
+                "name": "ModelUserFilterInput",
+                "description": null,
+                "fields": null,
+                "inputFields": [
+                    {
+                        "name": "id",
+                        "description": null,
+                        "type": {
+                            "kind": "INPUT_OBJECT",
+                            "name": "ModelIDInput",
+                            "ofType": null
+                        },
+                        "defaultValue": null
+                    },
+                    {
+                        "name": "email",
+                        "description": null,
+                        "type": {
+                            "kind": "INPUT_OBJECT",
+                            "name": "ModelStringInput",
+                            "ofType": null
+                        },
+                        "defaultValue": null
+                    },
+                    {
+                        "name": "defaultTemperatureUnit",
+                        "description": null,
+                        "type": {
+                            "kind": "INPUT_OBJECT",
+                            "name": "ModelTemperatureUnitInput",
+                            "ofType": null
+                        },
+                        "defaultValue": null
+                    },
+                    {
+                        "name": "defaultTemperatureCorrection",
+                        "description": null,
+                        "type": {
+                            "kind": "INPUT_OBJECT",
+                            "name": "ModelFloatInput",
+                            "ofType": null
+                        },
+                        "defaultValue": null
+                    },
+                    {
+                        "name": "defaultHydrometerCorrection",
+                        "description": null,
+                        "type": {
+                            "kind": "INPUT_OBJECT",
+                            "name": "ModelFloatInput",
+                            "ofType": null
+                        },
+                        "defaultValue": null
+                    },
+                    {
+                        "name": "and",
+                        "description": null,
+                        "type": {
+                            "kind": "LIST",
+                            "name": null,
+                            "ofType": {
+                                "kind": "INPUT_OBJECT",
+                                "name": "ModelUserFilterInput",
+                                "ofType": null
+                            }
+                        },
+                        "defaultValue": null
+                    },
+                    {
+                        "name": "or",
+                        "description": null,
+                        "type": {
+                            "kind": "LIST",
+                            "name": null,
+                            "ofType": {
+                                "kind": "INPUT_OBJECT",
+                                "name": "ModelUserFilterInput",
+                                "ofType": null
+                            }
+                        },
+                        "defaultValue": null
+                    },
+                    {
+                        "name": "not",
+                        "description": null,
+                        "type": {
+                            "kind": "INPUT_OBJECT",
+                            "name": "ModelUserFilterInput",
+                            "ofType": null
+                        },
+                        "defaultValue": null
+                    }
+                ],
+                "interfaces": null,
+                "enumValues": null,
+                "possibleTypes": null
+            },
+            {
+                "kind": "INPUT_OBJECT",
+                "name": "ModelTemperatureUnitInput",
+                "description": null,
+                "fields": null,
+                "inputFields": [
+                    {
+                        "name": "eq",
+                        "description": null,
+                        "type": {
+                            "kind": "ENUM",
+                            "name": "TemperatureUnit",
+                            "ofType": null
+                        },
+                        "defaultValue": null
+                    },
+                    {
+                        "name": "ne",
+                        "description": null,
+                        "type": {
+                            "kind": "ENUM",
+                            "name": "TemperatureUnit",
+                            "ofType": null
+                        },
+                        "defaultValue": null
+                    }
+                ],
+                "interfaces": null,
+                "enumValues": null,
+                "possibleTypes": null
+            },
+            {
+                "kind": "ENUM",
+                "name": "TemperatureUnit",
+                "description": null,
+                "fields": null,
+                "inputFields": null,
+                "interfaces": null,
+                "enumValues": [
+                    {
+                        "name": "FAHRENHEIT",
+                        "description": null,
+                        "isDeprecated": false,
+                        "deprecationReason": null
+                    },
+                    {
+                        "name": "CELSIUS",
+                        "description": null,
+                        "isDeprecated": false,
+                        "deprecationReason": null
+                    }
+                ],
+                "possibleTypes": null
+            },
+            {
+                "kind": "OBJECT",
+                "name": "ModelUserConnection",
+                "description": null,
+                "fields": [
+                    {
+                        "name": "items",
+                        "description": null,
+                        "args": [],
+                        "type": {
+                            "kind": "LIST",
+                            "name": null,
+                            "ofType": {
+                                "kind": "OBJECT",
+                                "name": "User",
+                                "ofType": null
+                            }
+                        },
+                        "isDeprecated": false,
+                        "deprecationReason": null
+                    },
+                    {
+                        "name": "nextToken",
+                        "description": null,
+                        "args": [],
+                        "type": {
+                            "kind": "SCALAR",
+                            "name": "String",
+                            "ofType": null
+                        },
+                        "isDeprecated": false,
+                        "deprecationReason": null
+                    },
+                    {
+                        "name": "startedAt",
+                        "description": null,
+                        "args": [],
+                        "type": {
+                            "kind": "SCALAR",
+                            "name": "AWSTimestamp",
+                            "ofType": null
+                        },
+                        "isDeprecated": false,
+                        "deprecationReason": null
+                    }
+                ],
+                "inputFields": null,
+                "interfaces": [],
+                "enumValues": null,
+                "possibleTypes": null
+            },
+            {
+                "kind": "OBJECT",
+                "name": "User",
+                "description": null,
+                "fields": [
+                    {
+                        "name": "id",
+                        "description": null,
+                        "args": [],
+                        "type": {
+                            "kind": "NON_NULL",
+                            "name": null,
+                            "ofType": {
+                                "kind": "SCALAR",
+                                "name": "ID",
+                                "ofType": null
+                            }
+                        },
+                        "isDeprecated": false,
+                        "deprecationReason": null
+                    },
+                    {
+                        "name": "email",
+                        "description": null,
+                        "args": [],
+                        "type": {
+                            "kind": "SCALAR",
+                            "name": "String",
+                            "ofType": null
+                        },
+                        "isDeprecated": false,
+                        "deprecationReason": null
+                    },
+                    {
+                        "name": "defaultTemperatureUnit",
+                        "description": null,
+                        "args": [],
+                        "type": {
+                            "kind": "ENUM",
+                            "name": "TemperatureUnit",
+                            "ofType": null
+                        },
+                        "isDeprecated": false,
+                        "deprecationReason": null
+                    },
+                    {
+                        "name": "defaultTemperatureCorrection",
+                        "description": null,
+                        "args": [],
+                        "type": {
+                            "kind": "SCALAR",
+                            "name": "Float",
+                            "ofType": null
+                        },
+                        "isDeprecated": false,
+                        "deprecationReason": null
+                    },
+                    {
+                        "name": "defaultHydrometerCorrection",
+                        "description": null,
+                        "args": [],
+                        "type": {
+                            "kind": "SCALAR",
+                            "name": "Float",
+                            "ofType": null
+                        },
+                        "isDeprecated": false,
+                        "deprecationReason": null
+                    },
+                    {
+                        "name": "_version",
+                        "description": null,
+                        "args": [],
+                        "type": {
+                            "kind": "NON_NULL",
+                            "name": null,
+                            "ofType": {
+                                "kind": "SCALAR",
+                                "name": "Int",
+                                "ofType": null
+                            }
+                        },
+                        "isDeprecated": false,
+                        "deprecationReason": null
+                    },
+                    {
+                        "name": "_deleted",
+                        "description": null,
+                        "args": [],
+                        "type": {
+                            "kind": "SCALAR",
+                            "name": "Boolean",
+                            "ofType": null
+                        },
+                        "isDeprecated": false,
+                        "deprecationReason": null
+                    },
+                    {
+                        "name": "_lastChangedAt",
+                        "description": null,
+                        "args": [],
+                        "type": {
+                            "kind": "NON_NULL",
+                            "name": null,
+                            "ofType": {
+                                "kind": "SCALAR",
+                                "name": "AWSTimestamp",
+                                "ofType": null
+                            }
+                        },
+                        "isDeprecated": false,
+                        "deprecationReason": null
+                    },
+                    {
+                        "name": "createdAt",
+                        "description": null,
+                        "args": [],
+                        "type": {
+                            "kind": "NON_NULL",
+                            "name": null,
+                            "ofType": {
+                                "kind": "SCALAR",
+                                "name": "AWSDateTime",
+                                "ofType": null
+                            }
+                        },
+                        "isDeprecated": false,
+                        "deprecationReason": null
+                    },
+                    {
+                        "name": "updatedAt",
+                        "description": null,
+                        "args": [],
+                        "type": {
+                            "kind": "NON_NULL",
+                            "name": null,
+                            "ofType": {
+                                "kind": "SCALAR",
+                                "name": "AWSDateTime",
                                 "ofType": null
                             }
                         },
@@ -2758,6 +3280,117 @@
                         },
                         "isDeprecated": false,
                         "deprecationReason": null
+                    },
+                    {
+                        "name": "createUser",
+                        "description": null,
+                        "args": [
+                            {
+                                "name": "input",
+                                "description": null,
+                                "type": {
+                                    "kind": "NON_NULL",
+                                    "name": null,
+                                    "ofType": {
+                                        "kind": "INPUT_OBJECT",
+                                        "name": "CreateUserInput",
+                                        "ofType": null
+                                    }
+                                },
+                                "defaultValue": null
+                            },
+                            {
+                                "name": "condition",
+                                "description": null,
+                                "type": {
+                                    "kind": "INPUT_OBJECT",
+                                    "name": "ModelUserConditionInput",
+                                    "ofType": null
+                                },
+                                "defaultValue": null
+                            }
+                        ],
+                        "type": {
+                            "kind": "OBJECT",
+                            "name": "User",
+                            "ofType": null
+                        },
+                        "isDeprecated": false,
+                        "deprecationReason": null
+                    },
+                    {
+                        "name": "updateUser",
+                        "description": null,
+                        "args": [
+                            {
+                                "name": "input",
+                                "description": null,
+                                "type": {
+                                    "kind": "NON_NULL",
+                                    "name": null,
+                                    "ofType": {
+                                        "kind": "INPUT_OBJECT",
+                                        "name": "UpdateUserInput",
+                                        "ofType": null
+                                    }
+                                },
+                                "defaultValue": null
+                            },
+                            {
+                                "name": "condition",
+                                "description": null,
+                                "type": {
+                                    "kind": "INPUT_OBJECT",
+                                    "name": "ModelUserConditionInput",
+                                    "ofType": null
+                                },
+                                "defaultValue": null
+                            }
+                        ],
+                        "type": {
+                            "kind": "OBJECT",
+                            "name": "User",
+                            "ofType": null
+                        },
+                        "isDeprecated": false,
+                        "deprecationReason": null
+                    },
+                    {
+                        "name": "deleteUser",
+                        "description": null,
+                        "args": [
+                            {
+                                "name": "input",
+                                "description": null,
+                                "type": {
+                                    "kind": "NON_NULL",
+                                    "name": null,
+                                    "ofType": {
+                                        "kind": "INPUT_OBJECT",
+                                        "name": "DeleteUserInput",
+                                        "ofType": null
+                                    }
+                                },
+                                "defaultValue": null
+                            },
+                            {
+                                "name": "condition",
+                                "description": null,
+                                "type": {
+                                    "kind": "INPUT_OBJECT",
+                                    "name": "ModelUserConditionInput",
+                                    "ofType": null
+                                },
+                                "defaultValue": null
+                            }
+                        ],
+                        "type": {
+                            "kind": "OBJECT",
+                            "name": "User",
+                            "ofType": null
+                        },
+                        "isDeprecated": false,
+                        "deprecationReason": null
                     }
                 ],
                 "inputFields": null,
@@ -3084,6 +3717,16 @@
                         "defaultValue": null
                     },
                     {
+                        "name": "completedAt",
+                        "description": null,
+                        "type": {
+                            "kind": "SCALAR",
+                            "name": "AWSDateTime",
+                            "ofType": null
+                        },
+                        "defaultValue": null
+                    },
+                    {
                         "name": "createdAt",
                         "description": null,
                         "type": {
@@ -3166,6 +3809,16 @@
                     },
                     {
                         "name": "type",
+                        "description": null,
+                        "type": {
+                            "kind": "INPUT_OBJECT",
+                            "name": "ModelStringInput",
+                            "ofType": null
+                        },
+                        "defaultValue": null
+                    },
+                    {
+                        "name": "completedAt",
                         "description": null,
                         "type": {
                             "kind": "INPUT_OBJECT",
@@ -3303,6 +3956,16 @@
                         "type": {
                             "kind": "SCALAR",
                             "name": "String",
+                            "ofType": null
+                        },
+                        "defaultValue": null
+                    },
+                    {
+                        "name": "completedAt",
+                        "description": null,
+                        "type": {
+                            "kind": "SCALAR",
+                            "name": "AWSDateTime",
                             "ofType": null
                         },
                         "defaultValue": null
@@ -3498,6 +4161,16 @@
                         "defaultValue": null
                     },
                     {
+                        "name": "takenAt",
+                        "description": null,
+                        "type": {
+                            "kind": "SCALAR",
+                            "name": "AWSDateTime",
+                            "ofType": null
+                        },
+                        "defaultValue": null
+                    },
+                    {
                         "name": "createdAt",
                         "description": null,
                         "type": {
@@ -3614,6 +4287,16 @@
                         "type": {
                             "kind": "INPUT_OBJECT",
                             "name": "ModelBooleanInput",
+                            "ofType": null
+                        },
+                        "defaultValue": null
+                    },
+                    {
+                        "name": "takenAt",
+                        "description": null,
+                        "type": {
+                            "kind": "INPUT_OBJECT",
+                            "name": "ModelStringInput",
                             "ofType": null
                         },
                         "defaultValue": null
@@ -3782,6 +4465,16 @@
                         "defaultValue": null
                     },
                     {
+                        "name": "takenAt",
+                        "description": null,
+                        "type": {
+                            "kind": "SCALAR",
+                            "name": "AWSDateTime",
+                            "ofType": null
+                        },
+                        "defaultValue": null
+                    },
+                    {
                         "name": "createdAt",
                         "description": null,
                         "type": {
@@ -3819,6 +4512,276 @@
             {
                 "kind": "INPUT_OBJECT",
                 "name": "DeleteMeasurementInput",
+                "description": null,
+                "fields": null,
+                "inputFields": [
+                    {
+                        "name": "id",
+                        "description": null,
+                        "type": {
+                            "kind": "NON_NULL",
+                            "name": null,
+                            "ofType": {
+                                "kind": "SCALAR",
+                                "name": "ID",
+                                "ofType": null
+                            }
+                        },
+                        "defaultValue": null
+                    },
+                    {
+                        "name": "_version",
+                        "description": null,
+                        "type": {
+                            "kind": "SCALAR",
+                            "name": "Int",
+                            "ofType": null
+                        },
+                        "defaultValue": null
+                    }
+                ],
+                "interfaces": null,
+                "enumValues": null,
+                "possibleTypes": null
+            },
+            {
+                "kind": "INPUT_OBJECT",
+                "name": "CreateUserInput",
+                "description": null,
+                "fields": null,
+                "inputFields": [
+                    {
+                        "name": "id",
+                        "description": null,
+                        "type": {
+                            "kind": "SCALAR",
+                            "name": "ID",
+                            "ofType": null
+                        },
+                        "defaultValue": null
+                    },
+                    {
+                        "name": "email",
+                        "description": null,
+                        "type": {
+                            "kind": "SCALAR",
+                            "name": "String",
+                            "ofType": null
+                        },
+                        "defaultValue": null
+                    },
+                    {
+                        "name": "defaultTemperatureUnit",
+                        "description": null,
+                        "type": {
+                            "kind": "ENUM",
+                            "name": "TemperatureUnit",
+                            "ofType": null
+                        },
+                        "defaultValue": null
+                    },
+                    {
+                        "name": "defaultTemperatureCorrection",
+                        "description": null,
+                        "type": {
+                            "kind": "SCALAR",
+                            "name": "Float",
+                            "ofType": null
+                        },
+                        "defaultValue": null
+                    },
+                    {
+                        "name": "defaultHydrometerCorrection",
+                        "description": null,
+                        "type": {
+                            "kind": "SCALAR",
+                            "name": "Float",
+                            "ofType": null
+                        },
+                        "defaultValue": null
+                    },
+                    {
+                        "name": "_version",
+                        "description": null,
+                        "type": {
+                            "kind": "SCALAR",
+                            "name": "Int",
+                            "ofType": null
+                        },
+                        "defaultValue": null
+                    }
+                ],
+                "interfaces": null,
+                "enumValues": null,
+                "possibleTypes": null
+            },
+            {
+                "kind": "INPUT_OBJECT",
+                "name": "ModelUserConditionInput",
+                "description": null,
+                "fields": null,
+                "inputFields": [
+                    {
+                        "name": "email",
+                        "description": null,
+                        "type": {
+                            "kind": "INPUT_OBJECT",
+                            "name": "ModelStringInput",
+                            "ofType": null
+                        },
+                        "defaultValue": null
+                    },
+                    {
+                        "name": "defaultTemperatureUnit",
+                        "description": null,
+                        "type": {
+                            "kind": "INPUT_OBJECT",
+                            "name": "ModelTemperatureUnitInput",
+                            "ofType": null
+                        },
+                        "defaultValue": null
+                    },
+                    {
+                        "name": "defaultTemperatureCorrection",
+                        "description": null,
+                        "type": {
+                            "kind": "INPUT_OBJECT",
+                            "name": "ModelFloatInput",
+                            "ofType": null
+                        },
+                        "defaultValue": null
+                    },
+                    {
+                        "name": "defaultHydrometerCorrection",
+                        "description": null,
+                        "type": {
+                            "kind": "INPUT_OBJECT",
+                            "name": "ModelFloatInput",
+                            "ofType": null
+                        },
+                        "defaultValue": null
+                    },
+                    {
+                        "name": "and",
+                        "description": null,
+                        "type": {
+                            "kind": "LIST",
+                            "name": null,
+                            "ofType": {
+                                "kind": "INPUT_OBJECT",
+                                "name": "ModelUserConditionInput",
+                                "ofType": null
+                            }
+                        },
+                        "defaultValue": null
+                    },
+                    {
+                        "name": "or",
+                        "description": null,
+                        "type": {
+                            "kind": "LIST",
+                            "name": null,
+                            "ofType": {
+                                "kind": "INPUT_OBJECT",
+                                "name": "ModelUserConditionInput",
+                                "ofType": null
+                            }
+                        },
+                        "defaultValue": null
+                    },
+                    {
+                        "name": "not",
+                        "description": null,
+                        "type": {
+                            "kind": "INPUT_OBJECT",
+                            "name": "ModelUserConditionInput",
+                            "ofType": null
+                        },
+                        "defaultValue": null
+                    }
+                ],
+                "interfaces": null,
+                "enumValues": null,
+                "possibleTypes": null
+            },
+            {
+                "kind": "INPUT_OBJECT",
+                "name": "UpdateUserInput",
+                "description": null,
+                "fields": null,
+                "inputFields": [
+                    {
+                        "name": "id",
+                        "description": null,
+                        "type": {
+                            "kind": "NON_NULL",
+                            "name": null,
+                            "ofType": {
+                                "kind": "SCALAR",
+                                "name": "ID",
+                                "ofType": null
+                            }
+                        },
+                        "defaultValue": null
+                    },
+                    {
+                        "name": "email",
+                        "description": null,
+                        "type": {
+                            "kind": "SCALAR",
+                            "name": "String",
+                            "ofType": null
+                        },
+                        "defaultValue": null
+                    },
+                    {
+                        "name": "defaultTemperatureUnit",
+                        "description": null,
+                        "type": {
+                            "kind": "ENUM",
+                            "name": "TemperatureUnit",
+                            "ofType": null
+                        },
+                        "defaultValue": null
+                    },
+                    {
+                        "name": "defaultTemperatureCorrection",
+                        "description": null,
+                        "type": {
+                            "kind": "SCALAR",
+                            "name": "Float",
+                            "ofType": null
+                        },
+                        "defaultValue": null
+                    },
+                    {
+                        "name": "defaultHydrometerCorrection",
+                        "description": null,
+                        "type": {
+                            "kind": "SCALAR",
+                            "name": "Float",
+                            "ofType": null
+                        },
+                        "defaultValue": null
+                    },
+                    {
+                        "name": "_version",
+                        "description": null,
+                        "type": {
+                            "kind": "SCALAR",
+                            "name": "Int",
+                            "ofType": null
+                        },
+                        "defaultValue": null
+                    }
+                ],
+                "interfaces": null,
+                "enumValues": null,
+                "possibleTypes": null
+            },
+            {
+                "kind": "INPUT_OBJECT",
+                "name": "DeleteUserInput",
                 "description": null,
                 "fields": null,
                 "inputFields": [
@@ -3959,6 +4922,42 @@
                         "type": {
                             "kind": "OBJECT",
                             "name": "Measurement",
+                            "ofType": null
+                        },
+                        "isDeprecated": false,
+                        "deprecationReason": null
+                    },
+                    {
+                        "name": "onCreateUser",
+                        "description": null,
+                        "args": [],
+                        "type": {
+                            "kind": "OBJECT",
+                            "name": "User",
+                            "ofType": null
+                        },
+                        "isDeprecated": false,
+                        "deprecationReason": null
+                    },
+                    {
+                        "name": "onUpdateUser",
+                        "description": null,
+                        "args": [],
+                        "type": {
+                            "kind": "OBJECT",
+                            "name": "User",
+                            "ofType": null
+                        },
+                        "isDeprecated": false,
+                        "deprecationReason": null
+                    },
+                    {
+                        "name": "onDeleteUser",
+                        "description": null,
+                        "args": [],
+                        "type": {
+                            "kind": "OBJECT",
+                            "name": "User",
                             "ofType": null
                         },
                         "isDeprecated": false,

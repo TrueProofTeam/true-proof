@@ -30,6 +30,7 @@ public final class Measurement implements Model {
   public static final QueryField HYDROMETER_CORRECTION = field("Measurement", "hydrometerCorrection");
   public static final QueryField NOTE = field("Measurement", "note");
   public static final QueryField FLAG = field("Measurement", "flag");
+  public static final QueryField TAKEN_AT = field("Measurement", "takenAt");
   public static final QueryField CREATED_AT = field("Measurement", "createdAt");
   public static final QueryField UPDATED_AT = field("Measurement", "updatedAt");
   public static final QueryField BATCH = field("Measurement", "batchID");
@@ -41,6 +42,7 @@ public final class Measurement implements Model {
   private final @ModelField(targetType="Float", isRequired = true) Double hydrometerCorrection;
   private final @ModelField(targetType="String") String note;
   private final @ModelField(targetType="Boolean") Boolean flag;
+  private final @ModelField(targetType="AWSDateTime") Temporal.DateTime takenAt;
   private final @ModelField(targetType="AWSDateTime") Temporal.DateTime createdAt;
   private final @ModelField(targetType="AWSDateTime") Temporal.DateTime updatedAt;
   private final @ModelField(targetType="Batch") @BelongsTo(targetName = "batchID", type = Batch.class) Batch batch;
@@ -76,6 +78,10 @@ public final class Measurement implements Model {
       return flag;
   }
   
+  public Temporal.DateTime getTakenAt() {
+      return takenAt;
+  }
+  
   public Temporal.DateTime getCreatedAt() {
       return createdAt;
   }
@@ -88,7 +94,7 @@ public final class Measurement implements Model {
       return batch;
   }
   
-  private Measurement(String id, Double trueProof, Double temperature, Double hydrometer, Double temperatureCorrection, Double hydrometerCorrection, String note, Boolean flag, Temporal.DateTime createdAt, Temporal.DateTime updatedAt, Batch batch) {
+  private Measurement(String id, Double trueProof, Double temperature, Double hydrometer, Double temperatureCorrection, Double hydrometerCorrection, String note, Boolean flag, Temporal.DateTime takenAt, Temporal.DateTime createdAt, Temporal.DateTime updatedAt, Batch batch) {
     this.id = id;
     this.trueProof = trueProof;
     this.temperature = temperature;
@@ -97,6 +103,7 @@ public final class Measurement implements Model {
     this.hydrometerCorrection = hydrometerCorrection;
     this.note = note;
     this.flag = flag;
+    this.takenAt = takenAt;
     this.createdAt = createdAt;
     this.updatedAt = updatedAt;
     this.batch = batch;
@@ -118,6 +125,7 @@ public final class Measurement implements Model {
               ObjectsCompat.equals(getHydrometerCorrection(), measurement.getHydrometerCorrection()) &&
               ObjectsCompat.equals(getNote(), measurement.getNote()) &&
               ObjectsCompat.equals(getFlag(), measurement.getFlag()) &&
+              ObjectsCompat.equals(getTakenAt(), measurement.getTakenAt()) &&
               ObjectsCompat.equals(getCreatedAt(), measurement.getCreatedAt()) &&
               ObjectsCompat.equals(getUpdatedAt(), measurement.getUpdatedAt()) &&
               ObjectsCompat.equals(getBatch(), measurement.getBatch());
@@ -135,6 +143,7 @@ public final class Measurement implements Model {
       .append(getHydrometerCorrection())
       .append(getNote())
       .append(getFlag())
+      .append(getTakenAt())
       .append(getCreatedAt())
       .append(getUpdatedAt())
       .append(getBatch())
@@ -154,6 +163,7 @@ public final class Measurement implements Model {
       .append("hydrometerCorrection=" + String.valueOf(getHydrometerCorrection()) + ", ")
       .append("note=" + String.valueOf(getNote()) + ", ")
       .append("flag=" + String.valueOf(getFlag()) + ", ")
+      .append("takenAt=" + String.valueOf(getTakenAt()) + ", ")
       .append("createdAt=" + String.valueOf(getCreatedAt()) + ", ")
       .append("updatedAt=" + String.valueOf(getUpdatedAt()) + ", ")
       .append("batch=" + String.valueOf(getBatch()))
@@ -195,6 +205,7 @@ public final class Measurement implements Model {
       null,
       null,
       null,
+      null,
       null
     );
   }
@@ -208,6 +219,7 @@ public final class Measurement implements Model {
       hydrometerCorrection,
       note,
       flag,
+      takenAt,
       createdAt,
       updatedAt,
       batch);
@@ -242,6 +254,7 @@ public final class Measurement implements Model {
     BuildStep id(String id) throws IllegalArgumentException;
     BuildStep note(String note);
     BuildStep flag(Boolean flag);
+    BuildStep takenAt(Temporal.DateTime takenAt);
     BuildStep createdAt(Temporal.DateTime createdAt);
     BuildStep updatedAt(Temporal.DateTime updatedAt);
     BuildStep batch(Batch batch);
@@ -257,6 +270,7 @@ public final class Measurement implements Model {
     private Double hydrometerCorrection;
     private String note;
     private Boolean flag;
+    private Temporal.DateTime takenAt;
     private Temporal.DateTime createdAt;
     private Temporal.DateTime updatedAt;
     private Batch batch;
@@ -273,6 +287,7 @@ public final class Measurement implements Model {
           hydrometerCorrection,
           note,
           flag,
+          takenAt,
           createdAt,
           updatedAt,
           batch);
@@ -326,6 +341,12 @@ public final class Measurement implements Model {
     }
     
     @Override
+     public BuildStep takenAt(Temporal.DateTime takenAt) {
+        this.takenAt = takenAt;
+        return this;
+    }
+    
+    @Override
      public BuildStep createdAt(Temporal.DateTime createdAt) {
         this.createdAt = createdAt;
         return this;
@@ -366,7 +387,7 @@ public final class Measurement implements Model {
   
 
   public final class CopyOfBuilder extends Builder {
-    private CopyOfBuilder(String id, Double trueProof, Double temperature, Double hydrometer, Double temperatureCorrection, Double hydrometerCorrection, String note, Boolean flag, Temporal.DateTime createdAt, Temporal.DateTime updatedAt, Batch batch) {
+    private CopyOfBuilder(String id, Double trueProof, Double temperature, Double hydrometer, Double temperatureCorrection, Double hydrometerCorrection, String note, Boolean flag, Temporal.DateTime takenAt, Temporal.DateTime createdAt, Temporal.DateTime updatedAt, Batch batch) {
       super.id(id);
       super.trueProof(trueProof)
         .temperature(temperature)
@@ -375,6 +396,7 @@ public final class Measurement implements Model {
         .hydrometerCorrection(hydrometerCorrection)
         .note(note)
         .flag(flag)
+        .takenAt(takenAt)
         .createdAt(createdAt)
         .updatedAt(updatedAt)
         .batch(batch);
@@ -413,6 +435,11 @@ public final class Measurement implements Model {
     @Override
      public CopyOfBuilder flag(Boolean flag) {
       return (CopyOfBuilder) super.flag(flag);
+    }
+    
+    @Override
+     public CopyOfBuilder takenAt(Temporal.DateTime takenAt) {
+      return (CopyOfBuilder) super.takenAt(takenAt);
     }
     
     @Override
