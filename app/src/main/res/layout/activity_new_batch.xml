@@ -6,4 +6,90 @@
     android:layout_height="match_parent"
     tools:context=".activities.NewBatchActivity">
 
+    <TextView
+            android:text="Distillery and DSP"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/textViewNewBatchdsp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginTop="8dp" />
+
+    <TextView
+            android:text="Type"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/textViewTypeTitleNewBatch"
+            app:layout_constraintTop_toTopOf="@+id/editTextBatchTypeNewBatch"
+            app:layout_constraintBottom_toBottomOf="@+id/editTextBatchTypeNewBatch"
+            app:layout_constraintEnd_toStartOf="@+id/editTextBatchTypeNewBatch"
+            android:layout_marginEnd="8dp" />
+
+    <TextView
+            android:text="Batch Number"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/textViewBatchNumNewBatch"
+            app:layout_constraintTop_toTopOf="@+id/editTextBatchNumNewBatch"
+            app:layout_constraintBottom_toBottomOf="@+id/editTextBatchNumNewBatch"
+            app:layout_constraintEnd_toStartOf="@+id/editTextBatchNumNewBatch"
+            android:layout_marginEnd="8dp" />
+
+    <TextView
+            android:text="Batch Identifier"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/textViewBatchIdNewBatch"
+            app:layout_constraintTop_toTopOf="@+id/editTextBatchIdNewBatch"
+            app:layout_constraintBottom_toBottomOf="@+id/editTextBatchIdNewBatch"
+            app:layout_constraintEnd_toStartOf="@+id/editTextBatchIdNewBatch"
+            android:layout_marginEnd="8dp" />
+
+    <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:inputType="textPersonName"
+            android:text="Name"
+            android:ems="10"
+            android:id="@+id/editTextBatchTypeNewBatch"
+            android:layout_marginEnd="16dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textViewNewBatchdsp"
+            android:layout_marginTop="24dp" />
+
+    <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:inputType="textPersonName"
+            android:text="Name"
+            android:ems="10"
+            android:id="@+id/editTextBatchNumNewBatch"
+            android:layout_marginEnd="16dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/editTextBatchTypeNewBatch"
+            android:layout_marginTop="16dp" />
+
+    <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:inputType="textPersonName"
+            android:text="Name"
+            android:ems="10"
+            android:id="@+id/editTextBatchIdNewBatch"
+            android:layout_marginEnd="16dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/editTextBatchNumNewBatch"
+            android:layout_marginTop="16dp" />
+
+    <Button
+            android:text="Create Batch"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_marginBottom="16dp"
+            android:id="@+id/buttonCreateBatchNewBatch"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginStart="16dp" />
 </androidx.constraintlayout.widget.ConstraintLayout>
