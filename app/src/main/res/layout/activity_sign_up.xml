@@ -74,8 +74,8 @@
         android:hint="@string/reTypePasswordText"
         android:importantForAutofill="no"
         android:inputType="textPassword"
-        app:layout_constraintBottom_toTopOf="@+id/editTextNumber"
-        app:layout_constraintStart_toStartOf="@+id/editTextNumber"
+        app:layout_constraintBottom_toTopOf="@+id/editTextDSP"
+        app:layout_constraintStart_toStartOf="@+id/editTextDSP"
         app:layout_constraintTop_toBottomOf="@+id/editTextPasswordSignup" />
 
     <Button
@@ -85,9 +85,9 @@
         android:text="@string/signUpText"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextNumber" />
+        app:layout_constraintTop_toBottomOf="@+id/editTextDSP" />
 
     <TextView
         android:id="@+id/labelForEmail"
@@ -95,8 +95,6 @@
         android:layout_height="wrap_content"
         android:text="@string/emailText"
         app:layout_constraintBottom_toTopOf="@+id/editTextEmailSignup"
-        app:layout_constraintEnd_toEndOf="@+id/editTextEmailSignup"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/editTextEmailSignup" />
 
     <TextView
@@ -105,8 +103,6 @@
         android:layout_height="wrap_content"
         android:text="@string/confirmationEmailText"
         app:layout_constraintBottom_toTopOf="@+id/editTextEmailConfirmationSignup"
-        app:layout_constraintEnd_toEndOf="@+id/editTextEmailConfirmationSignup"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/editTextEmailConfirmationSignup" />
 
     <TextView
@@ -115,8 +111,6 @@
         android:layout_height="wrap_content"
         android:text="@string/passwordText"
         app:layout_constraintBottom_toTopOf="@+id/editTextPasswordSignup"
-        app:layout_constraintEnd_toEndOf="@+id/editTextPasswordSignup"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/editTextPasswordSignup" />
 
     <TextView
@@ -125,8 +119,6 @@
         android:layout_height="wrap_content"
         android:text="@string/confirmPasswordText"
         app:layout_constraintBottom_toTopOf="@+id/editTextPasswordConfirmationSignup"
-        app:layout_constraintEnd_toEndOf="@+id/editTextPasswordConfirmationSignup"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/editTextPasswordConfirmationSignup" />
 
     <TextView
@@ -134,24 +126,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/dSPNumberText"
-        app:layout_constraintBottom_toTopOf="@+id/editTextNumber"
-        app:layout_constraintEnd_toEndOf="@+id/editTextNumber"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/editTextNumber" />
-
-    <EditText
-        android:id="@+id/editTextNumber"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:hint="@string/shortDSPNumberText"
-        android:inputType="number"
-        app:layout_constraintBottom_toTopOf="@+id/buttonSignupSignup"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextPasswordConfirmationSignup"
-        android:importantForAutofill="no" />
+        app:layout_constraintBottom_toTopOf="@+id/editTextDSP"
+        app:layout_constraintStart_toStartOf="@+id/editTextDSP" />
 
     <Button
         android:id="@+id/userAgreementButton"
@@ -164,8 +140,19 @@
         android:paddingBottom="2dp"
         android:text="@string/userAgreementButtonText"
         android:textSize="12sp"
-        app:layout_constraintEnd_toEndOf="@+id/editTextNumber"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/editTextNumber"
-        app:layout_constraintTop_toBottomOf="@+id/editTextNumber" />
+        app:layout_constraintStart_toStartOf="@+id/editTextDSP"
+        app:layout_constraintTop_toBottomOf="@+id/editTextDSP" />
+
+    <EditText
+        android:id="@+id/editTextDSP"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:hint="@string/shortDSPNumberText"
+        android:inputType="textPersonName"
+        app:layout_constraintBottom_toTopOf="@+id/buttonSignupSignup"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editTextPasswordConfirmationSignup" />
 </androidx.constraintlayout.widget.ConstraintLayout>
