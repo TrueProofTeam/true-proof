@@ -1,5 +1,7 @@
 package com.trueproof.trueproof.models;
 
+import android.annotation.SuppressLint;
+
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.DiffUtil;
 
@@ -17,4 +19,9 @@ public class BatchUtils {
             return oldItem.equals(newItem);
         }
     };
+
+    @SuppressLint("DefaultLocale")
+    public static String batchToString(Batch batch) {
+        return String.format("%s batch #%d", batch.getType(), batch.getBatchNumber());
+    }
 }

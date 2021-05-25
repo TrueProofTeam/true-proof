@@ -16,7 +16,7 @@ import com.trueproof.trueproof.models.BatchUtils;
 public class ActiveBatchListAdapter extends ListAdapter<Batch, ActiveBatchListAdapter.ActiveBatchViewHolder> {
     private final OnClickHandler onClickHandler;
 
-    private ActiveBatchListAdapter(OnClickHandler onClickHandler) {
+    public ActiveBatchListAdapter(OnClickHandler onClickHandler) {
         super(BatchUtils.DIFF_CALLBACK);
         this.onClickHandler = onClickHandler;
     }
