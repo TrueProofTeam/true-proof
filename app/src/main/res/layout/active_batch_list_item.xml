@@ -7,7 +7,7 @@
     android:layout_height="100dp">
 
     <TextView
-        android:id="@+id/batchNumberActiveBatchListItem"
+        android:id="@+id/batchNumberBatchListItem"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
@@ -17,25 +17,25 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/batchTypeActiveBatchListItem"
+        android:id="@+id/batchTypeBatchListItem"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="28dp"
         android:text="Whiskey"
-        app:layout_constraintBottom_toBottomOf="@+id/batchNumberActiveBatchListItem"
+        app:layout_constraintBottom_toBottomOf="@+id/batchNumberBatchListItem"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/batchNumberActiveBatchListItem"
+        app:layout_constraintTop_toTopOf="@+id/batchNumberBatchListItem"
         app:layout_constraintVertical_bias="0.0" />
 
     <TextView
-        android:id="@+id/startedAtActiveBatchListItem"
+        android:id="@+id/startedAtTimeActiveBatchListItem"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:text="8:24am today"
         app:layout_constraintBottom_toBottomOf="@+id/startedAtTextActiveBatchListItem"
         app:layout_constraintStart_toEndOf="@+id/startedAtTextActiveBatchListItem"
-        app:layout_constraintTop_toBottomOf="@+id/batchTypeActiveBatchListItem"
+        app:layout_constraintTop_toBottomOf="@+id/batchTypeBatchListItem"
         app:layout_constraintVertical_bias="1.0" />
 
     <TextView
@@ -44,8 +44,8 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="6dp"
         android:text="Started at:"
-        app:layout_constraintStart_toStartOf="@+id/batchTypeActiveBatchListItem"
-        app:layout_constraintTop_toBottomOf="@+id/batchTypeActiveBatchListItem" />
+        app:layout_constraintStart_toStartOf="@+id/batchTypeBatchListItem"
+        app:layout_constraintTop_toBottomOf="@+id/batchTypeBatchListItem" />
 
     <TextView
         android:id="@+id/lastMeasurementTextActiveBatchListItem"
@@ -62,11 +62,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="101.1 proof"
-        app:layout_constraintStart_toStartOf="@+id/batchNumberActiveBatchListItem"
-        app:layout_constraintTop_toTopOf="@+id/startedAtActiveBatchListItem" />
+        app:layout_constraintStart_toStartOf="@+id/batchNumberBatchListItem"
+        app:layout_constraintTop_toTopOf="@+id/startedAtTimeActiveBatchListItem" />
 
     <TextView
-        android:id="@+id/measuredAtTimeActiveBatchListItem"
+        android:id="@+id/lastMeasuredTimeActiveBatchListItem"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"

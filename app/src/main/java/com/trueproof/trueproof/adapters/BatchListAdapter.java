@@ -3,6 +3,7 @@ package com.trueproof.trueproof.adapters;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.ListAdapter;
@@ -15,7 +16,7 @@ import com.trueproof.trueproof.models.BatchUtils;
 public class BatchListAdapter extends ListAdapter<Batch, BatchListAdapter.BatchViewHolder> {
     private final OnClickHandler onClickHandler;
 
-    private BatchListAdapter(OnClickHandler onClickHandler) {
+    public BatchListAdapter(OnClickHandler onClickHandler) {
         super(BatchUtils.DIFF_CALLBACK);
         this.onClickHandler = onClickHandler;
     }
@@ -39,16 +40,27 @@ public class BatchListAdapter extends ListAdapter<Batch, BatchListAdapter.BatchV
     }
 
     protected class BatchViewHolder extends RecyclerView.ViewHolder {
-        private Batch batch = null;
-        // TODO: cache TextViews here
+        private Batch batch;
+        private TextView batchType;
+        private TextView batchNumber;
+        private TextView trueProof;
+        private TextView completedAtTime;
 
         public BatchViewHolder(@NonNull View itemView, OnClickHandler onClick) {
             super(itemView);
+            itemView.setOnClickListener(v -> onClick.onClick(this.batch));
+            batchType = itemView.findViewById(R.id.batchTypeBatchListItem);
+            batchNumber = itemView.findViewById(R.id.batchNumberBatchListItem);
+            // TODO Add field for completedAt to database schema
+            completedAtTime = itemView.findViewById(R.id.completedAtBatchListItem);
         }
 
         public void bind(Batch batch) {
             this.batch = batch;
-            // TODO: set TextView text values here
+            batchType.setText(batch.getType());
+            batchNumber.setText(String.format("Batch no. %d", batch.getBatchNumber()));
+            // TODO Date time formatting logic for this
+            completedAtTime.setText("placeholder");
         }
     }
 }
