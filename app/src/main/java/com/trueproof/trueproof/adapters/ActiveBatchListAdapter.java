@@ -61,7 +61,9 @@ public class ActiveBatchListAdapter extends ListAdapter<Batch, ActiveBatchListAd
             this.batch = batch;
             batchType.setText(batch.getType());
             batchNumber.setText(String.format("Batch no. %d", batch.getBatchNumber()));
-            trueProof.setText(String.format("%.1f proof", batch.getTrueProof()));
+            // TODO logic for retrieving most recent measurement
+            final double lastMeasuredTrueProof = 110.1;
+            trueProof.setText(String.format("%.1f proof", lastMeasuredTrueProof));
             // TODO Date time formatting for these
             startedAtTime.setText("placeholder");
             lastMeasuredTime.setText("placeholder");

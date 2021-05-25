@@ -51,15 +51,14 @@ public class BatchListAdapter extends ListAdapter<Batch, BatchListAdapter.BatchV
             itemView.setOnClickListener(v -> onClick.onClick(this.batch));
             batchType = itemView.findViewById(R.id.batchTypeBatchListItem);
             batchNumber = itemView.findViewById(R.id.batchNumberBatchListItem);
-            trueProof = itemView.findViewById(R.id.measuredProofBatchListItem);
-            completedAtTime = itemView.findViewById(R.id.completedAtTimeBatchListItem);
+            // TODO Add field for completedAt to database schema
+            completedAtTime = itemView.findViewById(R.id.completedAtBatchListItem);
         }
 
         public void bind(Batch batch) {
             this.batch = batch;
             batchType.setText(batch.getType());
             batchNumber.setText(String.format("Batch no. %d", batch.getBatchNumber()));
-            trueProof.setText(String.format("%.1f proof", batch.getTrueProof()));
             // TODO Date time formatting logic for this
             completedAtTime.setText("placeholder");
         }

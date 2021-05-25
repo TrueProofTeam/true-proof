@@ -8,27 +8,18 @@
 
 
     <TextView
-        android:id="@+id/batchNumberBatchListItem"
+        android:id="@+id/batchNumberActiveBatchListItem"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="52dp"
         android:text="Batch no. 1501"
-        app:layout_constraintBottom_toBottomOf="@+id/batchTypeBatchListItem"
+        app:layout_constraintBottom_toBottomOf="@+id/batchTypeActiveBatchListItem"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/batchTypeBatchListItem"
+        app:layout_constraintTop_toTopOf="@+id/batchTypeActiveBatchListItem"
         app:layout_constraintVertical_bias="0.0" />
 
     <TextView
-        android:id="@+id/measuredProofBatchListItem"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="12dp"
-        android:text="101.1 proof"
-        app:layout_constraintStart_toStartOf="@+id/batchNumberBatchListItem"
-        app:layout_constraintTop_toTopOf="@+id/startedAtTimeActiveBatchListItem" />
-
-    <TextView
-        android:id="@+id/batchTypeBatchListItem"
+        android:id="@+id/batchTypeActiveBatchListItem"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="52dp"
@@ -38,14 +29,14 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/completedAtTimeBatchListItem"
+        android:id="@+id/completedAtBatchListItem"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="20dp"
         android:text="Completed at 11/12/31"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/batchTypeBatchListItem" />
+        app:layout_constraintTop_toBottomOf="@+id/batchTypeActiveBatchListItem" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
