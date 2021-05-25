@@ -14,8 +14,17 @@ import com.amplifyframework.datastore.generated.model.Status;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.inject.Inject;
+import javax.inject.Singleton;
+
+@Singleton
 public class BatchRepository {
     String TAG = "BatchRepo";
+
+    @Inject
+    BatchRepository() {
+
+    }
 
     public void saveBatch(Batch batch, Consumer onSuccess, Consumer<ApiException> onFail) {
         Amplify.API.mutate(ModelMutation.create(batch),
