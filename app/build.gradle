@@ -44,9 +44,11 @@ dependencies {
     androidTestImplementation 'androidx.test.ext:junit:1.1.2'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
 
+    // Dependency injection with Hilt
     implementation "com.google.dagger:hilt-android:$hilt_version"
     kapt "com.google.dagger:hilt-compiler:$hilt_version"
 
+    // Amplify framework
     implementation 'com.amplifyframework:core:1.17.5'
     implementation 'com.amplifyframework:aws-auth-cognito:1.17.5'
     implementation 'com.amplifyframework:aws-api:1.17.5'
