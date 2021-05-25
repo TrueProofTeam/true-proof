@@ -62,6 +62,7 @@ public class ActiveBatchListAdapter extends ListAdapter<Batch, ActiveBatchListAd
             batchType.setText(batch.getType());
             batchNumber.setText(String.format("Batch no. %d", batch.getBatchNumber()));
             trueProof.setText(String.format("%.1f proof", batch.getTrueProof()));
+            // TODO Date time formatting for these
             startedAtTime.setText("placeholder");
             lastMeasuredTime.setText("placeholder");
         }

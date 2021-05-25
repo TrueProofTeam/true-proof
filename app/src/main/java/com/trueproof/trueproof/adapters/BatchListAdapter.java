@@ -60,6 +60,7 @@ public class BatchListAdapter extends ListAdapter<Batch, BatchListAdapter.BatchV
             batchType.setText(batch.getType());
             batchNumber.setText(String.format("Batch no. %d", batch.getBatchNumber()));
             trueProof.setText(String.format("%.1f proof", batch.getTrueProof()));
+            // TODO Date time formatting logic for this
             completedAtTime.setText("placeholder");
         }
     }
