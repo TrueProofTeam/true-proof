@@ -130,6 +130,7 @@ mutation CreateBatch(
       items {
         id
         batchID
+        trueProof
         temperature
         hydrometer
         temperatureCorrection
@@ -182,6 +183,7 @@ mutation UpdateBatch(
       items {
         id
         batchID
+        trueProof
         temperature
         hydrometer
         temperatureCorrection
@@ -234,6 +236,7 @@ mutation DeleteBatch(
       items {
         id
         batchID
+        trueProof
         temperature
         hydrometer
         temperatureCorrection
@@ -261,6 +264,7 @@ mutation CreateMeasurement(
   createMeasurement(input: $input, condition: $condition) {
     id
     batchID
+    trueProof
     temperature
     hydrometer
     temperatureCorrection
@@ -309,6 +313,7 @@ mutation UpdateMeasurement(
   updateMeasurement(input: $input, condition: $condition) {
     id
     batchID
+    trueProof
     temperature
     hydrometer
     temperatureCorrection
@@ -357,6 +362,7 @@ mutation DeleteMeasurement(
   deleteMeasurement(input: $input, condition: $condition) {
     id
     batchID
+    trueProof
     temperature
     hydrometer
     temperatureCorrection

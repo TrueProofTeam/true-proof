@@ -23,6 +23,7 @@ import static com.amplifyframework.core.model.query.predicate.QueryField.field;
 @Index(name = "byBatch", fields = {"batchID"})
 public final class Measurement implements Model {
   public static final QueryField ID = field("Measurement", "id");
+  public static final QueryField TRUE_PROOF = field("Measurement", "trueProof");
   public static final QueryField TEMPERATURE = field("Measurement", "temperature");
   public static final QueryField HYDROMETER = field("Measurement", "hydrometer");
   public static final QueryField TEMPERATURE_CORRECTION = field("Measurement", "temperatureCorrection");
@@ -33,10 +34,11 @@ public final class Measurement implements Model {
   public static final QueryField UPDATED_AT = field("Measurement", "updatedAt");
   public static final QueryField BATCH = field("Measurement", "batchID");
   private final @ModelField(targetType="ID", isRequired = true) String id;
-  private final @ModelField(targetType="Int", isRequired = true) Integer temperature;
-  private final @ModelField(targetType="Int", isRequired = true) Integer hydrometer;
-  private final @ModelField(targetType="Int", isRequired = true) Integer temperatureCorrection;
-  private final @ModelField(targetType="Int", isRequired = true) Integer hydrometerCorrection;
+  private final @ModelField(targetType="Float", isRequired = true) Double trueProof;
+  private final @ModelField(targetType="Float", isRequired = true) Double temperature;
+  private final @ModelField(targetType="Float", isRequired = true) Double hydrometer;
+  private final @ModelField(targetType="Float", isRequired = true) Double temperatureCorrection;
+  private final @ModelField(targetType="Float", isRequired = true) Double hydrometerCorrection;
   private final @ModelField(targetType="String") String note;
   private final @ModelField(targetType="Boolean") Boolean flag;
   private final @ModelField(targetType="AWSDateTime") Temporal.DateTime createdAt;
@@ -46,19 +48,23 @@ public final class Measurement implements Model {
       return id;
   }
   
-  public Integer getTemperature() {
+  public Double getTrueProof() {
+      return trueProof;
+  }
+  
+  public Double getTemperature() {
       return temperature;
   }
   
-  public Integer getHydrometer() {
+  public Double getHydrometer() {
       return hydrometer;
   }
   
-  public Integer getTemperatureCorrection() {
+  public Double getTemperatureCorrection() {
       return temperatureCorrection;
   }
   
-  public Integer getHydrometerCorrection() {
+  public Double getHydrometerCorrection() {
       return hydrometerCorrection;
   }
   
@@ -82,8 +88,9 @@ public final class Measurement implements Model {
       return batch;
   }
   
-  private Measurement(String id, Integer temperature, Integer hydrometer, Integer temperatureCorrection, Integer hydrometerCorrection, String note, Boolean flag, Temporal.DateTime createdAt, Temporal.DateTime updatedAt, Batch batch) {
+  private Measurement(String id, Double trueProof, Double temperature, Double hydrometer, Double temperatureCorrection, Double hydrometerCorrection, String note, Boolean flag, Temporal.DateTime createdAt, Temporal.DateTime updatedAt, Batch batch) {
     this.id = id;
+    this.trueProof = trueProof;
     this.temperature = temperature;
     this.hydrometer = hydrometer;
     this.temperatureCorrection = temperatureCorrection;
@@ -104,6 +111,7 @@ public final class Measurement implements Model {
       } else {
       Measurement measurement = (Measurement) obj;
       return ObjectsCompat.equals(getId(), measurement.getId()) &&
+              ObjectsCompat.equals(getTrueProof(), measurement.getTrueProof()) &&
               ObjectsCompat.equals(getTemperature(), measurement.getTemperature()) &&
               ObjectsCompat.equals(getHydrometer(), measurement.getHydrometer()) &&
               ObjectsCompat.equals(getTemperatureCorrection(), measurement.getTemperatureCorrection()) &&
@@ -120,6 +128,7 @@ public final class Measurement implements Model {
    public int hashCode() {
     return new StringBuilder()
       .append(getId())
+      .append(getTrueProof())
       .append(getTemperature())
       .append(getHydrometer())
       .append(getTemperatureCorrection())
@@ -138,6 +147,7 @@ public final class Measurement implements Model {
     return new StringBuilder()
       .append("Measurement {")
       .append("id=" + String.valueOf(getId()) + ", ")
+      .append("trueProof=" + String.valueOf(getTrueProof()) + ", ")
       .append("temperature=" + String.valueOf(getTemperature()) + ", ")
       .append("hydrometer=" + String.valueOf(getHydrometer()) + ", ")
       .append("temperatureCorrection=" + String.valueOf(getTemperatureCorrection()) + ", ")
@@ -151,7 +161,7 @@ public final class Measurement implements Model {
       .toString();
   }
   
-  public static TemperatureStep builder() {
+  public static TrueProofStep builder() {
       return new Builder();
   }
   
@@ -184,12 +194,14 @@ public final class Measurement implements Model {
       null,
       null,
       null,
+      null,
       null
     );
   }
   
   public CopyOfBuilder copyOfBuilder() {
     return new CopyOfBuilder(id,
+      trueProof,
       temperature,
       hydrometer,
       temperatureCorrection,
@@ -200,23 +212,28 @@ public final class Measurement implements Model {
       updatedAt,
       batch);
   }
+  public interface TrueProofStep {
+    TemperatureStep trueProof(Double trueProof);
+  }
+  
+
   public interface TemperatureStep {
-    HydrometerStep temperature(Integer temperature);
+    HydrometerStep temperature(Double temperature);
   }
   
 
   public interface HydrometerStep {
-    TemperatureCorrectionStep hydrometer(Integer hydrometer);
+    TemperatureCorrectionStep hydrometer(Double hydrometer);
   }
   
 
   public interface TemperatureCorrectionStep {
-    HydrometerCorrectionStep temperatureCorrection(Integer temperatureCorrection);
+    HydrometerCorrectionStep temperatureCorrection(Double temperatureCorrection);
   }
   
 
   public interface HydrometerCorrectionStep {
-    BuildStep hydrometerCorrection(Integer hydrometerCorrection);
+    BuildStep hydrometerCorrection(Double hydrometerCorrection);
   }
   
 
@@ -231,12 +248,13 @@ public final class Measurement implements Model {
   }
   
 
-  public static class Builder implements TemperatureStep, HydrometerStep, TemperatureCorrectionStep, HydrometerCorrectionStep, BuildStep {
+  public static class Builder implements TrueProofStep, TemperatureStep, HydrometerStep, TemperatureCorrectionStep, HydrometerCorrectionStep, BuildStep {
     private String id;
-    private Integer temperature;
-    private Integer hydrometer;
-    private Integer temperatureCorrection;
-    private Integer hydrometerCorrection;
+    private Double trueProof;
+    private Double temperature;
+    private Double hydrometer;
+    private Double temperatureCorrection;
+    private Double hydrometerCorrection;
     private String note;
     private Boolean flag;
     private Temporal.DateTime createdAt;
@@ -248,6 +266,7 @@ public final class Measurement implements Model {
         
         return new Measurement(
           id,
+          trueProof,
           temperature,
           hydrometer,
           temperatureCorrection,
@@ -260,28 +279,35 @@ public final class Measurement implements Model {
     }
     
     @Override
-     public HydrometerStep temperature(Integer temperature) {
+     public TemperatureStep trueProof(Double trueProof) {
+        Objects.requireNonNull(trueProof);
+        this.trueProof = trueProof;
+        return this;
+    }
+    
+    @Override
+     public HydrometerStep temperature(Double temperature) {
         Objects.requireNonNull(temperature);
         this.temperature = temperature;
         return this;
     }
     
     @Override
-     public TemperatureCorrectionStep hydrometer(Integer hydrometer) {
+     public TemperatureCorrectionStep hydrometer(Double hydrometer) {
         Objects.requireNonNull(hydrometer);
         this.hydrometer = hydrometer;
         return this;
     }
     
     @Override
-     public HydrometerCorrectionStep temperatureCorrection(Integer temperatureCorrection) {
+     public HydrometerCorrectionStep temperatureCorrection(Double temperatureCorrection) {
         Objects.requireNonNull(temperatureCorrection);
         this.temperatureCorrection = temperatureCorrection;
         return this;
     }
     
     @Override
-     public BuildStep hydrometerCorrection(Integer hydrometerCorrection) {
+     public BuildStep hydrometerCorrection(Double hydrometerCorrection) {
         Objects.requireNonNull(hydrometerCorrection);
         this.hydrometerCorrection = hydrometerCorrection;
         return this;
@@ -340,9 +366,10 @@ public final class Measurement implements Model {
   
 
   public final class CopyOfBuilder extends Builder {
-    private CopyOfBuilder(String id, Integer temperature, Integer hydrometer, Integer temperatureCorrection, Integer hydrometerCorrection, String note, Boolean flag, Temporal.DateTime createdAt, Temporal.DateTime updatedAt, Batch batch) {
+    private CopyOfBuilder(String id, Double trueProof, Double temperature, Double hydrometer, Double temperatureCorrection, Double hydrometerCorrection, String note, Boolean flag, Temporal.DateTime createdAt, Temporal.DateTime updatedAt, Batch batch) {
       super.id(id);
-      super.temperature(temperature)
+      super.trueProof(trueProof)
+        .temperature(temperature)
         .hydrometer(hydrometer)
         .temperatureCorrection(temperatureCorrection)
         .hydrometerCorrection(hydrometerCorrection)
@@ -354,22 +381,27 @@ public final class Measurement implements Model {
     }
     
     @Override
-     public CopyOfBuilder temperature(Integer temperature) {
+     public CopyOfBuilder trueProof(Double trueProof) {
+      return (CopyOfBuilder) super.trueProof(trueProof);
+    }
+    
+    @Override
+     public CopyOfBuilder temperature(Double temperature) {
       return (CopyOfBuilder) super.temperature(temperature);
     }
     
     @Override
-     public CopyOfBuilder hydrometer(Integer hydrometer) {
+     public CopyOfBuilder hydrometer(Double hydrometer) {
       return (CopyOfBuilder) super.hydrometer(hydrometer);
     }
     
     @Override
-     public CopyOfBuilder temperatureCorrection(Integer temperatureCorrection) {
+     public CopyOfBuilder temperatureCorrection(Double temperatureCorrection) {
       return (CopyOfBuilder) super.temperatureCorrection(temperatureCorrection);
     }
     
     @Override
-     public CopyOfBuilder hydrometerCorrection(Integer hydrometerCorrection) {
+     public CopyOfBuilder hydrometerCorrection(Double hydrometerCorrection) {
       return (CopyOfBuilder) super.hydrometerCorrection(hydrometerCorrection);
     }
     
