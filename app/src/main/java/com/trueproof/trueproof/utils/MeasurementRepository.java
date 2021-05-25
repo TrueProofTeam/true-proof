@@ -18,7 +18,8 @@ import java.util.logging.Handler;
 
 public class MeasurementRepository {
     String TAG = "MeasurementRepo";
-    public void saveMeasurement (Measurement measurement){
+
+    public void saveMeasurement(Measurement measurement) {
         Amplify.API.mutate(ModelMutation.create(measurement),
                 response -> {
                     Log.i(TAG, "onSuccess: added");
@@ -26,57 +27,71 @@ public class MeasurementRepository {
                     Log.i(TAG, "onFail: miss");
                 });
     }
-//    when calling this pass in own callback
-    public void getMeasurementsByBatch(Batch batch, Consumer<List<Measurement>> onSuccess, Consumer<ApiException> onFail){
-        List <Measurement> output = new ArrayList<>();
+
+
+    public void getMeasurementsByBatch(Batch batch, Consumer<List<Measurement>> onSuccess, Consumer<ApiException> onFail) {
+        List<Measurement> output = new ArrayList<>();
         Amplify.API.query(
                 ModelQuery.list(Measurement.class, Measurement.BATCH.contains(batch.getId())),
                 response -> {
-                    for (Measurement measurement:  response.getData()) {
+                    for (Measurement measurement : response.getData()) {
                         output.add(measurement);
                     }
                     onSuccess.accept(output);
                 },
-//                try .eq instead of contains
+
                 onFail
         );
-//        return output;
+
     }
-    public void getLastMeasurementsByBatch(Batch batch, Consumer<Measurement> onSuccess, Consumer<ApiException> onFail){
-        List <Measurement> output = new ArrayList<>();
+
+    public void getLastMeasurementByBatch(Batch batch, Consumer<Measurement> onSuccess, Consumer<ApiException> onFail) {
+        List<Measurement> output = new ArrayList<>();
         Amplify.API.query(
                 ModelQuery.list(Measurement.class, Measurement.BATCH.contains(batch.getId())),
                 response -> {
-                    for (Measurement measurement:  response.getData()) {
+                    for (Measurement measurement : response.getData()) {
                         output.add(measurement);
                     }
                     onSuccess.accept(output.get(0));
                 },
-//                try .eq instead of contains
                 onFail
         );
-//        return output;
+
     }
-    public void getLastMeasurementsByBatch(Batch batch, int amount, Consumer<Measurement> onSuccess, Consumer<ApiException> onFail){
-        List <Measurement> output = new ArrayList<>();
+
+    public void getLastMeasurementsByBatch(Batch batch, int amount, Consumer<Measurement> onSuccess, Consumer<ApiException> onFail) {
+        List<Measurement> output = new ArrayList<>();
         Amplify.API.query(
                 ModelQuery.list(Measurement.class, Measurement.BATCH.contains(batch.getId())),
                 response -> {
                     int count = 0;
-                    while (count < amount){
+                    while (count < amount) {
 
 
-                    for (Measurement measurement:  response.getData()) {
-                        output.add(measurement);
-                        count ++;
-                    }
+                        for (Measurement measurement : response.getData()) {
+                            output.add(measurement);
+                            count++;
+                        }
 
                     }
                     onSuccess.accept(output.get(0));
                 },
-//                try .eq instead of contains
                 onFail
         );
-//        return output;
+    }
+
+    public void updateMeasurement(Measurement measurement, Consumer onSuccess, Consumer<ApiException> onFail) {
+        Amplify.API.mutate(
+                ModelMutation.update(measurement),
+                onSuccess,
+                onFail
+        );
+    }
+
+    public void deleteMeasurement(Measurement measurement, Consumer onSuccess, Consumer<ApiException> onFail) {
+
+        Amplify.API.mutate(ModelMutation.delete(measurement), onSuccess, onFail);
+
     }
 }
