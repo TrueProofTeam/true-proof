@@ -19,13 +19,9 @@ import java.util.logging.Handler;
 public class MeasurementRepository {
     String TAG = "MeasurementRepo";
 
-    public void saveMeasurement(Measurement measurement) {
+    public void saveMeasurement(Measurement measurement,Consumer onSuccess, Consumer<ApiException> onFail) {
         Amplify.API.mutate(ModelMutation.create(measurement),
-                response -> {
-                    Log.i(TAG, "onSuccess: added");
-                }, response -> {
-                    Log.i(TAG, "onFail: miss");
-                });
+                onSuccess, onFail);
     }
 
 

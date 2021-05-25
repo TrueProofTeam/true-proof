@@ -17,13 +17,9 @@ import java.util.List;
 public class BatchRepository {
     String TAG = "BatchRepo";
 
-    public void saveBatch(Batch batch) {
+    public void saveBatch(Batch batch, Consumer onSuccess, Consumer<ApiException> onFail) {
         Amplify.API.mutate(ModelMutation.create(batch),
-                response -> {
-                    Log.i(TAG, "onSuccess: added");
-                }, response -> {
-                    Log.i(TAG, "onFail: miss");
-                });
+                onSuccess, onFail);
     }
 
     public void getBatchesByDistillery(Distillery distillery, Consumer<List<Batch>> onSuccess, Consumer<ApiException> onFail) {

@@ -18,13 +18,9 @@ import javax.security.auth.login.LoginException;
 
 public class DistilleryRepository {
     String TAG = "DistilleryRepo";
-    public void saveDistillery (Distillery distillery){
+    public void saveDistillery (Distillery distillery, Consumer onSuccess, Consumer<ApiException> onFail){
         Amplify.API.mutate(ModelMutation.create(distillery),
-                response -> {
-                        Log.i(TAG, "onSuccess: added");
-                }, response -> {
-                        Log.i(TAG, "onFail: miss");
-                });
+                onSuccess, onFail);
     }
     public void getDistillery(String id, Consumer<Distillery> onSuccess, Consumer<ApiException> onFail){
         Amplify.API.query(ModelQuery.get(Distillery.class, id),
