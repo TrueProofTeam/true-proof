@@ -42,4 +42,41 @@ public class MeasurementRepository {
         );
 //        return output;
     }
+    public void getLastMeasurementsByBatch(Batch batch, Consumer<Measurement> onSuccess, Consumer<ApiException> onFail){
+        List <Measurement> output = new ArrayList<>();
+        Amplify.API.query(
+                ModelQuery.list(Measurement.class, Measurement.BATCH.contains(batch.getId())),
+                response -> {
+                    for (Measurement measurement:  response.getData()) {
+                        output.add(measurement);
+                    }
+                    onSuccess.accept(output.get(0));
+                },
+//                try .eq instead of contains
+                onFail
+        );
+//        return output;
+    }
+    public void getLastMeasurementsByBatch(Batch batch, int amount, Consumer<Measurement> onSuccess, Consumer<ApiException> onFail){
+        List <Measurement> output = new ArrayList<>();
+        Amplify.API.query(
+                ModelQuery.list(Measurement.class, Measurement.BATCH.contains(batch.getId())),
+                response -> {
+                    int count = 0;
+                    while (count < amount){
+
+
+                    for (Measurement measurement:  response.getData()) {
+                        output.add(measurement);
+                        count ++;
+                    }
+
+                    }
+                    onSuccess.accept(output.get(0));
+                },
+//                try .eq instead of contains
+                onFail
+        );
+//        return output;
+    }
 }
