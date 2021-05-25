@@ -118,6 +118,7 @@ subscription OnCreateBatch {
       items {
         id
         batchID
+        trueProof
         temperature
         hydrometer
         temperatureCorrection
@@ -167,6 +168,7 @@ subscription OnUpdateBatch {
       items {
         id
         batchID
+        trueProof
         temperature
         hydrometer
         temperatureCorrection
@@ -216,6 +218,7 @@ subscription OnDeleteBatch {
       items {
         id
         batchID
+        trueProof
         temperature
         hydrometer
         temperatureCorrection
@@ -240,6 +243,7 @@ subscription OnCreateMeasurement {
   onCreateMeasurement {
     id
     batchID
+    trueProof
     temperature
     hydrometer
     temperatureCorrection
@@ -285,6 +289,7 @@ subscription OnUpdateMeasurement {
   onUpdateMeasurement {
     id
     batchID
+    trueProof
     temperature
     hydrometer
     temperatureCorrection
@@ -330,6 +335,7 @@ subscription OnDeleteMeasurement {
   onDeleteMeasurement {
     id
     batchID
+    trueProof
     temperature
     hydrometer
     temperatureCorrection
