@@ -19,7 +19,6 @@ public class BatchListViewModel extends ViewModel {
 
     @Inject
     BatchListViewModel() {
-
     }
 
     public LiveData<List<Batch>> getActiveBatchList() {
