@@ -11,6 +11,7 @@ import android.widget.Button;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.trueproof.trueproof.R;
+import com.trueproof.trueproof.logic.Proofing;
 import com.trueproof.trueproof.utils.TestDependencyInjection;
 
 import javax.inject.Inject;
@@ -24,12 +25,16 @@ public class MainActivity extends AppCompatActivity {
     @Inject
     TestDependencyInjection testDependencyInjection;
 
+    @Inject
+    Proofing proofing;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         initializeLoginButton();
         Log.i(TAG, "onCreate: " + testDependencyInjection.hello());
+        Log.i(TAG, "onCreate: " + proofing.proof(80.5, 100.1, 1.1, 1.1));
     }
     @Override
     public boolean onCreateOptionsMenu (Menu menu){
