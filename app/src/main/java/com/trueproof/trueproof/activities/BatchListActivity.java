@@ -7,6 +7,7 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.amplifyframework.datastore.generated.model.Batch;
@@ -51,12 +52,10 @@ public class BatchListActivity extends AppCompatActivity {
         if (list != null) batchListAdapter.submitList(list);
         else batchListAdapter.submitList(new ArrayList<Batch>());
 
-        viewModel.getBatchList().observe(this, new Observer<List<Batch>>() {
-            @Override
-            public void onChanged(List<Batch> batches) {
-                batchListAdapter.submitList(batches);
-            }
-        });
+        allBatchList.setAdapter(batchListAdapter);
+        allBatchList.setLayoutManager(new LinearLayoutManager(this));
+        viewModel.getBatchList().observe(this,
+                batches -> batchListAdapter.submitList(batches));
     }
 
     private void setUpActiveBatchList() {
@@ -72,11 +71,9 @@ public class BatchListActivity extends AppCompatActivity {
         if (list != null) activeBatchListAdapter.submitList(list);
         else activeBatchListAdapter.submitList(new ArrayList<Batch>());
 
-        viewModel.getActiveBatchList().observe(this, new Observer<List<Batch>>() {
-            @Override
-            public void onChanged(List<Batch> batches) {
-                activeBatchListAdapter.submitList(batches);
-            }
-        });
+        activeBatchList.setAdapter(activeBatchListAdapter);
+        activeBatchList.setLayoutManager(new LinearLayoutManager(this));
+        viewModel.getActiveBatchList().observe(this, batches ->
+                activeBatchListAdapter.submitList(batches));
     }
 }
