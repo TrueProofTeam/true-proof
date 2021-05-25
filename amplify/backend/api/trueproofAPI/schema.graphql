@@ -27,10 +27,11 @@ type Measurement @model
 {
 id: ID!
 batchID: ID!
-temperature: Int!
-hydrometer: Int!
-temperatureCorrection: Int!
-hydrometerCorrection: Int!
+trueProof: Float!
+temperature: Float!
+hydrometer: Float!
+temperatureCorrection: Float!
+hydrometerCorrection: Float!
 note: String
 flag: Boolean
 createdAt: AWSDateTime
