@@ -26,7 +26,6 @@ import dagger.hilt.android.AndroidEntryPoint;
 
 @AndroidEntryPoint
 public class NewBatchActivity extends AppCompatActivity {
-    final static String REDIRECT_TO_TAKE_MEASUREMENT = "redirect_to_take_measurement";
     static String TAG = "t.newBatch";
     @Inject
     DistilleryRepository distilleryRepository;
@@ -70,6 +69,5 @@ public class NewBatchActivity extends AppCompatActivity {
 
         });
     }
-
 
 }
