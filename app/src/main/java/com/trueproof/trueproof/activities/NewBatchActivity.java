@@ -2,6 +2,8 @@ package com.trueproof.trueproof.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.widget.Button;
 import android.widget.EditText;
@@ -27,6 +29,8 @@ import dagger.hilt.android.AndroidEntryPoint;
 @AndroidEntryPoint
 public class NewBatchActivity extends AppCompatActivity {
     static String TAG = "t.newBatch";
+    final static String REDIRECT_TO_BATCH_DETAIL_TO_TAKE_MEASUREMENT = "redirect_to_take_measurement";
+    final List <Distillery> distilleries = new ArrayList<>();
     @Inject
     DistilleryRepository distilleryRepository;
 
@@ -35,7 +39,6 @@ public class NewBatchActivity extends AppCompatActivity {
 
     @Inject
     UserSettings userSettings;
-
     @Inject
     JsonConverter jsonConverter;
 
@@ -43,12 +46,9 @@ public class NewBatchActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_new_batch);
-        final List<Distillery> distilleries = new ArrayList<>();
-
-        userSettings.getDistillery(success -> {
-            distilleries.add(success);
-        }, fail -> {
-        });
+        userSettings.getDistillery(success ->{
+              distilleries.add(success);
+          }, fail->{});
         ((Button) findViewById(R.id.buttonCreateBatchNewBatch)).setOnClickListener(v -> {
             String batchType = ((EditText) findViewById(R.id.editTextBatchTypeNewBatch)).getText().toString();
             Integer batchNum = Integer.parseInt(((EditText) findViewById(R.id.editTextBatchNumNewBatch)).getText().toString());
@@ -68,6 +68,50 @@ public class NewBatchActivity extends AppCompatActivity {
             );
 
         });
+
+          EditText batchTypeEditText = findViewById(R.id.editTextBatchTypeNewBatch);
+          EditText batchNumEditText = findViewById(R.id.editTextBatchNumNewBatch);
+          batchNumEditText.addTextChangedListener(new TextWatcher() {
+              @Override
+              public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+              }
+
+              @Override
+              public void afterTextChanged(Editable s) {
+              }
+
+              @Override
+              public void onTextChanged(CharSequence s, int start, int before, int count) {
+                  batchIdentifierOnChange();
+              }
+          });
+        batchTypeEditText.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                batchIdentifierOnChange();
+            }
+        });
+
+
     }
+    private void batchIdentifierOnChange (){
+        if (distilleries.get(0).getDspId() != null && ((EditText) findViewById(R.id.editTextBatchTypeNewBatch)).getText() != null
+        && ((EditText) findViewById(R.id.editTextBatchNumNewBatch)).getText() != null){
+            String batchIdentifier = distilleries.get(0).getDspId() + ((EditText) findViewById(R.id.editTextBatchTypeNewBatch)).getText().toString() +
+                    ((EditText) findViewById(R.id.editTextBatchNumNewBatch)).getText().toString();
+            ((EditText) findViewById(R.id.editTextBatchIdNewBatch)).setText(batchIdentifier);
+        }
+
+    }
+
+
 
 }

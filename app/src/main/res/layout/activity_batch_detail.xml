@@ -155,4 +155,13 @@
             android:layout_marginBottom="16dp"
             android:id="@+id/recyclerViewMeasurementsBatchDetail" />
 
+    <Button
+        android:id="@+id/buttonUpdateBatch"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="Update"
+        app:layout_constraintEnd_toEndOf="@+id/editTextIdentifierBatchDetail"
+        app:layout_constraintTop_toBottomOf="@+id/editTextIdentifierBatchDetail" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

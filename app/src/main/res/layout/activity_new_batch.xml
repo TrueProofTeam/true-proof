@@ -18,70 +18,62 @@
             android:layout_marginTop="8dp" />
 
     <TextView
-            android:text="Type"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/textViewTypeTitleNewBatch"
-            app:layout_constraintTop_toTopOf="@+id/editTextBatchTypeNewBatch"
-            app:layout_constraintBottom_toBottomOf="@+id/editTextBatchTypeNewBatch"
-            app:layout_constraintEnd_toStartOf="@+id/editTextBatchTypeNewBatch"
-            android:layout_marginEnd="8dp" />
+        android:id="@+id/textViewTypeTitleNewBatch"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:text="Type"
+        app:layout_constraintBottom_toBottomOf="@+id/editTextBatchTypeNewBatch"
+        app:layout_constraintEnd_toStartOf="@+id/editTextBatchTypeNewBatch"
+        app:layout_constraintHorizontal_bias="0.958"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/editTextBatchTypeNewBatch"
+        app:layout_constraintVertical_bias="0.419" />
 
     <TextView
-            android:text="Batch Number"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/textViewBatchNumNewBatch"
-            app:layout_constraintTop_toTopOf="@+id/editTextBatchNumNewBatch"
-            app:layout_constraintBottom_toBottomOf="@+id/editTextBatchNumNewBatch"
-            app:layout_constraintEnd_toStartOf="@+id/editTextBatchNumNewBatch"
-            android:layout_marginEnd="8dp" />
+        android:id="@+id/textViewBatchNumNewBatch"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Batch Number"
+        app:layout_constraintEnd_toStartOf="@+id/editTextBatchNumNewBatch"
+        app:layout_constraintHorizontal_bias="0.846"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:layout_editor_absoluteY="130dp" />
 
     <TextView
-            android:text="Batch Identifier"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/textViewBatchIdNewBatch"
-            app:layout_constraintTop_toTopOf="@+id/editTextBatchIdNewBatch"
-            app:layout_constraintBottom_toBottomOf="@+id/editTextBatchIdNewBatch"
-            app:layout_constraintEnd_toStartOf="@+id/editTextBatchIdNewBatch"
-            android:layout_marginEnd="8dp" />
+        android:id="@+id/textViewBatchIdNewBatch"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:text="Batch Identifier"
+        app:layout_constraintBottom_toBottomOf="@+id/editTextBatchIdNewBatch"
+        app:layout_constraintEnd_toStartOf="@+id/editTextBatchIdNewBatch"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/editTextBatchIdNewBatch"
+        app:layout_constraintVertical_bias="0.322" />
 
     <EditText
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:inputType="textPersonName"
-            android:text="Name"
-            android:ems="10"
-            android:id="@+id/editTextBatchTypeNewBatch"
-            android:layout_marginEnd="16dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textViewNewBatchdsp"
-            android:layout_marginTop="24dp" />
+        android:id="@+id/editTextBatchTypeNewBatch"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="16dp"
+        android:ems="10"
+        android:inputType="textPersonName"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textViewNewBatchdsp" />
 
     <EditText
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:inputType="textPersonName"
-            android:text="Name"
-            android:ems="10"
-            android:id="@+id/editTextBatchNumNewBatch"
-            android:layout_marginEnd="16dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/editTextBatchTypeNewBatch"
-            android:layout_marginTop="16dp" />
-
-    <EditText
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:inputType="textPersonName"
-            android:text="Name"
-            android:ems="10"
-            android:id="@+id/editTextBatchIdNewBatch"
-            android:layout_marginEnd="16dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/editTextBatchNumNewBatch"
-            android:layout_marginTop="16dp" />
+        android:id="@+id/editTextBatchIdNewBatch"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="16dp"
+        android:ems="10"
+        android:inputType="textPersonName"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editTextBatchNumNewBatch" />
 
     <Button
             android:text="Create Batch"
@@ -92,4 +84,15 @@
             android:id="@+id/buttonCreateBatchNewBatch"
             app:layout_constraintStart_toStartOf="parent"
             android:layout_marginStart="16dp" />
+
+    <EditText
+        android:id="@+id/editTextBatchNumNewBatch"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:ems="10"
+        android:inputType="number"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editTextBatchTypeNewBatch" />
 </androidx.constraintlayout.widget.ConstraintLayout>

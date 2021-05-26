@@ -3,6 +3,7 @@ package com.trueproof.trueproof.activities;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.EditText;
 
 import androidx.activity.result.contract.ActivityResultContract;
 import androidx.activity.result.contract.ActivityResultContracts;
@@ -48,9 +49,18 @@ public class BatchDetailActivity extends AppCompatActivity {
         String json = intent.getStringExtra(BATCH_JSON);
         if (json != null) {
             batch = jsonConverter.batchFromJson(json);
+            populateTextFields();
         } else {
             // TODO This error state is hopefully unreachable.
             Log.e(TAG, "No batch JSON in the intent!");
+        }
+    }
+
+    private void populateTextFields(){
+        if (batch != null){
+            ((EditText) findViewById(R.id.editTextTypeBatchDetail)).setText(batch.getType());
+            ((EditText) findViewById(R.id.editTextBatchNumberBatchDetail)).setText(batch.getBatchNumber());
+            ((EditText) findViewById(R.id.editTextIdentifierBatchDetail)).setText(batch.getBatchIdentifier());
         }
     }
 }
