@@ -15,7 +15,7 @@ type Batch @model
     distilleryID: ID!
     batchIdentifier: String
     batchNumber: Int
-    status: Status
+    status: Status!
     type: String
     completedAt: AWSDateTime
     """
