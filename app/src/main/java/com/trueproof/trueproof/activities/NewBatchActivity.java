@@ -48,7 +48,6 @@ public class NewBatchActivity extends AppCompatActivity {
         setContentView(R.layout.activity_new_batch);
         final List <Distillery> distilleries = new ArrayList<>();
 
-
           userSettings.getDistillery(success ->{
               distilleries.add(success);
           }, fail->{});
@@ -57,8 +56,9 @@ public class NewBatchActivity extends AppCompatActivity {
             Integer batchNum = Integer.parseInt(((EditText) findViewById(R.id.editTextBatchNumNewBatch)).getText().toString());
             String batchIdentifier = ((EditText) findViewById(R.id.editTextBatchIdNewBatch)).getText().toString();
 
-            Batch batch = Batch.builder()
-                    .batchIdentifier(batchIdentifier).batchNumber(batchNum).type(batchType).distillery(distilleries.get(0)).status(Status.ACTIVE).build();
+            Batch batch = Batch.builder().status(Status.ACTIVE).batchIdentifier(batchIdentifier).batchNumber(batchNum).distillery(distilleries.get(0)).build();
+            
+//                    .batchIdentifier(batchIdentifier).batchNumber(batchNum).type(batchType).distillery(distilleries.get(0)).status(Status.ACTIVE).build();
             batchRepository.saveBatch(batch, onSuccess->{
                 Intent i  = new Intent();
                 i.putExtra(REDIRECT_TO_TAKE_MEASUREMENT, true);
