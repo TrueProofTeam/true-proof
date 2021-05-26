@@ -25,14 +25,12 @@ import dagger.hilt.android.qualifiers.ApplicationContext;
 
 @Singleton
 public class UserSettings {
+    final static String TAG = "UserSettings";
     final static String SHARED_PREFERENCES_NAME = "trueproof.trueproof";
 
     private final SharedPreferences sharedPreferences;
     private final DistilleryRepository distilleryRepository;
     private final UserRepository userRepository;
-//
-//    @Inject
-//    UserSettings userSettings;
 
     @Inject
     UserSettings(@ApplicationContext Context context,
@@ -53,7 +51,7 @@ public class UserSettings {
      */
     @Nullable
     public String getEmail() {
-        return Amplify.Auth.getCurrentUser().getUserId();
+        return Amplify.Auth.getCurrentUser().getUsername();
     }
 
     /**
@@ -109,21 +107,46 @@ public class UserSettings {
                 attributes -> {
                     String userId = getValueFromAuthUserAttributesByKey(attributes,
                             "custom:userId");
+                    Log.i(TAG, "userId: " + userId);
                     if (userId != null) {
                         userRepository.getById(userId,
-                                success,
+                                user -> {
+                            if (user != null) {
+                                success.accept(user);
+                            } else {
+                                User newUser = User.builder()
+                                        .defaultTemperatureUnit(TemperatureUnit.FAHRENHEIT)
+                                        .defaultHydrometerCorrection(0.0)
+                                        .defaultTemperatureCorrection(0.0)
+                                        .email(authUser.getUsername())
+                                        .build();
+                                userRepository.save(newUser,
+                                        r -> {
+                                            success.accept(newUser);
+                                        },
+                                        r -> {
+                                            fail.accept(new ApiException(
+                                                            "Couldn't save user to the database",
+                                                            new Exception(),
+                                                            "aoeu"
+                                                    )
+                                            );
+                                        });
+                            }
+
+                                },
                                 fail
                         );
                     } else {
-                        User user = User.builder()
+                        User newUser = User.builder()
                                 .defaultTemperatureUnit(TemperatureUnit.FAHRENHEIT)
                                 .defaultHydrometerCorrection(0.0)
                                 .defaultTemperatureCorrection(0.0)
                                 .email(authUser.getUsername())
                                 .build();
-                        userRepository.save(user,
+                        userRepository.save(newUser,
                                 r -> {
-                                    success.accept(user);
+                                    success.accept(newUser);
                                 },
                                 r -> {
                                     fail.accept(new ApiException(
@@ -142,6 +165,7 @@ public class UserSettings {
     }
 
     /**
+<<<<<<< Updated upstream
      * Gets the value from a list of AuthUserAttribute given a key. These AuthUserAttributes are
      * key-value pairs and contain all of the AuthUser's custom attributes as well as the built
      * in Cognito attributes.
@@ -149,6 +173,17 @@ public class UserSettings {
      * @param keyString The key of the AuthUserAttribute
      * @return
      */
+=======
+     * Updates the User in the database, which contains user settings.
+     * @param user The user settings object to save.
+     * @param success The callback to be called when the settings are successfully saved.
+     * @param fail The callback to the called when an error occurs.
+     */
+    public void saveUserSettings(User user, Consumer success, Consumer<ApiException> fail) {
+        userRepository.update(user, success, fail);
+    }
+
+>>>>>>> Stashed changes
     private String getValueFromAuthUserAttributesByKey(List<AuthUserAttribute> attributes, String keyString) {
         for (AuthUserAttribute attribute : attributes) {
             if (attribute.getKey().getKeyString().equals("custom:distilleryId")) {
