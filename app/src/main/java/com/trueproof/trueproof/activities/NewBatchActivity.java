@@ -14,20 +14,30 @@ import com.amplifyframework.core.Amplify;
 import com.amplifyframework.datastore.generated.model.Batch;
 import com.amplifyframework.datastore.generated.model.Distillery;
 import com.trueproof.trueproof.R;
+import com.trueproof.trueproof.logic.Proofing;
+import com.trueproof.trueproof.utils.BatchRepository;
 import com.trueproof.trueproof.utils.DistilleryRepository;
+import com.trueproof.trueproof.utils.JsonConverter;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class NewBatchActivity extends AppCompatActivity {
+import javax.inject.Inject;
 
+import dagger.hilt.android.AndroidEntryPoint;
+
+@AndroidEntryPoint
+public class NewBatchActivity extends AppCompatActivity {
     static String TAG = "t.newBatch";
+
+    @Inject
+    DistilleryRepository distilleryRepository;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_new_batch);
-        DistilleryRepository distilleryRepository = new DistilleryRepository();
+
 //        TODO retrieve distillery from intent or db
 //        Distillery distillery = distilleryRepository.getDistilleryByUser();
         ((Button) findViewById(R.id.buttonCreateBatchNewBatch)).setOnClickListener(v -> {
