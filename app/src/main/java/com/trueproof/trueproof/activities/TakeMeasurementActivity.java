@@ -248,4 +248,4 @@ public class TakeMeasurementActivity extends AppCompatActivity {
 //    }
 
 
-}
+//}
