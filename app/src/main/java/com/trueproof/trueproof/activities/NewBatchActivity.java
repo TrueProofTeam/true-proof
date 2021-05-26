@@ -43,22 +43,17 @@ public class NewBatchActivity extends AppCompatActivity {
         ((Button) findViewById(R.id.buttonCreateBatchNewBatch)).setOnClickListener(v -> {
             String batchType = ((EditText) findViewById(R.id.editTextBatchTypeNewBatch)).getText().toString();
             Integer batchNum = Integer.parseInt(((EditText) findViewById(R.id.editTextBatchNumNewBatch)).getText().toString());
+            String batchId = ((EditText) findViewById(R.id.editTextBatchIdNewBatch)).getText().toString();
+//            TODO retrieve batch from intent or db
+//            Batch batch = Batch.builder()
+//                    .batchIdentifier(batchId).batchNumber(batchNum).type(batchType).distillery().build();
 
-            String batchIdentifier = ((EditText) findViewById(R.id.editTextBatchIdNewBatch)).getText().toString();
-
-            Batch batch = Batch.builder().status(Status.ACTIVE).batchIdentifier(batchIdentifier).batchNumber(batchNum).distillery(distilleries.get(0)).build();
-
-//                    .batchIdentifier(batchIdentifier).batchNumber(batchNum).type(batchType).distillery(distilleries.get(0)).status(Status.ACTIVE).build();
-            batchRepository.saveBatch(batch, onSuccess -> {
-                        Intent data = new Intent();
-                        data.putExtra(BatchDetailActivity.BATCH_JSON, jsonConverter.batchToJson(batch));
-                        setResult(BatchListActivity.REDIRECT_TO_BATCH_DETAIL_TO_TAKE_MEASUREMENT, data);
-                        finish();
-                    }, onFail -> {
-                        Log.i(TAG, "onFail: " + onFail.toString());
-                    }
-            );
-
+            Toast.makeText(this, "Started batch " + batchId, Toast.LENGTH_LONG).show();
+            startActivity(new Intent(this,TakeMeasurementActivity.class));
         });
     }
+
+
+
+
 }
