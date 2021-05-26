@@ -1,6 +1,7 @@
 package com.trueproof.trueproof.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.TaskStackBuilder;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -42,6 +43,9 @@ public class NewBatchActivity extends AppCompatActivity {
     @Inject
     UserSettings userSettings;
 
+    @Inject
+    JsonConverter jsonConverter;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -60,10 +64,20 @@ public class NewBatchActivity extends AppCompatActivity {
             
 //                    .batchIdentifier(batchIdentifier).batchNumber(batchNum).type(batchType).distillery(distilleries.get(0)).status(Status.ACTIVE).build();
             batchRepository.saveBatch(batch, onSuccess->{
-                Intent i  = new Intent();
-                i.putExtra(REDIRECT_TO_TAKE_MEASUREMENT, true);
+                Intent data = new Intent();
+                data.putExtra(BatchDetailActivity.BATCH_JSON, jsonConverter.batchToJson(batch));
+                setResult(BatchListActivity.REDIRECT_TO_BATCH_DETAIL_TO_TAKE_MEASUREMENT, data);
+                finish();
 
-                startActivity(i);
+//                Intent takeMeasurementIntent = new Intent(this, TakeMeasurementActivity.class);
+//                takeMeasurementIntent.putExtra(BatchDetailActivity.BATCH_JSON,
+//                        jsonConverter.batchToJson(batch));
+
+//                TaskStackBuilder.create(this)
+//                        .addParentStack()
+//                        .addNextIntent(batchDetailIntent)
+//                        .addNextIntent(takeMeasurementIntent)
+//                        .startActivities();
 
             }, onFail->{
                 Log.i(TAG, "onFail: " + onFail.toString());

@@ -3,10 +3,11 @@ package com.trueproof.trueproof.activities;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
-import android.widget.Toast;
 
+import androidx.activity.result.ActivityResult;
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -29,9 +30,15 @@ import dagger.hilt.android.AndroidEntryPoint;
 @AndroidEntryPoint
 public class BatchListActivity extends AppCompatActivity {
     static final private String TAG = "BatchListActivity";
+    static final int REDIRECT_TO_BATCH_DETAIL_TO_TAKE_MEASUREMENT = 1;
     private BatchListViewModel viewModel;
     private BatchListAdapter batchListAdapter;
     private ActiveBatchListAdapter activeBatchListAdapter;
+
+    ActivityResultLauncher<Intent> newBatchLauncher = registerForActivityResult(
+            new ActivityResultContracts.StartActivityForResult(),
+            this::onActivityResult
+    );
 
     @Inject
     JsonConverter jsonConverter;
@@ -92,6 +99,18 @@ public class BatchListActivity extends AppCompatActivity {
 
     private void goToNewBatchActivity() {
         Intent intent = new Intent(this, NewBatchActivity.class);
-        startActivity(intent);
+        newBatchLauncher.launch(intent);
     }
+
+    private void onActivityResult(ActivityResult activityResult) {
+        Log.i(TAG, "onActivityResult: ");
+        Log.i(TAG, "getResultCode(): " + activityResult.getResultCode());
+        if (activityResult.getResultCode() == REDIRECT_TO_BATCH_DETAIL_TO_TAKE_MEASUREMENT) {
+            String json = activityResult.getData().getStringExtra(BatchDetailActivity.BATCH_JSON);
+            Intent batchDetailIntent = new Intent(this, BatchDetailActivity.class);
+            batchDetailIntent.putExtra(BatchDetailActivity.REDIRECT_TO_TAKE_MEASUREMENT, true);
+            batchDetailIntent.putExtra(BatchDetailActivity.BATCH_JSON, json);
+            startActivity(batchDetailIntent);
+        }
+}
 }
