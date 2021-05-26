@@ -21,37 +21,13 @@ import org.jetbrains.annotations.NotNull;
 
 public class DistillerySettingsActivity extends AppCompatActivity {
 
-    static String TAG = "t.userSettings";
+    static String TAG = "t.distillerySettings";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_distillery_settings);
-        Distillery distillery = Distillery.builder().name("Old Thyme Whiskey").dspId("ASDF10255").build();
 
-        Measurement measurement = Measurement.builder().trueProof(60.0).temperature(30.0).hydrometer(10.0).temperatureCorrection(0.1).hydrometerCorrection(0.1).build();
-        MeasurementRepository measurementRepository = new MeasurementRepository();
-//        Consumer consumer = new Consumer() {
-//            @Override
-//            public void accept(@NonNull @NotNull Object value) {
-//                Log.i(TAG, "accept: WORKS");
-//            }
-//        };
-//        measurementRepository.saveMeasurement(measurement, consumer, new Consumer<ApiException>() {
-//            @Override
-//            public void accept(@NonNull @NotNull ApiException value) {
-//                Log.i(TAG, "accept: FAILED");
-//            }
-//    });
-
-        Amplify.API.mutate(ModelMutation.create(measurement),
-                response ->{
-                    Log.i(TAG, "oncreate success");
-                },
-                response -> {
-                    Log.i(TAG, "onCreate: fail");
-
-                });
 
 
 
