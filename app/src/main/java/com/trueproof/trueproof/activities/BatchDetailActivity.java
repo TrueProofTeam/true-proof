@@ -32,8 +32,16 @@ public class BatchDetailActivity extends AppCompatActivity {
         setContentView(R.layout.activity_batch_detail);
         Log.i(TAG, "onCreate: batch detail");
 
+        findViewById(R.id.imageButtonAddMeasurementBatchDetail).setOnClickListener(v -> goToTakeMeasurementActivity());
+
         Intent intent = getIntent();
         getBatchFromIntent(intent);
+    }
+
+    private void goToTakeMeasurementActivity() {
+        Intent intent = new Intent(this, TakeMeasurementActivity.class);
+        getBatchFromIntent(intent);
+        startActivity(intent);
     }
 
     private void getBatchFromIntent(Intent intent) {

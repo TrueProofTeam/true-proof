@@ -33,16 +33,6 @@ public class BatchListViewModel extends ViewModel {
         this.userSettings = userSettings;
 
         this.distillery = new MutableLiveData<>();
-        userSettings.getDistillery(
-                d -> {
-                    this.distillery.postValue(d);
-                    updateBatchLists(d);
-                },
-                e -> {
-                    // TODO
-                    Log.e(TAG, "Distillery not found in UserSettings");
-                }
-        );
         this.activeBatchList = new MutableLiveData<>(new ArrayList<>());
         this.batchList = new MutableLiveData<>(new ArrayList<>());
     }
@@ -79,6 +69,15 @@ public class BatchListViewModel extends ViewModel {
     }
 
     public void update() {
-        updateBatchLists(distillery.getValue());
+        userSettings.getDistillery(
+                d -> {
+                    this.distillery.postValue(d);
+                    updateBatchLists(d);
+                },
+                e -> {
+                    // TODO
+                    Log.e(TAG, "Distillery not found in UserSettings");
+                }
+        );
     }
 }

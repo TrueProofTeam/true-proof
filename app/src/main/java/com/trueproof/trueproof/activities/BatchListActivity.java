@@ -62,8 +62,6 @@ public class BatchListActivity extends AppCompatActivity {
         viewModel.update();
     }
 
-
-
     private void setUpAllBatchList() {
         RecyclerView allBatchList = findViewById(R.id.recyclerViewBatchList);
         allBatchList.setLayoutManager(new LinearLayoutManager(this));
