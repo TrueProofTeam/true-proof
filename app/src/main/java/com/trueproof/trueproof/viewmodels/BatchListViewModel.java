@@ -20,7 +20,6 @@ import dagger.hilt.android.lifecycle.HiltViewModel;
 
 @HiltViewModel
 public class BatchListViewModel extends ViewModel {
-    private static final String TAG = "BatchListViewModel";
     private final MutableLiveData<List<Batch>> activeBatchList;
     private final MutableLiveData<List<Batch>> batchList;
     private final MutableLiveData<Distillery> distillery;
@@ -34,15 +33,12 @@ public class BatchListViewModel extends ViewModel {
 
         this.distillery = new MutableLiveData<>();
         userSettings.getDistillery(
-                d -> {
-                    this.distillery.postValue(d);
-                    updateBatchLists(d);
-                },
+                d -> this.distillery.postValue(d),
                 e -> {
                     // TODO
-                    Log.e(TAG, "Distillery not found in UserSettings");
+                    Log.e("BatchListViewModel", "BatchListViewModel: AHHH");
                 }
-        );
+                );
         this.activeBatchList = new MutableLiveData<>(new ArrayList<>());
         this.batchList = new MutableLiveData<>(new ArrayList<>());
     }
@@ -61,20 +57,14 @@ public class BatchListViewModel extends ViewModel {
 
     private void updateBatchLists(Distillery distillery) {
         batchRepository.getCompleteBatchesByDistillery(distillery,
-                batches -> {
-                    Log.i(TAG, "updateBatchLists: Got complete batches by distillery");
-                    batchList.postValue(batches);
-                },
+                batches -> { batchList.postValue(batches); },
                 r -> {
-                    Log.e(TAG, "getCompleteBatchesByDistillery fail" + r);
+                    Log.e("BatchListViewModel", "getCompleteBatchesByDistillery fail" + r);
                 });
         batchRepository.getActiveBatchesByDistillery(distillery,
-                activeBatches -> {
-                    Log.i(TAG, "updateBatchLists: Got active batches by distillery");
-                    activeBatchList.postValue(activeBatches);
-                },
+                activeBatches -> { activeBatchList.postValue(activeBatches); },
                 r -> {
-                    Log.e(TAG, "getActiveBatchesByDistillery fail" + r);
+                    Log.e("BatchListViewModel", "getActiveBatchesByDistillery fail" + r);
                 });
     }
 }
