@@ -19,7 +19,7 @@ public class DistilleryRepository {
     String TAG = "DistilleryRepo";
 
     @Inject
-    DistilleryRepository() {
+    public DistilleryRepository() {
     }
 
     public void saveDistillery(Distillery distillery, Consumer onSuccess, Consumer<ApiException> onFail) {
