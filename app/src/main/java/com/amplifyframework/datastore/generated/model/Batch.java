@@ -35,7 +35,7 @@ public final class Batch implements Model {
   private final @ModelField(targetType="ID", isRequired = true) String id;
   private final @ModelField(targetType="String") String batchIdentifier;
   private final @ModelField(targetType="Int") Integer batchNumber;
-  private final @ModelField(targetType="Status") Status status;
+  private final @ModelField(targetType="Status", isRequired = true) Status status;
   private final @ModelField(targetType="String") String type;
   private final @ModelField(targetType="AWSDateTime") Temporal.DateTime completedAt;
   private final @ModelField(targetType="AWSDateTime") Temporal.DateTime createdAt;
@@ -147,7 +147,7 @@ public final class Batch implements Model {
       .toString();
   }
   
-  public static BuildStep builder() {
+  public static StatusStep builder() {
       return new Builder();
   }
   
@@ -194,12 +194,16 @@ public final class Batch implements Model {
       updatedAt,
       distillery);
   }
+  public interface StatusStep {
+    BuildStep status(Status status);
+  }
+  
+
   public interface BuildStep {
     Batch build();
     BuildStep id(String id) throws IllegalArgumentException;
     BuildStep batchIdentifier(String batchIdentifier);
     BuildStep batchNumber(Integer batchNumber);
-    BuildStep status(Status status);
     BuildStep type(String type);
     BuildStep completedAt(Temporal.DateTime completedAt);
     BuildStep createdAt(Temporal.DateTime createdAt);
@@ -208,11 +212,11 @@ public final class Batch implements Model {
   }
   
 
-  public static class Builder implements BuildStep {
+  public static class Builder implements StatusStep, BuildStep {
     private String id;
+    private Status status;
     private String batchIdentifier;
     private Integer batchNumber;
-    private Status status;
     private String type;
     private Temporal.DateTime completedAt;
     private Temporal.DateTime createdAt;
@@ -235,6 +239,13 @@ public final class Batch implements Model {
     }
     
     @Override
+     public BuildStep status(Status status) {
+        Objects.requireNonNull(status);
+        this.status = status;
+        return this;
+    }
+    
+    @Override
      public BuildStep batchIdentifier(String batchIdentifier) {
         this.batchIdentifier = batchIdentifier;
         return this;
@@ -243,12 +254,6 @@ public final class Batch implements Model {
     @Override
      public BuildStep batchNumber(Integer batchNumber) {
         this.batchNumber = batchNumber;
-        return this;
-    }
-    
-    @Override
-     public BuildStep status(Status status) {
-        this.status = status;
         return this;
     }
     
@@ -307,14 +312,19 @@ public final class Batch implements Model {
   public final class CopyOfBuilder extends Builder {
     private CopyOfBuilder(String id, String batchIdentifier, Integer batchNumber, Status status, String type, Temporal.DateTime completedAt, Temporal.DateTime createdAt, Temporal.DateTime updatedAt, Distillery distillery) {
       super.id(id);
-      super.batchIdentifier(batchIdentifier)
+      super.status(status)
+        .batchIdentifier(batchIdentifier)
         .batchNumber(batchNumber)
-        .status(status)
         .type(type)
         .completedAt(completedAt)
         .createdAt(createdAt)
         .updatedAt(updatedAt)
         .distillery(distillery);
+    }
+    
+    @Override
+     public CopyOfBuilder status(Status status) {
+      return (CopyOfBuilder) super.status(status);
     }
     
     @Override
@@ -325,11 +335,6 @@ public final class Batch implements Model {
     @Override
      public CopyOfBuilder batchNumber(Integer batchNumber) {
       return (CopyOfBuilder) super.batchNumber(batchNumber);
-    }
-    
-    @Override
-     public CopyOfBuilder status(Status status) {
-      return (CopyOfBuilder) super.status(status);
     }
     
     @Override
