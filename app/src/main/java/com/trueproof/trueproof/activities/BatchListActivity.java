@@ -1,5 +1,6 @@
 package com.trueproof.trueproof.activities;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.Toast;
@@ -15,10 +16,13 @@ import com.trueproof.trueproof.R;
 import com.trueproof.trueproof.adapters.ActiveBatchListAdapter;
 import com.trueproof.trueproof.adapters.BatchListAdapter;
 import com.trueproof.trueproof.models.BatchUtils;
+import com.trueproof.trueproof.utils.JsonConverter;
 import com.trueproof.trueproof.viewmodels.BatchListViewModel;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import javax.inject.Inject;
 
 import dagger.hilt.android.AndroidEntryPoint;
 
@@ -28,6 +32,9 @@ public class BatchListActivity extends AppCompatActivity {
     private BatchListViewModel viewModel;
     private BatchListAdapter batchListAdapter;
     private ActiveBatchListAdapter activeBatchListAdapter;
+
+    @Inject
+    JsonConverter jsonConverter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,9 +52,7 @@ public class BatchListActivity extends AppCompatActivity {
         batchListAdapter = new BatchListAdapter(batch -> {
             // TODO: Go to the batch detail
             Log.i(TAG, "BatchList: clicked on batch " + BatchUtils.batchToString(batch));
-            Toast.makeText(this,
-                    "Clicked on batch " + BatchUtils.batchToString(batch),
-                    Toast.LENGTH_LONG).show();
+            goToBatchDetail(batch);
         });
 
         final List<Batch> list = viewModel.getBatchList().getValue();
@@ -64,11 +69,8 @@ public class BatchListActivity extends AppCompatActivity {
         RecyclerView activeBatchList = findViewById(R.id.recyclerViewActiveBatchList);
         activeBatchList.setLayoutManager(new LinearLayoutManager(this));
         activeBatchListAdapter = new ActiveBatchListAdapter(batch -> {
-            // TODO: Go to the batch detail
             Log.i(TAG, "ActiveBatchList: clicked on batch " + BatchUtils.batchToString(batch));
-            Toast.makeText(this,
-                    "Clicked on batch " + BatchUtils.batchToString(batch),
-                    Toast.LENGTH_LONG).show();
+            goToBatchDetail(batch);
         });
         final List<Batch> list = viewModel.getActiveBatchList().getValue();
         if (list != null) activeBatchListAdapter.submitList(list);
@@ -77,5 +79,10 @@ public class BatchListActivity extends AppCompatActivity {
         activeBatchList.setAdapter(activeBatchListAdapter);
         viewModel.getActiveBatchList().observe(this, batches ->
                 activeBatchListAdapter.submitList(batches));
+    }
+
+    private void goToBatchDetail(Batch batch) {
+        Intent intent = new Intent(this, BatchDetailActivity.class);
+        intent.putExtra(BatchDetailActivity.BATCH_JSON, jsonConverter.batchToJson(batch));
     }
 }
