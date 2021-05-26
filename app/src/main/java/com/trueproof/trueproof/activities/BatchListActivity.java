@@ -44,6 +44,10 @@ public class BatchListActivity extends AppCompatActivity {
 
         setUpAllBatchList();
         setUpActiveBatchList();
+
+        findViewById(R.id.imageButtonNewBatchBatchList).setOnClickListener(
+                v -> goToNewBatchActivity()
+        );
     }
 
     private void setUpAllBatchList() {
@@ -84,5 +88,10 @@ public class BatchListActivity extends AppCompatActivity {
     private void goToBatchDetail(Batch batch) {
         Intent intent = new Intent(this, BatchDetailActivity.class);
         intent.putExtra(BatchDetailActivity.BATCH_JSON, jsonConverter.batchToJson(batch));
+    }
+
+    private void goToNewBatchActivity() {
+        Intent intent = new Intent(this, NewBatchActivity.class);
+        startActivity(intent);
     }
 }
