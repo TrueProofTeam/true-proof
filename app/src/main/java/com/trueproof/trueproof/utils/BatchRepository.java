@@ -66,15 +66,16 @@ public class BatchRepository {
     public void getActiveBatchesByDistillery(Distillery distillery, Consumer<List<Batch>> onSuccess, Consumer<ApiException> onFail) {
         List<Batch> output = new ArrayList<>();
         Amplify.API.query(
-                ModelQuery.list(Batch.class, Batch.DISTILLERY.contains(distillery.getId())),
+                ModelQuery.list(Batch.class,
+                        Batch.DISTILLERY.eq(distillery.getId())
+                        .and(Batch.STATUS.eq(Status.ACTIVE))
+                ),
                 response -> {
                     for (Batch batch : response.getData()) {
-                        if (batch.getStatus().equals(Status.ACTIVE)) output.add(batch);
-
+                        output.add(batch);
                     }
                     onSuccess.accept(output);
                 },
-
                 onFail
         );
     }
@@ -82,23 +83,22 @@ public class BatchRepository {
     public void getCompleteBatchesByDistillery(Distillery distillery, Consumer<List<Batch>> onSuccess, Consumer<ApiException> onFail) {
         List<Batch> output = new ArrayList<>();
         Amplify.API.query(
-                ModelQuery.list(Batch.class, Batch.DISTILLERY.contains(distillery.getId())),
+                ModelQuery.list(Batch.class,
+                        Batch.DISTILLERY.eq(distillery.getId())
+                        .and(Batch.STATUS.eq(Status.COMPLETE))
+                ),
                 response -> {
                     for (Batch batch : response.getData()) {
-                        if (batch.getStatus().equals(Status.COMPLETE)) output.add(batch);
-
+                        output.add(batch);
                     }
                     onSuccess.accept(output);
                 },
-
                 onFail
         );
     }
 
     public void deleteBatch (Batch batch, Consumer onSuccess, Consumer<ApiException>onFail){
-
             Amplify.API.mutate(ModelMutation.delete(batch), onSuccess, onFail);
-
     }
 
 }
