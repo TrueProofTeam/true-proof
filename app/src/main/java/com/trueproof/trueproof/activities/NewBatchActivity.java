@@ -13,6 +13,7 @@ import com.amplifyframework.api.graphql.model.ModelMutation;
 import com.amplifyframework.core.Amplify;
 import com.amplifyframework.datastore.generated.model.Batch;
 import com.amplifyframework.datastore.generated.model.Distillery;
+import com.amplifyframework.datastore.generated.model.Status;
 import com.trueproof.trueproof.R;
 import com.trueproof.trueproof.logic.Proofing;
 import com.trueproof.trueproof.utils.BatchRepository;
@@ -57,7 +58,7 @@ public class NewBatchActivity extends AppCompatActivity {
             String batchIdentifier = ((EditText) findViewById(R.id.editTextBatchIdNewBatch)).getText().toString();
 
             Batch batch = Batch.builder()
-                    .batchIdentifier(batchIdentifier).batchNumber(batchNum).type(batchType).distillery(distilleries.get(0)).build();
+                    .batchIdentifier(batchIdentifier).batchNumber(batchNum).type(batchType).distillery(distilleries.get(0)).status(Status.ACTIVE).build();
             batchRepository.saveBatch(batch, onSuccess->{
                 Intent i  = new Intent();
                 i.putExtra(REDIRECT_TO_TAKE_MEASUREMENT, true);
