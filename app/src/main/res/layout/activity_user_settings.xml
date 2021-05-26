@@ -4,18 +4,15 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".activities.SettingsActivity">
+    tools:context=".activities.SettingActivity">
 
     <TextView
         android:id="@+id/textViewDSPTitleUserSettings"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
         android:text="Your Distillery"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        tools:layout_editor_absoluteX="161dp"
+        tools:layout_editor_absoluteY="16dp" />
 
     <TextView
         android:id="@+id/textViewTempUnitsUserSettings"
@@ -31,18 +28,16 @@
         android:id="@+id/radioGroup2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="32dp"
         android:orientation="vertical"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textViewDSPTitleUserSettings">
+        tools:layout_editor_absoluteX="281dp"
+        tools:layout_editor_absoluteY="51dp">
 
         <RadioButton
             android:id="@+id/radioButtonTempCUserSettings"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Celcius"
             android:onClick="onRadioButtonUserSettings"
+            android:text="Celcius"
             tools:layout_editor_absoluteX="275dp"
             tools:layout_editor_absoluteY="51dp" />
 
@@ -52,8 +47,8 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:checked="true"
-            android:text="Fahrenheit"
             android:onClick="onRadioButtonUserSettings"
+            android:text="Fahrenheit"
             app:layout_constraintTop_toBottomOf="@+id/radioButtonTempCUserSettings"
             tools:layout_editor_absoluteX="275dp" />
     </RadioGroup>
@@ -62,45 +57,37 @@
         android:id="@+id/textViewHydroCorrUserSettings"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="16dp"
         android:text="Default Hydrometer Correction"
-        app:layout_constraintBottom_toBottomOf="@+id/editTextDefaultHydroCorrectionUserSettings"
-        app:layout_constraintEnd_toStartOf="@+id/editTextDefaultHydroCorrectionUserSettings"
-        app:layout_constraintTop_toTopOf="@+id/editTextDefaultHydroCorrectionUserSettings" />
+        tools:layout_editor_absoluteX="-6dp"
+        tools:layout_editor_absoluteY="222dp" />
 
     <TextView
         android:id="@+id/textViewThermCorrUserSettings"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="16dp"
         android:text="Default Thermometer Correction"
-        app:layout_constraintBottom_toBottomOf="@+id/editTextDefaultTempCorrectionUserSettings"
-        app:layout_constraintEnd_toStartOf="@+id/editTextDefaultTempCorrectionUserSettings"
-        app:layout_constraintTop_toTopOf="@+id/editTextDefaultTempCorrectionUserSettings" />
+        tools:layout_editor_absoluteY="326dp" />
 
     <EditText
         android:id="@+id/editTextDefaultHydroCorrectionUserSettings"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="16dp"
         android:ems="10"
         android:inputType="textPersonName"
         android:text="0"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/radioGroup2" />
+        tools:layout_editor_absoluteX="186dp"
+        tools:layout_editor_absoluteY="208dp" />
 
     <EditText
         android:id="@+id/editTextDefaultTempCorrectionUserSettings"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="16dp"
         android:ems="10"
         android:inputType="textPersonName"
         android:text="0"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextDefaultHydroCorrectionUserSettings" />
+        tools:layout_editor_absoluteX="186dp"
+        tools:layout_editor_absoluteY="301dp" />
+
 
     <Button
         android:id="@+id/buttonSubmitUserSettings"
@@ -112,5 +99,6 @@
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editTextDefaultTempCorrectionUserSettings" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

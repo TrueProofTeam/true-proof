@@ -26,4 +26,7 @@
     <string name="ecfr">
         <a href="https://www.ecfr.gov/cgi-bin/text-idx?SID=d52566b2cfd89ed58167c6cca87826f7&amp;node=27:1.0.1.1.25&amp;rgn=div5">Proofing Federal Regulations</a>
     </string>
+    <string name="userSettingText">User Settings</string>
+    <string name="noDistilleryNameText">Untitled Distillery</string>
+
 </resources>
