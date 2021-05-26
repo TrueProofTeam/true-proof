@@ -49,6 +49,7 @@ public class BatchDetailActivity extends AppCompatActivity {
         String json = intent.getStringExtra(BATCH_JSON);
         if (json != null) {
             batch = jsonConverter.batchFromJson(json);
+            populateTextFields();
         } else {
             // TODO This error state is hopefully unreachable.
             Log.e(TAG, "No batch JSON in the intent!");

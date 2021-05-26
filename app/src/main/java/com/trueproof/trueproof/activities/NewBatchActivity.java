@@ -58,7 +58,7 @@ public class NewBatchActivity extends AppCompatActivity {
 
             Batch batch = Batch.builder().status(Status.ACTIVE).batchIdentifier(batchIdentifier).batchNumber(batchNum).distillery(distilleries.get(0)).build();
 
-//                    .batchIdentifier(batchIdentifier).batchNumber(batchNum).type(batchType).distillery(distilleries.get(0)).status(Status.ACTIVE).build();
+
             batchRepository.saveBatch(batch, onSuccess->{
                 Intent i  = new Intent();
                 i.putExtra(REDIRECT_TO_TAKE_MEASUREMENT, true);
