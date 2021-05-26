@@ -29,19 +29,17 @@ import dagger.hilt.android.AndroidEntryPoint;
 
 @AndroidEntryPoint
 public class BatchListActivity extends AppCompatActivity {
-    static final private String TAG = "BatchListActivity";
     static final int REDIRECT_TO_BATCH_DETAIL_TO_TAKE_MEASUREMENT = 1;
-    private BatchListViewModel viewModel;
-    private BatchListAdapter batchListAdapter;
-    private ActiveBatchListAdapter activeBatchListAdapter;
-
+    static final private String TAG = "BatchListActivity";
     ActivityResultLauncher<Intent> newBatchLauncher = registerForActivityResult(
             new ActivityResultContracts.StartActivityForResult(),
             this::onActivityResult
     );
-
     @Inject
     JsonConverter jsonConverter;
+    private BatchListViewModel viewModel;
+    private BatchListAdapter batchListAdapter;
+    private ActiveBatchListAdapter activeBatchListAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -112,5 +110,5 @@ public class BatchListActivity extends AppCompatActivity {
             batchDetailIntent.putExtra(BatchDetailActivity.BATCH_JSON, json);
             startActivity(batchDetailIntent);
         }
-}
+    }
 }
