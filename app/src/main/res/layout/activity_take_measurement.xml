@@ -1,183 +1,197 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        xmlns:tools="http://schemas.android.com/tools"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        tools:context=".activities.TakeMeasurementActivity">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".activities.TakeMeasurementActivity">
 
     <Button
-            android:text="Go to Batch Detail"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/buttonBatchDetailTakeMeasurement"
-            app:layout_constraintStart_toStartOf="parent"
-            android:layout_marginStart="16dp"
-            app:layout_constraintTop_toBottomOf="@+id/textViewTakeMeasurementdsp"
-            android:layout_marginTop="16dp" />
+        android:id="@+id/buttonBatchDetailTakeMeasurement"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:text="Go to Batch Detail"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textViewTakeMeasurementdsp" />
 
     <TextView
-            android:text="Temperature °F"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/textViewTemperatureTakeMeasurement"
-            app:layout_constraintTop_toTopOf="@+id/editTextTemperatureTakeMeasurement"
-            app:layout_constraintBottom_toBottomOf="@+id/editTextTemperatureTakeMeasurement"
-            app:layout_constraintEnd_toStartOf="@+id/editTextTemperatureTakeMeasurement"
-            android:layout_marginEnd="32dp"
-            app:layout_constraintVertical_bias="0.0" />
+        android:id="@+id/textViewTemperatureTakeMeasurement"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="32dp"
+        android:text="Temperature °F"
+        app:layout_constraintBottom_toBottomOf="@+id/editTextTemperatureTakeMeasurement"
+        app:layout_constraintEnd_toStartOf="@+id/editTextTemperatureTakeMeasurement"
+        app:layout_constraintTop_toTopOf="@+id/editTextTemperatureTakeMeasurement"
+        app:layout_constraintVertical_bias="0.0" />
 
     <EditText
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:inputType="textPersonName"
-            android:text="68.2"
-            android:ems="10"
-            android:id="@+id/editTextTemperatureTakeMeasurement"
-            app:layout_constraintEnd_toEndOf="parent"
-            android:layout_marginEnd="16dp"
-            app:layout_constraintTop_toBottomOf="@+id/radioButtonTempCTakeMeasurement"
-            android:layout_marginTop="16dp" />
+        android:id="@+id/editTextTemperatureTakeMeasurement"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="16dp"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:text="68.2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/radioGroup" />
 
     <TextView
-            android:text="Temperature Correction °F"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/textViewTempCorrectionTakeMeasurement"
-            app:layout_constraintTop_toTopOf="@+id/editTextTempCorrectionTakeMeasuremen"
-            app:layout_constraintBottom_toBottomOf="@+id/editTextTempCorrectionTakeMeasuremen"
-            app:layout_constraintVertical_bias="0.0"
-            app:layout_constraintEnd_toStartOf="@+id/editTextTempCorrectionTakeMeasuremen"
-            android:layout_marginEnd="32dp" />
+        android:id="@+id/textViewTempCorrectionTakeMeasurement"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="32dp"
+        android:text="Temperature Correction °F"
+        app:layout_constraintBottom_toBottomOf="@+id/editTextTempCorrectionTakeMeasuremen"
+        app:layout_constraintEnd_toStartOf="@+id/editTextTempCorrectionTakeMeasuremen"
+        app:layout_constraintTop_toTopOf="@+id/editTextTempCorrectionTakeMeasuremen"
+        app:layout_constraintVertical_bias="0.0" />
 
     <Button
-            android:text="Save Measurement"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/buttonSaveMeasurementTakeMeasurement"
-            app:layout_constraintTop_toBottomOf="@+id/textViewCalculatedProofTakeMeasurement"
-            android:layout_marginTop="16dp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintHorizontal_bias="0.461"
-            app:layout_constraintEnd_toEndOf="parent" />
+        android:id="@+id/buttonSaveMeasurementTakeMeasurement"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="Save Measurement"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.461"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textViewCalculatedProofTakeMeasurement" />
 
     <EditText
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:inputType="textPersonName"
-            android:text="-0.03"
-            android:ems="10"
-            android:id="@+id/editTextHydroCorrectionTakeMeasurement"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/editTextHydrometerTakeMeasurement"
-            android:layout_marginEnd="16dp"
-            android:layout_marginTop="16dp" />
+        android:id="@+id/editTextHydroCorrectionTakeMeasurement"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:text="-0.03"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editTextHydrometerTakeMeasurement" />
 
     <EditText
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:inputType="textPersonName"
-            android:text="80.35"
-            android:ems="10"
-            android:id="@+id/editTextHydrometerTakeMeasurement"
-            app:layout_constraintTop_toBottomOf="@+id/editTextTempCorrectionTakeMeasuremen"
-            app:layout_constraintEnd_toEndOf="parent"
-            android:layout_marginEnd="16dp"
-            android:layout_marginTop="16dp" />
+        android:id="@+id/editTextHydrometerTakeMeasurement"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:text="80.35"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editTextTempCorrectionTakeMeasuremen" />
 
     <TextView
-            android:text="Proof at 60 °F"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/textViewProofTakeMeasurement"
-            app:layout_constraintTop_toTopOf="@+id/textViewCalculatedProofTakeMeasurement"
-            app:layout_constraintEnd_toEndOf="@+id/textViewHydroCorrectionTakeMeasurement"
-            app:layout_constraintBottom_toBottomOf="@+id/textViewCalculatedProofTakeMeasurement"
-            app:layout_constraintVertical_bias="0.0" />
+        android:id="@+id/textViewProofTakeMeasurement"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Proof at 60 °F"
+        app:layout_constraintBottom_toBottomOf="@+id/textViewCalculatedProofTakeMeasurement"
+        app:layout_constraintEnd_toEndOf="@+id/textViewHydroCorrectionTakeMeasurement"
+        app:layout_constraintTop_toTopOf="@+id/textViewCalculatedProofTakeMeasurement"
+        app:layout_constraintVertical_bias="0.0" />
 
     <EditText
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:inputType="textPersonName"
-            android:text="0.1"
-            android:ems="10"
-            android:id="@+id/editTextTempCorrectionTakeMeasuremen"
-            app:layout_constraintTop_toBottomOf="@+id/editTextTemperatureTakeMeasurement"
-            android:layout_marginTop="16dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            android:layout_marginEnd="16dp" />
+        android:id="@+id/editTextTempCorrectionTakeMeasuremen"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:text="0.1"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editTextTemperatureTakeMeasurement" />
 
     <TextView
-            android:text="76.4"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/textViewCalculatedProofTakeMeasurement"
-            app:layout_constraintTop_toBottomOf="@+id/editTextHydroCorrectionTakeMeasurement"
-            android:layout_marginTop="20dp"
-            app:layout_constraintStart_toEndOf="@+id/textViewProofTakeMeasurement"
-            android:layout_marginStart="36dp" />
+        android:id="@+id/textViewCalculatedProofTakeMeasurement"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="36dp"
+        android:layout_marginTop="20dp"
+        android:text="76.4"
+        app:layout_constraintStart_toEndOf="@+id/textViewProofTakeMeasurement"
+        app:layout_constraintTop_toBottomOf="@+id/editTextHydroCorrectionTakeMeasurement" />
 
     <TextView
-            android:text="Hydrometer Correction"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/textViewHydroCorrectionTakeMeasurement"
-            app:layout_constraintEnd_toStartOf="@+id/editTextHydroCorrectionTakeMeasurement"
-            app:layout_constraintTop_toTopOf="@+id/editTextHydroCorrectionTakeMeasurement"
-            app:layout_constraintBottom_toBottomOf="@+id/editTextHydroCorrectionTakeMeasurement"
-            android:layout_marginEnd="28dp"
-            app:layout_constraintVertical_bias="1.0" />
+        android:id="@+id/textViewHydroCorrectionTakeMeasurement"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="28dp"
+        android:text="Hydrometer Correction"
+        app:layout_constraintBottom_toBottomOf="@+id/editTextHydroCorrectionTakeMeasurement"
+        app:layout_constraintEnd_toStartOf="@+id/editTextHydroCorrectionTakeMeasurement"
+        app:layout_constraintTop_toTopOf="@+id/editTextHydroCorrectionTakeMeasurement"
+        app:layout_constraintVertical_bias="1.0" />
 
     <TextView
-            android:text="Hydrometer"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/textViewHydrometerTakeMeasurement"
-            app:layout_constraintTop_toTopOf="@+id/editTextHydrometerTakeMeasurement"
-            app:layout_constraintEnd_toStartOf="@+id/editTextHydrometerTakeMeasurement"
-            app:layout_constraintBottom_toBottomOf="@+id/editTextHydrometerTakeMeasurement"
-            android:layout_marginEnd="28dp"
-            app:layout_constraintVertical_bias="0.0" />
+        android:id="@+id/textViewHydrometerTakeMeasurement"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="28dp"
+        android:text="Hydrometer"
+        app:layout_constraintBottom_toBottomOf="@+id/editTextHydrometerTakeMeasurement"
+        app:layout_constraintEnd_toStartOf="@+id/editTextHydrometerTakeMeasurement"
+        app:layout_constraintTop_toTopOf="@+id/editTextHydrometerTakeMeasurement"
+        app:layout_constraintVertical_bias="0.0" />
 
-    <RadioButton
-            android:text="Temp in °C"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+    <RadioGroup
+        android:id="@+id/radioGroup"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="@+id/buttonBatchDetailTakeMeasurement"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/buttonBatchDetailTakeMeasurement">
+
+        <RadioButton
             android:id="@+id/radioButtonTempCTakeMeasurement"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_marginEnd="16dp"
+            android:text="Temp in °C"
+            android:onClick="onRadioButtonClicked"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/radioButtonTempFTakeMeasurement" />
 
-    <RadioButton
-            android:text="Temp in F"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+        <RadioButton
             android:id="@+id/radioButtonTempFTakeMeasurement"
-            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_marginEnd="16dp"
+            android:text="Temp in F"
+            android:onClick="onRadioButtonClicked"
             app:layout_constraintBottom_toBottomOf="@+id/textViewBatchNumberTakeMeasurment"
-            app:layout_constraintTop_toTopOf="@+id/buttonBatchDetailTakeMeasurement" />
-
-    <TextView
-            android:text="Batch #"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/textViewBatchNumberTakeMeasurment"
-            android:textSize="18sp"
-            app:layout_constraintTop_toBottomOf="@+id/buttonBatchDetailTakeMeasurement"
-            app:layout_constraintStart_toStartOf="@+id/buttonBatchDetailTakeMeasurement"
-            app:layout_constraintEnd_toEndOf="@+id/buttonBatchDetailTakeMeasurement"
-            android:layout_marginTop="16dp" />
-
-    <TextView
-            android:text="Distillery and DSP"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/textViewTakeMeasurementdsp"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintEnd_toEndOf="parent"
-            android:layout_marginTop="8dp" />
+            app:layout_constraintTop_toTopOf="@+id/buttonBatchDetailTakeMeasurement" />
+    </RadioGroup>
+
+    <TextView
+        android:id="@+id/textViewBatchNumberTakeMeasurment"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="Batch #"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="@+id/buttonBatchDetailTakeMeasurement"
+        app:layout_constraintStart_toStartOf="@+id/buttonBatchDetailTakeMeasurement"
+        app:layout_constraintTop_toBottomOf="@+id/buttonBatchDetailTakeMeasurement" />
+
+    <TextView
+        android:id="@+id/textViewTakeMeasurementdsp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="Distillery and DSP"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

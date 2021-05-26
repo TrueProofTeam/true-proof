@@ -6,4 +6,80 @@
     android:layout_height="match_parent"
     tools:context=".activities.DistillerySettingsActivity">
 
+    <TextView
+        android:id="@+id/textViewDSPTitleDistillerySettings"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="Whiskey Co"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textViewDistillerySettingsTitleDistillerySettings"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="Distillery Settings"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textViewDSPTitleDistillerySettings" />
+
+    <TextView
+        android:id="@+id/textViewDSPNumDistillerySettings"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:text="DSP#"
+        app:layout_constraintBottom_toBottomOf="@+id/editTextDSPDistillerySettings"
+        app:layout_constraintEnd_toStartOf="@+id/editTextDSPDistillerySettings"
+        app:layout_constraintTop_toTopOf="@+id/editTextDSPDistillerySettings" />
+
+    <TextView
+        android:id="@+id/textViewDistilleryNameDistillerySettings"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:text="Distillery Name"
+        app:layout_constraintBottom_toBottomOf="@+id/editTextDistilleryNameDistillerySettings"
+        app:layout_constraintEnd_toStartOf="@+id/editTextDistilleryNameDistillerySettings"
+        app:layout_constraintTop_toTopOf="@+id/editTextDistilleryNameDistillerySettings" />
+
+    <EditText
+        android:id="@+id/editTextDSPDistillerySettings"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:text="010101"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textViewDistillerySettingsTitleDistillerySettings" />
+
+    <EditText
+        android:id="@+id/editTextDistilleryNameDistillerySettings"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:text="Whiskey and Gin Inc"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editTextDSPDistillerySettings" />
+
+    <Button
+        android:id="@+id/buttonSubmitDistillerySettings"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:text="Submit"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editTextDistilleryNameDistillerySettings" />
 </androidx.constraintlayout.widget.ConstraintLayout>
