@@ -3,6 +3,7 @@ package com.trueproof.trueproof.activities;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.EditText;
 
 import androidx.activity.result.contract.ActivityResultContract;
 import androidx.activity.result.contract.ActivityResultContracts;
@@ -58,5 +59,15 @@ public class BatchDetailActivity extends AppCompatActivity {
         Intent redirectIntent = new Intent(this, TakeMeasurementActivity.class);
         redirectIntent.putExtra(BATCH_JSON, jsonConverter.batchToJson(batch));
         startActivity(redirectIntent);
+    }
+
+    private void populateTextFields(){
+        if (batch != null){
+            ((EditText) findViewById(R.id.editTextTypeBatchDetail)).setText(batch.getType());
+            ((EditText) findViewById(R.id.editTextBatchNumberBatchDetail)).setText(batch.getBatchNumber());
+            ((EditText) findViewById(R.id.editTextIdentifierBatchDetail)).setText(batch.getBatchIdentifier());
+        }
+
+
     }
 }

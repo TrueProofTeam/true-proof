@@ -70,8 +70,7 @@ public class NewBatchActivity extends AppCompatActivity {
             });
 
 
-//
-//            Toast.makeText(this, "Started batch " + batchId, Toast.LENGTH_LONG).show();
+
 
         });
     }
