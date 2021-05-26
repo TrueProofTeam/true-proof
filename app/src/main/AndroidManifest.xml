@@ -14,7 +14,7 @@
         <activity android:name=".activities.SignUpActivity" />
         <activity android:name=".activities.SignUpConfirmationActivity" />
         <activity android:name=".activities.LogInActivity" />
-        <activity android:name=".activities.UserSettingsActivity" />
+        <activity android:name=".activities.SettingsActivity" />
         <activity android:name=".activities.MeasurementDetailActivity" />
         <activity android:name=".activities.DistillerySettingsActivity" />
         <activity android:name=".activities.NewBatchActivity" />
