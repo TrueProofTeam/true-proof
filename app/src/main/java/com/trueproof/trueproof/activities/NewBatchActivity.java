@@ -33,7 +33,7 @@ import dagger.hilt.android.AndroidEntryPoint;
 @AndroidEntryPoint
 public class NewBatchActivity extends AppCompatActivity {
     static String TAG = "t.newBatch";
-    final static String REDIRECT_TO_TAKE_MEASUREMENT = "redirect_to_take_measurement";
+    final static String REDIRECT_TO_BATCH_DETAIL_TO_TAKE_MEASUREMENT = "redirect_to_take_measurement";
     final List <Distillery> distilleries = new ArrayList<>();
     @Inject
     DistilleryRepository distilleryRepository;
@@ -43,16 +43,36 @@ public class NewBatchActivity extends AppCompatActivity {
 
     @Inject
     UserSettings userSettings;
+    @Inject
+    JsonConverter jsonConverter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_new_batch);
-
-
-          userSettings.getDistillery(success ->{
+        userSettings.getDistillery(success ->{
               distilleries.add(success);
           }, fail->{});
+        ((Button) findViewById(R.id.buttonCreateBatchNewBatch)).setOnClickListener(v -> {
+            String batchType = ((EditText) findViewById(R.id.editTextBatchTypeNewBatch)).getText().toString();
+            Integer batchNum = Integer.parseInt(((EditText) findViewById(R.id.editTextBatchNumNewBatch)).getText().toString());
+            String batchIdentifier = ((EditText) findViewById(R.id.editTextBatchIdNewBatch)).getText().toString();
+
+            Batch batch = Batch.builder().status(Status.ACTIVE).batchIdentifier(batchIdentifier).batchNumber(batchNum).distillery(distilleries.get(0)).build();
+
+//                    .batchIdentifier(batchIdentifier).batchNumber(batchNum).type(batchType).distillery(distilleries.get(0)).status(Status.ACTIVE).build();
+            batchRepository.saveBatch(batch, onSuccess -> {
+                        Intent data = new Intent();
+                        data.putExtra(BatchDetailActivity.BATCH_JSON, jsonConverter.batchToJson(batch));
+                        setResult(BatchListActivity.REDIRECT_TO_BATCH_DETAIL_TO_TAKE_MEASUREMENT, data);
+                        finish();
+                    }, onFail -> {
+                        Log.i(TAG, "onFail: " + onFail.toString());
+                    }
+            );
+
+        });
+
           EditText batchTypeEditText = findViewById(R.id.editTextBatchTypeNewBatch);
           EditText batchNumEditText = findViewById(R.id.editTextBatchNumNewBatch);
           batchNumEditText.addTextChangedListener(new TextWatcher() {
@@ -84,28 +104,7 @@ public class NewBatchActivity extends AppCompatActivity {
             }
         });
 
-        ((Button) findViewById(R.id.buttonCreateBatchNewBatch)).setOnClickListener(v -> {
-            String batchType = ((EditText) findViewById(R.id.editTextBatchTypeNewBatch)).getText().toString();
-            Integer batchNum = Integer.parseInt(((EditText) findViewById(R.id.editTextBatchNumNewBatch)).getText().toString());
-            String batchIdentifier = ((EditText) findViewById(R.id.editTextBatchIdNewBatch)).getText().toString();
 
-            Batch batch = Batch.builder().status(Status.ACTIVE).batchIdentifier(batchIdentifier).batchNumber(batchNum).distillery(distilleries.get(0)).build();
-
-
-            batchRepository.saveBatch(batch, onSuccess->{
-                Intent i  = new Intent();
-                i.putExtra(REDIRECT_TO_TAKE_MEASUREMENT, true);
-
-                startActivity(i);
-
-            }, onFail->{
-                Log.i(TAG, "onFail: " + onFail.toString());
-            });
-
-
-
-
-        });
     }
     private void batchIdentifierOnChange (){
         if (distilleries.get(0).getDspId() != null && ((EditText) findViewById(R.id.editTextBatchTypeNewBatch)).getText() != null
