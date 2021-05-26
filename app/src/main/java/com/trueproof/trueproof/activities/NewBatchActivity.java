@@ -57,7 +57,7 @@ public class NewBatchActivity extends AppCompatActivity {
             String batchIdentifier = ((EditText) findViewById(R.id.editTextBatchIdNewBatch)).getText().toString();
 
             Batch batch = Batch.builder().status(Status.ACTIVE).batchIdentifier(batchIdentifier).batchNumber(batchNum).distillery(distilleries.get(0)).build();
-            
+
 //                    .batchIdentifier(batchIdentifier).batchNumber(batchNum).type(batchType).distillery(distilleries.get(0)).status(Status.ACTIVE).build();
             batchRepository.saveBatch(batch, onSuccess->{
                 Intent i  = new Intent();
