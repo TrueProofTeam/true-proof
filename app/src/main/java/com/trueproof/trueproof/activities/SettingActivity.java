@@ -16,7 +16,7 @@ import com.trueproof.trueproof.utils.MeasurementRepository;
 
 import org.jetbrains.annotations.NotNull;
 
-public class UserSettingsActivity extends AppCompatActivity {
+public class SettingActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

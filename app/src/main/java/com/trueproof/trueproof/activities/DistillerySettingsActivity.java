@@ -1,7 +1,10 @@
 package com.trueproof.trueproof.activities;
 
+import android.graphics.Color;
 import android.os.Bundle;
+import android.text.method.LinkMovementMethod;
 import android.util.Log;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -28,8 +31,22 @@ public class DistillerySettingsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_distillery_settings);
 
-
-
+        setupHyperlink();
 
     }
+
+    private void setupHyperlink(){
+        TextView ttbTable = findViewById(R.id.textViewTTBGaugingManual);
+        ttbTable.setMovementMethod(LinkMovementMethod.getInstance());
+        ttbTable.setLinkTextColor(Color.BLUE);
+
+        TextView interpolationManual = findViewById(R.id.textViewInterpolationGaugingManual);
+        interpolationManual.setMovementMethod(LinkMovementMethod.getInstance());
+        interpolationManual.setLinkTextColor(Color.BLUE);
+
+        TextView eCFR = findViewById(R.id.textViewGaugingECFR);
+        eCFR.setMovementMethod(LinkMovementMethod.getInstance());
+        eCFR.setLinkTextColor(Color.BLUE);
+    }
+
 }

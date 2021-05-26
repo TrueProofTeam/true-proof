@@ -5,18 +5,18 @@
     <application
         android:name=".TrueProofApplication"
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@mipmap/logo"
         android:label="@string/app_name"
-        android:roundIcon="@mipmap/ic_launcher_round"
+        android:roundIcon="@mipmap/logo_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.TrueProof">
         <activity android:name=".activities.UserAgreementActivity" />
         <activity android:name=".activities.SignUpActivity" />
         <activity android:name=".activities.SignUpConfirmationActivity" />
         <activity android:name=".activities.LogInActivity" />
-        <activity android:name=".activities.UserSettingsActivity" />
+        <activity android:name=".activities.SettingActivity" />
         <activity android:name=".activities.MeasurementDetailActivity" />
-        <activity android:name=".activities.DistillerySettingsActivity" />
+        <activity android:name=".activities.SettingsActivity" />
         <activity android:name=".activities.NewBatchActivity" />
         <activity android:name=".activities.BatchDetailActivity" />
         <activity android:name=".activities.BatchListActivity" />
