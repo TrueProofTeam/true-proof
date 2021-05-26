@@ -1,5 +1,7 @@
 package com.trueproof.trueproof.logic;
 
+import android.util.Log;
+
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
@@ -32,27 +34,54 @@ public class Proofing {
     // temperature Arg wants value in C, convert F to C if
     public double proof(double temperature, double proof, double proofCorrection, double tempCorrection) {
 
-                            /* TODO
-                            [✓] bring in CSV through getResources() instead of file path
-                            [] accept temperature in both F and C and convert where appropriate
-                                F -> C equation: (F - 32) * (5/9) = C
-                            [] convert F to C in activity/intent, Proof method always takes temperature in C
-                            [✓] handle simple proofing (no interpolation) with fractional temp/proof values. round up/down?
-                            [] handle exceptions if args return invalid value from table
-                             */
+        System.out.println("temperature = " + temperature);
+        System.out.println("proof = " + proof);
+        System.out.println("proofCorrection = " + proofCorrection);
+        System.out.println("tempCorrection = " + tempCorrection);
+
+            /* TODO
+            [✓] 5/24 bring in CSV through getResources() instead of file path
+            [] accept temperature in both F and C and convert where appropriate
+                F -> C equation: (F - 32) * (5/9) = C
+            [] convert F to C in activity/intent, Proof method always takes temperature in C
+            [✓] 5/24 handle simple proofing (no interpolation) with fractional temp/proof values. round up/down?
+            [✓] 5/25 handle exceptions if args return invalid value from table
+             */
+
+        if (temperature <= 1){
+            temperature = 1;
+        }
+        if (temperature >= 100){
+            temperature = 99;
+        }
+        if (proof <= 1){
+            proof = 1;
+        }
+        if (proof >= 207){
+            proof = 206;
+        }
 
         // simple proofing for quick calculation when correction factors not selected or set to 0, no interpolation just intersection of TTB table
-        if (proofCorrection == 0 && tempCorrection == 0) {
+        if (proofCorrection == 0.0 && tempCorrection == 0.0) {
             double roundTemp = Math.round(temperature);
             double roundProof = Math.round(proof);
+
+//            if (roundTemp < 1){
+//                roundTemp = 1;
+//            }
+//            if (roundProof > 100){
+//                roundTemp = 100
+//            }
 
             System.out.println("temperature = " + temperature);
             System.out.println("roundTemp = " + roundTemp);
             System.out.println("proof = " + proof);
             System.out.println("roundProof = " + roundProof);
 
-            double chartProof = Double.parseDouble(table.get((int) roundTemp).get((int) roundProof));
+            double chartProof = Double.parseDouble(table.get((int) roundTemp - 1).get((int) roundProof));
             System.out.println("chartProof = " + (chartProof / 10));
+
+            Log.e("Chart Proof: ", String.valueOf(chartProof / 10));
 
             return chartProof / 10;
         }
@@ -73,6 +102,7 @@ public class Proofing {
         double proofDifference = highProof - lowProof;
 
         // find proof at standardized proof (80) when measured temp rounded high/low
+        System.out.println("correctedTemp = " + (correctedTemp-1));
         double highTemp = Double.parseDouble(table.get((int) Math.ceil(correctedTemp - 1)).get(80));
         double lowTemp = Double.parseDouble(table.get((int) Math.floor(correctedTemp - 1)).get(80));
 
@@ -91,6 +121,7 @@ public class Proofing {
         System.out.println("interpolatedProof = " + interpolatedProof);
 
         // divide big dumb Integer by 10 to find it's actual proof value;
+        Log.e("Interpolated Proof: ", String.valueOf(interpolatedProof / 10));
         return (interpolatedProof / 10);
     }
 }
