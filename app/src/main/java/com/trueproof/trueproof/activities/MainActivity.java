@@ -1,11 +1,14 @@
 package com.trueproof.trueproof.activities;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.InputFilter;
 import android.text.InputType;
 import android.text.TextWatcher;
+import android.text.method.LinkMovementMethod;
+import android.text.util.Linkify;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -55,6 +58,7 @@ public class MainActivity extends AppCompatActivity {
 
         limitAndCalculate();
 
+        setupHyperlink();
     }
 
     public void calculateOnChange(){
@@ -164,6 +168,22 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
+    // Cannibalize this + associated xml blocks for clickable links to federal regulations and reference
+    private void setupHyperlink(){
+        TextView ttbTable = findViewById(R.id.textViewTTBGaugingManual);
+        ttbTable.setMovementMethod(LinkMovementMethod.getInstance());
+        ttbTable.setLinkTextColor(Color.BLUE);
+
+        TextView interpolationManual = findViewById(R.id.textViewInterpolationGaugingManual);
+        interpolationManual.setMovementMethod(LinkMovementMethod.getInstance());
+        interpolationManual.setLinkTextColor(Color.BLUE);
+
+        TextView eCFR = findViewById(R.id.textViewGaugingECFR);
+        eCFR.setMovementMethod(LinkMovementMethod.getInstance());
+        eCFR.setLinkTextColor(Color.BLUE);
+    }
+
+
     @Override
     public boolean onCreateOptionsMenu (Menu menu){
         getMenuInflater().inflate(R.menu.menu, menu);
@@ -174,7 +194,6 @@ public class MainActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem menuItem){
         if (menuItem.getItemId() == R.id.nav_settings)MainActivity.this.startActivity(new Intent(MainActivity.this, DistillerySettingsActivity.class));
         if (menuItem.getItemId() == R.id.nav_batch_list)MainActivity.this.startActivity(new Intent(MainActivity.this, BatchListActivity.class));
-        if (menuItem.getItemId() == R.id.nav_settings)MainActivity.this.startActivity(new Intent(MainActivity.this, DistillerySettingsActivity.class));
         if (menuItem.getItemId() == R.id.nav_quick_calculator)MainActivity.this.startActivity(new Intent(MainActivity.this, TakeMeasurementActivity.class));
         return true;
         }
