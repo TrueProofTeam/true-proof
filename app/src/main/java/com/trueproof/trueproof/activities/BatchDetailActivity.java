@@ -12,15 +12,12 @@ import com.amplifyframework.datastore.generated.model.Batch;
 import com.trueproof.trueproof.R;
 import com.trueproof.trueproof.utils.JsonConverter;
 
-import org.jetbrains.annotations.NotNull;
-
 import javax.inject.Inject;
 
 import dagger.hilt.android.AndroidEntryPoint;
 
 @AndroidEntryPoint
 public class BatchDetailActivity extends AppCompatActivity {
-    final static String REDIRECT_TO_TAKE_MEASUREMENT = "redirect_to_take_measurement";
     final static String BATCH_JSON = "batch_json";
     final static String TAG = "BatchDetailActivity";
 
@@ -35,14 +32,16 @@ public class BatchDetailActivity extends AppCompatActivity {
         setContentView(R.layout.activity_batch_detail);
         Log.i(TAG, "onCreate: batch detail");
 
+        findViewById(R.id.imageButtonAddMeasurementBatchDetail).setOnClickListener(v -> goToTakeMeasurementActivity());
+
         Intent intent = getIntent();
         getBatchFromIntent(intent);
+    }
 
-        boolean redirect = intent.getBooleanExtra(REDIRECT_TO_TAKE_MEASUREMENT, false);
-        Log.i(TAG, "getBooleanExtra redirect_to_take_measurement" + redirect);
-        if (redirect) {
-            redirectToTakeMeasurement();
-        }
+    private void goToTakeMeasurementActivity() {
+        Intent intent = new Intent(this, TakeMeasurementActivity.class);
+        getBatchFromIntent(intent);
+        startActivity(intent);
     }
 
     private void getBatchFromIntent(Intent intent) {
@@ -53,12 +52,5 @@ public class BatchDetailActivity extends AppCompatActivity {
             // TODO This error state is hopefully unreachable.
             Log.e(TAG, "No batch JSON in the intent!");
         }
-    }
-
-    private void redirectToTakeMeasurement() {
-        Log.i(TAG, "redirectToTakeMeasurement: We are redirecting to take measurement");
-        Intent redirectIntent = new Intent(this, TakeMeasurementActivity.class);
-        redirectIntent.putExtra(BATCH_JSON, jsonConverter.batchToJson(batch));
-        startActivity(redirectIntent);
     }
 }

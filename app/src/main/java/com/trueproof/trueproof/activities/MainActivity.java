@@ -2,6 +2,7 @@ package com.trueproof.trueproof.activities;
 
 import android.content.Intent;
 import android.graphics.Color;
+import android.os.Build;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.InputFilter;
@@ -16,12 +17,26 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.trueproof.trueproof.R;
 import com.trueproof.trueproof.logic.InputFilterMinMax;
 import com.trueproof.trueproof.logic.Proofing;
 import com.trueproof.trueproof.utils.TestDependencyInjection;
+
+import com.trueproof.trueproof.utils.UserSettings;
+
+import java.sql.Time;
+import java.time.Instant;
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.FormatStyle;
+import java.util.ArrayList;
+import java.util.Locale;
+import java.util.TimeZone;
+
 
 import javax.inject.Inject;
 
@@ -43,6 +58,7 @@ public class MainActivity extends AppCompatActivity {
     double inputProofDouble = 0.0;
     double inputProofCorrDouble = 0.0;
 
+    @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -52,8 +68,10 @@ public class MainActivity extends AppCompatActivity {
         Log.i(TAG, "onCreate: " + proofing.proof(80.5, 100.1, 1.1, 1.1));
 
         limitAndCalculate();
-
         setupHyperlink();
+
+        TextView dateTimeLocal = findViewById(R.id.textViewDateTimeLocal);
+        dateTimeLocal.setText(userLocalTime());
     }
 
     public void calculateOnChange(){
@@ -161,6 +179,17 @@ public class MainActivity extends AppCompatActivity {
             public void onTextChanged(CharSequence s, int start, int before, int count) {calculateOnChange();
             }
         });
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.O)
+    public String userLocalTime(){
+
+        TimeZone timeZone = TimeZone.getDefault();
+        return ZonedDateTime.now(ZoneId.of(timeZone.getID()))
+                .format(
+                        DateTimeFormatter.ofLocalizedDateTime( FormatStyle.MEDIUM)
+                        .withLocale(Locale.US)
+                );
     }
 
     // Cannibalize this + associated xml blocks for clickable links to federal regulations and reference

@@ -55,6 +55,13 @@ public class BatchListActivity extends AppCompatActivity {
         );
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        viewModel.update();
+    }
+
     private void setUpAllBatchList() {
         RecyclerView allBatchList = findViewById(R.id.recyclerViewBatchList);
         allBatchList.setLayoutManager(new LinearLayoutManager(this));
@@ -104,10 +111,17 @@ public class BatchListActivity extends AppCompatActivity {
     private void onActivityResult(ActivityResult activityResult) {
         if (activityResult.getResultCode() == REDIRECT_TO_BATCH_DETAIL_TO_TAKE_MEASUREMENT) {
             String json = activityResult.getData().getStringExtra(BatchDetailActivity.BATCH_JSON);
+
             Intent batchDetailIntent = new Intent(this, BatchDetailActivity.class);
-            batchDetailIntent.putExtra(BatchDetailActivity.REDIRECT_TO_TAKE_MEASUREMENT, true);
             batchDetailIntent.putExtra(BatchDetailActivity.BATCH_JSON, json);
-            startActivity(batchDetailIntent);
+
+            Intent takeMeasurementIntent = new Intent(this, TakeMeasurementActivity.class);
+            takeMeasurementIntent.putExtra(BatchDetailActivity.BATCH_JSON, json);
+
+            startActivities(new Intent[]{
+                    batchDetailIntent,
+                    takeMeasurementIntent
+            });
         }
     }
 }
