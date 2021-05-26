@@ -63,12 +63,6 @@ public class NewBatchActivity extends AppCompatActivity {
                         data.putExtra(BatchDetailActivity.BATCH_JSON, jsonConverter.batchToJson(batch));
                         setResult(BatchListActivity.REDIRECT_TO_BATCH_DETAIL_TO_TAKE_MEASUREMENT, data);
                         finish();
-
-            startActivity(new Intent(this,TakeMeasurementActivity.class));
-        });
-    }
-
-
                     }, onFail -> {
                         Log.i(TAG, "onFail: " + onFail.toString());
                     }
