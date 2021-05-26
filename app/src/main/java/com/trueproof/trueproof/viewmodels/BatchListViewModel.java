@@ -77,4 +77,8 @@ public class BatchListViewModel extends ViewModel {
                     Log.e(TAG, "getActiveBatchesByDistillery fail" + r);
                 });
     }
+
+    public void update() {
+        updateBatchLists(distillery.getValue());
+    }
 }
