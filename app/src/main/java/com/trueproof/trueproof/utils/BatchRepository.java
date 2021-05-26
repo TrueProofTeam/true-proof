@@ -94,6 +94,7 @@ public class BatchRepository {
                 onFail
         );
     }
+
     public void deleteBatch (Batch batch, Consumer onSuccess, Consumer<ApiException>onFail){
 
             Amplify.API.mutate(ModelMutation.delete(batch), onSuccess, onFail);

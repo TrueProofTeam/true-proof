@@ -48,19 +48,20 @@
             app:layout_constraintHorizontal_bias="0.5"
             android:id="@+id/recyclerViewActiveBatchList">
 
-        <androidx.recyclerview.widget.RecyclerView
-                android:layout_width="373dp"
-                android:layout_height="152dp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textViewActiveBatchesBatchList"
-                android:layout_marginTop="8dp"
-                app:layout_constraintHorizontal_bias="0.5" />
     </androidx.recyclerview.widget.RecyclerView>
 
+    <androidx.recyclerview.widget.RecyclerView
+        android:layout_width="373dp"
+        android:layout_height="152dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textViewActiveBatchesBatchList"
+        android:layout_marginTop="8dp"
+        app:layout_constraintHorizontal_bias="0.5" />
+
     <TextView
-            android:text="Your Batches"
-            android:layout_width="wrap_content"
+        android:text="Your Batches"
+        android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/textViewYourBatchesBatchList"
             app:layout_constraintTop_toBottomOf="@+id/recyclerViewActiveBatchList"

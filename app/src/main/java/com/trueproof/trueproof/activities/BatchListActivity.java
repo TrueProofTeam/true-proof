@@ -41,6 +41,7 @@ public class BatchListActivity extends AppCompatActivity {
 
     private void setUpAllBatchList() {
         RecyclerView allBatchList = findViewById(R.id.recyclerViewBatchList);
+        allBatchList.setLayoutManager(new LinearLayoutManager(this));
         batchListAdapter = new BatchListAdapter(batch -> {
             // TODO: Go to the batch detail
             Log.i(TAG, "BatchList: clicked on batch " + BatchUtils.batchToString(batch));
@@ -48,18 +49,20 @@ public class BatchListActivity extends AppCompatActivity {
                     "Clicked on batch " + BatchUtils.batchToString(batch),
                     Toast.LENGTH_LONG).show();
         });
+
         final List<Batch> list = viewModel.getBatchList().getValue();
         if (list != null) batchListAdapter.submitList(list);
         else batchListAdapter.submitList(new ArrayList<Batch>());
 
-        allBatchList.setAdapter(batchListAdapter);
         allBatchList.setLayoutManager(new LinearLayoutManager(this));
+        allBatchList.setAdapter(batchListAdapter);
         viewModel.getBatchList().observe(this,
                 batches -> batchListAdapter.submitList(batches));
     }
 
     private void setUpActiveBatchList() {
         RecyclerView activeBatchList = findViewById(R.id.recyclerViewActiveBatchList);
+        activeBatchList.setLayoutManager(new LinearLayoutManager(this));
         activeBatchListAdapter = new ActiveBatchListAdapter(batch -> {
             // TODO: Go to the batch detail
             Log.i(TAG, "ActiveBatchList: clicked on batch " + BatchUtils.batchToString(batch));
@@ -72,7 +75,6 @@ public class BatchListActivity extends AppCompatActivity {
         else activeBatchListAdapter.submitList(new ArrayList<Batch>());
 
         activeBatchList.setAdapter(activeBatchListAdapter);
-        activeBatchList.setLayoutManager(new LinearLayoutManager(this));
         viewModel.getActiveBatchList().observe(this, batches ->
                 activeBatchListAdapter.submitList(batches));
     }
