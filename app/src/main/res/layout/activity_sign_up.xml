@@ -87,7 +87,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextDSP" />
+        app:layout_constraintTop_toBottomOf="@+id/userAgreementButton" />
 
     <TextView
         android:id="@+id/labelForEmail"
@@ -134,12 +134,13 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:backgroundTint="#DF4444"
-        android:paddingLeft="8dp"
-        android:paddingTop="2dp"
-        android:paddingRight="8dp"
-        android:paddingBottom="2dp"
+        android:paddingLeft="4dp"
+        android:paddingTop="1dp"
+        android:paddingRight="4dp"
+        android:paddingBottom="1dp"
         android:text="@string/userAgreementButtonText"
         android:textSize="12sp"
+        app:layout_constraintBottom_toTopOf="@+id/buttonSignupSignup"
         app:layout_constraintStart_toStartOf="@+id/editTextDSP"
         app:layout_constraintTop_toBottomOf="@+id/editTextDSP" />
 
@@ -149,11 +150,11 @@
         android:layout_height="wrap_content"
         android:ems="10"
         android:hint="@string/shortDSPNumberText"
+        android:importantForAutofill="no"
         android:inputType="textPersonName"
         app:layout_constraintBottom_toTopOf="@+id/buttonSignupSignup"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextPasswordConfirmationSignup"
-        android:importantForAutofill="no" />
+        app:layout_constraintTop_toBottomOf="@+id/editTextPasswordConfirmationSignup" />
 </androidx.constraintlayout.widget.ConstraintLayout>
