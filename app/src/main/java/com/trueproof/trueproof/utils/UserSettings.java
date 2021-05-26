@@ -165,15 +165,6 @@ public class UserSettings {
     }
 
     /**
-<<<<<<< Updated upstream
-     * Gets the value from a list of AuthUserAttribute given a key. These AuthUserAttributes are
-     * key-value pairs and contain all of the AuthUser's custom attributes as well as the built
-     * in Cognito attributes.
-     * @param attributes The list of AuthUserAttributes given by Amplify.Auth.fetchUserAttributes
-     * @param keyString The key of the AuthUserAttribute
-     * @return
-     */
-=======
      * Updates the User in the database, which contains user settings.
      * @param user The user settings object to save.
      * @param success The callback to be called when the settings are successfully saved.
@@ -183,7 +174,14 @@ public class UserSettings {
         userRepository.update(user, success, fail);
     }
 
->>>>>>> Stashed changes
+    /**
+     * Gets the value from a list of AuthUserAttribute given a key. These AuthUserAttributes are
+     * key-value pairs and contain all of the AuthUser's custom attributes as well as the built
+     * in Cognito attributes.
+     * @param attributes The list of AuthUserAttributes given by Amplify.Auth.fetchUserAttributes
+     * @param keyString The key of the AuthUserAttribute
+     * @return
+     */
     private String getValueFromAuthUserAttributesByKey(List<AuthUserAttribute> attributes, String keyString) {
         for (AuthUserAttribute attribute : attributes) {
             if (attribute.getKey().getKeyString().equals("custom:distilleryId")) {
