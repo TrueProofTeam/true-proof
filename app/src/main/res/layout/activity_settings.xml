@@ -1,0 +1,189 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".activities.SettingsActivity">
+
+    <EditText
+        android:id="@+id/editTextDefaultTempCorrectionUserSettings6"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="4dp"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:text="0"
+        app:layout_constraintBottom_toBottomOf="@+id/textViewThermCorrUserSettings6"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/textViewThermCorrUserSettings6"
+        app:layout_constraintTop_toTopOf="@+id/textViewThermCorrUserSettings6"
+        app:layout_constraintVertical_bias="1.0" />
+
+    <TextView
+        android:id="@+id/textViewThermCorrUserSettings6"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="52dp"
+        android:text="Default Thermometer Correction"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.024"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textViewHydroCorrUserSettings6" />
+
+    <EditText
+        android:id="@+id/editTextDefaultHydroCorrectionUserSettings6"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:text="0"
+        app:layout_constraintBottom_toBottomOf="@+id/textViewHydroCorrUserSettings6"
+        app:layout_constraintStart_toEndOf="@+id/textViewHydroCorrUserSettings6"
+        app:layout_constraintTop_toTopOf="@+id/textViewHydroCorrUserSettings6"
+        app:layout_constraintVertical_bias="0.384" />
+
+    <TextView
+        android:id="@+id/textViewHydroCorrUserSettings6"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="52dp"
+        android:text="Default Hydrometer Correction"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.073"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/textViewTempUnitsUserSettings7" />
+
+    <TextView
+        android:id="@+id/textViewTempUnitsUserSettings7"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Default Temperature Units"
+        app:layout_constraintBottom_toTopOf="@+id/textViewHydroCorrUserSettings6"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.121"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textViewDSPTitleUserSettings6"
+        app:layout_constraintVertical_bias="0.59000003" />
+
+    <RadioGroup
+        android:id="@+id/radioGroup2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="@+id/textViewTempUnitsUserSettings7"
+        app:layout_constraintStart_toEndOf="@+id/textViewTempUnitsUserSettings7"
+        app:layout_constraintTop_toTopOf="@+id/textViewTempUnitsUserSettings7"
+        app:layout_constraintVertical_bias="0.506">
+
+        <RadioButton
+            android:id="@+id/radioButtonTempCUserSettings"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="onRadioButtonUserSettings"
+            android:text="Celcius"
+            tools:layout_editor_absoluteX="255dp"
+            tools:layout_editor_absoluteY="343dp" />
+
+        <RadioButton
+            android:id="@+id/radioButtonTempFUserSettings"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:checked="true"
+            android:onClick="onRadioButtonUserSettings"
+            android:text="Fahrenheit"
+            app:layout_constraintTop_toBottomOf="@+id/radioButtonTempCUserSettings"
+            tools:layout_editor_absoluteX="255dp" />
+    </RadioGroup>
+
+    <TextView
+        android:id="@+id/textViewDSPTitleUserSettings6"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/userSettingText"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.336"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editTextDistilleryNameDistillerySettings"
+        app:layout_constraintVertical_bias="0.328" />
+
+    <TextView
+        android:id="@+id/textViewDSPTitleDistillerySettings"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="Whiskey Co"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textViewDistillerySettingsTitleDistillerySettings"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="Distillery Settings"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textViewDSPTitleDistillerySettings" />
+
+    <TextView
+        android:id="@+id/textViewDSPNumDistillerySettings"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:text="DSP#"
+        app:layout_constraintBottom_toBottomOf="@+id/editTextDSPDistillerySettings"
+        app:layout_constraintEnd_toStartOf="@+id/editTextDSPDistillerySettings"
+        app:layout_constraintTop_toTopOf="@+id/editTextDSPDistillerySettings" />
+
+    <TextView
+        android:id="@+id/textViewDistilleryNameDistillerySettings"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:text="Distillery Name"
+        app:layout_constraintBottom_toBottomOf="@+id/editTextDistilleryNameDistillerySettings"
+        app:layout_constraintEnd_toStartOf="@+id/editTextDistilleryNameDistillerySettings"
+        app:layout_constraintTop_toTopOf="@+id/editTextDistilleryNameDistillerySettings" />
+
+    <EditText
+        android:id="@+id/editTextDSPDistillerySettings"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:text="010101"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textViewDistillerySettingsTitleDistillerySettings" />
+
+    <EditText
+        android:id="@+id/editTextDistilleryNameDistillerySettings"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:text="Whiskey and Gin Inc"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editTextDSPDistillerySettings" />
+
+    <Button
+        android:id="@+id/buttonSubmitDistillerySettings"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Submit"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textViewThermCorrUserSettings6" />
+</androidx.constraintlayout.widget.ConstraintLayout>
