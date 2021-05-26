@@ -36,7 +36,6 @@ public class BatchDetailActivity extends AppCompatActivity {
         Log.i(TAG, "onCreate: batch detail");
 
         Intent intent = getIntent();
-
         getBatchFromIntent(intent);
 
         boolean redirect = intent.getBooleanExtra(REDIRECT_TO_TAKE_MEASUREMENT, false);

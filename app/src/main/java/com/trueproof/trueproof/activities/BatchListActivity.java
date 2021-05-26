@@ -93,6 +93,7 @@ public class BatchListActivity extends AppCompatActivity {
     private void goToBatchDetail(Batch batch) {
         Intent intent = new Intent(this, BatchDetailActivity.class);
         intent.putExtra(BatchDetailActivity.BATCH_JSON, jsonConverter.batchToJson(batch));
+        startActivity(intent);
     }
 
     private void goToNewBatchActivity() {
@@ -101,8 +102,6 @@ public class BatchListActivity extends AppCompatActivity {
     }
 
     private void onActivityResult(ActivityResult activityResult) {
-        Log.i(TAG, "onActivityResult: ");
-        Log.i(TAG, "getResultCode(): " + activityResult.getResultCode());
         if (activityResult.getResultCode() == REDIRECT_TO_BATCH_DETAIL_TO_TAKE_MEASUREMENT) {
             String json = activityResult.getData().getStringExtra(BatchDetailActivity.BATCH_JSON);
             Intent batchDetailIntent = new Intent(this, BatchDetailActivity.class);
