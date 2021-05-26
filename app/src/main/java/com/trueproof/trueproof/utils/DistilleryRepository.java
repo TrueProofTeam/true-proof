@@ -38,6 +38,7 @@ public class DistilleryRepository {
     }
 
     public void updateDistillery(Distillery distillery, Consumer onSuccess, Consumer<ApiException> onFail) {
+        
         Amplify.API.mutate(ModelMutation.update(distillery),
                 onSuccess,
                 onFail);

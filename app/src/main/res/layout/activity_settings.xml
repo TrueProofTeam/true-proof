@@ -81,6 +81,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:onClick="onRadioButtonUserSettings"
+            android:checked="true"
             android:text="Celcius"
             tools:layout_editor_absoluteX="255dp"
             tools:layout_editor_absoluteY="343dp" />
@@ -90,7 +91,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="4dp"
-            android:checked="true"
             android:onClick="onRadioButtonUserSettings"
             android:text="Fahrenheit"
             app:layout_constraintTop_toBottomOf="@+id/radioButtonTempCUserSettings"
