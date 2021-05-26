@@ -33,12 +33,13 @@ public class BatchDetailActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_batch_detail);
+        Log.i(TAG, "onCreate: batch detail");
 
         Intent intent = getIntent();
-
         getBatchFromIntent(intent);
 
         boolean redirect = intent.getBooleanExtra(REDIRECT_TO_TAKE_MEASUREMENT, false);
+        Log.i(TAG, "getBooleanExtra redirect_to_take_measurement" + redirect);
         if (redirect) {
             redirectToTakeMeasurement();
         }
@@ -55,6 +56,7 @@ public class BatchDetailActivity extends AppCompatActivity {
     }
 
     private void redirectToTakeMeasurement() {
+        Log.i(TAG, "redirectToTakeMeasurement: We are redirecting to take measurement");
         Intent redirectIntent = new Intent(this, TakeMeasurementActivity.class);
         redirectIntent.putExtra(BATCH_JSON, jsonConverter.batchToJson(batch));
         startActivity(redirectIntent);
