@@ -13,6 +13,7 @@ subscription OnCreateDistillery {
         batchNumber
         status
         type
+        completedAt
         createdAt
         updatedAt
         _version
@@ -43,6 +44,7 @@ subscription OnUpdateDistillery {
         batchNumber
         status
         type
+        completedAt
         createdAt
         updatedAt
         _version
@@ -73,6 +75,7 @@ subscription OnDeleteDistillery {
         batchNumber
         status
         type
+        completedAt
         createdAt
         updatedAt
         _version
@@ -97,6 +100,7 @@ subscription OnCreateBatch {
     batchNumber
     status
     type
+    completedAt
     createdAt
     updatedAt
     distillery {
@@ -125,6 +129,7 @@ subscription OnCreateBatch {
         hydrometerCorrection
         note
         flag
+        takenAt
         createdAt
         updatedAt
         _version
@@ -147,6 +152,7 @@ subscription OnUpdateBatch {
     batchNumber
     status
     type
+    completedAt
     createdAt
     updatedAt
     distillery {
@@ -175,6 +181,7 @@ subscription OnUpdateBatch {
         hydrometerCorrection
         note
         flag
+        takenAt
         createdAt
         updatedAt
         _version
@@ -197,6 +204,7 @@ subscription OnDeleteBatch {
     batchNumber
     status
     type
+    completedAt
     createdAt
     updatedAt
     distillery {
@@ -225,6 +233,7 @@ subscription OnDeleteBatch {
         hydrometerCorrection
         note
         flag
+        takenAt
         createdAt
         updatedAt
         _version
@@ -250,6 +259,7 @@ subscription OnCreateMeasurement {
     hydrometerCorrection
     note
     flag
+    takenAt
     createdAt
     updatedAt
     batch {
@@ -259,6 +269,7 @@ subscription OnCreateMeasurement {
       batchNumber
       status
       type
+      completedAt
       createdAt
       updatedAt
       distillery {
@@ -296,6 +307,7 @@ subscription OnUpdateMeasurement {
     hydrometerCorrection
     note
     flag
+    takenAt
     createdAt
     updatedAt
     batch {
@@ -305,6 +317,7 @@ subscription OnUpdateMeasurement {
       batchNumber
       status
       type
+      completedAt
       createdAt
       updatedAt
       distillery {
@@ -342,6 +355,7 @@ subscription OnDeleteMeasurement {
     hydrometerCorrection
     note
     flag
+    takenAt
     createdAt
     updatedAt
     batch {
@@ -351,6 +365,7 @@ subscription OnDeleteMeasurement {
       batchNumber
       status
       type
+      completedAt
       createdAt
       updatedAt
       distillery {
@@ -375,5 +390,47 @@ subscription OnDeleteMeasurement {
     _version
     _deleted
     _lastChangedAt
+  }
+}
+subscription OnCreateUser {
+  onCreateUser {
+    id
+    email
+    defaultTemperatureUnit
+    defaultTemperatureCorrection
+    defaultHydrometerCorrection
+    _version
+    _deleted
+    _lastChangedAt
+    createdAt
+    updatedAt
+  }
+}
+subscription OnUpdateUser {
+  onUpdateUser {
+    id
+    email
+    defaultTemperatureUnit
+    defaultTemperatureCorrection
+    defaultHydrometerCorrection
+    _version
+    _deleted
+    _lastChangedAt
+    createdAt
+    updatedAt
+  }
+}
+subscription OnDeleteUser {
+  onDeleteUser {
+    id
+    email
+    defaultTemperatureUnit
+    defaultTemperatureCorrection
+    defaultHydrometerCorrection
+    _version
+    _deleted
+    _lastChangedAt
+    createdAt
+    updatedAt
   }
 }

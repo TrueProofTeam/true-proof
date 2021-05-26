@@ -21,6 +21,7 @@ import com.trueproof.trueproof.R;
 import com.trueproof.trueproof.logic.InputFilterMinMax;
 import com.trueproof.trueproof.logic.Proofing;
 import com.trueproof.trueproof.utils.TestDependencyInjection;
+import com.trueproof.trueproof.utils.UserSettings;
 
 import java.util.ArrayList;
 
