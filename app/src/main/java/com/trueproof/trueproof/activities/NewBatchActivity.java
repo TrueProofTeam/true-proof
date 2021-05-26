@@ -48,7 +48,6 @@ public class NewBatchActivity extends AppCompatActivity {
 //            Batch batch = Batch.builder()
 //                    .batchIdentifier(batchId).batchNumber(batchNum).type(batchType).distillery().build();
 
-
             Toast.makeText(this, "Started batch " + batchId, Toast.LENGTH_LONG).show();
             startActivity(new Intent(this,TakeMeasurementActivity.class));
         });

@@ -3,10 +3,13 @@ package com.trueproof.trueproof.activities;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.graphics.Color;
 import android.os.Bundle;
+import android.text.method.LinkMovementMethod;
 import android.util.Log;
 import android.view.View;
 import android.widget.RadioButton;
+import android.widget.TextView;
 
 import com.amplifyframework.api.ApiException;
 import com.amplifyframework.core.Consumer;
@@ -23,8 +26,8 @@ public class SettingsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_settings);
 
-
     }
+
     public void onRadioButtonUserSettings (View view){
         boolean defaultFahrenheit = true;        // TODO refactor this to query a saved user setting based on selected preference
         boolean checked = ((RadioButton) view).isChecked();

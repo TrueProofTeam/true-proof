@@ -17,4 +17,13 @@
     <string name="codeText">Code</string>
     <string name="confirmationDescriptionText">We have sent you an email to the address you provided. Inside that email there is a code. Please type that code below to confirm your account.</string>
     <string name="loginText">Login</string>
+    <string name="TtbTable">
+        <a href="https://www.ttb.gov/images/pdfs/foia_Gauging_Manual_Tables/Table_1.pdf">TTB Gauging Manual</a>
+    </string>
+    <string name="interpolationTable">
+        <a href="https://www.ttb.gov/distilled-spirits/proofing-page-interpolation-table">Interpolation of Proof Manual</a>
+    </string>
+    <string name="ecfr">
+        <a href="https://www.ecfr.gov/cgi-bin/text-idx?SID=d52566b2cfd89ed58167c6cca87826f7&amp;node=27:1.0.1.1.25&amp;rgn=div5">Proofing Federal Regulations</a>
+    </string>
 </resources>
