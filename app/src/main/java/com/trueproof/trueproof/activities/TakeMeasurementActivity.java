@@ -1,14 +1,17 @@
 package com.trueproof.trueproof.activities;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.icu.util.Measure;
+import android.os.Build;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.InputFilter;
 import android.text.TextWatcher;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
@@ -25,7 +28,13 @@ import com.trueproof.trueproof.utils.TestDependencyInjection;
 
 import java.io.InputStream;
 import java.lang.reflect.Field;
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.FormatStyle;
 import java.util.ArrayList;
+import java.util.Locale;
+import java.util.TimeZone;
 
 import javax.inject.Inject;
 
@@ -58,16 +67,73 @@ public class TakeMeasurementActivity extends AppCompatActivity {
     @Inject
     MeasurementRepository measurementRepository;
 
+    @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_take_measurement);
 
+        inputLimitListener();
+        saveMeasurement();
+
+    }
+
+    public void calculateOnChange() {
+        String inputTemperature = ((EditText) findViewById(R.id.editTextTemperatureMain)).getText().toString();
+        if (inputTemperature != null && inputTemperature.length() > 0 && !inputTemperature.contains(".")) {
+            String doubleAppend = inputTemperature + ".0";
+            inTempDouble = Double.parseDouble(doubleAppend);
+        }
+        if (inputTemperature != null && inputTemperature.length() > 0 && inputTemperature.contains(".")) {
+            inTempDouble = Double.parseDouble(inputTemperature);
+        }
+        System.out.println("inTempDouble = " + inTempDouble);
+        ////////////////////////
+        String inputTemperatureCorrection = ((EditText) findViewById(R.id.editTextTemperatureCorrectionMain)).getText().toString();
+        if (inputTemperatureCorrection != null && inputTemperatureCorrection.length() > 0 && !inputTemperatureCorrection.contains(".")) {
+            String doubleAppend = inputTemperatureCorrection + ".0";
+            inputTempCorrDouble = Double.parseDouble(doubleAppend);
+        }
+        if (inputTemperatureCorrection != null && inputTemperatureCorrection.length() > 0 && inputTemperatureCorrection.contains(".")) {
+            inputTempCorrDouble = Double.parseDouble(inputTemperatureCorrection);
+        }
+        System.out.println("inputTempCorrDouble = " + inputTempCorrDouble);
+        /////////////////////////
+        String inputProof = ((EditText) findViewById(R.id.editTextHydrometerMain)).getText().toString();
+        if (inputProof != null && inputProof.length() > 0 && !inputProof.contains(".")) {
+            String doubleAppend = inputProof + ".0";
+            inputProofDouble = Double.parseDouble(doubleAppend);
+        }
+        if (inputProof != null && inputProof.length() > 0 && inputProof.contains(".")) {
+            inputProofDouble = Double.parseDouble(inputProof);
+        }
+        System.out.println("inputProofDouble = " + inputProofDouble);
+        /////////////////////////
+        String inputProofCorrection = ((EditText) findViewById(R.id.editTextHydrometerCorrectionMain)).getText().toString();
+        if (inputProofCorrection != null && inputProofCorrection.length() > 0 && !inputProofCorrection.contains(".")) {
+            String doubleAppend = inputProofCorrection + ".0";
+            inputProofCorrDouble = Double.parseDouble(doubleAppend);
+        }
+        if (inputProofCorrection != null && inputProofCorrection.length() > 0 && inputProofCorrection.contains(".")) {
+            inputProofCorrDouble = Double.parseDouble(inputProofCorrection);
+        }
+        System.out.println("inputProofCorrDouble = " + inputProofCorrDouble);
+
+        TextView calculatedProof = findViewById(R.id.textViewCalculatedProofMain);
+
+        double proofFromProofing = proofing.proof(inTempDouble, inputProofDouble, inputProofCorrDouble, inputTempCorrDouble);
+        if (proofFromProofing < 0) {
+            calculatedProof.setText("Does not exist. Check measurements and try again.");
+        } else calculatedProof.setText(String.valueOf(proofFromProofing));
+
+    }
+
+    public void inputLimitListener(){
         EditText tempField = findViewById(R.id.editTextTemperatureTakeMeasurement);
         InputFilterMinMax tempLimits = new InputFilterMinMax(1.0, 100.0);
         tempField.setFilters(new InputFilter[]{tempLimits});
 
-        EditText tempCorrectionField = findViewById(R.id.editTextTemperatureTakeMeasurement);
+        EditText tempCorrectionField = findViewById(R.id.editTextTempCorrectionTakeMeasurement);
         InputFilterMinMax tempCorrLimits = new InputFilterMinMax(-1.0, 1.0);
         tempCorrectionField.setFilters(new InputFilter[]{tempCorrLimits});
 
@@ -138,56 +204,46 @@ public class TakeMeasurementActivity extends AppCompatActivity {
                 calculateOnChange();
             }
         });
-
     }
 
-    public void calculateOnChange() {
-        String inputTemperature = ((EditText) findViewById(R.id.editTextTemperatureMain)).getText().toString();
-        if (inputTemperature != null && inputTemperature.length() > 0 && !inputTemperature.contains(".")) {
-            String doubleAppend = inputTemperature + ".0";
-            inTempDouble = Double.parseDouble(doubleAppend);
-        }
-        if (inputTemperature != null && inputTemperature.length() > 0 && inputTemperature.contains(".")) {
-            inTempDouble = Double.parseDouble(inputTemperature);
-        }
-        System.out.println("inTempDouble = " + inTempDouble);
-        ////////////////////////
-        String inputTemperatureCorrection = ((EditText) findViewById(R.id.editTextTemperatureCorrectionMain)).getText().toString();
-        if (inputTemperatureCorrection != null && inputTemperatureCorrection.length() > 0 && !inputTemperatureCorrection.contains(".")) {
-            String doubleAppend = inputTemperatureCorrection + ".0";
-            inputTempCorrDouble = Double.parseDouble(doubleAppend);
-        }
-        if (inputTemperatureCorrection != null && inputTemperatureCorrection.length() > 0 && inputTemperatureCorrection.contains(".")) {
-            inputTempCorrDouble = Double.parseDouble(inputTemperatureCorrection);
-        }
-        System.out.println("inputTempCorrDouble = " + inputTempCorrDouble);
-        /////////////////////////
-        String inputProof = ((EditText) findViewById(R.id.editTextHydrometerMain)).getText().toString();
-        if (inputProof != null && inputProof.length() > 0 && !inputProof.contains(".")) {
-            String doubleAppend = inputProof + ".0";
-            inputProofDouble = Double.parseDouble(doubleAppend);
-        }
-        if (inputProof != null && inputProof.length() > 0 && inputProof.contains(".")) {
-            inputProofDouble = Double.parseDouble(inputProof);
-        }
-        System.out.println("inputProofDouble = " + inputProofDouble);
-        /////////////////////////
-        String inputProofCorrection = ((EditText) findViewById(R.id.editTextHydrometerCorrectionMain)).getText().toString();
-        if (inputProofCorrection != null && inputProofCorrection.length() > 0 && !inputProofCorrection.contains(".")) {
-            String doubleAppend = inputProofCorrection + ".0";
-            inputProofCorrDouble = Double.parseDouble(doubleAppend);
-        }
-        if (inputProofCorrection != null && inputProofCorrection.length() > 0 && inputProofCorrection.contains(".")) {
-            inputProofCorrDouble = Double.parseDouble(inputProofCorrection);
-        }
-        System.out.println("inputProofCorrDouble = " + inputProofCorrDouble);
+    @RequiresApi(api = Build.VERSION_CODES.O)
+    public void saveMeasurement(){
+        ((Button) findViewById(R.id.buttonSaveMeasurementTakeMeasurement)).setOnClickListener(v -> {
+            String temptToSave = ((TextView) findViewById(R.id.editTextTemperatureTakeMeasurement))
+                    .getText().toString();
+            System.out.println("temptToSave = " + temptToSave);
 
-        TextView calculatedProof = findViewById(R.id.textViewCalculatedProofMain);
+            String tempCorrectionToSave = ((TextView) findViewById(R.id.editTextTempCorrectionTakeMeasurement))
+                    .getText().toString();
+            System.out.println("tempCorrectionToSave = " + tempCorrectionToSave);
 
-        double proofFromProofing = proofing.proof(inTempDouble, inputProofDouble, inputProofCorrDouble, inputTempCorrDouble);
-        if (proofFromProofing < 0) {
-            calculatedProof.setText("Does not exist. Check measurements and try again.");
-        } else calculatedProof.setText(String.valueOf(proofFromProofing));
+            String hydroToSave = ((TextView) findViewById(R.id.editTextHydrometerTakeMeasurement))
+                    .getText().toString();
+            System.out.println("hydroToSave = " + hydroToSave);
 
+            String hydroCorrectionToSave = ((TextView) findViewById(R.id.editTextHydroCorrectionTakeMeasurement))
+                    .getText().toString();
+            System.out.println("hydroCorrectionToSave = " + hydroCorrectionToSave);
+
+            String measurementToSave = ((TextView) findViewById(R.id.textViewCalculatedProofTakeMeasurement))
+                    .getText().toString();
+            System.out.println("measurementToSave = " + measurementToSave);
+
+            String measurementTime = userLocalTime();
+            System.out.println("measurementTime = " + measurementTime);
+        });
     }
+
+    @RequiresApi(api = Build.VERSION_CODES.O)
+    public String userLocalTime(){
+
+        TimeZone timeZone = TimeZone.getDefault();
+        return ZonedDateTime.now(ZoneId.of(timeZone.getID()))
+                .format(
+                        DateTimeFormatter.ofLocalizedDateTime( FormatStyle.MEDIUM)
+                                .withLocale(Locale.US)
+                );
+    }
+
+
 }
