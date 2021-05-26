@@ -108,10 +108,10 @@ public class SignUpActivity extends AppCompatActivity {
                 }
 
                 if(dsp.getText().toString().length()==0){
-                    dsp.setError("Please Type In your Distillery Plant Number!");
-                    return;
+                    dsp.setText("");
                 }
 
+                //forces users to go into the user agreement activity and accept terms and uses
                 if(!agreementFromUser){
                     Toast.makeText(getBaseContext(),"Please read the User Agreement and Accept!",Toast.LENGTH_LONG).show();
                     return;
