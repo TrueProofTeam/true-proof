@@ -9,6 +9,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
@@ -54,6 +55,7 @@ public class NewBatchActivity extends AppCompatActivity {
         setContentView(R.layout.activity_new_batch);
         userSettings.getDistillery(success ->{
               distilleries.add(success);
+            ((TextView)findViewById(R.id.textViewNewBatchdsp)).setText(distilleries.get(0).getName());
           }, fail->{});
         ((Button) findViewById(R.id.buttonCreateBatchNewBatch)).setOnClickListener(v -> {
             String batchType = ((EditText) findViewById(R.id.editTextBatchTypeNewBatch)).getText().toString();

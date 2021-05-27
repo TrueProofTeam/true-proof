@@ -8,6 +8,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.activity.result.contract.ActivityResultContract;
@@ -23,6 +24,7 @@ import com.trueproof.trueproof.R;
 import com.trueproof.trueproof.utils.ActivityUtils;
 import com.trueproof.trueproof.utils.BatchRepository;
 import com.trueproof.trueproof.utils.JsonConverter;
+import com.trueproof.trueproof.utils.UserSettings;
 
 import javax.inject.Inject;
 
@@ -37,6 +39,9 @@ public class BatchDetailActivity extends AppCompatActivity {
     @Inject BatchRepository batchRepository;
     @Inject ActivityUtils activityUtils;
 
+    @Inject
+    UserSettings userSettings;
+
     Batch batch;
 
     @Override
@@ -45,7 +50,9 @@ public class BatchDetailActivity extends AppCompatActivity {
         setContentView(R.layout.activity_batch_detail);
 
         Log.i(TAG, "onCreate: batch detail");
-
+        userSettings.getDistillery(success ->{
+            ((TextView)findViewById(R.id.textViewBatchDetaildsp)).setText(success.getName());
+        }, fail->{});
         findViewById(R.id.imageButtonAddMeasurementBatchDetail).setOnClickListener(v -> goToTakeMeasurementActivity());
         Intent intent = getIntent();
         getBatchFromIntent(intent);
