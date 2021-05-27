@@ -16,6 +16,25 @@ import java.time.format.DateTimeFormatter;
 import java.time.temporal.TemporalAccessor;
 import java.util.Date;
 
+/**
+ * Utility class to create AWS (Temporal.DateTime) objects from java Temporal objects.
+ *
+ * Tested to work on OffsetDateTime, ZonedDateTime, and Instant objects.
+ *
+ * Usage:
+ *
+ * Temporal.DateTime awsDateTime = AWSDateTime.of(offsetDateTime);
+ *
+ * Batch.builder()
+ *     ...
+ *     .completedAt(AWSDateTime.of(zonedDateTime))
+ *     .build();
+ *
+ * Measurement.builder()
+ *     ....
+ *     .takenAt(AWSDateTime.of(instant))
+ *     .build();
+ */
 public class AWSDateTime {
     @RequiresApi(api = Build.VERSION_CODES.O)
     static public Temporal.DateTime of(TemporalAccessor temporal) {
