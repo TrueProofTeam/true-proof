@@ -91,8 +91,11 @@ public class SettingsActivity extends AppCompatActivity {
                 r->{
                     usersDistillery=r;
                     handler.sendEmptyMessage(1);
+                    Log.i(TAG, "distilleryRequest: success ->"+r);
                 },
-                r->{}
+                r->{
+                    Log.i(TAG, "distilleryRequest: failed ->"+r);
+                }
         );
     }
 
@@ -103,8 +106,9 @@ public class SettingsActivity extends AppCompatActivity {
     void userRequest(){
         userSettings.getUserSettings(
                 r->{
-                    user=r;
+                    SettingsActivity.this.user=r;
                     handler.sendEmptyMessage(2);
+                    Log.i(TAG, "request user settings -->"+user);
                 },
                 r->{}
         );
@@ -118,6 +122,8 @@ public class SettingsActivity extends AppCompatActivity {
         distilleryName.setText(usersDistillery.getName());
         if(usersDistillery.getName()==null){
             distilleryTitle.setText(R.string.noDistilleryNameText);
+        }else {
+            distilleryTitle.setText(usersDistillery.getName());
         }
     }
 
@@ -171,37 +177,26 @@ public class SettingsActivity extends AppCompatActivity {
                 Log.d(TAG, "Old user settings "+user.toString());
 
 
-//                userSettings.saveUserSettings(newUser,
-//                        r->{
-//                            Log.i(TAG, "user saved!!!!! hazah ->"+r.toString());
-//                            handler.sendEmptyMessage(3);
-//                            //toast and leave em here
-//                            userSettings.getUserSettings(e->{
-//                                        Log.i(TAG, "cool e success!!! -> "+e.toString());
-//                                    },
-//                                    e->{
-//                                        Log.i(TAG, "failure for e -> "+e);
-//                                    });
-//                        },
-//                        r->{
-//                            Log.i(TAG, "user failed to save find out why here ->> "+r.toString());
-//                        }
-//                );
+                userSettings.saveUserSettings(newUser,
+                        r->{
+                            Log.i(TAG, "user saved!!!!! hazah ->"+r.toString());
+                            handler.sendEmptyMessage(3);
+                            //toast and leave em here
+                        },
+                        r->{
+                            Log.i(TAG, "user failed to save find out why here ->> "+r.toString());
+                        }
+                );
 
-//                distilleryRepository.updateDistillery(newDistillery,
-//                        r->{
-//                            Log.i(TAG, "SAVED THE NEW Distillery!! ->"+r.toString());
-//                            handler.sendEmptyMessage(4);
-//                            distilleryRepository.getDistillery(newDistillery.getId(),r2->{
-//                                Log.i(TAG, "r2 success -> "+r2);
-//                            },r2->{
-//
-//                            });
-//                        },
-//                        r->{
-//                            Log.i(TAG, "failed to save distillery ->"+r.toString());
-//                        }
-//                );
+                distilleryRepository.updateDistillery(newDistillery,
+                        r->{
+                            Log.i(TAG, "SAVED THE NEW Distillery!! ->"+r.toString());
+                            handler.sendEmptyMessage(4);
+                        },
+                        r->{
+                            Log.i(TAG, "failed to save distillery ->"+r.toString());
+                        }
+                );
 
 
             }

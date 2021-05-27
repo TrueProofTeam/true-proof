@@ -16,6 +16,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.amplifyframework.api.graphql.model.ModelMutation;
+import com.amplifyframework.auth.AuthUserAttribute;
 import com.amplifyframework.auth.AuthUserAttributeKey;
 import com.amplifyframework.auth.options.AuthSignUpOptions;
 import com.amplifyframework.core.Amplify;
@@ -25,6 +26,9 @@ import com.amplifyframework.datastore.generated.model.User;
 import com.trueproof.trueproof.R;
 import com.trueproof.trueproof.utils.DistilleryRepository;
 import com.trueproof.trueproof.utils.UserSettings;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.inject.Inject;
 import javax.security.auth.login.LoginException;
@@ -69,6 +73,9 @@ public class SignUpActivity extends AppCompatActivity {
                     userMadeFlag=true;
                 }
                 if(signUpFlag && distilleryAddedFlag && userMadeFlag){
+                    signUpFlag=false;
+                    distilleryAddedFlag=false;
+                    userMadeFlag=false;
                     Toast.makeText(getBaseContext(),"Account has been made! Please confirmed the account now!",Toast.LENGTH_LONG).show();
                     EditText emailConfirm = findViewById(R.id.editTextEmailConfirmationSignup);
                     Intent i = new Intent(SignUpActivity.this,SignUpConfirmationActivity.class);
@@ -150,9 +157,14 @@ public class SignUpActivity extends AppCompatActivity {
                         .defaultTemperatureUnit(TemperatureUnit.FAHRENHEIT)
                         .build();
 
+                //might fix attributes, needs to made into a list so that options can use userAttributes
+                Log.i(TAG, "this is the disillery id "+distillery.getId());
+                List<AuthUserAttribute> attributes = new ArrayList<>();
+                attributes.add(new AuthUserAttribute(AuthUserAttributeKey.custom("custom:distilleryId"),distillery.getId()));
+                attributes.add(new AuthUserAttribute(AuthUserAttributeKey.custom("custom:userId"),user.getId()));
+
                 AuthSignUpOptions options = AuthSignUpOptions.builder()
-                        .userAttribute(AuthUserAttributeKey.custom("custom:distilleryId"),distillery.getId())
-                        .userAttribute(AuthUserAttributeKey.custom("custom:userId"),user.getId())
+                        .userAttributes(attributes)
                         .build();
 
                 Amplify.Auth.signUp(
@@ -171,6 +183,8 @@ public class SignUpActivity extends AppCompatActivity {
                distilleryRepository.saveDistillery(distillery,
                        r->{
                            handler.sendEmptyMessage(2);
+                           Log.i(TAG, "Success response from distillery"+r);
+                           Log.i(TAG,"This is the distillery made ->>"+distillery.toString());
                        },
                        r->{
                            Log.i(TAG, "something with wrong with adding the distillery to the database -> "+r.toString());
