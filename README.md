@@ -27,3 +27,5 @@ Time | Action
 5/21/21 | Create whiteboard and project outline
 5/24/21 | Generate all user activities, navigation menu, implement all necessary dependencies, implement AWS Amplify with Dynamo DB and cognito
 5/25/21 | Users can sign in and sign up (cognito implemented), users can quickly calculate true proofs from the main activity without signing in.
+5/26/21 | Date and times correctly display on measurements and batches,
+5/27/21 | Batches can be updated with new names, numbers and identifiers, navigation between all points of the app, logout functionality, prevent logged out users from navigating to settings, batch and  measurement pages
