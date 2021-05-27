@@ -19,10 +19,30 @@ public class JsonConverterTest {
     static String utcTime3 = "2022-01-01T23:19:23.001Z";
 
     @Test
+    public void distilleryConvert() {
+        // Distillery should drop the "batches" list when deserializing from Json
+        Distillery distillery = Distillery.builder()
+                .dspId("string").build();
+        assertEquals(distillery, jsonConverter.distilleryFromJson(jsonConverter.distilleryToJson(distillery)));
+
+        distillery = Distillery.builder()
+                .dspId("string")
+                .name("name")
+                .build();
+        assertEquals(distillery, jsonConverter.distilleryFromJson(jsonConverter.distilleryToJson(distillery)));
+
+        distillery = Distillery.builder()
+                .dspId("string")
+                .name("name")
+                .id(uuid)
+                .build();
+        assertEquals(distillery, jsonConverter.distilleryFromJson(jsonConverter.distilleryToJson(distillery)));
+    }
+
+    @Test
     public void batchConvert() {
         Batch batch = Batch.builder()
                 .status(Status.ACTIVE)
-                .distillery(Distillery.justId(uuid))
                 .batchIdentifier("batchIdentifier")
                 .batchNumber(1)
                 .completedAt(new Temporal.DateTime(utcTime))
