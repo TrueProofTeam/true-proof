@@ -252,18 +252,21 @@ public class MainActivity extends AppCompatActivity {
             });
         }
         }
+
+    /** Radio button listener for C/F on quick calculator.
+     * Note: Temperature setting on MainActivity is not saved to user settings (user is not logged in).
+     * @param view
+     */
     public void onMainRadioButtonClicked (View view){
-        boolean defaultFahrenheit = true;        // TODO refactor this to query a saved user setting based on selected preference
         boolean checked = ((RadioButton) view).isChecked();
         switch (view.getId()) {
-            case R.id.radioButtonTempCUserSettings:
+            case R.id.radioButtonTempCMain:
                 if (checked)
                     // TODO display this page in C
                     break;
-            case R.id.radioButtonTempFUserSettings:
+            case R.id.radioButtonTempFMain:
                 if (checked)
                     // TODO display this page in F
-
                     break;
         }
     }
