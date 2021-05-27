@@ -10,6 +10,7 @@
         android:roundIcon="@mipmap/logo_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.TrueProof">
+        <activity android:name=".activities.References"></activity>
         <activity android:name=".activities.UserAgreementActivity" />
         <activity android:name=".activities.SignUpActivity" />
         <activity android:name=".activities.SignUpConfirmationActivity" />
