@@ -20,7 +20,7 @@ public class TrueProofApplication extends Application {
         try {
             Amplify.addPlugin(new AWSApiPlugin());
             Amplify.addPlugin(new AWSCognitoAuthPlugin());
-            Amplify.addPlugin(new AWSDataStorePlugin());
+            //Amplify.addPlugin(new AWSDataStorePlugin());
             Amplify.configure(getApplicationContext());
             Log.i("MyAmplifyApp", "Initialized Amplify");
         } catch (AmplifyException error) {
