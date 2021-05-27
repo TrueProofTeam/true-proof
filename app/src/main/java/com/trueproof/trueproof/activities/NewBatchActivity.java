@@ -7,7 +7,6 @@ import android.text.TextWatcher;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
@@ -46,6 +45,20 @@ public class NewBatchActivity extends AppCompatActivity {
     JsonConverter jsonConverter;
     @Inject
     ActivityUtils activityUtils;
+    private final TextWatcher textWatcher = new TextWatcher() {
+        @Override
+        public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+        }
+
+        @Override
+        public void onTextChanged(CharSequence s, int start, int before, int count) {
+            batchIdentifierOnChange();
+        }
+
+        @Override
+        public void afterTextChanged(Editable s) {
+        }
+    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -85,19 +98,6 @@ public class NewBatchActivity extends AppCompatActivity {
         batchNumEditText.addTextChangedListener(textWatcher);
         batchTypeEditText.addTextChangedListener(textWatcher);
     }
-
-    private TextWatcher textWatcher = new TextWatcher() {
-        @Override
-        public void beforeTextChanged(CharSequence s, int start, int count, int after) { }
-
-        @Override
-        public void onTextChanged(CharSequence s, int start, int before, int count) {
-            batchIdentifierOnChange();
-        }
-
-        @Override
-        public void afterTextChanged(Editable s) { }
-    };
 
     private void batchIdentifierOnChange() {
         if (distilleries.get(0).getDspId() != null && ((EditText) findViewById(R.id.editTextBatchTypeNewBatch)).getText() != null
