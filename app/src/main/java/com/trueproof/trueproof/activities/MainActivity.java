@@ -72,7 +72,6 @@ public class MainActivity extends AppCompatActivity {
         Log.i(TAG, "onCreate: " + proofing.proof(80.5, 100.1, 1.1, 1.1));
 
         limitAndCalculate();
-        setupHyperlink();
 
         TextView dateTimeLocal = findViewById(R.id.textViewDateTimeLocal);
         dateTimeLocal.setText(userLocalTime());
@@ -199,20 +198,7 @@ public class MainActivity extends AppCompatActivity {
                 );
     }
 
-    // Cannibalize this + associated xml blocks for clickable links to federal regulations and reference
-    private void setupHyperlink(){
-        TextView ttbTable = findViewById(R.id.textViewTTBGaugingManual);
-        ttbTable.setMovementMethod(LinkMovementMethod.getInstance());
-        ttbTable.setLinkTextColor(Color.BLUE);
 
-        TextView interpolationManual = findViewById(R.id.textViewInterpolationGaugingManual);
-        interpolationManual.setMovementMethod(LinkMovementMethod.getInstance());
-        interpolationManual.setLinkTextColor(Color.BLUE);
-
-        TextView eCFR = findViewById(R.id.textViewGaugingECFR);
-        eCFR.setMovementMethod(LinkMovementMethod.getInstance());
-        eCFR.setLinkTextColor(Color.BLUE);
-    }
 
 
     @Override
