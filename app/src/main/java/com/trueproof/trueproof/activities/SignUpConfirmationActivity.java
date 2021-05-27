@@ -28,7 +28,7 @@ public class SignUpConfirmationActivity extends AppCompatActivity {
                 super.handleMessage(msg);
                 if(msg.what==1){
                     Toast.makeText(getBaseContext(),"Account Successfully made and confirmed!",Toast.LENGTH_LONG).show();
-                    Intent i = new Intent(SignUpConfirmationActivity.this,MainActivity.class);
+                    Intent i = new Intent(SignUpConfirmationActivity.this,LogInActivity.class);
                     startActivity(i);
                     finish();
                 }

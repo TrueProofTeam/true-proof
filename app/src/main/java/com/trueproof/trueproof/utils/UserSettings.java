@@ -172,11 +172,23 @@ public class UserSettings {
      *
      * @param user    The user settings object to save.
      * @param success The callback to be called when the settings are successfully saved.
-     * @param fail    The callback to the called when an error occurs.
+     * @param fail    The callback to be called when an error occurs.
      */
     public void saveUserSettings(User user, Consumer success, Consumer<ApiException> fail) {
         userRepository.update(user, success, fail);
     }
+
+
+    /**
+     *
+     * @param user      The user object to be made into the database
+     * @param success   The callback to be called when the settings are successfully saved.
+     * @param fail      the callback to be called when an errror occurs
+     */
+    public void addUser(User user, Consumer success, Consumer<ApiException> fail){
+        userRepository.save(user,success,fail);
+    }
+
 
     /**
      * Gets the value from a list of AuthUserAttribute given a key. These AuthUserAttributes are
