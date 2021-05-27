@@ -6,10 +6,12 @@ import android.util.Log;
 
 import androidx.annotation.Nullable;
 
+import com.amplifyframework.AmplifyException;
 import com.amplifyframework.api.ApiException;
 import com.amplifyframework.auth.AuthException;
 import com.amplifyframework.auth.AuthUser;
 import com.amplifyframework.auth.AuthUserAttribute;
+import com.amplifyframework.auth.AuthUserAttributeKey;
 import com.amplifyframework.core.Amplify;
 import com.amplifyframework.core.Consumer;
 import com.amplifyframework.datastore.generated.model.Distillery;
@@ -33,9 +35,9 @@ public class UserSettings {
     private final UserRepository userRepository;
 
     @Inject
-    UserSettings(@ApplicationContext Context context,
-                 DistilleryRepository distilleryRepository,
-                 UserRepository userRepository
+    public UserSettings(@ApplicationContext Context context,
+                        DistilleryRepository distilleryRepository,
+                        UserRepository userRepository
     ) {
         this.distilleryRepository = distilleryRepository;
         this.userRepository = userRepository;
@@ -46,6 +48,7 @@ public class UserSettings {
 
     /**
      * Gets the email for the current user.
+     *
      * @return A string containing the email for the current user. Returns
      * null if the user is not logged in. TODO: confirm this
      */
@@ -56,9 +59,10 @@ public class UserSettings {
 
     /**
      * Gets the distillery for the current user.
+     *
      * @param success The callback called when the distillery is successfully grabbed
-     * @param fail The callback for when an error occurs. The ApiException is passed
-     *             onto the user and the cause can be grabbed with getCause().
+     * @param fail    The callback for when an error occurs. The ApiException is passed
+     *                onto the user and the cause can be grabbed with getCause().
      */
     public void getDistillery(Consumer<Distillery> success, Consumer<ApiException> fail) {
         AuthUser authUser = Amplify.Auth.getCurrentUser();
@@ -91,11 +95,12 @@ public class UserSettings {
 
     /**
      * Gets the User object for the current user, which contains user settings.
+     *
      * @param success The callback called when the User is successfully grabbed
-     * @param fail The callback for when an error occurs. The ApiException is passed
-     *             onto the user and the cause can be grabbed with getCause().
+     * @param fail    The callback for when an error occurs. The ApiException is passed
+     *                onto the user and the cause can be grabbed with getCause().
      */
-    public void getUserSettings(Consumer<User> success, Consumer<ApiException> fail) {
+    public void getUserSettings(Consumer<User> success, Consumer<AmplifyException> fail) {
         AuthUser authUser = Amplify.Auth.getCurrentUser();
         if (authUser == null) fail.accept(
                 new ApiException("user is not logged in",
@@ -111,51 +116,18 @@ public class UserSettings {
                     if (userId != null) {
                         userRepository.getById(userId,
                                 user -> {
-                            if (user != null) {
-                                success.accept(user);
-                            } else {
-                                User newUser = User.builder()
-                                        .defaultTemperatureUnit(TemperatureUnit.FAHRENHEIT)
-                                        .defaultHydrometerCorrection(0.0)
-                                        .defaultTemperatureCorrection(0.0)
-                                        .email(authUser.getUsername())
-                                        .build();
-                                userRepository.save(newUser,
-                                        r -> {
-                                            success.accept(newUser);
-                                        },
-                                        r -> {
-                                            fail.accept(new ApiException(
-                                                            "Couldn't save user to the database",
-                                                            new Exception(),
-                                                            "aoeu"
-                                                    )
-                                            );
-                                        });
-                            }
-
+                                    if (user != null) {
+                                        success.accept(user);
+                                    } else {
+                                        createNewUserEntity(authUser, success, fail);
+                                    }
                                 },
-                                fail
+                                apiException -> {
+                                    fail.accept(apiException);
+                                }
                         );
                     } else {
-                        User newUser = User.builder()
-                                .defaultTemperatureUnit(TemperatureUnit.FAHRENHEIT)
-                                .defaultHydrometerCorrection(0.0)
-                                .defaultTemperatureCorrection(0.0)
-                                .email(authUser.getUsername())
-                                .build();
-                        userRepository.save(newUser,
-                                r -> {
-                                    success.accept(newUser);
-                                },
-                                r -> {
-                                    fail.accept(new ApiException(
-                                                    "Couldn't save user to the database",
-                                                    new Exception(),
-                                                    "aoeu"
-                                            )
-                                    );
-                                });
+                        createNewUserEntity(authUser, success, fail);
                     }
                 },
                 error -> {
@@ -164,11 +136,43 @@ public class UserSettings {
         );
     }
 
+    public void createNewUserEntity(AuthUser authUser, Consumer<User> success, Consumer<AmplifyException> fail) {
+        User newUser = User.builder()
+                .defaultTemperatureUnit(TemperatureUnit.FAHRENHEIT)
+                .defaultHydrometerCorrection(0.0)
+                .defaultTemperatureCorrection(0.0)
+                .email(authUser.getUsername())
+                .build();
+        userRepository.save(newUser,
+                r -> {
+                    Log.i(TAG, "createNewUserEntity: User entity saved to database");
+                    Amplify.Auth.updateUserAttribute(
+                            new AuthUserAttribute(AuthUserAttributeKey.custom("custom:userId"), newUser.getId()),
+                            r2 -> {
+                                Log.i(TAG, "createNewUserEntity: Added userId to the authUser attributes");
+                                success.accept(newUser);
+                            },
+                            authException -> {
+                                fail.accept(authException);
+                            }
+                    );
+                },
+                e -> {
+                    fail.accept(new ApiException(
+                                    "Couldn't save user to the database",
+                                    e,
+                                    "Make sure user is logged in and amplify is set up correctly"
+                            )
+                    );
+                });
+    }
+
     /**
      * Updates the User in the database, which contains user settings.
-     * @param user The user settings object to save.
+     *
+     * @param user    The user settings object to save.
      * @param success The callback to be called when the settings are successfully saved.
-     * @param fail The callback to the called when an error occurs.
+     * @param fail    The callback to the called when an error occurs.
      */
     public void saveUserSettings(User user, Consumer success, Consumer<ApiException> fail) {
         userRepository.update(user, success, fail);
@@ -178,8 +182,9 @@ public class UserSettings {
      * Gets the value from a list of AuthUserAttribute given a key. These AuthUserAttributes are
      * key-value pairs and contain all of the AuthUser's custom attributes as well as the built
      * in Cognito attributes.
+     *
      * @param attributes The list of AuthUserAttributes given by Amplify.Auth.fetchUserAttributes
-     * @param keyString The key of the AuthUserAttribute
+     * @param keyString  The key of the AuthUserAttribute
      * @return
      */
     private String getValueFromAuthUserAttributesByKey(List<AuthUserAttribute> attributes, String keyString) {
