@@ -25,6 +25,7 @@
         android:layout_marginStart="52dp"
         android:layout_marginTop="24dp"
         android:text="Whiskey"
+        android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 

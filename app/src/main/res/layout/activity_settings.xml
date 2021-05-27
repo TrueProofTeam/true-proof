@@ -11,50 +11,54 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        android:layout_marginEnd="16dp"
         android:ems="10"
         android:inputType="textPersonName"
         android:text="0"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editTextDefaultHydroCorrectionUserSettings6" />
 
     <TextView
         android:id="@+id/textViewThermCorrUserSettings6"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
         android:text="Default Thermometer Correction"
-        app:layout_constraintBottom_toBottomOf="@+id/editTextDefaultTempCorrectionUserSettings6"
-        app:layout_constraintEnd_toStartOf="@+id/editTextDefaultTempCorrectionUserSettings6"
-        app:layout_constraintTop_toTopOf="@+id/editTextDefaultTempCorrectionUserSettings6" />
+        app:layout_constraintBottom_toTopOf="@+id/editTextDefaultTempCorrectionUserSettings6"
+        app:layout_constraintEnd_toEndOf="@+id/editTextDefaultTempCorrectionUserSettings6"
+        app:layout_constraintStart_toStartOf="@+id/editTextDefaultTempCorrectionUserSettings6"
+        app:layout_constraintTop_toBottomOf="@+id/editTextDefaultHydroCorrectionUserSettings6" />
 
     <EditText
         android:id="@+id/editTextDefaultHydroCorrectionUserSettings6"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        android:layout_marginEnd="16dp"
         android:ems="10"
         android:inputType="textPersonName"
         android:text="0"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/radioGroup2" />
 
     <TextView
         android:id="@+id/textViewHydroCorrUserSettings6"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
         android:text="Default Hydrometer Correction"
-        app:layout_constraintBottom_toBottomOf="@+id/editTextDefaultHydroCorrectionUserSettings6"
-        app:layout_constraintEnd_toStartOf="@+id/editTextDefaultHydroCorrectionUserSettings6"
-        app:layout_constraintTop_toTopOf="@+id/editTextDefaultHydroCorrectionUserSettings6" />
+        app:layout_constraintBottom_toTopOf="@+id/editTextDefaultHydroCorrectionUserSettings6"
+        app:layout_constraintEnd_toEndOf="@+id/editTextDefaultHydroCorrectionUserSettings6"
+        app:layout_constraintStart_toStartOf="@+id/editTextDefaultHydroCorrectionUserSettings6"
+        app:layout_constraintTop_toBottomOf="@+id/radioGroup2" />
 
     <TextView
         android:id="@+id/textViewTempUnitsUserSettings7"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="48dp"
+        android:layout_marginTop="24dp"
         android:layout_marginEnd="16dp"
         android:text="Default Temperature Units"
         app:layout_constraintEnd_toStartOf="@+id/radioGroup2"
@@ -62,8 +66,8 @@
 
     <RadioGroup
         android:id="@+id/radioGroup2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="109dp"
+        android:layout_height="84dp"
         android:layout_marginEnd="16dp"
         android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="@+id/textViewTempUnitsUserSettings7"
@@ -72,8 +76,8 @@
 
         <RadioButton
             android:id="@+id/radioButtonTempCUserSettings"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="88dp"
+            android:layout_height="37dp"
             android:onClick="onRadioButtonUserSettings"
             android:text="Celcius"
             tools:layout_editor_absoluteX="255dp"
@@ -97,6 +101,8 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
         android:text="@string/userSettingText"
+        android:textSize="20sp"
+        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
@@ -117,9 +123,10 @@
         android:id="@+id/textViewDistillerySettingsTitleDistillerySettings"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="8dp"
         android:text="Distillery Settings"
-        android:textSize="16sp"
+        android:textSize="20sp"
+        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
@@ -149,7 +156,7 @@
         android:id="@+id/editTextDSPDistillerySettings"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="8dp"
         android:layout_marginEnd="16dp"
         android:ems="10"
         android:inputType="textPersonName"
@@ -161,7 +168,7 @@
         android:id="@+id/editTextDistilleryNameDistillerySettings"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="8dp"
         android:layout_marginEnd="16dp"
         android:ems="10"
         android:inputType="textPersonName"
