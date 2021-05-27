@@ -110,7 +110,9 @@ public class SettingsActivity extends AppCompatActivity {
                     handler.sendEmptyMessage(2);
                     Log.i(TAG, "request user settings -->"+user);
                 },
-                r->{}
+                r->{
+                    Log.e(TAG, "userRequest: ERROR", r);
+                }
         );
     }
 
