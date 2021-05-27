@@ -107,7 +107,7 @@ public class NewBatchActivity extends AppCompatActivity {
     private void batchIdentifierOnChange (){
         if (distilleries.get(0).getDspId() != null && ((EditText) findViewById(R.id.editTextBatchTypeNewBatch)).getText() != null
         && ((EditText) findViewById(R.id.editTextBatchNumNewBatch)).getText() != null){
-            String batchIdentifier = distilleries.get(0).getDspId() + ((EditText) findViewById(R.id.editTextBatchTypeNewBatch)).getText().toString() +
+            String batchIdentifier = distilleries.get(0).getDspId() + "-"+ ((EditText) findViewById(R.id.editTextBatchTypeNewBatch)).getText().toString() + "-"+
                     ((EditText) findViewById(R.id.editTextBatchNumNewBatch)).getText().toString();
             ((EditText) findViewById(R.id.editTextBatchIdNewBatch)).setText(batchIdentifier);
         }
