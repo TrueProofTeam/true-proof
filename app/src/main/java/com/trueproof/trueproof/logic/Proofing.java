@@ -31,7 +31,7 @@ public class Proofing {
         }
     }
 
-    // temperature Arg wants value in C, convert F to C if
+    // Takes in Fahrenheit, C converted to F before being passed as in
     public double proof(double temperature, double proof, double proofCorrection, double tempCorrection) {
 
         System.out.println("temperature = " + temperature);
@@ -93,7 +93,7 @@ public class Proofing {
         double correctedTemp = temperature + tempCorrection;
 
         // C->F conversion,
-        double celsiusToFahrenheitConversion = ((correctedTemp * 1.8) + 32);
+//        double celsiusToFahrenheitConversion = ((correctedTemp * 1.8) + 32);
 
         // find proof at standardized temp (68F) when measured proof rounded high/low
         double highProof = Double.parseDouble(table.get(68 - 1).get((int) Math.ceil(correctedProof)));
@@ -110,7 +110,7 @@ public class Proofing {
 
         // isolate fractional portion of measured temp/proof
         double proofFractional = correctedProof - Math.floor(proof);
-        double tempFractional = celsiusToFahrenheitConversion - Math.floor(celsiusToFahrenheitConversion);
+        double tempFractional = correctedTemp - Math.floor(temperature);
 
         //interpolate proof and temp
         double proofInterpolation = proofFractional * proofDifference;

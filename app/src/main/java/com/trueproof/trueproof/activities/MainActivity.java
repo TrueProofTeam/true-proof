@@ -2,6 +2,7 @@ package com.trueproof.trueproof.activities;
 
 import android.content.Intent;
 import android.graphics.Color;
+import android.icu.number.Precision;
 import android.os.Build;
 import android.os.Bundle;
 import android.text.Editable;
@@ -16,6 +17,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.TextView;
 
 import androidx.annotation.RequiresApi;
@@ -24,6 +26,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.amplifyframework.auth.AuthUser;
 import com.amplifyframework.core.Amplify;
+import com.amplifyframework.datastore.generated.model.TemperatureUnit;
 import com.trueproof.trueproof.R;
 import com.trueproof.trueproof.logic.InputFilterMinMax;
 import com.trueproof.trueproof.logic.Proofing;
@@ -31,6 +34,9 @@ import com.trueproof.trueproof.utils.TestDependencyInjection;
 
 import com.trueproof.trueproof.utils.UserSettings;
 
+import java.math.BigDecimal;
+import java.math.MathContext;
+import java.math.RoundingMode;
 import java.sql.Time;
 import java.time.Instant;
 import java.time.ZoneId;
@@ -51,11 +57,16 @@ public class MainActivity extends AppCompatActivity {
 
     static final String TAG = "TrueProof.MainActivity";
 
+    EditText tempField;
+    InputFilterMinMax tempLimits;
+
     @Inject
     TestDependencyInjection testDependencyInjection;
 
     @Inject
     Proofing proofing;
+
+    TemperatureUnit temperatureUnit;
 
     double inTempDouble = 0.0;
     double inputTempCorrDouble = 0.0;
@@ -71,6 +82,8 @@ public class MainActivity extends AppCompatActivity {
         Log.i(TAG, "onCreate: " + testDependencyInjection.hello());
         Log.i(TAG, "onCreate: " + proofing.proof(80.5, 100.1, 1.1, 1.1));
 
+        temperatureUnit = TemperatureUnit.FAHRENHEIT;
+
         limitAndCalculate();
 
         TextView dateTimeLocal = findViewById(R.id.textViewDateTimeLocal);
@@ -80,19 +93,29 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    public void calculateOnChange(){
+    public void calculateOnChange() {
         String inputTemperature = ((EditText) findViewById(R.id.editTextTemperatureMain)).getText().toString();
-        if (inputTemperature != null && inputTemperature.length() > 0 && !inputTemperature.contains(".")){
+        if (inputTemperature != null && inputTemperature.length() > 0 && !inputTemperature.contains(".")) {
             String doubleAppend = inputTemperature + ".0";
             inTempDouble = Double.parseDouble(doubleAppend);
         }
-        if (inputTemperature != null && inputTemperature.length() > 0 && inputTemperature.contains(".")){
+        if (inputTemperature != null && inputTemperature.length() > 0 && inputTemperature.contains(".")) {
             inTempDouble = Double.parseDouble(inputTemperature);
+        }
+        RadioButton radioButtonC = (RadioButton) findViewById(R.id.radioButtonTempCMain);
+        if (radioButtonC.isChecked()) {
+            System.out.println("calculate on change, C->F conversion");
+            double getTemp = Double.parseDouble(tempField.getText().toString()) + inputTempCorrDouble;
+            double convertTemp = ((getTemp * 1.8) + 32);
+            BigDecimal roundTemp = new BigDecimal(convertTemp);
+            MathContext decimalPlaces = new MathContext(4);
+            BigDecimal rounded = roundTemp.round(decimalPlaces);
+            inTempDouble = Double.parseDouble(String.valueOf(rounded));
         }
         System.out.println("inTempDouble = " + inTempDouble);
         ////////////////////////
         String inputTemperatureCorrection = ((EditText) findViewById(R.id.editTextTemperatureCorrectionMain)).getText().toString();
-        if (inputTemperatureCorrection != null && inputTemperatureCorrection.length() > 0 && !inputTemperatureCorrection.contains(".")){
+        if (inputTemperatureCorrection != null && inputTemperatureCorrection.length() > 0 && !inputTemperatureCorrection.contains(".")) {
             String doubleAppend = inputTemperatureCorrection + ".0";
             inputTempCorrDouble = Double.parseDouble(doubleAppend);
         }
@@ -102,7 +125,7 @@ public class MainActivity extends AppCompatActivity {
         System.out.println("inputTempCorrDouble = " + inputTempCorrDouble);
         /////////////////////////
         String inputProof = ((EditText) findViewById(R.id.editTextHydrometerMain)).getText().toString();
-        if (inputProof != null && inputProof.length() > 0 && !inputProof.contains(".")){
+        if (inputProof != null && inputProof.length() > 0 && !inputProof.contains(".")) {
             String doubleAppend = inputProof + ".0";
             inputProofDouble = Double.parseDouble(doubleAppend);
         }
@@ -112,7 +135,7 @@ public class MainActivity extends AppCompatActivity {
         System.out.println("inputProofDouble = " + inputProofDouble);
         /////////////////////////
         String inputProofCorrection = ((EditText) findViewById(R.id.editTextHydrometerCorrectionMain)).getText().toString();
-        if (inputProofCorrection != null && inputProofCorrection.length() > 0 && !inputProofCorrection.contains(".")){
+        if (inputProofCorrection != null && inputProofCorrection.length() > 0 && !inputProofCorrection.contains(".")) {
             String doubleAppend = inputProofCorrection + ".0";
             inputProofCorrDouble = Double.parseDouble(doubleAppend);
         }
@@ -124,88 +147,108 @@ public class MainActivity extends AppCompatActivity {
         TextView calculatedProof = findViewById(R.id.textViewCalculatedProofMain);
 
         double proofFromProofing = proofing.proof(inTempDouble, inputProofDouble, inputProofCorrDouble, inputTempCorrDouble);
-        if (proofFromProofing < 0){
+        if (proofFromProofing < 0) {
             calculatedProof.setText("Does not exist. Check measurements and try again.");
-        }else calculatedProof.setText(String.valueOf(proofFromProofing));
+        } else calculatedProof.setText(String.valueOf(proofFromProofing));
 
 
 //        calculatedProof.setText(String.valueOf(proofing.proof(inTempDouble, inputProofDouble, inputProofCorrDouble, inputTempCorrDouble)));
     }
 
-    public void limitAndCalculate(){
+    public void limitAndCalculate() {
         EditText tempField = findViewById(R.id.editTextTemperatureMain);
         InputFilterMinMax tempLimits = new InputFilterMinMax(1.0, 100.0);
-        tempField.setFilters(new  InputFilter[]{ tempLimits });
+        tempField.setFilters(new InputFilter[]{tempLimits});
 
         EditText tempCorrectionField = findViewById(R.id.editTextTemperatureCorrectionMain);
         InputFilterMinMax tempCorrLimits = new InputFilterMinMax(-1.0, 1.0);
-        tempCorrectionField.setFilters(new  InputFilter[]{ tempCorrLimits });
+        tempCorrectionField.setFilters(new InputFilter[]{tempCorrLimits});
 
         EditText proofField = findViewById(R.id.editTextHydrometerMain);
         InputFilterMinMax proofLimits = new InputFilterMinMax(1.0, 206.0);
-        proofField.setFilters(new  InputFilter[]{ proofLimits });
+        proofField.setFilters(new InputFilter[]{proofLimits});
 
         EditText proofCorrectionField = findViewById(R.id.editTextHydrometerCorrectionMain);
         InputFilterMinMax proofCorrLimits = new InputFilterMinMax(-1.0, 1.0);
-        proofCorrectionField.setFilters(new  InputFilter[]{ proofCorrLimits });
+        proofCorrectionField.setFilters(new InputFilter[]{proofCorrLimits});
 
         tempField.addTextChangedListener(new TextWatcher() {
             @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+            }
+
             @Override
-            public void afterTextChanged(Editable s) {}
+            public void afterTextChanged(Editable s) {
+            }
+
             @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {calculateOnChange();}
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                calculateOnChange();
+            }
         });
 
         tempCorrectionField.addTextChangedListener(new TextWatcher() {
             @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+            }
+
             @Override
-            public void afterTextChanged(Editable s) {}
+            public void afterTextChanged(Editable s) {
+            }
+
             @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {calculateOnChange();}
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                calculateOnChange();
+            }
         });
 
         proofField.addTextChangedListener(new TextWatcher() {
             @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+            }
+
             @Override
-            public void afterTextChanged(Editable s) {}
+            public void afterTextChanged(Editable s) {
+            }
+
             @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {calculateOnChange();}
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                calculateOnChange();
+            }
         });
 
         proofCorrectionField.addTextChangedListener(new TextWatcher() {
             @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+            }
+
             @Override
-            public void afterTextChanged(Editable s) {}
+            public void afterTextChanged(Editable s) {
+            }
+
             @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {calculateOnChange();
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                calculateOnChange();
             }
         });
     }
 
     @RequiresApi(api = Build.VERSION_CODES.O)
-    public String userLocalTime(){
+    public String userLocalTime() {
 
         TimeZone timeZone = TimeZone.getDefault();
         return ZonedDateTime.now(ZoneId.of(timeZone.getID()))
                 .format(
-                        DateTimeFormatter.ofLocalizedDateTime( FormatStyle.MEDIUM)
-                        .withLocale(Locale.US)
+                        DateTimeFormatter.ofLocalizedDateTime(FormatStyle.MEDIUM)
+                                .withLocale(Locale.US)
                 );
     }
-
-
 
 
     @Override
     public boolean onCreateOptionsMenu (Menu menu){
         AuthUser principal = Amplify.Auth.getCurrentUser();
         if (principal != null){
-
 
         getMenuInflater().inflate(R.menu.menu, menu);
         return true;
@@ -214,6 +257,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     @Override
+
     public boolean onOptionsItemSelected(MenuItem menuItem){
         if (menuItem.getItemId() == R.id.nav_settings)MainActivity.this.startActivity(new Intent(MainActivity.this, SettingsActivity.class));
         if (menuItem.getItemId() == R.id.nav_batch_list)MainActivity.this.startActivity(new Intent(MainActivity.this, BatchListActivity.class));
@@ -228,10 +272,11 @@ public class MainActivity extends AppCompatActivity {
             finish();
         }
         return true;
-        }
+    }
 
     private void initializeLoginButton() {
         AuthUser principal = Amplify.Auth.getCurrentUser();
+
         Button loginButton = findViewById(R.id.buttonLoginMain);
         if(principal == null){
 
@@ -253,26 +298,71 @@ public class MainActivity extends AppCompatActivity {
                 }
             });
         }
-        }
+    }
 
-    /** Radio button listener for C/F on quick calculator.
+    /**
+     * Radio button listener for C/F on quick calculator.
      * Note: Temperature setting on MainActivity is not saved to user settings (user is not logged in).
+     *
      * @param view
      */
-    public void onMainRadioButtonClicked (View view){
+    public void onMainRadioButtonClicked(View view) {
+//        RadioButton radioButtonF = findViewById(R.id.radioButtonTempFMain);
+//        radioButtonF.setChecked(true);
+        RadioButton fButton = findViewById(R.id.radioButtonTempFMain);
+        RadioButton cButton = findViewById(R.id.radioButtonTempCMain);
+
         boolean checked = ((RadioButton) view).isChecked();
         switch (view.getId()) {
             case R.id.radioButtonTempCMain:
                 if (checked)
                     // TODO display this page in C
-                    break;
+                    tempField = findViewById(R.id.editTextTemperatureMain);
+//                tempField.getText().toString();
+                if (temperatureUnit.equals(TemperatureUnit.FAHRENHEIT) && tempField != null && tempField.length() > 0) {
+                    temperatureUnit = TemperatureUnit.CELSIUS;
+                    double getTemp = Double.parseDouble(tempField.getText().toString());
+                    double convertTemp = ((getTemp - 32) * .5556);
+                    BigDecimal roundTemp = new BigDecimal(convertTemp);
+                    MathContext decimalPlaces = new MathContext(4);
+                    BigDecimal rounded = roundTemp.round(decimalPlaces);
+                    System.out.println("rounded = " + rounded);
+                    tempField.setText(String.valueOf(rounded));
+                    inTempDouble = Double.parseDouble(String.valueOf(rounded));
+                }
+                    tempLimits = new InputFilterMinMax(-17.22, 37.78);
+                    tempField.setFilters(new InputFilter[]{tempLimits});
+                break;
             case R.id.radioButtonTempFMain:
                 if (checked)
                     // TODO display this page in F
-                    break;
+                    tempField = findViewById(R.id.editTextTemperatureMain);
+                if (temperatureUnit.equals(TemperatureUnit.CELSIUS) && tempField != null  && tempField.length() > 0) {
+                    temperatureUnit = TemperatureUnit.FAHRENHEIT;
+                    double getTemp = Double.parseDouble(tempField.getText().toString());
+                    double convertTemp = ((getTemp * 1.8) + 32);
+                    BigDecimal roundTemp = new BigDecimal(convertTemp);
+                    MathContext decimalPlaces = new MathContext(4);
+                    BigDecimal rounded = roundTemp.round(decimalPlaces);
+                    System.out.println("rounded = " + rounded);
+                    tempField.setText(String.valueOf(rounded));
+                    inTempDouble = Double.parseDouble(String.valueOf(rounded));
+                }
+                tempLimits = new InputFilterMinMax(1.0, 100.0);
+                tempField.setFilters(new InputFilter[]{tempLimits});
+                break;
         }
+//        if (inputProofCorrection != null && inputProofCorrection.length() > 0 && !inputProofCorrection.contains(".")) {
+
     }
 
+//    private static double round(double value, int places) {
+//        if (places < 0) throw new IllegalArgumentException();
+//
+//        BigDecimal bd = new BigDecimal(Double.toString(value));
+//        bd = bd.setScale(places, RoundingMode.HALF_UP);
+//        return bd.doubleValue();
+//    }
 
 
 }

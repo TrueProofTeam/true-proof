@@ -42,7 +42,6 @@
         android:layout_marginTop="8dp"
         android:layout_marginEnd="16dp"
         android:inputType="numberDecimal"
-        android:text="0.0"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/radioGroupMain" />
 
@@ -106,7 +105,6 @@
         android:layout_marginTop="16dp"
         android:layout_marginEnd="16dp"
         android:inputType="numberDecimal"
-        android:text="0.0"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editTextTemperatureCorrectionMain" />
 
@@ -128,7 +126,6 @@
         android:layout_marginTop="12dp"
         android:layout_marginEnd="16dp"
         android:inputType="numberDecimal|numberSigned"
-        android:text="0.0"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editTextTemperatureMain" />
 
@@ -184,7 +181,6 @@
         android:layout_marginTop="8dp"
         android:layout_marginEnd="16dp"
         android:inputType="numberDecimal|numberSigned"
-        android:text="0.0"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editTextHydrometerMain" />
 
