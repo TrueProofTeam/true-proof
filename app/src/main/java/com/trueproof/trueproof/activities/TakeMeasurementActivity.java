@@ -11,11 +11,8 @@ import android.os.Bundle;
 import android.text.Editable;
 import android.text.InputFilter;
 import android.text.TextWatcher;
-<<<<<<< Updated upstream
 import android.view.Menu;
 import android.view.MenuItem;
-=======
->>>>>>> Stashed changes
 import android.util.Log;
 import android.widget.Button;
 import android.widget.EditText;
@@ -267,12 +264,13 @@ public class TakeMeasurementActivity extends AppCompatActivity implements Measur
                     .hydrometerCorrection(Double.parseDouble(hydroCorrectionToSave))
                     .build();
 
+            System.out.println("measurement = " + measurement);
+
             Amplify.API.mutate(
                     ModelMutation.create(measurement),
                     response -> Log.i("Mutate", "success"),
                     error -> Log.e("Mutate", "error+ " + error)
             );
-
         });
     }
 
