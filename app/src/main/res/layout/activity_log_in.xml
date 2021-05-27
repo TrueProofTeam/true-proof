@@ -14,7 +14,6 @@
         android:textSize="30sp"
         app:layout_constraintBottom_toTopOf="@+id/editTextUsernameLogin"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.501"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -53,16 +52,15 @@
 
     <Button
         android:id="@+id/buttonSignupLogin"
+        style="@style/Widget.AppCompat.Button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:text="Signup"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@+id/textViewFooterLogin"
-        app:layout_constraintHorizontal_bias="0.493"
         app:layout_constraintStart_toStartOf="@+id/textViewFooterLogin"
-        app:layout_constraintTop_toBottomOf="@+id/textViewFooterLogin"
-        app:layout_constraintVertical_bias="0.145" />
+        app:layout_constraintTop_toBottomOf="@+id/textViewFooterLogin" />
 
     <EditText
         android:id="@+id/editTextPasswordLogin"
@@ -95,6 +93,7 @@
         android:layout_height="wrap_content"
         android:text="@string/loginText"
         app:layout_constraintBottom_toTopOf="@+id/editTextUsernameLogin"
+        app:layout_constraintEnd_toEndOf="@+id/editTextUsernameLogin"
         app:layout_constraintStart_toStartOf="@+id/editTextUsernameLogin" />
 
     <TextView
@@ -103,6 +102,7 @@
         android:layout_height="wrap_content"
         android:text="@string/passwordText"
         app:layout_constraintBottom_toTopOf="@+id/editTextPasswordLogin"
+        app:layout_constraintEnd_toEndOf="@+id/editTextPasswordLogin"
         app:layout_constraintStart_toStartOf="@+id/editTextPasswordLogin" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -18,14 +18,14 @@
             android:layout_marginTop="8dp" />
 
     <ImageButton
-        android:id="@+id/imageButtonAddMeasurementBatchDetail"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="16dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/buttonUpdateBatch"
-        app:srcCompat="@android:drawable/ic_menu_add" />
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:srcCompat="@android:drawable/ic_menu_add"
+            android:id="@+id/imageButtonAddMeasurementBatchDetail"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_marginEnd="16dp"
+            android:layout_marginBottom="16dp" />
 
     <TextView
             android:text="Add Measurement"
@@ -135,24 +135,22 @@
         android:id="@+id/textViewMeasurementsBatchDetail"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
+        android:layout_marginStart="16dp"
         android:text="Measurements"
         android:textSize="20sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageButtonAddMeasurementBatchDetail" />
+        app:layout_constraintTop_toBottomOf="@+id/textViewTitleBatchDetail" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerViewMeasurementsBatchDetail"
-        android:layout_width="413dp"
-        android:layout_height="308dp"
-        android:layout_marginTop="12dp"
+        android:layout_width="374dp"
+        android:layout_height="310dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="16dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/textViewIdentifierBatchDetail"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textViewMeasurementsBatchDetail"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintTop_toBottomOf="@+id/textViewMeasurementsBatchDetail" />
 
     <Button
         android:id="@+id/buttonUpdateBatch"

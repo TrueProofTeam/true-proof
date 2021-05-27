@@ -10,45 +10,45 @@
         android:id="@+id/editTextDefaultTempCorrectionUserSettings6"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="8dp"
         android:layout_marginEnd="16dp"
         android:ems="10"
         android:inputType="textPersonName"
         android:text="0"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextDefaultHydroCorrectionUserSettings6" />
+        app:layout_constraintTop_toBottomOf="@+id/textViewThermCorrUserSettings6" />
 
     <TextView
         android:id="@+id/textViewThermCorrUserSettings6"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="24dp"
         android:text="Default Thermometer Correction"
-        app:layout_constraintBottom_toBottomOf="@+id/editTextDefaultTempCorrectionUserSettings6"
-        app:layout_constraintEnd_toStartOf="@+id/editTextDefaultTempCorrectionUserSettings6"
-        app:layout_constraintTop_toTopOf="@+id/editTextDefaultTempCorrectionUserSettings6" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editTextDefaultHydroCorrectionUserSettings6" />
 
     <EditText
         android:id="@+id/editTextDefaultHydroCorrectionUserSettings6"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="8dp"
         android:layout_marginEnd="16dp"
         android:ems="10"
         android:inputType="textPersonName"
         android:text="0"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/radioGroup2" />
+        app:layout_constraintTop_toBottomOf="@+id/textViewHydroCorrUserSettings6" />
 
     <TextView
         android:id="@+id/textViewHydroCorrUserSettings6"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="24dp"
         android:text="Default Hydrometer Correction"
-        app:layout_constraintBottom_toBottomOf="@+id/editTextDefaultHydroCorrectionUserSettings6"
-        app:layout_constraintEnd_toStartOf="@+id/editTextDefaultHydroCorrectionUserSettings6"
-        app:layout_constraintTop_toTopOf="@+id/editTextDefaultHydroCorrectionUserSettings6" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/radioGroup2" />
 
     <TextView
         android:id="@+id/textViewTempUnitsUserSettings7"
@@ -95,21 +95,21 @@
         android:id="@+id/textViewDSPTitleUserSettings6"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="24dp"
         android:text="@string/userSettingText"
+        android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextDistilleryNameDistillerySettings" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/textViewDSPTitleDistillerySettings"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
         android:text="Whiskey Co"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
+        android:textSize="24sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -117,11 +117,10 @@
         android:id="@+id/textViewDistillerySettingsTitleDistillerySettings"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
         android:text="Distillery Settings"
-        android:textSize="16sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
+        android:textSize="20sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textViewDSPTitleDistillerySettings" />
 
@@ -129,44 +128,42 @@
         android:id="@+id/textViewDSPNumDistillerySettings"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="16dp"
         android:text="DSP#"
         app:layout_constraintBottom_toBottomOf="@+id/editTextDSPDistillerySettings"
-        app:layout_constraintEnd_toStartOf="@+id/editTextDSPDistillerySettings"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/editTextDSPDistillerySettings" />
 
     <TextView
         android:id="@+id/textViewDistilleryNameDistillerySettings"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="16dp"
         android:text="Distillery Name"
         app:layout_constraintBottom_toBottomOf="@+id/editTextDistilleryNameDistillerySettings"
-        app:layout_constraintEnd_toStartOf="@+id/editTextDistilleryNameDistillerySettings"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/editTextDistilleryNameDistillerySettings" />
 
     <EditText
         android:id="@+id/editTextDSPDistillerySettings"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
-        android:layout_marginEnd="16dp"
         android:ems="10"
         android:inputType="textPersonName"
         android:text="010101"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/textViewDSPNumDistillerySettings"
         app:layout_constraintTop_toBottomOf="@+id/textViewDistillerySettingsTitleDistillerySettings" />
 
     <EditText
         android:id="@+id/editTextDistilleryNameDistillerySettings"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
-        android:layout_marginEnd="16dp"
         android:ems="10"
         android:inputType="textPersonName"
         android:text="Whiskey and Gin Inc"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/textViewDistilleryNameDistillerySettings"
         app:layout_constraintTop_toBottomOf="@+id/editTextDSPDistillerySettings" />
 
     <Button
