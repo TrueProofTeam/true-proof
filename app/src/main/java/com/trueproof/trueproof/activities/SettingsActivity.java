@@ -245,6 +245,7 @@ public class SettingsActivity extends AppCompatActivity {
             Amplify.Auth.signOut(
                     ()->{
                         Log.i(TAG,"Success Logout!");
+                        userSettings.invalidateCache();
                     },
                     r->{});
             SettingsActivity.this.startActivity(new Intent( SettingsActivity.this,MainActivity.class));
