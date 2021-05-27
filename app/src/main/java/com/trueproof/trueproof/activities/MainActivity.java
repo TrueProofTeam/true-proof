@@ -15,6 +15,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.RadioButton;
 import android.widget.TextView;
 
 import androidx.annotation.RequiresApi;
@@ -251,6 +252,21 @@ public class MainActivity extends AppCompatActivity {
             });
         }
         }
+    public void onMainRadioButtonClicked (View view){
+        boolean defaultFahrenheit = true;        // TODO refactor this to query a saved user setting based on selected preference
+        boolean checked = ((RadioButton) view).isChecked();
+        switch (view.getId()) {
+            case R.id.radioButtonTempCUserSettings:
+                if (checked)
+                    // TODO display this page in C
+                    break;
+            case R.id.radioButtonTempFUserSettings:
+                if (checked)
+                    // TODO display this page in F
+
+                    break;
+        }
+    }
 
 
 }
