@@ -56,7 +56,7 @@
         android:textAppearance="@style/TextAppearance.AppCompat.Large"
         android:textSize="30sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/buttonLoginMain" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
             android:text="Temperature units in °F"
@@ -72,14 +72,11 @@
         android:id="@+id/textViewTermsOfUseMain"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
-        android:layout_marginBottom="8dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginBottom="16dp"
         android:text="Terms of Use"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textViewGaugingECFR" />
+        app:layout_constraintStart_toStartOf="parent" />
 
     <EditText
         android:id="@+id/editTextHydrometerMain"
@@ -96,13 +93,12 @@
         android:id="@+id/textViewProofMain"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="16dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="48dp"
         android:text="Proof at 60°F"
         android:textSize="20sp"
-        app:layout_constraintBottom_toBottomOf="@+id/textViewCalculatedProofMain"
-        app:layout_constraintEnd_toStartOf="@+id/textViewCalculatedProofMain"
-        app:layout_constraintTop_toTopOf="@+id/textViewCalculatedProofMain"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textViewGaugingECFR" />
 
     <EditText
         android:id="@+id/editTextTemperatureCorrectionMain"
@@ -119,12 +115,12 @@
         android:id="@+id/textViewCalculatedProofMain"
         android:layout_width="129dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="40dp"
-        android:layout_marginEnd="16dp"
+        android:layout_marginStart="16dp"
         android:text="76.4"
         android:textSize="20sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextHydrometerCorrectionMain" />
+        app:layout_constraintBottom_toBottomOf="@+id/textViewProofMain"
+        app:layout_constraintStart_toEndOf="@+id/textViewProofMain"
+        app:layout_constraintTop_toTopOf="@+id/textViewProofMain" />
 
     <TextView
         android:id="@+id/textViewTempCorrectionMain"
@@ -174,24 +170,19 @@
         android:id="@+id/textViewTTBGaugingManual"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
         android:layout_marginTop="32dp"
-        android:layout_marginBottom="10dp"
         android:text="@string/TtbTable"
-        app:layout_constraintBottom_toTopOf="@+id/textViewInterpolationGaugingManual"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textViewProofMain"
-        app:layout_constraintVertical_bias="1.0" />
+        app:layout_constraintTop_toBottomOf="@+id/buttonLoginMain" />
 
     <TextView
         android:id="@+id/textViewInterpolationGaugingManual"
         android:layout_width="wrap_content"
         android:layout_height="19dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginBottom="10dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="28dp"
         android:text="@string/interpolationTable"
-        app:layout_constraintBottom_toTopOf="@+id/textViewGaugingECFR"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textViewTTBGaugingManual" />
 
@@ -199,17 +190,11 @@
         android:id="@+id/textViewGaugingECFR"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="117dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginEnd="114dp"
-        android:layout_marginBottom="8dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="32dp"
         android:text="@string/ecfr"
-        app:layout_constraintBottom_toTopOf="@+id/textViewTermsOfUseMain"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textViewInterpolationGaugingManual"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintTop_toBottomOf="@+id/textViewInterpolationGaugingManual" />
 
     <TextView
         android:id="@+id/textViewDateTimeLocal"

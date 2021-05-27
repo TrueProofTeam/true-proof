@@ -28,9 +28,10 @@
         android:id="@+id/radioGroup2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
         android:orientation="vertical"
-        tools:layout_editor_absoluteX="281dp"
-        tools:layout_editor_absoluteY="51dp">
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textViewDSPTitleUserSettings">
 
         <RadioButton
             android:id="@+id/radioButtonTempCUserSettings"
@@ -57,36 +58,45 @@
         android:id="@+id/textViewHydroCorrUserSettings"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
         android:text="Default Hydrometer Correction"
-        tools:layout_editor_absoluteX="-6dp"
-        tools:layout_editor_absoluteY="222dp" />
+        app:layout_constraintBottom_toBottomOf="@+id/editTextDefaultHydroCorrectionUserSettings"
+        app:layout_constraintEnd_toStartOf="@+id/editTextDefaultHydroCorrectionUserSettings"
+        app:layout_constraintTop_toTopOf="@+id/editTextDefaultHydroCorrectionUserSettings" />
 
     <TextView
         android:id="@+id/textViewThermCorrUserSettings"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
         android:text="Default Thermometer Correction"
-        tools:layout_editor_absoluteY="326dp" />
+        app:layout_constraintBottom_toBottomOf="@+id/editTextDefaultTempCorrectionUserSettings"
+        app:layout_constraintEnd_toStartOf="@+id/editTextDefaultTempCorrectionUserSettings"
+        app:layout_constraintTop_toTopOf="@+id/editTextDefaultTempCorrectionUserSettings" />
 
     <EditText
         android:id="@+id/editTextDefaultHydroCorrectionUserSettings"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
         android:ems="10"
         android:inputType="textPersonName"
         android:text="0"
-        tools:layout_editor_absoluteX="186dp"
-        tools:layout_editor_absoluteY="208dp" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/radioGroup2" />
 
     <EditText
         android:id="@+id/editTextDefaultTempCorrectionUserSettings"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="16dp"
         android:ems="10"
         android:inputType="textPersonName"
         android:text="0"
-        tools:layout_editor_absoluteX="186dp"
-        tools:layout_editor_absoluteY="301dp" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editTextDefaultHydroCorrectionUserSettings" />
 
 
     <Button
