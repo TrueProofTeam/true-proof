@@ -1,5 +1,6 @@
 package com.trueproof.trueproof.activities;
 
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -29,5 +30,9 @@ public class MeasurementDetailActivity extends AppCompatActivity {
         if (menuItem.getItemId() == R.id.nav_batch_list)MeasurementDetailActivity.this.startActivity(new Intent(MeasurementDetailActivity.this, BatchListActivity.class));
         if (menuItem.getItemId() == R.id.nav_quick_calculator)MeasurementDetailActivity.this.startActivity(new Intent(MeasurementDetailActivity.this, MainActivity.class));
         return true;
+    }
+    private void modifyActionbar () {
+        ActionBar actionBar = getSupportActionBar();
+        if (actionBar != null) actionBar.setTitle("Measurement Details");
     }
 }
