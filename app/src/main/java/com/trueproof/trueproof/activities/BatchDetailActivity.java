@@ -42,6 +42,7 @@ public class BatchDetailActivity extends AppCompatActivity {
 
         Intent intent = getIntent();
         getBatchFromIntent(intent);
+
     }
 
     private void goToTakeMeasurementActivity() {

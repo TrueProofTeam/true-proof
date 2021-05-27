@@ -3,6 +3,8 @@ package com.trueproof.trueproof.activities;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 
 import androidx.activity.result.ActivityResult;
 import androidx.activity.result.ActivityResultLauncher;
@@ -123,5 +125,18 @@ public class BatchListActivity extends AppCompatActivity {
                     takeMeasurementIntent
             });
         }
+    }
+    @Override
+    public boolean onCreateOptionsMenu (Menu menu){
+        getMenuInflater().inflate(R.menu.menu, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem menuItem){
+        if (menuItem.getItemId() == R.id.nav_settings)BatchListActivity.this.startActivity(new Intent(BatchListActivity.this, SettingsActivity.class));
+        if (menuItem.getItemId() == R.id.nav_batch_list)BatchListActivity.this.startActivity(new Intent(BatchListActivity.this, BatchListActivity.class));
+        if (menuItem.getItemId() == R.id.nav_quick_calculator)BatchListActivity.this.startActivity(new Intent(BatchListActivity.this, TakeMeasurementActivity.class));
+        return true;
     }
 }
