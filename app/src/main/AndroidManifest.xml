@@ -10,11 +10,11 @@
         android:roundIcon="@mipmap/logo_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.TrueProof">
+        <activity android:name=".activities.References"></activity>
         <activity android:name=".activities.UserAgreementActivity" />
         <activity android:name=".activities.SignUpActivity" />
         <activity android:name=".activities.SignUpConfirmationActivity" />
         <activity android:name=".activities.LogInActivity" />
-        <activity android:name=".activities.SettingActivity" />
         <activity android:name=".activities.MeasurementDetailActivity" />
         <activity android:name=".activities.SettingsActivity" />
         <activity android:name=".activities.NewBatchActivity" />

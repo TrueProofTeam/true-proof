@@ -1,5 +1,7 @@
 package com.trueproof.trueproof.utils;
 
+import android.util.Log;
+
 import com.amplifyframework.api.ApiException;
 import com.amplifyframework.api.graphql.model.ModelMutation;
 import com.amplifyframework.api.graphql.model.ModelQuery;
@@ -35,6 +37,7 @@ public class UserRepository {
     public void getById(String userId, Consumer<User> onSuccess, Consumer<ApiException> onFail) {
         Amplify.API.query(ModelQuery.get(User.class, userId),
                 r -> {
+                    Log.i("UserRepository", "getById: " + r);
                     onSuccess.accept(r.getData());
                 },
                 onFail);

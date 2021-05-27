@@ -1,6 +1,7 @@
 package com.trueproof.trueproof.activities;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -15,24 +16,45 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.amplifyframework.api.graphql.model.ModelMutation;
+import com.amplifyframework.auth.AuthUserAttribute;
 import com.amplifyframework.auth.AuthUserAttributeKey;
 import com.amplifyframework.auth.options.AuthSignUpOptions;
 import com.amplifyframework.core.Amplify;
 import com.amplifyframework.datastore.generated.model.Distillery;
+import com.amplifyframework.datastore.generated.model.TemperatureUnit;
+import com.amplifyframework.datastore.generated.model.User;
 import com.trueproof.trueproof.R;
+import com.trueproof.trueproof.utils.DistilleryRepository;
+import com.trueproof.trueproof.utils.UserSettings;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.inject.Inject;
 import javax.security.auth.login.LoginException;
 
+import dagger.hilt.android.AndroidEntryPoint;
+
+@AndroidEntryPoint
 public class SignUpActivity extends AppCompatActivity {
     String TAG= "TrueProof.SignUpActivity";
     static boolean agreementFromUser=false;
     Handler handler;
     boolean signUpFlag = false;
     boolean distilleryAddedFlag = false;
+    boolean userMadeFlag = false;
+
+    @Inject
+    UserSettings settings;
+
+    @Inject
+    DistilleryRepository distilleryRepository;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_up);
+        modifyActionbar();
         handler = new Handler(this.getMainLooper()){
             @Override
             public void handleMessage(@NonNull Message msg) {
@@ -47,8 +69,14 @@ public class SignUpActivity extends AppCompatActivity {
                 if(msg.what==3){
                     Toast.makeText(getBaseContext(),"Something went wrong! Email already in use or try again",Toast.LENGTH_LONG).show();
                 }
-
-                if(signUpFlag && distilleryAddedFlag){
+                if(msg.what==4){
+                    userMadeFlag=true;
+                }
+                if(signUpFlag && distilleryAddedFlag && userMadeFlag){
+                    signUpFlag=false;
+                    distilleryAddedFlag=false;
+                    userMadeFlag=false;
+                    Toast.makeText(getBaseContext(),"Account has been made! Please confirmed the account now!",Toast.LENGTH_LONG).show();
                     EditText emailConfirm = findViewById(R.id.editTextEmailConfirmationSignup);
                     Intent i = new Intent(SignUpActivity.this,SignUpConfirmationActivity.class);
                     i.putExtra("username",emailConfirm.getText().toString());
@@ -122,8 +150,21 @@ public class SignUpActivity extends AppCompatActivity {
                         .dspId(dsp.getText().toString())
                         .build();
 
+                User user = User.builder()
+                        .email(emailConfirm.getText().toString())
+                        .defaultHydrometerCorrection(0.0)
+                        .defaultTemperatureCorrection(0.0)
+                        .defaultTemperatureUnit(TemperatureUnit.FAHRENHEIT)
+                        .build();
+
+                //might fix attributes, needs to made into a list so that options can use userAttributes
+                Log.i(TAG, "this is the disillery id "+distillery.getId());
+                List<AuthUserAttribute> attributes = new ArrayList<>();
+                attributes.add(new AuthUserAttribute(AuthUserAttributeKey.custom("custom:distilleryId"),distillery.getId()));
+                attributes.add(new AuthUserAttribute(AuthUserAttributeKey.custom("custom:userId"),user.getId()));
+
                 AuthSignUpOptions options = AuthSignUpOptions.builder()
-                        .userAttribute(AuthUserAttributeKey.custom("custom:distilleryId"),distillery.getId())
+                        .userAttributes(attributes)
                         .build();
 
                 Amplify.Auth.signUp(
@@ -139,16 +180,26 @@ public class SignUpActivity extends AppCompatActivity {
                         }
                 );
 
-                Amplify.API.mutate(
-                        ModelMutation.create(distillery),
+               distilleryRepository.saveDistillery(distillery,
+                       r->{
+                           handler.sendEmptyMessage(2);
+                           Log.i(TAG, "Success response from distillery"+r);
+                           Log.i(TAG,"This is the distillery made ->>"+distillery.toString());
+                       },
+                       r->{
+                           Log.i(TAG, "something with wrong with adding the distillery to the database -> "+r.toString());
+                           handler.sendEmptyMessage(3);
+                       });
+
+                settings.addUser(user,
                         r->{
-                            handler.sendEmptyMessage(2);
+                            Log.i(TAG, "user was added to db!!! ->"+r);
+                            handler.sendEmptyMessage(4);
                         },
                         r->{
-                            Log.i(TAG, "something with wrong with adding the distillery to the database -> "+r.toString());
-                        }
-
-                );
+                            Log.i(TAG, "failed to add users to db"+r);
+                            handler.sendEmptyMessage(3);
+                        });
             }
 
         });
@@ -162,5 +213,9 @@ public class SignUpActivity extends AppCompatActivity {
             }
         });
 
+    }
+    private void modifyActionbar () {
+        ActionBar actionBar = getSupportActionBar();
+        if (actionBar != null) actionBar.setTitle("Sign Up");
     }
 }

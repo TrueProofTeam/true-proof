@@ -1,5 +1,6 @@
 package com.trueproof.trueproof.activities;
 
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
@@ -25,6 +26,7 @@ public class UserAgreementActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_agreement);
+        modifyActionbar();
 
 //        try {
 //            Resources res = getResources();
@@ -59,5 +61,9 @@ public class UserAgreementActivity extends AppCompatActivity {
             }
         });
 
+    }
+    private void modifyActionbar () {
+        ActionBar actionBar = getSupportActionBar();
+        if (actionBar != null) actionBar.setTitle("User Agreement");
     }
 }

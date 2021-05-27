@@ -1,6 +1,6 @@
 <resources>
     <string name="app_name">True Proof</string>
-    <string name="signUpTitle">Fill in the information below to make a new account with our app!</string>
+    <string name="signUpTitle">Fill in the information below to make a new account.</string>
     <string name="signUpText">Sign Up</string>
     <string name="emailText">Email</string>
     <string name="confirmationEmailText">Confirm Email</string>
@@ -28,5 +28,9 @@
     </string>
     <string name="userSettingText">User Settings</string>
     <string name="noDistilleryNameText">Untitled Distillery</string>
+    <string name="logOutText">Logout</string>
+    <string name="quickCaculatorText">Quick Calculator</string>
+    <string name="batchListText">Batch List</string>
+    <string name="settingsText">Settings</string>
 
 </resources>

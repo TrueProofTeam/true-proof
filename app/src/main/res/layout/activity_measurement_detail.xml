@@ -7,15 +7,16 @@
         tools:context=".activities.MeasurementDetailActivity">
 
     <TextView
-            android:text="Measurement Detail"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/textViewTitleMeasurementDetail"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textViewMDdsp"
-            android:layout_marginTop="16dp" />
+        android:id="@+id/textViewTitleMeasurementDetail"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="Measurement Detail"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textViewMDdsp" />
 
     <TextView
             android:text="Batch #"

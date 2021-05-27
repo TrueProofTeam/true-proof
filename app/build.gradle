@@ -50,6 +50,13 @@ dependencies {
     // Dependency injection with Hilt
     implementation "com.google.dagger:hilt-android:$hilt_version"
     kapt "com.google.dagger:hilt-compiler:$hilt_version"
+    // For instrumented tests.
+    androidTestImplementation 'com.google.dagger:hilt-android-testing:2.35'
+    // ...with Kotlin.
+    kaptAndroidTest 'com.google.dagger:hilt-android-compiler:2.35'
+    // ...with Java.
+    androidTestAnnotationProcessor 'com.google.dagger:hilt-android-compiler:2.35'
+
 
     // Amplify framework
     implementation 'com.amplifyframework:core:1.17.5'

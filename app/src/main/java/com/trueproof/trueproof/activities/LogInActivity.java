@@ -1,6 +1,7 @@
 package com.trueproof.trueproof.activities;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -14,16 +15,27 @@ import android.widget.Toast;
 
 import com.amplifyframework.core.Amplify;
 import com.trueproof.trueproof.R;
+import com.trueproof.trueproof.utils.UserSettings;
 
+import javax.inject.Inject;
+
+import dagger.hilt.android.AndroidEntryPoint;
+
+@AndroidEntryPoint
 public class LogInActivity extends AppCompatActivity {
     static final String TAG = "TrueProof.LogInActivity";
     Handler handler;
+
+    @Inject
+    UserSettings userSettings;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_log_in);
         makeHandler();
         initializeAllButton();
+        modifyActionbar();
     }
 
 
@@ -59,6 +71,7 @@ public class LogInActivity extends AppCompatActivity {
                         r->{
                             if(r.isSignInComplete()){
                                 handler.sendEmptyMessage(1);
+                                userSettings.refreshCache(r2->{},r2->{});
                             }else {
                                 handler.sendEmptyMessage(2);
                             }
@@ -94,5 +107,9 @@ public class LogInActivity extends AppCompatActivity {
                 }
             }
         };
+    }
+    private void modifyActionbar () {
+        ActionBar actionBar = getSupportActionBar();
+        if (actionBar != null) actionBar.setTitle("Login");
     }
 }

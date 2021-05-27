@@ -28,15 +28,17 @@
         app:layout_constraintTop_toBottomOf="@+id/textViewYourBatchesBatchList" />
 
     <TextView
-            android:text="Active Batches"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/textViewActiveBatchesBatchList"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textViewBatchListdsp"
-            android:layout_marginTop="8dp" />
+        android:id="@+id/textViewActiveBatchesBatchList"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="Active Batches"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textViewBatchListdsp" />
 
     <androidx.recyclerview.widget.RecyclerView
             android:layout_width="373dp"
@@ -60,15 +62,17 @@
         app:layout_constraintHorizontal_bias="0.5" />
 
     <TextView
-        android:text="Your Batches"
+        android:id="@+id/textViewYourBatchesBatchList"
         android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/textViewYourBatchesBatchList"
-            app:layout_constraintTop_toBottomOf="@+id/recyclerViewActiveBatchList"
-            android:layout_marginTop="16dp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintEnd_toEndOf="parent" />
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="Your Batches"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/recyclerViewActiveBatchList" />
 
     <ImageButton
             android:layout_width="wrap_content"

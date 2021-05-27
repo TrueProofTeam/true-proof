@@ -10,7 +10,7 @@
         android:id="@+id/editTextTemperatureMain"
         android:layout_width="129dp"
         android:layout_height="40dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="8dp"
         android:layout_marginEnd="16dp"
         android:inputType="numberDecimal"
         app:layout_constraintEnd_toEndOf="parent"
@@ -24,8 +24,7 @@
         android:text="Temperature"
         app:layout_constraintBottom_toBottomOf="@+id/editTextTemperatureMain"
         app:layout_constraintEnd_toStartOf="@+id/editTextTemperatureCorrectionMain"
-        app:layout_constraintTop_toTopOf="@+id/editTextTemperatureMain"
-        app:layout_constraintVertical_bias="0.571" />
+        app:layout_constraintTop_toTopOf="@+id/editTextTemperatureMain" />
 
     <Button
             android:text="Log in to save your data"
@@ -42,6 +41,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
+        android:layout_marginEnd="16dp"
         android:text="Quick Proofing Calculator"
         android:textAppearance="@style/TextAppearance.AppCompat.Large"
         android:textSize="30sp"
@@ -52,20 +52,17 @@
         android:id="@+id/textViewTermsOfUseMain"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
-        android:layout_marginBottom="8dp"
+        android:layout_marginTop="48dp"
         android:text="Terms of Use"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textViewGaugingECFR" />
+        app:layout_constraintTop_toBottomOf="@+id/textViewCalculatedProofMain" />
 
     <EditText
         android:id="@+id/editTextHydrometerMain"
         android:layout_width="129dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
+        android:layout_marginTop="16dp"
         android:layout_marginEnd="16dp"
         android:inputType="numberDecimal"
         app:layout_constraintEnd_toEndOf="parent"
@@ -80,8 +77,7 @@
         android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="@+id/textViewCalculatedProofMain"
         app:layout_constraintEnd_toStartOf="@+id/textViewCalculatedProofMain"
-        app:layout_constraintTop_toTopOf="@+id/textViewCalculatedProofMain"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintTop_toTopOf="@+id/textViewCalculatedProofMain" />
 
     <EditText
         android:id="@+id/editTextTemperatureCorrectionMain"
@@ -97,8 +93,9 @@
         android:id="@+id/textViewCalculatedProofMain"
         android:layout_width="129dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="32dp"
         android:layout_marginEnd="16dp"
+        android:background="@drawable/border"
         android:text="76.4"
         android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -112,8 +109,7 @@
         android:text="Temperature Correction"
         app:layout_constraintBottom_toBottomOf="@+id/editTextTemperatureCorrectionMain"
         app:layout_constraintEnd_toStartOf="@+id/editTextTemperatureCorrectionMain"
-        app:layout_constraintTop_toTopOf="@+id/editTextTemperatureCorrectionMain"
-        app:layout_constraintVertical_bias="0.619" />
+        app:layout_constraintTop_toTopOf="@+id/editTextTemperatureCorrectionMain" />
 
     <TextView
         android:id="@+id/textViewHydrometerMain"
@@ -123,8 +119,7 @@
         android:text="Hydrometer"
         app:layout_constraintBottom_toBottomOf="@+id/editTextHydrometerMain"
         app:layout_constraintEnd_toStartOf="@+id/editTextHydrometerMain"
-        app:layout_constraintTop_toTopOf="@+id/editTextHydrometerMain"
-        app:layout_constraintVertical_bias="0.322" />
+        app:layout_constraintTop_toTopOf="@+id/editTextHydrometerMain" />
 
     <TextView
         android:id="@+id/textViewHydrometerCorrectionMain"
@@ -134,8 +129,7 @@
         android:text="Hydrometer Correction"
         app:layout_constraintBottom_toBottomOf="@+id/editTextHydrometerCorrectionMain"
         app:layout_constraintEnd_toStartOf="@+id/editTextHydrometerCorrectionMain"
-        app:layout_constraintTop_toTopOf="@+id/editTextHydrometerCorrectionMain"
-        app:layout_constraintVertical_bias="0.58" />
+        app:layout_constraintTop_toTopOf="@+id/editTextHydrometerCorrectionMain" />
 
     <EditText
         android:id="@+id/editTextHydrometerCorrectionMain"
@@ -146,47 +140,6 @@
         android:inputType="numberDecimal|numberSigned"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editTextHydrometerMain" />
-
-    <TextView
-        android:id="@+id/textViewTTBGaugingManual"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
-        android:layout_marginBottom="10dp"
-        android:text="@string/TtbTable"
-        app:layout_constraintBottom_toTopOf="@+id/textViewInterpolationGaugingManual"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textViewProofMain"
-        app:layout_constraintVertical_bias="1.0" />
-
-    <TextView
-        android:id="@+id/textViewInterpolationGaugingManual"
-        android:layout_width="wrap_content"
-        android:layout_height="19dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginBottom="10dp"
-        android:text="@string/interpolationTable"
-        app:layout_constraintBottom_toTopOf="@+id/textViewGaugingECFR"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textViewTTBGaugingManual" />
-
-    <TextView
-        android:id="@+id/textViewGaugingECFR"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="117dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginEnd="114dp"
-        android:layout_marginBottom="8dp"
-        android:text="@string/ecfr"
-        app:layout_constraintBottom_toTopOf="@+id/textViewTermsOfUseMain"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textViewInterpolationGaugingManual"
-        app:layout_constraintVertical_bias="0.0" />
 
     <RadioGroup
         android:id="@+id/radioGroupMain"
@@ -216,7 +169,6 @@
             android:text="Temp in °F"
             app:layout_constraintEnd_toEndOf="parent" />
     </RadioGroup>
-
 
     <TextView
         android:id="@+id/textViewDateTimeLocal"

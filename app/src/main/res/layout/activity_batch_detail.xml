@@ -38,17 +38,18 @@
             android:layout_marginEnd="8dp" />
 
     <TextView
-            android:text="Batch Detail"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/textViewTitleBatchDetail"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintEnd_toEndOf="parent"
-            android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-            android:textSize="20sp"
-            app:layout_constraintTop_toBottomOf="@+id/textViewBatchDetaildsp"
-            android:layout_marginTop="8dp" />
+        android:id="@+id/textViewTitleBatchDetail"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="Batch Detail"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textViewBatchDetaildsp" />
 
     <TextView
             android:text="Type"
@@ -138,6 +139,7 @@
         android:layout_marginTop="8dp"
         android:text="Measurements"
         android:textSize="20sp"
+        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"

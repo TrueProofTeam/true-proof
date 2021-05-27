@@ -21,6 +21,7 @@ import android.widget.RadioGroup;
 import android.widget.TextView;
 
 import androidx.annotation.RequiresApi;
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.amplifyframework.auth.AuthUser;
@@ -87,6 +88,7 @@ public class MainActivity extends AppCompatActivity {
 
         TextView dateTimeLocal = findViewById(R.id.textViewDateTimeLocal);
         dateTimeLocal.setText(userLocalTime());
+
 
 
     }
@@ -242,27 +244,41 @@ public class MainActivity extends AppCompatActivity {
                 );
     }
 
+
     @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
+    public boolean onCreateOptionsMenu (Menu menu){
+        AuthUser principal = Amplify.Auth.getCurrentUser();
+        if (principal != null){
+
         getMenuInflater().inflate(R.menu.menu, menu);
         return true;
+        }
+        else return false;
     }
 
     @Override
-    public boolean onOptionsItemSelected(MenuItem menuItem) {
-        if (menuItem.getItemId() == R.id.nav_settings)
-            MainActivity.this.startActivity(new Intent(MainActivity.this, SettingsActivity.class));
-        if (menuItem.getItemId() == R.id.nav_batch_list)
-            MainActivity.this.startActivity(new Intent(MainActivity.this, BatchListActivity.class));
-        if (menuItem.getItemId() == R.id.nav_quick_calculator)
-            MainActivity.this.startActivity(new Intent(MainActivity.this, MainActivity.class));
+
+    public boolean onOptionsItemSelected(MenuItem menuItem){
+        if (menuItem.getItemId() == R.id.nav_settings)MainActivity.this.startActivity(new Intent(MainActivity.this, SettingsActivity.class));
+        if (menuItem.getItemId() == R.id.nav_batch_list)MainActivity.this.startActivity(new Intent(MainActivity.this, BatchListActivity.class));
+        if (menuItem.getItemId() == R.id.nav_quick_calculator)MainActivity.this.startActivity(new Intent(MainActivity.this, MainActivity.class));
+        if (menuItem.getItemId() == R.id.nav_log_out){
+            Amplify.Auth.signOut(
+                    ()->{
+                        Log.i(TAG,"Success Logout!");
+                    },
+                    r->{});
+            MainActivity.this.startActivity(new Intent( MainActivity.this,MainActivity.class));
+            finish();
+        }
         return true;
     }
 
-    void initializeLoginButton() {
+    private void initializeLoginButton() {
         AuthUser principal = Amplify.Auth.getCurrentUser();
-        if (principal == null) {
-            Button loginButton = findViewById(R.id.buttonLoginMain);
+
+        Button loginButton = findViewById(R.id.buttonLoginMain);
+        if(principal == null){
 
             loginButton.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -272,8 +288,7 @@ public class MainActivity extends AppCompatActivity {
                 }
             });
 
-        } else {
-            Button loginButton = findViewById(R.id.buttonLoginMain);
+        } else{
             loginButton.setText("Go to Batch List");
             loginButton.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -348,5 +363,6 @@ public class MainActivity extends AppCompatActivity {
 //        bd = bd.setScale(places, RoundingMode.HALF_UP);
 //        return bd.doubleValue();
 //    }
+
 
 }

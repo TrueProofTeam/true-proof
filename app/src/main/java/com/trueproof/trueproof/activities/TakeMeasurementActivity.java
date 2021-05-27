@@ -2,6 +2,7 @@ package com.trueproof.trueproof.activities;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -11,6 +12,7 @@ import android.os.Bundle;
 import android.text.Editable;
 import android.text.InputFilter;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.util.Log;
@@ -83,7 +85,7 @@ public class TakeMeasurementActivity extends AppCompatActivity implements Measur
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_take_measurement);
-
+        modifyActionbar();
         inputLimitListener();
         saveMeasurement();
 
@@ -290,12 +292,27 @@ public class TakeMeasurementActivity extends AppCompatActivity implements Measur
         return true;
     }
 
+
     @Override
     public boolean onOptionsItemSelected(MenuItem menuItem){
         if (menuItem.getItemId() == R.id.nav_settings)TakeMeasurementActivity.this.startActivity(new Intent(TakeMeasurementActivity.this, SettingsActivity.class));
         if (menuItem.getItemId() == R.id.nav_batch_list)TakeMeasurementActivity.this.startActivity(new Intent(TakeMeasurementActivity.this, BatchListActivity.class));
         if (menuItem.getItemId() == R.id.nav_quick_calculator)TakeMeasurementActivity.this.startActivity(new Intent(TakeMeasurementActivity.this, MainActivity.class));
+        if (menuItem.getItemId() == R.id.nav_log_out){
+            Amplify.Auth.signOut(
+                    ()->{
+                        Log.i(TAG,"Success Logout!");
+                    },
+                    r->{});
+            TakeMeasurementActivity.this.startActivity(new Intent( TakeMeasurementActivity.this,MainActivity.class));
+            finish();
+        }
         return true;
     }
 
+
+    private void modifyActionbar () {
+        ActionBar actionBar = getSupportActionBar();
+        if (actionBar != null) actionBar.setTitle("Take Measurement");
+    }
 }
