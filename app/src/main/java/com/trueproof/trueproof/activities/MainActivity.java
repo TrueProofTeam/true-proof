@@ -20,6 +20,8 @@ import android.widget.TextView;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.amplifyframework.auth.AuthUser;
+import com.amplifyframework.core.Amplify;
 import com.trueproof.trueproof.R;
 import com.trueproof.trueproof.logic.InputFilterMinMax;
 import com.trueproof.trueproof.logic.Proofing;
@@ -72,6 +74,8 @@ public class MainActivity extends AppCompatActivity {
 
         TextView dateTimeLocal = findViewById(R.id.textViewDateTimeLocal);
         dateTimeLocal.setText(userLocalTime());
+
+
     }
 
     public void calculateOnChange(){
@@ -223,16 +227,30 @@ public class MainActivity extends AppCompatActivity {
         }
 
     void initializeLoginButton() {
-        Button loginButton = findViewById(R.id.buttonLoginMain);
+        AuthUser principal = Amplify.Auth.getCurrentUser();
+        if (principal == null){
+            Button loginButton = findViewById(R.id.buttonLoginMain);
 
-        loginButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, LogInActivity.class);
-                startActivity(intent);
-            }
-        });
+            loginButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(MainActivity.this, LogInActivity.class);
+                    startActivity(intent);
+                }
+            });
 
-    }
+        } else{
+            Button loginButton = findViewById(R.id.buttonLoginMain);
+            loginButton.setText("Go to Batch List");
+            loginButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(MainActivity.this, BatchListActivity.class);
+                    startActivity(intent);
+                }
+            });
+        }
+        }
+
 
 }
