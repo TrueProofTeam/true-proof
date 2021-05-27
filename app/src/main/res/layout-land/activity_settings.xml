@@ -152,7 +152,6 @@
         android:layout_marginTop="16dp"
         android:ems="10"
         android:inputType="textPersonName"
-        android:text="010101"
         app:layout_constraintStart_toEndOf="@+id/textViewDSPNumDistillerySettings"
         app:layout_constraintTop_toBottomOf="@+id/textViewDistillerySettingsTitleDistillerySettings" />
 
@@ -164,7 +163,6 @@
         android:layout_marginTop="16dp"
         android:ems="10"
         android:inputType="textPersonName"
-        android:text="Whiskey and Gin Inc"
         app:layout_constraintStart_toEndOf="@+id/textViewDistilleryNameDistillerySettings"
         app:layout_constraintTop_toBottomOf="@+id/editTextDSPDistillerySettings" />
 
