@@ -19,6 +19,7 @@ import com.amplifyframework.datastore.generated.model.TemperatureUnit;
 import com.amplifyframework.datastore.generated.model.User;
 
 import java.util.List;
+import java.util.concurrent.atomic.AtomicBoolean;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;
@@ -143,8 +144,8 @@ public class UserSettings {
                         Log.i(TAG, "AuthUser custom:userId is null");
                         createNewUserEntity(authUser,
                                 success, e -> {
-                            fail.accept(e);
-                        });
+                                    fail.accept(e);
+                                });
                     }
                 },
                 error -> {
@@ -252,6 +253,61 @@ public class UserSettings {
         return null;
     }
 
+    /**
+     * Gets the cached distillery object populated when the user signed in. If the cache has not been populated, returns null.
+     *
+     * @return
+     */
+    @Nullable
+    public Distillery getCachedDistillery() {
+        return cachedDistillery;
+    }
+
+    /**
+     * Gets the cached user settings populated when the user signed in. If the cache has not been populated, returns null.
+     *
+     * @return
+     */
+    @Nullable
+    public User getCachedUserSettings() {
+        return cachedUserSettings;
+    }
+
+    /**
+     * Run this on user log in, or sign up.
+     * Performs database requests and populates the cache for userSettings and Distillery settings.
+     */
+    public void refreshCache(Consumer success, Consumer<Exception> failure) {
+        AtomicBoolean distillery = new AtomicBoolean(false);
+        AtomicBoolean fail = new AtomicBoolean(false);
+        AtomicBoolean user = new AtomicBoolean(false);
+        getDistillery(
+                r -> {
+                    if (!fail.get() && user.get()) {
+                        success.accept(true);
+                    }
+                    distillery.set(true);
+                },
+                e -> {
+                    if (!fail.get()) {
+                        fail.set(true);
+                        failure.accept(e);
+                    }
+                });
+        getUserSettings(
+                r -> {
+                    user.set(true);
+                    if (!fail.get() && distillery.get()) {
+                        success.accept(true);
+                    }
+                },
+                e -> {
+                    if (!fail.get()) {
+                        fail.set(true);
+                        failure.accept(e);
+                    }
+                });
+    }
 
     /**
      * Run this when you log out a user to clear the cached userSettings and distillerySettings
