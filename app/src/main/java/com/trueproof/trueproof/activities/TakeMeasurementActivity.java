@@ -13,14 +13,19 @@ import android.text.InputFilter;
 import android.text.TextWatcher;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.util.Log;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.amplifyframework.api.graphql.model.ModelMutation;
+import com.amplifyframework.core.Amplify;
+import com.amplifyframework.core.model.temporal.Temporal;
 import com.amplifyframework.datastore.generated.model.Batch;
 import com.amplifyframework.datastore.generated.model.Distillery;
 import com.amplifyframework.datastore.generated.model.Measurement;
 import com.trueproof.trueproof.R;
+import com.trueproof.trueproof.adapters.MeasurementListAdapter;
 import com.trueproof.trueproof.logic.InputFilterMinMax;
 import com.trueproof.trueproof.logic.Proofing;
 import com.trueproof.trueproof.utils.BatchRepository;
@@ -30,11 +35,15 @@ import com.trueproof.trueproof.utils.TestDependencyInjection;
 
 import java.io.InputStream;
 import java.lang.reflect.Field;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.Instant;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.FormatStyle;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Locale;
 import java.util.TimeZone;
 
@@ -48,7 +57,7 @@ import javax.inject.Inject;
 import dagger.hilt.android.AndroidEntryPoint;
 
 @AndroidEntryPoint
-public class TakeMeasurementActivity extends AppCompatActivity {
+public class TakeMeasurementActivity extends AppCompatActivity implements MeasurementListAdapter.OnClickHandler {
 
     @Inject
     Proofing proofing;
@@ -78,6 +87,22 @@ public class TakeMeasurementActivity extends AppCompatActivity {
         inputLimitListener();
         saveMeasurement();
 
+    }
+
+    @Override
+    public void onClick(Measurement measurement){
+        double temp = measurement.getTemperature();
+        double tempCorrection = measurement.getTemperatureCorrection();
+        double hydro = measurement.getHydrometer();
+        double hydroCorrection = measurement.getHydrometerCorrection();
+        double trueProof = measurement.getTrueProof();
+        Intent viewMeasurementDetail = new Intent(TakeMeasurementActivity.this, MeasurementDetailActivity.class);
+        viewMeasurementDetail.putExtra("temp", temp);
+        viewMeasurementDetail.putExtra("tempCorrection", tempCorrection);
+        viewMeasurementDetail.putExtra("hydro", hydro);
+        viewMeasurementDetail.putExtra("hydroCorrection", hydroCorrection);
+        viewMeasurementDetail.putExtra("trueProof", trueProof);
+        startActivity(viewMeasurementDetail);
     }
 
     public void calculateOnChange() {
@@ -231,8 +256,20 @@ public class TakeMeasurementActivity extends AppCompatActivity {
                     .getText().toString();
             System.out.println("measurementToSave = " + measurementToSave);
 
-            String measurementTime = userLocalTime();
-            System.out.println("measurementTime = " + measurementTime);
+            Measurement measurement = Measurement.builder()
+                    .trueProof(Double.parseDouble(measurementToSave))
+                    .temperature(Double.parseDouble(temptToSave))
+                    .hydrometer(Double.parseDouble(hydroToSave))
+                    .temperatureCorrection(Double.parseDouble(tempCorrectionToSave))
+                    .hydrometerCorrection(Double.parseDouble(hydroCorrectionToSave))
+                    .build();
+
+            Amplify.API.mutate(
+                    ModelMutation.create(measurement),
+                    response -> Log.i("Mutate", "success"),
+                    error -> Log.e("Mutate", "error+ " + error)
+            );
+
         });
     }
 

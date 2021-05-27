@@ -10,11 +10,26 @@ import android.view.MenuItem;
 import com.trueproof.trueproof.R;
 
 public class MeasurementDetailActivity extends AppCompatActivity {
+    private static final String TAG = "Measurement Detail";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_measurement_detail);
+
+//        Intent intent = getIntent();
+//        if (intent.getDoubleExtra("tempCorrection", 0.0) != 0.0 &&
+//            intent.getDoubleExtra("hydroCorrection", 0.0) != 0.0){
+//            String temp = String.valueOf(intent.getDoubleExtra("temp", 0.0));
+//            String hydro = String.valueOf(intent.getDoubleExtra("hydro", 0.0));
+//            ((TextView) findViewById(R.id.))
+//        } else {
+//            double temp = intent.getDoubleExtra("temp", 0.0);
+//            double tempCorrection = intent.getDoubleExtra("tempCorrection", 0.0);
+//
+//
+//        }
+
     }
 
     @Override
