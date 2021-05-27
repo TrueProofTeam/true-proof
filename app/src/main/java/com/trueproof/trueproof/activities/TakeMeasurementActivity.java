@@ -11,6 +11,8 @@ import android.os.Bundle;
 import android.text.Editable;
 import android.text.InputFilter;
 import android.text.TextWatcher;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -244,6 +246,18 @@ public class TakeMeasurementActivity extends AppCompatActivity {
                                 .withLocale(Locale.US)
                 );
     }
+    @Override
+    public boolean onCreateOptionsMenu (Menu menu){
+        getMenuInflater().inflate(R.menu.menu, menu);
+        return true;
+    }
 
+    @Override
+    public boolean onOptionsItemSelected(MenuItem menuItem){
+        if (menuItem.getItemId() == R.id.nav_settings)TakeMeasurementActivity.this.startActivity(new Intent(TakeMeasurementActivity.this, SettingsActivity.class));
+        if (menuItem.getItemId() == R.id.nav_batch_list)TakeMeasurementActivity.this.startActivity(new Intent(TakeMeasurementActivity.this, BatchListActivity.class));
+        if (menuItem.getItemId() == R.id.nav_quick_calculator)TakeMeasurementActivity.this.startActivity(new Intent(TakeMeasurementActivity.this, MainActivity.class));
+        return true;
+    }
 
 }

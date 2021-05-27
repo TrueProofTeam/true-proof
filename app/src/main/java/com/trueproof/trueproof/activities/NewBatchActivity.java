@@ -5,6 +5,8 @@ import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.widget.Button;
 import android.widget.EditText;
 
@@ -112,6 +114,18 @@ public class NewBatchActivity extends AppCompatActivity {
 
     }
 
+    @Override
+    public boolean onCreateOptionsMenu (Menu menu){
+        getMenuInflater().inflate(R.menu.menu, menu);
+        return true;
+    }
 
+    @Override
+    public boolean onOptionsItemSelected(MenuItem menuItem){
+        if (menuItem.getItemId() == R.id.nav_settings)NewBatchActivity.this.startActivity(new Intent(NewBatchActivity.this, SettingsActivity.class));
+        if (menuItem.getItemId() == R.id.nav_batch_list)NewBatchActivity.this.startActivity(new Intent(NewBatchActivity.this, BatchListActivity.class));
+        if (menuItem.getItemId() == R.id.nav_quick_calculator)NewBatchActivity.this.startActivity(new Intent(NewBatchActivity.this, MainActivity.class));
+        return true;
+    }
 
 }

@@ -1,9 +1,12 @@
 package com.trueproof.trueproof.activities;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.RadioButton;
@@ -124,5 +127,18 @@ public class SettingsActivity extends AppCompatActivity {
 
                     break;
         }
+    }
+    @Override
+    public boolean onCreateOptionsMenu (Menu menu){
+        getMenuInflater().inflate(R.menu.menu, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem menuItem){
+        if (menuItem.getItemId() == R.id.nav_settings)SettingsActivity.this.startActivity(new Intent(SettingsActivity.this, SettingsActivity.class));
+        if (menuItem.getItemId() == R.id.nav_batch_list)SettingsActivity.this.startActivity(new Intent(SettingsActivity.this, BatchListActivity.class));
+        if (menuItem.getItemId() == R.id.nav_quick_calculator)SettingsActivity.this.startActivity(new Intent(SettingsActivity.this, MainActivity.class));
+        return true;
     }
 }
