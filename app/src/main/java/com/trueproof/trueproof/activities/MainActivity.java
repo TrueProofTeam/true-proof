@@ -1,15 +1,11 @@
 package com.trueproof.trueproof.activities;
 
 import android.content.Intent;
-import android.graphics.Color;
-import android.icu.number.Precision;
 import android.os.Build;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.InputFilter;
 import android.text.TextWatcher;
-import android.text.method.LinkMovementMethod;
-import android.text.util.Linkify;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -17,11 +13,9 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioButton;
-import android.widget.RadioGroup;
 import android.widget.TextView;
 
 import androidx.annotation.RequiresApi;
-import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.amplifyframework.auth.AuthUser;
@@ -30,23 +24,17 @@ import com.amplifyframework.datastore.generated.model.TemperatureUnit;
 import com.trueproof.trueproof.R;
 import com.trueproof.trueproof.logic.InputFilterMinMax;
 import com.trueproof.trueproof.logic.Proofing;
+import com.trueproof.trueproof.utils.ActivityUtils;
 import com.trueproof.trueproof.utils.TestDependencyInjection;
-
-import com.trueproof.trueproof.utils.UserSettings;
 
 import java.math.BigDecimal;
 import java.math.MathContext;
-import java.math.RoundingMode;
-import java.sql.Time;
-import java.time.Instant;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.FormatStyle;
-import java.util.ArrayList;
 import java.util.Locale;
 import java.util.TimeZone;
-
 
 import javax.inject.Inject;
 
@@ -62,9 +50,10 @@ public class MainActivity extends AppCompatActivity {
 
     @Inject
     TestDependencyInjection testDependencyInjection;
-
     @Inject
     Proofing proofing;
+    @Inject
+    ActivityUtils activityUtils;
 
     TemperatureUnit temperatureUnit;
 
@@ -90,7 +79,6 @@ public class MainActivity extends AppCompatActivity {
         dateTimeLocal.setText(userLocalTime());
 
 
-
     }
 
     public void calculateOnChange() {
@@ -102,7 +90,7 @@ public class MainActivity extends AppCompatActivity {
         if (inputTemperature != null && inputTemperature.length() > 0 && inputTemperature.contains(".")) {
             inTempDouble = Double.parseDouble(inputTemperature);
         }
-        RadioButton radioButtonC = (RadioButton) findViewById(R.id.radioButtonTempCMain);
+        RadioButton radioButtonC = findViewById(R.id.radioButtonTempCMain);
         if (radioButtonC.isChecked()) {
             System.out.println("calculate on change, C->F conversion");
             double getTemp = Double.parseDouble(tempField.getText().toString()) + inputTempCorrDouble;
@@ -246,39 +234,24 @@ public class MainActivity extends AppCompatActivity {
 
 
     @Override
-    public boolean onCreateOptionsMenu (Menu menu){
+    public boolean onCreateOptionsMenu(Menu menu) {
         AuthUser principal = Amplify.Auth.getCurrentUser();
-        if (principal != null){
-
-        getMenuInflater().inflate(R.menu.menu, menu);
-        return true;
-        }
-        else return false;
+        if (principal != null) {
+            getMenuInflater().inflate(R.menu.menu, menu);
+            return true;
+        } else return false;
     }
 
     @Override
-
-    public boolean onOptionsItemSelected(MenuItem menuItem){
-        if (menuItem.getItemId() == R.id.nav_settings)MainActivity.this.startActivity(new Intent(MainActivity.this, SettingsActivity.class));
-        if (menuItem.getItemId() == R.id.nav_batch_list)MainActivity.this.startActivity(new Intent(MainActivity.this, BatchListActivity.class));
-        if (menuItem.getItemId() == R.id.nav_quick_calculator)MainActivity.this.startActivity(new Intent(MainActivity.this, MainActivity.class));
-        if (menuItem.getItemId() == R.id.nav_log_out){
-            Amplify.Auth.signOut(
-                    ()->{
-                        Log.i(TAG,"Success Logout!");
-                    },
-                    r->{});
-            MainActivity.this.startActivity(new Intent( MainActivity.this,MainActivity.class));
-            finish();
-        }
-        return true;
+    public boolean onOptionsItemSelected(MenuItem menuItem) {
+        return activityUtils.onOptionsItemSelected(this, menuItem);
     }
 
     private void initializeLoginButton() {
         AuthUser principal = Amplify.Auth.getCurrentUser();
 
         Button loginButton = findViewById(R.id.buttonLoginMain);
-        if(principal == null){
+        if (principal == null) {
 
             loginButton.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -288,7 +261,7 @@ public class MainActivity extends AppCompatActivity {
                 }
             });
 
-        } else{
+        } else {
             loginButton.setText("Go to Batch List");
             loginButton.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -330,14 +303,14 @@ public class MainActivity extends AppCompatActivity {
                     tempField.setText(String.valueOf(rounded));
                     inTempDouble = Double.parseDouble(String.valueOf(rounded));
                 }
-                    tempLimits = new InputFilterMinMax(-17.22, 37.78);
-                    tempField.setFilters(new InputFilter[]{tempLimits});
+                tempLimits = new InputFilterMinMax(-17.22, 37.78);
+                tempField.setFilters(new InputFilter[]{tempLimits});
                 break;
             case R.id.radioButtonTempFMain:
                 if (checked)
                     // TODO display this page in F
                     tempField = findViewById(R.id.editTextTemperatureMain);
-                if (temperatureUnit.equals(TemperatureUnit.CELSIUS) && tempField != null  && tempField.length() > 0) {
+                if (temperatureUnit.equals(TemperatureUnit.CELSIUS) && tempField != null && tempField.length() > 0) {
                     temperatureUnit = TemperatureUnit.FAHRENHEIT;
                     double getTemp = Double.parseDouble(tempField.getText().toString());
                     double convertTemp = ((getTemp * 1.8) + 32);
@@ -363,6 +336,5 @@ public class MainActivity extends AppCompatActivity {
 //        bd = bd.setScale(places, RoundingMode.HALF_UP);
 //        return bd.doubleValue();
 //    }
-
 
 }

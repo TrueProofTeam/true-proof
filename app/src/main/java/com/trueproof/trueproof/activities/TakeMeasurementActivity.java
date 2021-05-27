@@ -30,6 +30,7 @@ import com.trueproof.trueproof.R;
 import com.trueproof.trueproof.adapters.MeasurementListAdapter;
 import com.trueproof.trueproof.logic.InputFilterMinMax;
 import com.trueproof.trueproof.logic.Proofing;
+import com.trueproof.trueproof.utils.ActivityUtils;
 import com.trueproof.trueproof.utils.BatchRepository;
 import com.trueproof.trueproof.utils.DistilleryRepository;
 import com.trueproof.trueproof.utils.MeasurementRepository;
@@ -73,12 +74,12 @@ public class TakeMeasurementActivity extends AppCompatActivity implements Measur
 
     @Inject
     DistilleryRepository distilleryRepository;
-
     @Inject
     BatchRepository batchRepository;
-
     @Inject
     MeasurementRepository measurementRepository;
+    @Inject
+    ActivityUtils activityUtils;
 
     @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
@@ -292,24 +293,10 @@ public class TakeMeasurementActivity extends AppCompatActivity implements Measur
         return true;
     }
 
-
     @Override
     public boolean onOptionsItemSelected(MenuItem menuItem){
-        if (menuItem.getItemId() == R.id.nav_settings)TakeMeasurementActivity.this.startActivity(new Intent(TakeMeasurementActivity.this, SettingsActivity.class));
-        if (menuItem.getItemId() == R.id.nav_batch_list)TakeMeasurementActivity.this.startActivity(new Intent(TakeMeasurementActivity.this, BatchListActivity.class));
-        if (menuItem.getItemId() == R.id.nav_quick_calculator)TakeMeasurementActivity.this.startActivity(new Intent(TakeMeasurementActivity.this, MainActivity.class));
-        if (menuItem.getItemId() == R.id.nav_log_out){
-            Amplify.Auth.signOut(
-                    ()->{
-                        Log.i(TAG,"Success Logout!");
-                    },
-                    r->{});
-            TakeMeasurementActivity.this.startActivity(new Intent( TakeMeasurementActivity.this,MainActivity.class));
-            finish();
-        }
-        return true;
+        return activityUtils.onOptionsItemSelected(this, menuItem);
     }
-
 
     private void modifyActionbar () {
         ActionBar actionBar = getSupportActionBar();

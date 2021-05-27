@@ -21,6 +21,7 @@ import com.trueproof.trueproof.R;
 import com.trueproof.trueproof.adapters.ActiveBatchListAdapter;
 import com.trueproof.trueproof.adapters.BatchListAdapter;
 import com.trueproof.trueproof.models.BatchUtils;
+import com.trueproof.trueproof.utils.ActivityUtils;
 import com.trueproof.trueproof.utils.JsonConverter;
 import com.trueproof.trueproof.viewmodels.BatchListViewModel;
 
@@ -41,6 +42,8 @@ public class BatchListActivity extends AppCompatActivity {
     );
     @Inject
     JsonConverter jsonConverter;
+    @Inject
+    ActivityUtils activityUtils;
     private BatchListViewModel viewModel;
     private BatchListAdapter batchListAdapter;
     private ActiveBatchListAdapter activeBatchListAdapter;
@@ -53,7 +56,6 @@ public class BatchListActivity extends AppCompatActivity {
 
         setUpAllBatchList();
         setUpActiveBatchList();
-        modifyActionbar();
         findViewById(R.id.imageButtonNewBatchBatchList).setOnClickListener(
                 v -> goToNewBatchActivity()
         );
@@ -128,6 +130,7 @@ public class BatchListActivity extends AppCompatActivity {
             });
         }
     }
+
     @Override
     public boolean onCreateOptionsMenu (Menu menu){
         getMenuInflater().inflate(R.menu.menu, menu);
@@ -135,23 +138,7 @@ public class BatchListActivity extends AppCompatActivity {
     }
 
     @Override
-    public boolean onOptionsItemSelected(MenuItem menuItem){
-        if (menuItem.getItemId() == R.id.nav_settings)BatchListActivity.this.startActivity(new Intent(BatchListActivity.this, SettingsActivity.class));
-        if (menuItem.getItemId() == R.id.nav_batch_list)BatchListActivity.this.startActivity(new Intent(BatchListActivity.this, BatchListActivity.class));
-        if (menuItem.getItemId() == R.id.nav_quick_calculator)BatchListActivity.this.startActivity(new Intent(BatchListActivity.this, MainActivity.class));
-        if (menuItem.getItemId() == R.id.nav_log_out){
-            Amplify.Auth.signOut(
-                    ()->{
-                        Log.i(TAG,"Success Logout!");
-                    },
-                    r->{});
-            BatchListActivity.this.startActivity(new Intent( BatchListActivity.this,MainActivity.class));
-            finish();
-        }
-        return true;
-    }
-    private void modifyActionbar () {
-        ActionBar actionBar = getSupportActionBar();
-        if (actionBar != null) actionBar.setTitle("Batch List");
+    public boolean onOptionsItemSelected(MenuItem menuItem) {
+        return activityUtils.onOptionsItemSelected(this, menuItem);
     }
 }

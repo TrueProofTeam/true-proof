@@ -24,6 +24,7 @@ import com.amplifyframework.datastore.generated.model.Distillery;
 import com.amplifyframework.datastore.generated.model.TemperatureUnit;
 import com.amplifyframework.datastore.generated.model.User;
 import com.trueproof.trueproof.R;
+import com.trueproof.trueproof.utils.ActivityUtils;
 import com.trueproof.trueproof.utils.DistilleryRepository;
 import com.trueproof.trueproof.utils.UserSettings;
 
@@ -48,6 +49,9 @@ public class SettingsActivity extends AppCompatActivity {
 
     @Inject
     DistilleryRepository distilleryRepository;
+
+    @Inject
+    ActivityUtils activityUtils;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -237,22 +241,10 @@ public class SettingsActivity extends AppCompatActivity {
     }
 
     @Override
-    public boolean onOptionsItemSelected(MenuItem menuItem){
-        if (menuItem.getItemId() == R.id.nav_settings)SettingsActivity.this.startActivity(new Intent(SettingsActivity.this, SettingsActivity.class));
-        if (menuItem.getItemId() == R.id.nav_batch_list)SettingsActivity.this.startActivity(new Intent(SettingsActivity.this, BatchListActivity.class));
-        if (menuItem.getItemId() == R.id.nav_quick_calculator)SettingsActivity.this.startActivity(new Intent(SettingsActivity.this, MainActivity.class));
-        if (menuItem.getItemId() == R.id.nav_log_out){
-            Amplify.Auth.signOut(
-                    ()->{
-                        Log.i(TAG,"Success Logout!");
-                        userSettings.invalidateCache();
-                    },
-                    r->{});
-            SettingsActivity.this.startActivity(new Intent( SettingsActivity.this,MainActivity.class));
-            finish();
-        }
-        return true;
+    public boolean onOptionsItemSelected(MenuItem menuItem) {
+        return activityUtils.onOptionsItemSelected(this, menuItem);
     }
+
     private void modifyActionbar () {
         ActionBar actionBar = getSupportActionBar();
         if (actionBar != null) actionBar.setTitle("Settings");

@@ -11,10 +11,16 @@ import android.view.MenuItem;
 
 import com.amplifyframework.core.Amplify;
 import com.trueproof.trueproof.R;
+import com.trueproof.trueproof.utils.ActivityUtils;
+
+import javax.inject.Inject;
 
 public class MeasurementDetailActivity extends AppCompatActivity {
 
     String TAG = "TrueProof.MeasurementDetailActivity";
+
+    @Inject
+    ActivityUtils activityUtils;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,22 +50,6 @@ public class MeasurementDetailActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem menuItem){
-        if (menuItem.getItemId() == R.id.nav_settings)MeasurementDetailActivity.this.startActivity(new Intent(MeasurementDetailActivity.this, SettingsActivity.class));
-        if (menuItem.getItemId() == R.id.nav_batch_list)MeasurementDetailActivity.this.startActivity(new Intent(MeasurementDetailActivity.this, BatchListActivity.class));
-        if (menuItem.getItemId() == R.id.nav_quick_calculator)MeasurementDetailActivity.this.startActivity(new Intent(MeasurementDetailActivity.this, MainActivity.class));
-        if (menuItem.getItemId() == R.id.nav_log_out){
-            Amplify.Auth.signOut(
-                    ()->{
-                        Log.i(TAG,"Success Logout!");
-                    },
-                    r->{});
-            MeasurementDetailActivity.this.startActivity(new Intent( MeasurementDetailActivity.this,MainActivity.class));
-            finish();
-        }
-        return true;
-    }
-    private void modifyActionbar () {
-        ActionBar actionBar = getSupportActionBar();
-        if (actionBar != null) actionBar.setTitle("Measurement Details");
+        return activityUtils.onOptionsItemSelected(this, menuItem);
     }
 }
