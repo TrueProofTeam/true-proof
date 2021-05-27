@@ -15,10 +15,20 @@ import android.widget.Toast;
 
 import com.amplifyframework.core.Amplify;
 import com.trueproof.trueproof.R;
+import com.trueproof.trueproof.utils.UserSettings;
 
+import javax.inject.Inject;
+
+import dagger.hilt.android.AndroidEntryPoint;
+
+@AndroidEntryPoint
 public class LogInActivity extends AppCompatActivity {
     static final String TAG = "TrueProof.LogInActivity";
     Handler handler;
+
+    @Inject
+    UserSettings userSettings;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -61,6 +71,7 @@ public class LogInActivity extends AppCompatActivity {
                         r->{
                             if(r.isSignInComplete()){
                                 handler.sendEmptyMessage(1);
+                                userSettings.refreshCache(r2->{},r2->{});
                             }else {
                                 handler.sendEmptyMessage(2);
                             }

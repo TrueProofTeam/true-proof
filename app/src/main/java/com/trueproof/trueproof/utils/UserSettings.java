@@ -19,6 +19,7 @@ import com.amplifyframework.datastore.generated.model.TemperatureUnit;
 import com.amplifyframework.datastore.generated.model.User;
 
 import java.util.List;
+import java.util.concurrent.atomic.AtomicBoolean;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;
@@ -34,6 +35,7 @@ public class UserSettings {
     private final DistilleryRepository distilleryRepository;
     private final UserRepository userRepository;
     private Distillery cachedDistillery;
+    private User cachedUserSettings;
 
     @Inject
     public UserSettings(@ApplicationContext Context context,
@@ -109,14 +111,17 @@ public class UserSettings {
      * @param fail    The callback for when an error occurs. The ApiException is passed
      *                onto the user and the cause can be grabbed with getCause().
      */
-    public void getUserSettings(Consumer<User> success, Consumer<AmplifyException> fail) {
+    public void getUserSettings(Consumer<User> success, Consumer<Exception> fail) {
+        if (cachedUserSettings != null) {
+
+        }
+
         AuthUser authUser = Amplify.Auth.getCurrentUser();
         if (authUser == null) fail.accept(
                 new ApiException("user is not logged in",
                         new Exception(),
                         "maybe prompt the user to log in")
         );
-
         Amplify.Auth.fetchUserAttributes(
                 attributes -> {
                     String userId = getValueFromAuthUserAttributesByKey(attributes,
@@ -128,7 +133,7 @@ public class UserSettings {
                                     if (user != null) {
                                         success.accept(user);
                                     } else {
-                                        createNewUserEntity(authUser, success, fail);
+                                        fail.accept(new Exception("user object was not found in the database"));
                                     }
                                 },
                                 apiException -> {
@@ -136,11 +141,15 @@ public class UserSettings {
                                 }
                         );
                     } else {
-                        createNewUserEntity(authUser, success, fail);
+                        Log.i(TAG, "AuthUser custom:userId is null");
+                        createNewUserEntity(authUser,
+                                success, e -> {
+                                    fail.accept(e);
+                                });
                     }
                 },
                 error -> {
-                    Log.e("UserSettings", "getDistillery: ", error);
+                    Log.e("UserSettings", "Couldn't get authUser attributes", error);
                 }
         );
     }
@@ -159,6 +168,7 @@ public class UserSettings {
                             new AuthUserAttribute(AuthUserAttributeKey.custom("custom:userId"), newUser.getId()),
                             r2 -> {
                                 Log.i(TAG, "createNewUserEntity: Added userId to the authUser attributes");
+                                cachedUserSettings = newUser;
                                 success.accept(newUser);
                             },
                             authException -> {
@@ -184,26 +194,38 @@ public class UserSettings {
      * @param fail    The callback to be called when an error occurs.
      */
     public void saveUserSettings(User user, Consumer success, Consumer<ApiException> fail) {
-        userRepository.update(user, success, fail);
+        userRepository.update(user,
+                r -> {
+                    cachedUserSettings = user;
+                    success.accept(r);
+                },
+                fail
+        );
     }
 
 
     /**
-     *
-     * @param user      The user object to be made into the database
-     * @param success   The callback to be called when the settings are successfully saved.
-     * @param fail      the callback to be called when an errror occurs
+     * @param user    The user object to be made into the database
+     * @param success The callback to be called when the settings are successfully saved.
+     * @param fail    the callback to be called when an errror occurs
      */
-    public void addUser(User user, Consumer success, Consumer<ApiException> fail){
-        userRepository.save(user,success,fail);
+    public void addUser(User user, Consumer success, Consumer<ApiException> fail) {
+        userRepository.save(user,
+                r -> {
+                    cachedUserSettings = user;
+                    success.accept(r);
+                },
+                fail
+        );
+
     }
 
     /**
      * Updates the Distillery in the database
      *
-     * @param distillery  The distillery settings object to update.
-     * @param success     The callback to be called when the settings are successfully saved.
-     * @param fail        The callback to be called when an error occurs.
+     * @param distillery The distillery settings object to update.
+     * @param success    The callback to be called when the settings are successfully saved.
+     * @param fail       The callback to be called when an error occurs.
      */
     public void updateDistillerySettings(Distillery distillery, Consumer success, Consumer<ApiException> fail) {
         distilleryRepository.updateDistillery(distillery,
@@ -224,10 +246,74 @@ public class UserSettings {
      */
     private String getValueFromAuthUserAttributesByKey(List<AuthUserAttribute> attributes, String keyString) {
         for (AuthUserAttribute attribute : attributes) {
-            if (attribute.getKey().getKeyString().equals("custom:distilleryId")) {
+            if (attribute.getKey().getKeyString().equals(keyString)) {
                 return attribute.getValue();
             }
         }
         return null;
+    }
+
+    /**
+     * Gets the cached distillery object populated when the user signed in. If the cache has not been populated, returns null.
+     *
+     * @return
+     */
+    @Nullable
+    public Distillery getCachedDistillery() {
+        return cachedDistillery;
+    }
+
+    /**
+     * Gets the cached user settings populated when the user signed in. If the cache has not been populated, returns null.
+     *
+     * @return
+     */
+    @Nullable
+    public User getCachedUserSettings() {
+        return cachedUserSettings;
+    }
+
+    /**
+     * Run this on user log in, or sign up.
+     * Performs database requests and populates the cache for userSettings and Distillery settings.
+     */
+    public void refreshCache(Consumer success, Consumer<Exception> failure) {
+        AtomicBoolean distillery = new AtomicBoolean(false);
+        AtomicBoolean fail = new AtomicBoolean(false);
+        AtomicBoolean user = new AtomicBoolean(false);
+        getDistillery(
+                r -> {
+                    if (!fail.get() && user.get()) {
+                        success.accept(true);
+                    }
+                    distillery.set(true);
+                },
+                e -> {
+                    if (!fail.get()) {
+                        fail.set(true);
+                        failure.accept(e);
+                    }
+                });
+        getUserSettings(
+                r -> {
+                    user.set(true);
+                    if (!fail.get() && distillery.get()) {
+                        success.accept(true);
+                    }
+                },
+                e -> {
+                    if (!fail.get()) {
+                        fail.set(true);
+                        failure.accept(e);
+                    }
+                });
+    }
+
+    /**
+     * Run this when you log out a user to clear the cached userSettings and distillerySettings
+     */
+    public void invalidateCache() {
+        this.cachedUserSettings = null;
+        this.cachedDistillery = null;
     }
 }
