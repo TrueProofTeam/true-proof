@@ -79,7 +79,7 @@ public class BatchDetailActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem menuItem){
         if (menuItem.getItemId() == R.id.nav_settings)BatchDetailActivity.this.startActivity(new Intent(BatchDetailActivity.this, SettingsActivity.class));
         if (menuItem.getItemId() == R.id.nav_batch_list)BatchDetailActivity.this.startActivity(new Intent(BatchDetailActivity.this, BatchListActivity.class));
-        if (menuItem.getItemId() == R.id.nav_quick_calculator)BatchDetailActivity.this.startActivity(new Intent(BatchDetailActivity.this, TakeMeasurementActivity.class));
+        if (menuItem.getItemId() == R.id.nav_quick_calculator)BatchDetailActivity.this.startActivity(new Intent(BatchDetailActivity.this, MainActivity.class));
         return true;
     }
 

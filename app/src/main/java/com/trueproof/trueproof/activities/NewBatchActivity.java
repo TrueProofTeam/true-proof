@@ -124,7 +124,7 @@ public class NewBatchActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem menuItem){
         if (menuItem.getItemId() == R.id.nav_settings)NewBatchActivity.this.startActivity(new Intent(NewBatchActivity.this, SettingsActivity.class));
         if (menuItem.getItemId() == R.id.nav_batch_list)NewBatchActivity.this.startActivity(new Intent(NewBatchActivity.this, BatchListActivity.class));
-        if (menuItem.getItemId() == R.id.nav_quick_calculator)NewBatchActivity.this.startActivity(new Intent(NewBatchActivity.this, TakeMeasurementActivity.class));
+        if (menuItem.getItemId() == R.id.nav_quick_calculator)NewBatchActivity.this.startActivity(new Intent(NewBatchActivity.this, MainActivity.class));
         return true;
     }
 

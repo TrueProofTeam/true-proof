@@ -256,7 +256,7 @@ public class TakeMeasurementActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem menuItem){
         if (menuItem.getItemId() == R.id.nav_settings)TakeMeasurementActivity.this.startActivity(new Intent(TakeMeasurementActivity.this, SettingsActivity.class));
         if (menuItem.getItemId() == R.id.nav_batch_list)TakeMeasurementActivity.this.startActivity(new Intent(TakeMeasurementActivity.this, BatchListActivity.class));
-        if (menuItem.getItemId() == R.id.nav_quick_calculator)TakeMeasurementActivity.this.startActivity(new Intent(TakeMeasurementActivity.this, TakeMeasurementActivity.class));
+        if (menuItem.getItemId() == R.id.nav_quick_calculator)TakeMeasurementActivity.this.startActivity(new Intent(TakeMeasurementActivity.this, MainActivity.class));
         return true;
     }
 

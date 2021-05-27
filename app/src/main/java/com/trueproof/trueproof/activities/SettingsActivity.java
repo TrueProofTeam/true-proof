@@ -138,7 +138,7 @@ public class SettingsActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem menuItem){
         if (menuItem.getItemId() == R.id.nav_settings)SettingsActivity.this.startActivity(new Intent(SettingsActivity.this, SettingsActivity.class));
         if (menuItem.getItemId() == R.id.nav_batch_list)SettingsActivity.this.startActivity(new Intent(SettingsActivity.this, BatchListActivity.class));
-        if (menuItem.getItemId() == R.id.nav_quick_calculator)SettingsActivity.this.startActivity(new Intent(SettingsActivity.this, TakeMeasurementActivity.class));
+        if (menuItem.getItemId() == R.id.nav_quick_calculator)SettingsActivity.this.startActivity(new Intent(SettingsActivity.this, MainActivity.class));
         return true;
     }
 }

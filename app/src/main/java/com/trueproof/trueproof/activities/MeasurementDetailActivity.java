@@ -27,7 +27,7 @@ public class MeasurementDetailActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem menuItem){
         if (menuItem.getItemId() == R.id.nav_settings)MeasurementDetailActivity.this.startActivity(new Intent(MeasurementDetailActivity.this, SettingsActivity.class));
         if (menuItem.getItemId() == R.id.nav_batch_list)MeasurementDetailActivity.this.startActivity(new Intent(MeasurementDetailActivity.this, BatchListActivity.class));
-        if (menuItem.getItemId() == R.id.nav_quick_calculator)MeasurementDetailActivity.this.startActivity(new Intent(MeasurementDetailActivity.this, TakeMeasurementActivity.class));
+        if (menuItem.getItemId() == R.id.nav_quick_calculator)MeasurementDetailActivity.this.startActivity(new Intent(MeasurementDetailActivity.this, MainActivity.class));
         return true;
     }
 }
