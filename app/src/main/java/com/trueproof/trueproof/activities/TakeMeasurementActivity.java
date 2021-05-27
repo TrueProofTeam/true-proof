@@ -253,6 +253,7 @@ public class TakeMeasurementActivity extends AppCompatActivity {
         return true;
     }
 
+
     @Override
     public boolean onOptionsItemSelected(MenuItem menuItem){
         if (menuItem.getItemId() == R.id.nav_settings)TakeMeasurementActivity.this.startActivity(new Intent(TakeMeasurementActivity.this, SettingsActivity.class));

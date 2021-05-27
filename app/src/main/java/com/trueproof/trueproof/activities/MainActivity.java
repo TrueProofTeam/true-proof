@@ -216,8 +216,14 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public boolean onCreateOptionsMenu (Menu menu){
+        AuthUser principal = Amplify.Auth.getCurrentUser();
+        if (principal != null){
+
+
         getMenuInflater().inflate(R.menu.menu, menu);
         return true;
+        }
+        else return false;
     }
 
     @Override
