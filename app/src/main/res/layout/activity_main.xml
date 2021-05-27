@@ -53,14 +53,11 @@
         android:id="@+id/textViewTermsOfUseMain"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
-        android:layout_marginBottom="8dp"
+        android:layout_marginTop="48dp"
         android:text="Terms of Use"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textViewGaugingECFR" />
+        app:layout_constraintTop_toBottomOf="@+id/textViewCalculatedProofMain" />
 
     <EditText
         android:id="@+id/editTextHydrometerMain"
@@ -151,47 +148,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editTextHydrometerMain" />
 
-    <TextView
-        android:id="@+id/textViewTTBGaugingManual"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
-        android:layout_marginBottom="10dp"
-        android:text="@string/TtbTable"
-        app:layout_constraintBottom_toTopOf="@+id/textViewInterpolationGaugingManual"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textViewProofMain"
-        app:layout_constraintVertical_bias="1.0" />
-
-    <TextView
-        android:id="@+id/textViewInterpolationGaugingManual"
-        android:layout_width="wrap_content"
-        android:layout_height="19dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginBottom="10dp"
-        android:text="@string/interpolationTable"
-        app:layout_constraintBottom_toTopOf="@+id/textViewGaugingECFR"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textViewTTBGaugingManual" />
-
-    <TextView
-        android:id="@+id/textViewGaugingECFR"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="117dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginEnd="114dp"
-        android:layout_marginBottom="8dp"
-        android:text="@string/ecfr"
-        app:layout_constraintBottom_toTopOf="@+id/textViewTermsOfUseMain"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textViewInterpolationGaugingManual"
-        app:layout_constraintVertical_bias="0.0" />
-
     <RadioGroup
         android:id="@+id/radioGroupMain"
         android:layout_width="wrap_content"
@@ -220,7 +176,6 @@
             android:text="Temp in °F"
             app:layout_constraintEnd_toEndOf="parent" />
     </RadioGroup>
-
 
     <TextView
         android:id="@+id/textViewDateTimeLocal"
