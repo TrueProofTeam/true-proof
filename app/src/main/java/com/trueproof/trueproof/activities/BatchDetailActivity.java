@@ -14,6 +14,7 @@ import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.amplifyframework.core.Amplify;
 import com.amplifyframework.datastore.generated.model.Batch;
 import com.trueproof.trueproof.R;
 import com.trueproof.trueproof.utils.JsonConverter;
@@ -83,6 +84,15 @@ public class BatchDetailActivity extends AppCompatActivity {
         if (menuItem.getItemId() == R.id.nav_settings)BatchDetailActivity.this.startActivity(new Intent(BatchDetailActivity.this, SettingsActivity.class));
         if (menuItem.getItemId() == R.id.nav_batch_list)BatchDetailActivity.this.startActivity(new Intent(BatchDetailActivity.this, BatchListActivity.class));
         if (menuItem.getItemId() == R.id.nav_quick_calculator)BatchDetailActivity.this.startActivity(new Intent(BatchDetailActivity.this, MainActivity.class));
+        if (menuItem.getItemId() == R.id.nav_log_out){
+            Amplify.Auth.signOut(
+                    ()->{
+                        Log.i(TAG,"Success Logout!");
+                    },
+                    r->{});
+            BatchDetailActivity.this.startActivity(new Intent( BatchDetailActivity.this,MainActivity.class));
+            finish();
+        }
         return true;
     }
     private void modifyActionbar () {

@@ -232,6 +232,15 @@ public class MainActivity extends AppCompatActivity {
         if (menuItem.getItemId() == R.id.nav_settings)MainActivity.this.startActivity(new Intent(MainActivity.this, SettingsActivity.class));
         if (menuItem.getItemId() == R.id.nav_batch_list)MainActivity.this.startActivity(new Intent(MainActivity.this, BatchListActivity.class));
         if (menuItem.getItemId() == R.id.nav_quick_calculator)MainActivity.this.startActivity(new Intent(MainActivity.this, MainActivity.class));
+        if (menuItem.getItemId() == R.id.nav_log_out){
+            Amplify.Auth.signOut(
+                    ()->{
+                        Log.i(TAG,"Success Logout!");
+                    },
+                    r->{});
+            MainActivity.this.startActivity(new Intent( MainActivity.this,MainActivity.class));
+            finish();
+        }
         return true;
         }
 

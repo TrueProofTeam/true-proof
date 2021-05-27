@@ -12,12 +12,14 @@ import android.os.Bundle;
 import android.text.Editable;
 import android.text.InputFilter;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.amplifyframework.core.Amplify;
 import com.amplifyframework.datastore.generated.model.Batch;
 import com.amplifyframework.datastore.generated.model.Distillery;
 import com.amplifyframework.datastore.generated.model.Measurement;
@@ -259,6 +261,15 @@ public class TakeMeasurementActivity extends AppCompatActivity {
         if (menuItem.getItemId() == R.id.nav_settings)TakeMeasurementActivity.this.startActivity(new Intent(TakeMeasurementActivity.this, SettingsActivity.class));
         if (menuItem.getItemId() == R.id.nav_batch_list)TakeMeasurementActivity.this.startActivity(new Intent(TakeMeasurementActivity.this, BatchListActivity.class));
         if (menuItem.getItemId() == R.id.nav_quick_calculator)TakeMeasurementActivity.this.startActivity(new Intent(TakeMeasurementActivity.this, MainActivity.class));
+        if (menuItem.getItemId() == R.id.nav_log_out){
+            Amplify.Auth.signOut(
+                    ()->{
+                        Log.i(TAG,"Success Logout!");
+                    },
+                    r->{});
+            TakeMeasurementActivity.this.startActivity(new Intent( TakeMeasurementActivity.this,MainActivity.class));
+            finish();
+        }
         return true;
     }
 

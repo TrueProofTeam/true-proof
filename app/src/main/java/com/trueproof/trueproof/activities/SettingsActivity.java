@@ -17,6 +17,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.amplifyframework.core.Amplify;
 import com.amplifyframework.datastore.generated.model.Distillery;
 import com.amplifyframework.datastore.generated.model.TemperatureUnit;
 import com.amplifyframework.datastore.generated.model.User;
@@ -141,6 +142,15 @@ public class SettingsActivity extends AppCompatActivity {
         if (menuItem.getItemId() == R.id.nav_settings)SettingsActivity.this.startActivity(new Intent(SettingsActivity.this, SettingsActivity.class));
         if (menuItem.getItemId() == R.id.nav_batch_list)SettingsActivity.this.startActivity(new Intent(SettingsActivity.this, BatchListActivity.class));
         if (menuItem.getItemId() == R.id.nav_quick_calculator)SettingsActivity.this.startActivity(new Intent(SettingsActivity.this, MainActivity.class));
+        if (menuItem.getItemId() == R.id.nav_log_out){
+            Amplify.Auth.signOut(
+                    ()->{
+                        Log.i(TAG,"Success Logout!");
+                    },
+                    r->{});
+            SettingsActivity.this.startActivity(new Intent( SettingsActivity.this,MainActivity.class));
+            finish();
+        }
         return true;
     }
     private void modifyActionbar () {

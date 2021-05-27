@@ -15,6 +15,7 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.amplifyframework.core.Amplify;
 import com.amplifyframework.datastore.generated.model.Batch;
 import com.trueproof.trueproof.R;
 import com.trueproof.trueproof.adapters.ActiveBatchListAdapter;
@@ -138,6 +139,15 @@ public class BatchListActivity extends AppCompatActivity {
         if (menuItem.getItemId() == R.id.nav_settings)BatchListActivity.this.startActivity(new Intent(BatchListActivity.this, SettingsActivity.class));
         if (menuItem.getItemId() == R.id.nav_batch_list)BatchListActivity.this.startActivity(new Intent(BatchListActivity.this, BatchListActivity.class));
         if (menuItem.getItemId() == R.id.nav_quick_calculator)BatchListActivity.this.startActivity(new Intent(BatchListActivity.this, MainActivity.class));
+        if (menuItem.getItemId() == R.id.nav_log_out){
+            Amplify.Auth.signOut(
+                    ()->{
+                        Log.i(TAG,"Success Logout!");
+                    },
+                    r->{});
+            BatchListActivity.this.startActivity(new Intent( BatchListActivity.this,MainActivity.class));
+            finish();
+        }
         return true;
     }
     private void modifyActionbar () {

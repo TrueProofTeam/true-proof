@@ -28,5 +28,9 @@
     </string>
     <string name="userSettingText">User Settings</string>
     <string name="noDistilleryNameText">Untitled Distillery</string>
+    <string name="logOutText">Logout</string>
+    <string name="quickCaculatorText">Quick Calculator</string>
+    <string name="batchListText">Batch List</string>
+    <string name="settingsText">Settings</string>
 
 </resources>
