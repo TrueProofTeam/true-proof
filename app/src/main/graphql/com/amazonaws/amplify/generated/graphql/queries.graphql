@@ -1,35 +1,4 @@
 # this is an auto generated file. This will be overwritten
-query SyncDistilleries(
-  $filter: ModelDistilleryFilterInput
-  $limit: Int
-  $nextToken: String
-  $lastSync: AWSTimestamp
-) {
-  syncDistilleries(
-    filter: $filter
-    limit: $limit
-    nextToken: $nextToken
-    lastSync: $lastSync
-  ) {
-    items {
-      id
-      name
-      dspID
-      users
-      batches {
-        nextToken
-        startedAt
-      }
-      _version
-      _deleted
-      _lastChangedAt
-      createdAt
-      updatedAt
-    }
-    nextToken
-    startedAt
-  }
-}
 query GetDistillery($id: ID!) {
   getDistillery(id: $id) {
     id
@@ -47,16 +16,9 @@ query GetDistillery($id: ID!) {
         completedAt
         createdAt
         updatedAt
-        _version
-        _deleted
-        _lastChangedAt
       }
       nextToken
-      startedAt
     }
-    _version
-    _deleted
-    _lastChangedAt
     createdAt
     updatedAt
   }
@@ -74,61 +36,11 @@ query ListDistillerys(
       users
       batches {
         nextToken
-        startedAt
       }
-      _version
-      _deleted
-      _lastChangedAt
       createdAt
       updatedAt
     }
     nextToken
-    startedAt
-  }
-}
-query SyncBatches(
-  $filter: ModelBatchFilterInput
-  $limit: Int
-  $nextToken: String
-  $lastSync: AWSTimestamp
-) {
-  syncBatches(
-    filter: $filter
-    limit: $limit
-    nextToken: $nextToken
-    lastSync: $lastSync
-  ) {
-    items {
-      id
-      distilleryID
-      batchIdentifier
-      batchNumber
-      status
-      type
-      completedAt
-      createdAt
-      updatedAt
-      distillery {
-        id
-        name
-        dspID
-        users
-        _version
-        _deleted
-        _lastChangedAt
-        createdAt
-        updatedAt
-      }
-      measurements {
-        nextToken
-        startedAt
-      }
-      _version
-      _deleted
-      _lastChangedAt
-    }
-    nextToken
-    startedAt
   }
 }
 query GetBatch($id: ID!) {
@@ -149,11 +61,7 @@ query GetBatch($id: ID!) {
       users
       batches {
         nextToken
-        startedAt
       }
-      _version
-      _deleted
-      _lastChangedAt
       createdAt
       updatedAt
     }
@@ -171,16 +79,9 @@ query GetBatch($id: ID!) {
         takenAt
         createdAt
         updatedAt
-        _version
-        _deleted
-        _lastChangedAt
       }
       nextToken
-      startedAt
     }
-    _version
-    _deleted
-    _lastChangedAt
   }
 }
 query ListBatchs(
@@ -204,69 +105,14 @@ query ListBatchs(
         name
         dspID
         users
-        _version
-        _deleted
-        _lastChangedAt
         createdAt
         updatedAt
       }
       measurements {
         nextToken
-        startedAt
       }
-      _version
-      _deleted
-      _lastChangedAt
     }
     nextToken
-    startedAt
-  }
-}
-query SyncMeasurements(
-  $filter: ModelMeasurementFilterInput
-  $limit: Int
-  $nextToken: String
-  $lastSync: AWSTimestamp
-) {
-  syncMeasurements(
-    filter: $filter
-    limit: $limit
-    nextToken: $nextToken
-    lastSync: $lastSync
-  ) {
-    items {
-      id
-      batchID
-      trueProof
-      temperature
-      hydrometer
-      temperatureCorrection
-      hydrometerCorrection
-      note
-      flag
-      takenAt
-      createdAt
-      updatedAt
-      batch {
-        id
-        distilleryID
-        batchIdentifier
-        batchNumber
-        status
-        type
-        completedAt
-        createdAt
-        updatedAt
-        _version
-        _deleted
-        _lastChangedAt
-      }
-      _version
-      _deleted
-      _lastChangedAt
-    }
-    nextToken
-    startedAt
   }
 }
 query GetMeasurement($id: ID!) {
@@ -298,23 +144,13 @@ query GetMeasurement($id: ID!) {
         name
         dspID
         users
-        _version
-        _deleted
-        _lastChangedAt
         createdAt
         updatedAt
       }
       measurements {
         nextToken
-        startedAt
       }
-      _version
-      _deleted
-      _lastChangedAt
     }
-    _version
-    _deleted
-    _lastChangedAt
   }
 }
 query ListMeasurements(
@@ -346,44 +182,9 @@ query ListMeasurements(
         completedAt
         createdAt
         updatedAt
-        _version
-        _deleted
-        _lastChangedAt
       }
-      _version
-      _deleted
-      _lastChangedAt
     }
     nextToken
-    startedAt
-  }
-}
-query SyncUsers(
-  $filter: ModelUserFilterInput
-  $limit: Int
-  $nextToken: String
-  $lastSync: AWSTimestamp
-) {
-  syncUsers(
-    filter: $filter
-    limit: $limit
-    nextToken: $nextToken
-    lastSync: $lastSync
-  ) {
-    items {
-      id
-      email
-      defaultTemperatureUnit
-      defaultTemperatureCorrection
-      defaultHydrometerCorrection
-      _version
-      _deleted
-      _lastChangedAt
-      createdAt
-      updatedAt
-    }
-    nextToken
-    startedAt
   }
 }
 query GetUser($id: ID!) {
@@ -393,9 +194,6 @@ query GetUser($id: ID!) {
     defaultTemperatureUnit
     defaultTemperatureCorrection
     defaultHydrometerCorrection
-    _version
-    _deleted
-    _lastChangedAt
     createdAt
     updatedAt
   }
@@ -412,13 +210,9 @@ query ListUsers(
       defaultTemperatureUnit
       defaultTemperatureCorrection
       defaultHydrometerCorrection
-      _version
-      _deleted
-      _lastChangedAt
       createdAt
       updatedAt
     }
     nextToken
-    startedAt
   }
 }

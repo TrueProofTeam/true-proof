@@ -16,16 +16,9 @@ subscription OnCreateDistillery {
         completedAt
         createdAt
         updatedAt
-        _version
-        _deleted
-        _lastChangedAt
       }
       nextToken
-      startedAt
     }
-    _version
-    _deleted
-    _lastChangedAt
     createdAt
     updatedAt
   }
@@ -47,16 +40,9 @@ subscription OnUpdateDistillery {
         completedAt
         createdAt
         updatedAt
-        _version
-        _deleted
-        _lastChangedAt
       }
       nextToken
-      startedAt
     }
-    _version
-    _deleted
-    _lastChangedAt
     createdAt
     updatedAt
   }
@@ -78,16 +64,9 @@ subscription OnDeleteDistillery {
         completedAt
         createdAt
         updatedAt
-        _version
-        _deleted
-        _lastChangedAt
       }
       nextToken
-      startedAt
     }
-    _version
-    _deleted
-    _lastChangedAt
     createdAt
     updatedAt
   }
@@ -110,11 +89,7 @@ subscription OnCreateBatch {
       users
       batches {
         nextToken
-        startedAt
       }
-      _version
-      _deleted
-      _lastChangedAt
       createdAt
       updatedAt
     }
@@ -132,16 +107,9 @@ subscription OnCreateBatch {
         takenAt
         createdAt
         updatedAt
-        _version
-        _deleted
-        _lastChangedAt
       }
       nextToken
-      startedAt
     }
-    _version
-    _deleted
-    _lastChangedAt
   }
 }
 subscription OnUpdateBatch {
@@ -162,11 +130,7 @@ subscription OnUpdateBatch {
       users
       batches {
         nextToken
-        startedAt
       }
-      _version
-      _deleted
-      _lastChangedAt
       createdAt
       updatedAt
     }
@@ -184,16 +148,9 @@ subscription OnUpdateBatch {
         takenAt
         createdAt
         updatedAt
-        _version
-        _deleted
-        _lastChangedAt
       }
       nextToken
-      startedAt
     }
-    _version
-    _deleted
-    _lastChangedAt
   }
 }
 subscription OnDeleteBatch {
@@ -214,11 +171,7 @@ subscription OnDeleteBatch {
       users
       batches {
         nextToken
-        startedAt
       }
-      _version
-      _deleted
-      _lastChangedAt
       createdAt
       updatedAt
     }
@@ -236,16 +189,9 @@ subscription OnDeleteBatch {
         takenAt
         createdAt
         updatedAt
-        _version
-        _deleted
-        _lastChangedAt
       }
       nextToken
-      startedAt
     }
-    _version
-    _deleted
-    _lastChangedAt
   }
 }
 subscription OnCreateMeasurement {
@@ -277,23 +223,13 @@ subscription OnCreateMeasurement {
         name
         dspID
         users
-        _version
-        _deleted
-        _lastChangedAt
         createdAt
         updatedAt
       }
       measurements {
         nextToken
-        startedAt
       }
-      _version
-      _deleted
-      _lastChangedAt
     }
-    _version
-    _deleted
-    _lastChangedAt
   }
 }
 subscription OnUpdateMeasurement {
@@ -325,23 +261,13 @@ subscription OnUpdateMeasurement {
         name
         dspID
         users
-        _version
-        _deleted
-        _lastChangedAt
         createdAt
         updatedAt
       }
       measurements {
         nextToken
-        startedAt
       }
-      _version
-      _deleted
-      _lastChangedAt
     }
-    _version
-    _deleted
-    _lastChangedAt
   }
 }
 subscription OnDeleteMeasurement {
@@ -373,23 +299,13 @@ subscription OnDeleteMeasurement {
         name
         dspID
         users
-        _version
-        _deleted
-        _lastChangedAt
         createdAt
         updatedAt
       }
       measurements {
         nextToken
-        startedAt
       }
-      _version
-      _deleted
-      _lastChangedAt
     }
-    _version
-    _deleted
-    _lastChangedAt
   }
 }
 subscription OnCreateUser {
@@ -399,9 +315,6 @@ subscription OnCreateUser {
     defaultTemperatureUnit
     defaultTemperatureCorrection
     defaultHydrometerCorrection
-    _version
-    _deleted
-    _lastChangedAt
     createdAt
     updatedAt
   }
@@ -413,9 +326,6 @@ subscription OnUpdateUser {
     defaultTemperatureUnit
     defaultTemperatureCorrection
     defaultHydrometerCorrection
-    _version
-    _deleted
-    _lastChangedAt
     createdAt
     updatedAt
   }
@@ -427,9 +337,6 @@ subscription OnDeleteUser {
     defaultTemperatureUnit
     defaultTemperatureCorrection
     defaultHydrometerCorrection
-    _version
-    _deleted
-    _lastChangedAt
     createdAt
     updatedAt
   }

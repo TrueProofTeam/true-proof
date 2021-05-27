@@ -19,16 +19,9 @@ mutation CreateDistillery(
         completedAt
         createdAt
         updatedAt
-        _version
-        _deleted
-        _lastChangedAt
       }
       nextToken
-      startedAt
     }
-    _version
-    _deleted
-    _lastChangedAt
     createdAt
     updatedAt
   }
@@ -53,16 +46,9 @@ mutation UpdateDistillery(
         completedAt
         createdAt
         updatedAt
-        _version
-        _deleted
-        _lastChangedAt
       }
       nextToken
-      startedAt
     }
-    _version
-    _deleted
-    _lastChangedAt
     createdAt
     updatedAt
   }
@@ -87,16 +73,9 @@ mutation DeleteDistillery(
         completedAt
         createdAt
         updatedAt
-        _version
-        _deleted
-        _lastChangedAt
       }
       nextToken
-      startedAt
     }
-    _version
-    _deleted
-    _lastChangedAt
     createdAt
     updatedAt
   }
@@ -122,11 +101,7 @@ mutation CreateBatch(
       users
       batches {
         nextToken
-        startedAt
       }
-      _version
-      _deleted
-      _lastChangedAt
       createdAt
       updatedAt
     }
@@ -144,16 +119,9 @@ mutation CreateBatch(
         takenAt
         createdAt
         updatedAt
-        _version
-        _deleted
-        _lastChangedAt
       }
       nextToken
-      startedAt
     }
-    _version
-    _deleted
-    _lastChangedAt
   }
 }
 mutation UpdateBatch(
@@ -177,11 +145,7 @@ mutation UpdateBatch(
       users
       batches {
         nextToken
-        startedAt
       }
-      _version
-      _deleted
-      _lastChangedAt
       createdAt
       updatedAt
     }
@@ -199,16 +163,9 @@ mutation UpdateBatch(
         takenAt
         createdAt
         updatedAt
-        _version
-        _deleted
-        _lastChangedAt
       }
       nextToken
-      startedAt
     }
-    _version
-    _deleted
-    _lastChangedAt
   }
 }
 mutation DeleteBatch(
@@ -232,11 +189,7 @@ mutation DeleteBatch(
       users
       batches {
         nextToken
-        startedAt
       }
-      _version
-      _deleted
-      _lastChangedAt
       createdAt
       updatedAt
     }
@@ -254,16 +207,9 @@ mutation DeleteBatch(
         takenAt
         createdAt
         updatedAt
-        _version
-        _deleted
-        _lastChangedAt
       }
       nextToken
-      startedAt
     }
-    _version
-    _deleted
-    _lastChangedAt
   }
 }
 mutation CreateMeasurement(
@@ -298,23 +244,13 @@ mutation CreateMeasurement(
         name
         dspID
         users
-        _version
-        _deleted
-        _lastChangedAt
         createdAt
         updatedAt
       }
       measurements {
         nextToken
-        startedAt
       }
-      _version
-      _deleted
-      _lastChangedAt
     }
-    _version
-    _deleted
-    _lastChangedAt
   }
 }
 mutation UpdateMeasurement(
@@ -349,23 +285,13 @@ mutation UpdateMeasurement(
         name
         dspID
         users
-        _version
-        _deleted
-        _lastChangedAt
         createdAt
         updatedAt
       }
       measurements {
         nextToken
-        startedAt
       }
-      _version
-      _deleted
-      _lastChangedAt
     }
-    _version
-    _deleted
-    _lastChangedAt
   }
 }
 mutation DeleteMeasurement(
@@ -400,23 +326,13 @@ mutation DeleteMeasurement(
         name
         dspID
         users
-        _version
-        _deleted
-        _lastChangedAt
         createdAt
         updatedAt
       }
       measurements {
         nextToken
-        startedAt
       }
-      _version
-      _deleted
-      _lastChangedAt
     }
-    _version
-    _deleted
-    _lastChangedAt
   }
 }
 mutation CreateUser(
@@ -429,9 +345,6 @@ mutation CreateUser(
     defaultTemperatureUnit
     defaultTemperatureCorrection
     defaultHydrometerCorrection
-    _version
-    _deleted
-    _lastChangedAt
     createdAt
     updatedAt
   }
@@ -446,9 +359,6 @@ mutation UpdateUser(
     defaultTemperatureUnit
     defaultTemperatureCorrection
     defaultHydrometerCorrection
-    _version
-    _deleted
-    _lastChangedAt
     createdAt
     updatedAt
   }
@@ -463,9 +373,6 @@ mutation DeleteUser(
     defaultTemperatureUnit
     defaultTemperatureCorrection
     defaultHydrometerCorrection
-    _version
-    _deleted
-    _lastChangedAt
     createdAt
     updatedAt
   }
