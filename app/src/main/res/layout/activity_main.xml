@@ -10,7 +10,7 @@
         android:id="@+id/editTextTemperatureMain"
         android:layout_width="129dp"
         android:layout_height="40dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="8dp"
         android:layout_marginEnd="16dp"
         android:inputType="numberDecimal"
         android:text="0.0"
@@ -25,8 +25,7 @@
         android:text="Temperature"
         app:layout_constraintBottom_toBottomOf="@+id/editTextTemperatureMain"
         app:layout_constraintEnd_toStartOf="@+id/editTextTemperatureCorrectionMain"
-        app:layout_constraintTop_toTopOf="@+id/editTextTemperatureMain"
-        app:layout_constraintVertical_bias="0.571" />
+        app:layout_constraintTop_toTopOf="@+id/editTextTemperatureMain" />
 
     <Button
             android:text="Log in to save your data"
@@ -43,6 +42,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
+        android:layout_marginEnd="16dp"
         android:text="Quick Proofing Calculator"
         android:textAppearance="@style/TextAppearance.AppCompat.Large"
         android:textSize="30sp"
@@ -63,7 +63,7 @@
         android:id="@+id/editTextHydrometerMain"
         android:layout_width="129dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
+        android:layout_marginTop="16dp"
         android:layout_marginEnd="16dp"
         android:inputType="numberDecimal"
         android:text="0.0"
@@ -79,8 +79,7 @@
         android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="@+id/textViewCalculatedProofMain"
         app:layout_constraintEnd_toStartOf="@+id/textViewCalculatedProofMain"
-        app:layout_constraintTop_toTopOf="@+id/textViewCalculatedProofMain"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintTop_toTopOf="@+id/textViewCalculatedProofMain" />
 
     <EditText
         android:id="@+id/editTextTemperatureCorrectionMain"
@@ -97,8 +96,9 @@
         android:id="@+id/textViewCalculatedProofMain"
         android:layout_width="129dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="32dp"
         android:layout_marginEnd="16dp"
+        android:background="@drawable/border"
         android:text="76.4"
         android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -112,8 +112,7 @@
         android:text="Temperature Correction"
         app:layout_constraintBottom_toBottomOf="@+id/editTextTemperatureCorrectionMain"
         app:layout_constraintEnd_toStartOf="@+id/editTextTemperatureCorrectionMain"
-        app:layout_constraintTop_toTopOf="@+id/editTextTemperatureCorrectionMain"
-        app:layout_constraintVertical_bias="0.619" />
+        app:layout_constraintTop_toTopOf="@+id/editTextTemperatureCorrectionMain" />
 
     <TextView
         android:id="@+id/textViewHydrometerMain"
@@ -123,8 +122,7 @@
         android:text="Hydrometer"
         app:layout_constraintBottom_toBottomOf="@+id/editTextHydrometerMain"
         app:layout_constraintEnd_toStartOf="@+id/editTextHydrometerMain"
-        app:layout_constraintTop_toTopOf="@+id/editTextHydrometerMain"
-        app:layout_constraintVertical_bias="0.322" />
+        app:layout_constraintTop_toTopOf="@+id/editTextHydrometerMain" />
 
     <TextView
         android:id="@+id/textViewHydrometerCorrectionMain"
@@ -134,8 +132,7 @@
         android:text="Hydrometer Correction"
         app:layout_constraintBottom_toBottomOf="@+id/editTextHydrometerCorrectionMain"
         app:layout_constraintEnd_toStartOf="@+id/editTextHydrometerCorrectionMain"
-        app:layout_constraintTop_toTopOf="@+id/editTextHydrometerCorrectionMain"
-        app:layout_constraintVertical_bias="0.58" />
+        app:layout_constraintTop_toTopOf="@+id/editTextHydrometerCorrectionMain" />
 
     <EditText
         android:id="@+id/editTextHydrometerCorrectionMain"
