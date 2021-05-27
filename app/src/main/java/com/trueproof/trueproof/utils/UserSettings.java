@@ -33,6 +33,7 @@ public class UserSettings {
     private final SharedPreferences sharedPreferences;
     private final DistilleryRepository distilleryRepository;
     private final UserRepository userRepository;
+    private Distillery cachedDistillery;
 
     @Inject
     public UserSettings(@ApplicationContext Context context,
@@ -65,6 +66,10 @@ public class UserSettings {
      *                onto the user and the cause can be grabbed with getCause().
      */
     public void getDistillery(Consumer<Distillery> success, Consumer<ApiException> fail) {
+        if (cachedDistillery != null) {
+            success.accept(cachedDistillery);
+            return;
+        }
         AuthUser authUser = Amplify.Auth.getCurrentUser();
         if (authUser == null) fail.accept(
                 new ApiException("user is not logged in",
@@ -78,7 +83,11 @@ public class UserSettings {
                             "custom:distilleryId");
                     if (distilleryId != null) {
                         distilleryRepository.getDistillery(distilleryId,
-                                success,
+                                distillery -> {
+                                    cachedDistillery = distillery;
+                                    success.accept(distillery);
+                                }
+                                ,
                                 fail
                         );
                     } else {
@@ -189,6 +198,20 @@ public class UserSettings {
         userRepository.save(user,success,fail);
     }
 
+    /**
+     * Updates the Distillery in the database
+     *
+     * @param distillery  The distillery settings object to update.
+     * @param success     The callback to be called when the settings are successfully saved.
+     * @param fail        The callback to be called when an error occurs.
+     */
+    public void updateDistillerySettings(Distillery distillery, Consumer success, Consumer<ApiException> fail) {
+        distilleryRepository.updateDistillery(distillery,
+                d -> {
+                    cachedDistillery = distillery;
+                    success.accept(d);
+                }, fail);
+    }
 
     /**
      * Gets the value from a list of AuthUserAttribute given a key. These AuthUserAttributes are
