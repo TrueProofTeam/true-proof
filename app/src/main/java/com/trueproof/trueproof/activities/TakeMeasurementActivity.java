@@ -86,7 +86,6 @@ public class TakeMeasurementActivity extends AppCompatActivity implements Measur
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_take_measurement);
-        modifyActionbar();
         inputLimitListener();
         saveMeasurement();
 
@@ -298,8 +297,4 @@ public class TakeMeasurementActivity extends AppCompatActivity implements Measur
         return activityUtils.onOptionsItemSelected(this, menuItem);
     }
 
-    private void modifyActionbar () {
-        ActionBar actionBar = getSupportActionBar();
-        if (actionBar != null) actionBar.setTitle("Take Measurement");
-    }
 }

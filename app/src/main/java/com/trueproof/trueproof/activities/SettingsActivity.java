@@ -245,9 +245,5 @@ public class SettingsActivity extends AppCompatActivity {
         return activityUtils.onOptionsItemSelected(this, menuItem);
     }
 
-    private void modifyActionbar () {
-        ActionBar actionBar = getSupportActionBar();
-        if (actionBar != null) actionBar.setTitle("Settings");
-    }
 }
 
