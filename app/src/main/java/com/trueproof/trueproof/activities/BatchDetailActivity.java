@@ -85,13 +85,9 @@ public class BatchDetailActivity extends AppCompatActivity {
                     String type =  ((EditText)findViewById(R.id.editTextTypeBatchDetail)).getText().toString();
                     int number =  Integer.parseInt(String.valueOf(((EditText)findViewById(R.id.editTextBatchNumberBatchDetail)).getText().toString()));
                     String batchIdentifier = ((EditText)findViewById(R.id.editTextIdentifierBatchDetail)).getText().toString();
-//                    Batch updateBatch = Batch.builder().status(Status.ACTIVE).type(type).batchNumber(number).batchIdentifier(batchIdentifier).id(batch.getId()).build();
                     Batch batch1 = Batch.builder().status(Status.ACTIVE).type(type).batchNumber(number).batchIdentifier(batchIdentifier).distillery(batch.getDistillery()).id(batch.getId()).build();
                     batchRepository.updateBatch(batch1, onSuccess ->{
-//                        Intent intent = new Intent(BatchDetailActivity.this, BatchDetailActivity.class);
-//                        intent.putExtra(BATCH_JSON, jsonConverter.batchToJson(batch1));
-//                        startActivity(intent);
-                        Toast.makeText(getApplicationContext(), "BATCH UPDATED", Toast.LENGTH_LONG).show();
+                        button.setText("UPDATED");
                     }, onFail->{});
 
                 }
