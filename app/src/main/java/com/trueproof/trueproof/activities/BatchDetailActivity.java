@@ -14,9 +14,12 @@ import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.amplifyframework.auth.AuthUser;
 import com.amplifyframework.core.Amplify;
 import com.amplifyframework.datastore.generated.model.Batch;
+import com.amplifyframework.datastore.generated.model.Status;
 import com.trueproof.trueproof.R;
+import com.trueproof.trueproof.utils.BatchRepository;
 import com.trueproof.trueproof.utils.JsonConverter;
 
 import javax.inject.Inject;
@@ -31,6 +34,9 @@ public class BatchDetailActivity extends AppCompatActivity {
     @Inject
     JsonConverter jsonConverter;
 
+    @Inject
+    BatchRepository batchRepository;
+
     Batch batch;
 
     @Override
@@ -44,6 +50,7 @@ public class BatchDetailActivity extends AppCompatActivity {
         modifyActionbar();
         Intent intent = getIntent();
         getBatchFromIntent(intent);
+        initializeUpdateButton();
 
 
     }
@@ -65,7 +72,25 @@ public class BatchDetailActivity extends AppCompatActivity {
             Log.e(TAG, "No batch JSON in the intent!");
         }
     }
+    private void initializeUpdateButton() {
 
+        Button button = findViewById(R.id.buttonUpdateBatch);
+
+
+            button.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    String type =  ((EditText)findViewById(R.id.editTextTypeBatchDetail)).getText().toString();
+                    int number =  Integer.parseInt(String.valueOf(((EditText)findViewById(R.id.editTextBatchNumberBatchDetail)).getText().toString()));
+                    String batchIdentifier = ((EditText)findViewById(R.id.editTextIdentifierBatchDetail)).getText().toString();
+                    Batch updateBatch = Batch.builder().status(Status.ACTIVE).type(type).batchNumber(number).batchIdentifier(batchIdentifier).id(batch.getId()).build();
+                    batchRepository.updateBatch(updateBatch, onSuccess ->{}, onFail->{});
+                    Intent intent = new Intent(BatchDetailActivity.this, BatchDetailActivity.class);
+                    startActivity(intent);
+                }
+            });
+
+    }
     private void populateTextFields(){
         if (batch != null){
             if (batch.getType() != null) ((EditText) findViewById(R.id.editTextTypeBatchDetail)).setText(batch.getType());
