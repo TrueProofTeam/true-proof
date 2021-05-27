@@ -11,6 +11,7 @@ import android.widget.EditText;
 
 import androidx.activity.result.contract.ActivityResultContract;
 import androidx.activity.result.contract.ActivityResultContracts;
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.amplifyframework.datastore.generated.model.Batch;
@@ -39,9 +40,10 @@ public class BatchDetailActivity extends AppCompatActivity {
         Log.i(TAG, "onCreate: batch detail");
 
         findViewById(R.id.imageButtonAddMeasurementBatchDetail).setOnClickListener(v -> goToTakeMeasurementActivity());
-
+        modifyActionbar();
         Intent intent = getIntent();
         getBatchFromIntent(intent);
+
 
     }
 
@@ -56,6 +58,7 @@ public class BatchDetailActivity extends AppCompatActivity {
         if (json != null) {
             batch = jsonConverter.batchFromJson(json);
             populateTextFields();
+
         } else {
             // TODO This error state is hopefully unreachable.
             Log.e(TAG, "No batch JSON in the intent!");
@@ -82,6 +85,9 @@ public class BatchDetailActivity extends AppCompatActivity {
         if (menuItem.getItemId() == R.id.nav_quick_calculator)BatchDetailActivity.this.startActivity(new Intent(BatchDetailActivity.this, MainActivity.class));
         return true;
     }
-
+    private void modifyActionbar () {
+        ActionBar actionBar = getSupportActionBar();
+        if (actionBar != null) actionBar.setTitle("Batch Details");
+    }
 
 }

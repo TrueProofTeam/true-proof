@@ -10,6 +10,7 @@ import android.view.MenuItem;
 import android.widget.Button;
 import android.widget.EditText;
 
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.amplifyframework.datastore.generated.model.Batch;
@@ -48,6 +49,7 @@ public class NewBatchActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_new_batch);
+        modifyActionbar();
         userSettings.getDistillery(success ->{
               distilleries.add(success);
           }, fail->{});
@@ -127,5 +129,8 @@ public class NewBatchActivity extends AppCompatActivity {
         if (menuItem.getItemId() == R.id.nav_quick_calculator)NewBatchActivity.this.startActivity(new Intent(NewBatchActivity.this, MainActivity.class));
         return true;
     }
-
+    private void modifyActionbar () {
+        ActionBar actionBar = getSupportActionBar();
+        if (actionBar != null) actionBar.setTitle("New Batch");
+    }
 }

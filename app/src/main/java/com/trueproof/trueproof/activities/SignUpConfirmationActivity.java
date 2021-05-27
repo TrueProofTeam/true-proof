@@ -1,6 +1,7 @@
 package com.trueproof.trueproof.activities;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -22,6 +23,7 @@ public class SignUpConfirmationActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_up_confirmation);
+        modifyActionbar();
         handler = new Handler(getMainLooper()){
             @Override
             public void handleMessage(@NonNull Message msg) {
@@ -63,5 +65,9 @@ public class SignUpConfirmationActivity extends AppCompatActivity {
                 );
             }
         });
+    }
+    private void modifyActionbar () {
+        ActionBar actionBar = getSupportActionBar();
+        if (actionBar != null) actionBar.setTitle("Confirmation");
     }
 }

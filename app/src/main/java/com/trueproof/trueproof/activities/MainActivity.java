@@ -18,6 +18,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import androidx.annotation.RequiresApi;
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.amplifyframework.auth.AuthUser;
@@ -74,6 +75,7 @@ public class MainActivity extends AppCompatActivity {
 
         TextView dateTimeLocal = findViewById(R.id.textViewDateTimeLocal);
         dateTimeLocal.setText(userLocalTime());
+
 
 
     }
@@ -226,10 +228,10 @@ public class MainActivity extends AppCompatActivity {
         return true;
         }
 
-    void initializeLoginButton() {
+    private void initializeLoginButton() {
         AuthUser principal = Amplify.Auth.getCurrentUser();
-        if (principal == null){
-            Button loginButton = findViewById(R.id.buttonLoginMain);
+        Button loginButton = findViewById(R.id.buttonLoginMain);
+        if(principal == null){
 
             loginButton.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -240,7 +242,6 @@ public class MainActivity extends AppCompatActivity {
             });
 
         } else{
-            Button loginButton = findViewById(R.id.buttonLoginMain);
             loginButton.setText("Go to Batch List");
             loginButton.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -251,6 +252,7 @@ public class MainActivity extends AppCompatActivity {
             });
         }
         }
+
 
 
 }

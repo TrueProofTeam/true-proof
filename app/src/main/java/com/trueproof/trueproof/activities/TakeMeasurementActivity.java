@@ -2,6 +2,7 @@ package com.trueproof.trueproof.activities;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -74,7 +75,7 @@ public class TakeMeasurementActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_take_measurement);
-
+        modifyActionbar();
         inputLimitListener();
         saveMeasurement();
 
@@ -260,4 +261,9 @@ public class TakeMeasurementActivity extends AppCompatActivity {
         return true;
     }
 
+
+    private void modifyActionbar () {
+        ActionBar actionBar = getSupportActionBar();
+        if (actionBar != null) actionBar.setTitle("Take Measurement");
+    }
 }

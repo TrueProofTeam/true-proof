@@ -1,6 +1,7 @@
 package com.trueproof.trueproof.activities;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -24,6 +25,7 @@ public class LogInActivity extends AppCompatActivity {
         setContentView(R.layout.activity_log_in);
         makeHandler();
         initializeAllButton();
+        modifyActionbar();
     }
 
 
@@ -94,5 +96,9 @@ public class LogInActivity extends AppCompatActivity {
                 }
             }
         };
+    }
+    private void modifyActionbar () {
+        ActionBar actionBar = getSupportActionBar();
+        if (actionBar != null) actionBar.setTitle("Login");
     }
 }
