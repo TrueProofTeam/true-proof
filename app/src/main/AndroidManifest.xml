@@ -10,18 +10,42 @@
         android:roundIcon="@mipmap/logo_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.TrueProof">
-        <activity android:name=".activities.References"></activity>
-        <activity android:name=".activities.UserAgreementActivity" />
-        <activity android:name=".activities.SignUpActivity" />
-        <activity android:name=".activities.SignUpConfirmationActivity" />
-        <activity android:name=".activities.LogInActivity" />
-        <activity android:name=".activities.MeasurementDetailActivity" />
-        <activity android:name=".activities.SettingsActivity" />
-        <activity android:name=".activities.NewBatchActivity" />
-        <activity android:name=".activities.BatchDetailActivity" />
-        <activity android:name=".activities.BatchListActivity" />
-        <activity android:name=".activities.TakeMeasurementActivity" />
-        <activity android:name=".activities.MainActivity">
+        <activity
+            android:name=".activities.References"
+            android:label="References" />
+        <activity android:name=".activities.UserAgreementActivity"
+            android:label="User Agreement"
+            />
+        <activity android:name=".activities.SignUpActivity"
+            android:label="Sign up"
+            />
+        <activity android:name=".activities.SignUpConfirmationActivity"
+            android:label="Confirmation"
+            />
+        <activity android:name=".activities.LogInActivity"
+            android:label="Log In"
+            />
+        <activity android:name=".activities.MeasurementDetailActivity"
+            android:label="Measurement Detail"
+            />
+        <activity android:name=".activities.SettingsActivity"
+            android:label="Settings"
+            />
+        <activity android:name=".activities.NewBatchActivity"
+            android:label="New Batch"
+            />
+        <activity android:name=".activities.BatchDetailActivity"
+            android:label="Batch"
+            />
+        <activity android:name=".activities.BatchListActivity"
+            android:label="Your Batches"
+            />
+        <activity android:name=".activities.TakeMeasurementActivity"
+            android:label="Take Measurement"
+            />
+        <activity android:name=".activities.MainActivity"
+            android:label="True Proof"
+            >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

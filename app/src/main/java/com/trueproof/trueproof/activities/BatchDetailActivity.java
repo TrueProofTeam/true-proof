@@ -20,6 +20,7 @@ import com.amplifyframework.core.Amplify;
 import com.amplifyframework.datastore.generated.model.Batch;
 import com.amplifyframework.datastore.generated.model.Status;
 import com.trueproof.trueproof.R;
+import com.trueproof.trueproof.utils.ActivityUtils;
 import com.trueproof.trueproof.utils.BatchRepository;
 import com.trueproof.trueproof.utils.JsonConverter;
 
@@ -32,11 +33,9 @@ public class BatchDetailActivity extends AppCompatActivity {
     final static String BATCH_JSON = "batch_json";
     final static String TAG = "BatchDetailActivity";
 
-    @Inject
-    JsonConverter jsonConverter;
-
-    @Inject
-    BatchRepository batchRepository;
+    @Inject JsonConverter jsonConverter;
+    @Inject BatchRepository batchRepository;
+    @Inject ActivityUtils activityUtils;
 
     Batch batch;
 
@@ -48,7 +47,6 @@ public class BatchDetailActivity extends AppCompatActivity {
         Log.i(TAG, "onCreate: batch detail");
 
         findViewById(R.id.imageButtonAddMeasurementBatchDetail).setOnClickListener(v -> goToTakeMeasurementActivity());
-        modifyActionbar();
         Intent intent = getIntent();
         getBatchFromIntent(intent);
         initializeUpdateButton();
@@ -108,24 +106,7 @@ public class BatchDetailActivity extends AppCompatActivity {
     }
 
     @Override
-    public boolean onOptionsItemSelected(MenuItem menuItem){
-        if (menuItem.getItemId() == R.id.nav_settings)BatchDetailActivity.this.startActivity(new Intent(BatchDetailActivity.this, SettingsActivity.class));
-        if (menuItem.getItemId() == R.id.nav_batch_list)BatchDetailActivity.this.startActivity(new Intent(BatchDetailActivity.this, BatchListActivity.class));
-        if (menuItem.getItemId() == R.id.nav_quick_calculator)BatchDetailActivity.this.startActivity(new Intent(BatchDetailActivity.this, MainActivity.class));
-        if (menuItem.getItemId() == R.id.nav_log_out){
-            Amplify.Auth.signOut(
-                    ()->{
-                        Log.i(TAG,"Success Logout!");
-                    },
-                    r->{});
-            BatchDetailActivity.this.startActivity(new Intent( BatchDetailActivity.this,MainActivity.class));
-            finish();
-        }
-        return true;
+    public boolean onOptionsItemSelected(MenuItem menuItem) {
+        return activityUtils.onOptionsItemSelected(this, menuItem);
     }
-    private void modifyActionbar () {
-        ActionBar actionBar = getSupportActionBar();
-        if (actionBar != null) actionBar.setTitle("Batch Details");
-    }
-
 }

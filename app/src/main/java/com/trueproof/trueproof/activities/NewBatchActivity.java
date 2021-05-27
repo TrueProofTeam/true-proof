@@ -18,6 +18,7 @@ import com.amplifyframework.datastore.generated.model.Batch;
 import com.amplifyframework.datastore.generated.model.Distillery;
 import com.amplifyframework.datastore.generated.model.Status;
 import com.trueproof.trueproof.R;
+import com.trueproof.trueproof.utils.ActivityUtils;
 import com.trueproof.trueproof.utils.BatchRepository;
 import com.trueproof.trueproof.utils.DistilleryRepository;
 import com.trueproof.trueproof.utils.JsonConverter;
@@ -35,22 +36,22 @@ public class NewBatchActivity extends AppCompatActivity {
     static String TAG = "t.newBatch";
     final static String REDIRECT_TO_BATCH_DETAIL_TO_TAKE_MEASUREMENT = "redirect_to_take_measurement";
     final List <Distillery> distilleries = new ArrayList<>();
+
     @Inject
     DistilleryRepository distilleryRepository;
-
     @Inject
     BatchRepository batchRepository;
-
     @Inject
     UserSettings userSettings;
     @Inject
     JsonConverter jsonConverter;
+    @Inject
+    ActivityUtils activityUtils;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_new_batch);
-        modifyActionbar();
         userSettings.getDistillery(success ->{
               distilleries.add(success);
           }, fail->{});
@@ -124,23 +125,7 @@ public class NewBatchActivity extends AppCompatActivity {
     }
 
     @Override
-    public boolean onOptionsItemSelected(MenuItem menuItem){
-        if (menuItem.getItemId() == R.id.nav_settings)NewBatchActivity.this.startActivity(new Intent(NewBatchActivity.this, SettingsActivity.class));
-        if (menuItem.getItemId() == R.id.nav_batch_list)NewBatchActivity.this.startActivity(new Intent(NewBatchActivity.this, BatchListActivity.class));
-        if (menuItem.getItemId() == R.id.nav_quick_calculator)NewBatchActivity.this.startActivity(new Intent(NewBatchActivity.this, MainActivity.class));
-        if (menuItem.getItemId() == R.id.nav_log_out){
-            Amplify.Auth.signOut(
-                    ()->{
-                        Log.i(TAG,"Success Logout!");
-                    },
-                    r->{});
-            NewBatchActivity.this.startActivity(new Intent( NewBatchActivity.this,MainActivity.class));
-            finish();
-        }
-        return true;
-    }
-    private void modifyActionbar () {
-        ActionBar actionBar = getSupportActionBar();
-        if (actionBar != null) actionBar.setTitle("New Batch");
+    public boolean onOptionsItemSelected(MenuItem menuItem) {
+        return activityUtils.onOptionsItemSelected(this, menuItem);
     }
 }
