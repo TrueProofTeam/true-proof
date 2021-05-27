@@ -15,6 +15,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.RadioButton;
 import android.widget.TextView;
 
 import androidx.annotation.RequiresApi;
@@ -251,6 +252,24 @@ public class MainActivity extends AppCompatActivity {
             });
         }
         }
+
+    /** Radio button listener for C/F on quick calculator.
+     * Note: Temperature setting on MainActivity is not saved to user settings (user is not logged in).
+     * @param view
+     */
+    public void onMainRadioButtonClicked (View view){
+        boolean checked = ((RadioButton) view).isChecked();
+        switch (view.getId()) {
+            case R.id.radioButtonTempCMain:
+                if (checked)
+                    // TODO display this page in C
+                    break;
+            case R.id.radioButtonTempFMain:
+                if (checked)
+                    // TODO display this page in F
+                    break;
+        }
+    }
 
 
 }
