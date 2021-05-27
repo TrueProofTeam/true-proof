@@ -10,17 +10,19 @@ import com.amplifyframework.datastore.generated.model.Distillery;
 import com.amplifyframework.datastore.generated.model.Measurement;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.google.gson.JsonArray;
 import com.google.gson.JsonDeserializationContext;
 import com.google.gson.JsonDeserializer;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParseException;
+import com.google.gson.JsonPrimitive;
+import com.google.gson.JsonSerializationContext;
+import com.google.gson.JsonSerializer;
 
 import java.lang.reflect.Type;
-import java.time.OffsetDateTime;
-import java.time.ZoneOffset;
-import java.time.format.DateTimeFormatter;
-import java.util.Date;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;
@@ -33,6 +35,9 @@ public class JsonConverter {
     public JsonConverter() {
         gson = new GsonBuilder()
                 .registerTypeAdapter(Temporal.DateTime.class, new TemporalDateTimeDeserializer())
+                .registerTypeAdapter(Temporal.DateTime.class, new TemporalDateTimeSerializer())
+                .registerTypeAdapter(Distillery.class, new DistilleryDeserializer())
+                .registerTypeAdapter(Distillery.class, new DistillerySerializer())
                 .create();
     }
 
@@ -60,32 +65,65 @@ public class JsonConverter {
         return gson.fromJson(json, Distillery.class);
     }
 
+    private static final class TemporalDateTimeSerializer implements JsonSerializer<Temporal.DateTime> {
+        @Override
+        public JsonElement serialize(Temporal.DateTime src, Type typeOfSrc, JsonSerializationContext context) {
+            return new JsonPrimitive(src.format());
+        }
+    }
+
     private static final class TemporalDateTimeDeserializer implements JsonDeserializer<Temporal.DateTime> {
         @RequiresApi(api = Build.VERSION_CODES.O)
         @Override
         public Temporal.DateTime deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context)
                 throws JsonParseException {
-            JsonObject jsonObject = json.getAsJsonObject();
-            JsonObject offsetDateTime = jsonObject.get("offsetDateTime").getAsJsonObject();
-            JsonObject dateTime = offsetDateTime.get("dateTime").getAsJsonObject();
-            int offsetTotalSeconds = offsetDateTime.get("offset").getAsJsonObject()
-                    .get("totalSeconds").getAsInt();
+            return new Temporal.DateTime(json.getAsString());
+        }
+    }
 
-            JsonObject date = dateTime.get("date").getAsJsonObject();
-            JsonObject time = dateTime.get("time").getAsJsonObject();
+    private static final class DistilleryDeserializer implements JsonDeserializer<Distillery> {
+        @RequiresApi(api = Build.VERSION_CODES.N)
+        @Override
+        public Distillery deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context) throws JsonParseException {
+            JsonObject distillery = json.getAsJsonObject();
+            List<String> users = null;
+            JsonElement usersJson = distillery.get("users");
+            if (usersJson != null && usersJson.isJsonArray()) {
+                List<String> usersList = new ArrayList<>();
+                distillery.get("users")
+                        .getAsJsonArray()
+                        .forEach(jsonElement -> usersList.add(json.getAsString()));
+                users = usersList;
+            }
 
-            OffsetDateTime odt = OffsetDateTime.of(
-                    date.get("year").getAsInt(),
-                    date.get("month").getAsInt(),
-                    date.get("day").getAsInt(),
-                    time.get("hour").getAsInt(),
-                    time.get("minute").getAsInt(),
-                    time.get("second").getAsInt(),
-                    time.get("nano").getAsInt(),
-                    ZoneOffset.ofTotalSeconds(offsetTotalSeconds)
-            );
+            String id = distillery.get("id") != null ? distillery.get("id").getAsString() : null;
+            String dspId = distillery.get("dspId") != null ? distillery.get("dspId").getAsString() : null;
+            String name = distillery.get("name") != null ? distillery.get("name").getAsString() : null;
 
-            return new Temporal.DateTime(odt.toString());
+            return Distillery.builder()
+                    .id(id)
+                    .dspId(dspId)
+                    .name(name)
+                    .users(users)
+                    .build();
+        }
+    }
+
+    private static final class DistillerySerializer implements JsonSerializer<Distillery> {
+        @RequiresApi(api = Build.VERSION_CODES.N)
+        @Override
+        public JsonElement serialize(Distillery src, Type typeOfSrc, JsonSerializationContext context) {
+            JsonObject jsonObject = new JsonObject();
+            jsonObject.addProperty("id", src.getId());
+            jsonObject.addProperty("name", src.getName());
+            jsonObject.addProperty("dspId", src.getDspId());
+            JsonArray users = null;
+            if (src.getUsers() != null) {
+                users = new JsonArray();
+                src.getUsers().forEach(users::add);
+            }
+            jsonObject.add("users", users);
+            return jsonObject;
         }
     }
 }
