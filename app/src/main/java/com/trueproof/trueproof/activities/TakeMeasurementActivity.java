@@ -11,8 +11,11 @@ import android.os.Bundle;
 import android.text.Editable;
 import android.text.InputFilter;
 import android.text.TextWatcher;
+<<<<<<< Updated upstream
 import android.view.Menu;
 import android.view.MenuItem;
+=======
+>>>>>>> Stashed changes
 import android.util.Log;
 import android.widget.Button;
 import android.widget.EditText;
