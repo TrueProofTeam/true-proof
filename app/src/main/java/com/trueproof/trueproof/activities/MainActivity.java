@@ -76,8 +76,8 @@ public class MainActivity extends AppCompatActivity {
 
         limitAndCalculate();
 
-        TextView dateTimeLocal = findViewById(R.id.textViewDateTimeLocal);
-        dateTimeLocal.setText(userLocalTime());
+        //TextView dateTimeLocal = findViewById(R.id.textViewDateTimeLocal);
+        //dateTimeLocal.setText(userLocalTime());
 
         userSettings.refreshCache(r -> {
                     Log.i("TrueProofApplication", "works i guess");
