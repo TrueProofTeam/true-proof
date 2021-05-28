@@ -8,13 +8,19 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
+import com.amplifyframework.core.Consumer;
 import com.amplifyframework.datastore.generated.model.Batch;
 import com.amplifyframework.datastore.generated.model.Measurement;
+import com.amplifyframework.datastore.generated.model.Status;
+import com.trueproof.trueproof.utils.AWSDateTime;
 import com.trueproof.trueproof.utils.BatchRepository;
 import com.trueproof.trueproof.utils.JsonConverter;
 import com.trueproof.trueproof.utils.MeasurementRepository;
 import com.trueproof.trueproof.utils.UserSettings;
 
+import java.time.Instant;
+import java.time.OffsetDateTime;
+import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 import java.util.NoSuchElementException;
@@ -29,12 +35,7 @@ public class BatchDetailViewModel extends ViewModel {
     private static final String TAG = "BatchDetailViewModel";
     private final MutableLiveData<Batch> batchLiveData;
     private final MutableLiveData<List<Measurement>> measurementsLiveData;
-    private final Comparator<Measurement> byDate = new Comparator<Measurement>() {
-        @Override
-        public int compare(Measurement m1, Measurement m2) {
-            return m1.getCreatedAt().compareTo(m2.getCreatedAt());
-        }
-    };
+    private final MutableLiveData<Boolean> updatedLiveData;
     JsonConverter jsonConverter;
     BatchRepository batchRepository;
     MeasurementRepository measurementRepository;
@@ -59,21 +60,23 @@ public class BatchDetailViewModel extends ViewModel {
         return batchLiveData;
     }
 
-    public LiveData<Batch> getBatch() {
-        return batchLiveData;
+    public LiveData<List<Measurement>> getMeasurements() {
+        return measurementsLiveData;
     }
 
     public void setBatchFromJson(String json) {
         Batch batchFromJson = jsonConverter.batchFromJson(json);
-        batchFromJson.getMeasurements().sort(byDate);
-        batchLiveData.setValue(batchFromJson);
-        measurementsLiveData.postValue(batchFromJson.getMeasurements());
+        updateLiveData(batchFromJson);
     }
 
     public void updateBatch(Batch batch) {
-        batch.getMeasurements().sort(byDate);
-        this.batchLiveData.postValue(batch);
-        batchRepository.updateBatch(batch,
+        Batch updateBatch = batchLiveData.getValue().getStatus().equals(Status.ACTIVE) &&
+                batch.getStatus().equals(Status.COMPLETE) ?
+                batch.copyOfBuilder()
+                        .completedAt(AWSDateTime.of(OffsetDateTime.now()))
+                        .build() :
+                batch;
+        batchRepository.updateBatch(updateBatch,
                 r -> {
                     Log.i(TAG, "updateBatch: batch updated succesfully");
                     this.batchLiveData.postValue(updateBatch);

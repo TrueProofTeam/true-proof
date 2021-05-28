@@ -1,18 +1,23 @@
 package com.trueproof.trueproof.adapters;
 
+import android.os.Build;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
 import androidx.recyclerview.widget.ListAdapter;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.amplifyframework.datastore.generated.model.Batch;
 import com.trueproof.trueproof.R;
 import com.trueproof.trueproof.models.BatchUtils;
+import com.trueproof.trueproof.utils.AWSDateTimeFormatter;
 
+@RequiresApi(api = Build.VERSION_CODES.O)
 public class BatchListAdapter extends ListAdapter<Batch, BatchListAdapter.BatchViewHolder> {
     private final OnClickHandler onClickHandler;
 
@@ -40,6 +45,7 @@ public class BatchListAdapter extends ListAdapter<Batch, BatchListAdapter.BatchV
     }
 
     protected class BatchViewHolder extends RecyclerView.ViewHolder {
+        private static final String TAG = "BatchListAdapter";
         private Batch batch;
         private TextView batchType;
         private TextView batchNumber;
@@ -60,7 +66,10 @@ public class BatchListAdapter extends ListAdapter<Batch, BatchListAdapter.BatchV
             batchType.setText(batch.getType());
             batchNumber.setText(String.format("Batch no. %d", batch.getBatchNumber()));
             // TODO Date time formatting logic for this
-            completedAtTime.setText("placeholder");
+            String completedAt = batch.getCompletedAt() != null ?
+                    AWSDateTimeFormatter.ofPattern("y/M/d hh:mm").format(batch.getCompletedAt()) :
+                    "No completion date entered";
+            completedAtTime.setText(completedAt);
         }
     }
 }
