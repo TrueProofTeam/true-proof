@@ -84,6 +84,7 @@ public class UserSettings {
                         distilleryRepository.getDistillery(distilleryId,
                                 distillery -> {
                                     cachedDistillery = distillery;
+
                                     success.accept(distillery);
                                 }
                                 ,

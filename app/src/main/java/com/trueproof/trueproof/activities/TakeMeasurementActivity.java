@@ -102,6 +102,7 @@ public class TakeMeasurementActivity extends AppCompatActivity implements Measur
         setContentView(R.layout.activity_take_measurement);
         Distillery distillery = userSettings.getCachedDistillery();
         if (distillery != null)((TextView)findViewById(R.id.textViewTakeMeasurementdsp)).setText(distillery.getName());
+        else ((TextView)findViewById(R.id.textViewBatchListdsp)).setText("Untitled Distillery");
         inputLimitListener();
         saveMeasurement();
 
