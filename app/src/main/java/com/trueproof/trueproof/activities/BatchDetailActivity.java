@@ -26,6 +26,7 @@ import com.amplifyframework.datastore.generated.model.Status;
 import com.amplifyframework.datastore.generated.model.TemperatureUnit;
 import com.trueproof.trueproof.R;
 import com.trueproof.trueproof.adapters.MeasurementListAdapter;
+import com.trueproof.trueproof.models.DistilleryUtils;
 import com.trueproof.trueproof.utils.ActivityUtils;
 import com.trueproof.trueproof.utils.BatchRepository;
 import com.trueproof.trueproof.utils.JsonConverter;
@@ -71,9 +72,9 @@ public class BatchDetailActivity extends AppCompatActivity {
 
         Log.i(TAG, "onCreate: batch detail");
 
-       Distillery distillery = userSettings.getCachedDistillery();
-        if (distillery != null)((TextView)findViewById(R.id.textViewBatchDetaildsp)).setText(distillery.getName());
-        else ((TextView)findViewById(R.id.textViewBatchListdsp)).setText("Untitled Distillery");
+        Distillery distillery = userSettings.getCachedDistillery();
+        TextView distilleryName = findViewById(R.id.textViewBatchListdsp);
+        distilleryName.setText(DistilleryUtils.toHeaderString(distillery));
 
         findViewById(R.id.imageButtonAddMeasurementBatchDetail).setOnClickListener(v -> goToTakeMeasurementActivity());
 

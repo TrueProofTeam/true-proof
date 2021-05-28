@@ -16,6 +16,7 @@ import com.amplifyframework.datastore.generated.model.Batch;
 import com.amplifyframework.datastore.generated.model.Distillery;
 import com.amplifyframework.datastore.generated.model.Status;
 import com.trueproof.trueproof.R;
+import com.trueproof.trueproof.models.DistilleryUtils;
 import com.trueproof.trueproof.utils.ActivityUtils;
 import com.trueproof.trueproof.utils.BatchRepository;
 import com.trueproof.trueproof.utils.DistilleryRepository;
@@ -65,8 +66,9 @@ public class NewBatchActivity extends AppCompatActivity {
         setContentView(R.layout.activity_new_batch);
 
         Distillery distillery = userSettings.getCachedDistillery();
-        if (distillery != null)((TextView)findViewById(R.id.textViewNewBatchdsp)).setText(distillery.getName());
-        else ((TextView)findViewById(R.id.textViewBatchListdsp)).setText("Untitled Distillery");
+        TextView distilleryName = findViewById(R.id.textViewNewBatchdsp);
+        distilleryName.setText(DistilleryUtils.toHeaderString(distillery));
+
         findViewById(R.id.buttonCreateBatchNewBatch).setOnClickListener(v -> {
 
             String batchType = ((EditText) findViewById(R.id.editTextBatchTypeNewBatch)).getText().toString();

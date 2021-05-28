@@ -32,6 +32,7 @@ import com.trueproof.trueproof.R;
 import com.trueproof.trueproof.adapters.MeasurementListAdapter;
 import com.trueproof.trueproof.logic.InputFilterMinMax;
 import com.trueproof.trueproof.logic.Proofing;
+import com.trueproof.trueproof.models.DistilleryUtils;
 import com.trueproof.trueproof.utils.ActivityUtils;
 import com.trueproof.trueproof.utils.BatchRepository;
 import com.trueproof.trueproof.utils.DistilleryRepository;
@@ -100,9 +101,12 @@ public class TakeMeasurementActivity extends AppCompatActivity implements Measur
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_take_measurement);
+
+
         Distillery distillery = userSettings.getCachedDistillery();
-        if (distillery != null)((TextView)findViewById(R.id.textViewTakeMeasurementdsp)).setText(distillery.getName());
-        else ((TextView)findViewById(R.id.textViewBatchListdsp)).setText("Untitled Distillery");
+        TextView distilleryName = findViewById(R.id.textViewTakeMeasurementdsp);
+        distilleryName.setText(DistilleryUtils.toHeaderString(distillery));
+
         inputLimitListener();
         saveMeasurement();
 
