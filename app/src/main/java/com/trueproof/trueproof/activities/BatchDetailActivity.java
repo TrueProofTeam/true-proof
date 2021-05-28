@@ -26,6 +26,7 @@ import com.amplifyframework.datastore.generated.model.Status;
 import com.amplifyframework.datastore.generated.model.TemperatureUnit;
 import com.trueproof.trueproof.R;
 import com.trueproof.trueproof.adapters.MeasurementListAdapter;
+import com.trueproof.trueproof.models.DistilleryUtils;
 import com.trueproof.trueproof.utils.ActivityUtils;
 import com.trueproof.trueproof.utils.BatchRepository;
 import com.trueproof.trueproof.utils.JsonConverter;
@@ -71,9 +72,10 @@ public class BatchDetailActivity extends AppCompatActivity {
 
         Log.i(TAG, "onCreate: batch detail");
 
-       Distillery distillery = userSettings.getCachedDistillery();
-        if (distillery != null)((TextView)findViewById(R.id.textViewBatchDetaildsp)).setText(distillery.getName());
-        else ((TextView)findViewById(R.id.textViewBatchListdsp)).setText("Untitled Distillery");
+        Distillery distillery = userSettings.getCachedDistillery();
+        Log.i(TAG, "onCreate: distillery " + distillery);
+        TextView distilleryName = findViewById(R.id.textViewBatchDetaildsp);
+        distilleryName.setText(DistilleryUtils.toHeaderString(distillery));
 
         findViewById(R.id.imageButtonAddMeasurementBatchDetail).setOnClickListener(v -> goToTakeMeasurementActivity());
 
@@ -83,6 +85,12 @@ public class BatchDetailActivity extends AppCompatActivity {
         observeLiveData();
         setUpMeasurementList();
         setUpSpinner();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        viewModel.update();
     }
 
     private void setUpSpinner() {
@@ -125,7 +133,7 @@ public class BatchDetailActivity extends AppCompatActivity {
     }
 
     private void goToMeasurementDetail(Measurement measurement) {
-        Intent intent = new Intent(this, TakeMeasurementActivity.class);
+        Intent intent = new Intent(this, MeasurementDetailActivity.class);
         String measurementJson = jsonConverter.measurementToJson(measurement);
         intent.putExtra(MeasurementDetailActivity.MEASUREMENT_JSON, measurementJson);
         startActivity(intent);
@@ -133,7 +141,8 @@ public class BatchDetailActivity extends AppCompatActivity {
 
     private void goToTakeMeasurementActivity() {
         Intent intent = new Intent(this, TakeMeasurementActivity.class);
-        getBatchFromIntent(intent);
+        String batchJson = jsonConverter.batchToJson(viewModel.getBatch().getValue());
+        intent.putExtra(TakeMeasurementActivity.BATCH_JSON, batchJson);
         startActivity(intent);
     }
 

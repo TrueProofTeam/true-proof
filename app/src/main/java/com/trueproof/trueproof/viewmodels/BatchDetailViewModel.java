@@ -65,6 +65,7 @@ public class BatchDetailViewModel extends ViewModel {
     }
 
     public void setBatchFromJson(String json) {
+        Log.d(TAG, "setBatchFromJson: running");
         Batch batchFromJson = jsonConverter.batchFromJson(json);
         updateLiveData(batchFromJson);
     }
@@ -96,14 +97,13 @@ public class BatchDetailViewModel extends ViewModel {
                         Log.e(TAG, "update: ApiException on getBatch", e);
                     });
         } else {
-            throw new NoSuchElementException("ViewModel has not been populated with an initial batch. "
-                    + "Call viewModel.setBatchFromJson before updating from database");
+            Log.d(TAG, "Called .update() but batch has not been populated yet.");
         }
     }
 
     private void updateLiveData(Batch batch) {
         ArrayList<Measurement> measurements = new ArrayList<>(batch.getMeasurements());
-        measurements.sort(AWSDateTime.measurementByDate);
+        measurements.sort(AWSDateTime.measurementByDate.reversed());
         measurementsLiveData.postValue(measurements);
         batchLiveData.postValue(batch);
     }

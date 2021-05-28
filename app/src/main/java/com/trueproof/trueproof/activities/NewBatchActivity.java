@@ -16,6 +16,7 @@ import com.amplifyframework.datastore.generated.model.Batch;
 import com.amplifyframework.datastore.generated.model.Distillery;
 import com.amplifyframework.datastore.generated.model.Status;
 import com.trueproof.trueproof.R;
+import com.trueproof.trueproof.models.DistilleryUtils;
 import com.trueproof.trueproof.utils.ActivityUtils;
 import com.trueproof.trueproof.utils.BatchRepository;
 import com.trueproof.trueproof.utils.DistilleryRepository;
@@ -33,8 +34,6 @@ import dagger.hilt.android.AndroidEntryPoint;
 public class NewBatchActivity extends AppCompatActivity {
     final static String REDIRECT_TO_BATCH_DETAIL_TO_TAKE_MEASUREMENT = "redirect_to_take_measurement";
     static String TAG = "t.newBatch";
-    final List<Distillery> distilleries = new ArrayList<>();
-
     @Inject
     DistilleryRepository distilleryRepository;
     @Inject
@@ -67,8 +66,9 @@ public class NewBatchActivity extends AppCompatActivity {
         setContentView(R.layout.activity_new_batch);
 
         Distillery distillery = userSettings.getCachedDistillery();
-        if (distillery != null)((TextView)findViewById(R.id.textViewNewBatchdsp)).setText(distillery.getName());
-        else ((TextView)findViewById(R.id.textViewBatchListdsp)).setText("Untitled Distillery");
+        TextView distilleryName = findViewById(R.id.textViewNewBatchdsp);
+        distilleryName.setText(DistilleryUtils.toHeaderString(distillery));
+
         findViewById(R.id.buttonCreateBatchNewBatch).setOnClickListener(v -> {
 
             String batchType = ((EditText) findViewById(R.id.editTextBatchTypeNewBatch)).getText().toString();
@@ -80,7 +80,7 @@ public class NewBatchActivity extends AppCompatActivity {
                     .type(batchType)
                     .batchIdentifier(batchIdentifier)
                     .batchNumber(batchNum)
-                    .distillery(distilleries.get(0))
+                    .distillery(userSettings.getCachedDistillery())
                     .build();
 
             batchRepository.saveBatch(batch, onSuccess -> {
@@ -101,9 +101,11 @@ public class NewBatchActivity extends AppCompatActivity {
     }
 
     private void batchIdentifierOnChange() {
-        if (distilleries.get(0).getDspId() != null && ((EditText) findViewById(R.id.editTextBatchTypeNewBatch)).getText() != null
+        Distillery distillery = userSettings.getCachedDistillery();
+
+        if (distillery.getDspId() != null && ((EditText) findViewById(R.id.editTextBatchTypeNewBatch)).getText() != null
                 && ((EditText) findViewById(R.id.editTextBatchNumNewBatch)).getText() != null) {
-            String batchIdentifier = distilleries.get(0).getDspId() + "-" + ((EditText) findViewById(R.id.editTextBatchTypeNewBatch)).getText().toString() + "-" +
+            String batchIdentifier = distillery.getDspId() + "-" + ((EditText) findViewById(R.id.editTextBatchTypeNewBatch)).getText().toString() + "-" +
                     ((EditText) findViewById(R.id.editTextBatchNumNewBatch)).getText().toString();
             ((EditText) findViewById(R.id.editTextBatchIdNewBatch)).setText(batchIdentifier);
         }

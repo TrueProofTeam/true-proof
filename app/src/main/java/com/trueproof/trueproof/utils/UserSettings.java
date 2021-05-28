@@ -2,9 +2,11 @@ package com.trueproof.trueproof.utils;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.os.Build;
 import android.util.Log;
 
 import androidx.annotation.Nullable;
+import androidx.annotation.RequiresApi;
 
 import com.amplifyframework.AmplifyException;
 import com.amplifyframework.api.ApiException;
@@ -19,14 +21,17 @@ import com.amplifyframework.datastore.generated.model.TemperatureUnit;
 import com.amplifyframework.datastore.generated.model.User;
 
 import java.util.List;
+import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;
 
 import dagger.hilt.android.qualifiers.ApplicationContext;
+import hilt_aggregated_deps._com_trueproof_trueproof_activities_LogInActivity_GeneratedInjector;
 
 @Singleton
+@RequiresApi(api = Build.VERSION_CODES.N)
 public class UserSettings {
     final static String TAG = "UserSettings";
     final static String SHARED_PREFERENCES_NAME = "trueproof.trueproof";
@@ -42,6 +47,7 @@ public class UserSettings {
                         DistilleryRepository distilleryRepository,
                         UserRepository userRepository
     ) {
+        Log.i(TAG, "UserSettings: initialized");
         this.distilleryRepository = distilleryRepository;
         this.userRepository = userRepository;
         sharedPreferences = context.getSharedPreferences(SHARED_PREFERENCES_NAME, Context.MODE_PRIVATE);
@@ -89,10 +95,8 @@ public class UserSettings {
                         distilleryRepository.getDistillery(distilleryId,
                                 distillery -> {
                                     cachedDistillery = distillery;
-
                                     success.accept(distillery);
-                                }
-                                ,
+                                },
                                 fail
                         );
                     } else {
@@ -117,11 +121,14 @@ public class UserSettings {
     public void getUserSettings(Consumer<User> success, Consumer<Exception> fail) {
 
         AuthUser authUser = Amplify.Auth.getCurrentUser();
-        if (authUser == null) fail.accept(
-                new ApiException("user is not logged in",
-                        new Exception(),
-                        "maybe prompt the user to log in")
-        );
+        if (authUser == null) {
+            fail.accept(
+                    new ApiException("user is not logged in",
+                            new Exception(),
+                            "maybe prompt the user to log in")
+            );
+            return;
+        }
         Amplify.Auth.fetchUserAttributes(
                 attributes -> {
                     String userId = getValueFromAuthUserAttributesByKey(attributes,
@@ -130,23 +137,14 @@ public class UserSettings {
                     if (userId != null) {
                         userRepository.getById(userId,
                                 user -> {
-                                    if (user != null) {
-                                        cachedUserSettings = user;
-                                        success.accept(user);
-                                    } else {
-                                        fail.accept(new Exception("user object was not found in the database"));
-                                    }
+                                    cachedUserSettings = user;
+                                    success.accept(user);
                                 },
-                                apiException -> {
-                                    fail.accept(apiException);
-                                }
+                                fail::accept
                         );
                     } else {
                         Log.i(TAG, "AuthUser custom:userId is null");
-                        createNewUserEntity(authUser,
-                                success, e -> {
-                                    fail.accept(e);
-                                });
+                        createNewUserEntity(authUser, success, fail::accept);
                     }
                 },
                 error -> {
@@ -261,6 +259,21 @@ public class UserSettings {
      */
     @Nullable
     public Distillery getCachedDistillery() {
+        if (cachedDistillery != null) return cachedDistillery;
+        CompletableFuture<Distillery> distilleryCompletableFuture = new CompletableFuture<>();
+
+        Object lock = new Object();
+        try {
+            lock.wait(2000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        getDistillery(success -> {
+            lock.notify();
+        }, fail -> {
+            lock.notify();
+        });
+
         return cachedDistillery;
     }
 
@@ -271,6 +284,20 @@ public class UserSettings {
      */
     @Nullable
     public User getCachedUserSettings() {
+        if (cachedUserSettings != null) return cachedUserSettings;
+
+        Object lock = new Object();
+        try {
+            lock.wait(2000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        getUserSettings(success -> {
+            lock.notify();
+        }, fail -> {
+            lock.notify();
+        });
+
         return cachedUserSettings;
     }
 
@@ -284,12 +311,14 @@ public class UserSettings {
         AtomicBoolean user = new AtomicBoolean(false);
         getDistillery(
                 r -> {
+                    Log.i(TAG, "refreshCache: distillery settings cached");
+                    distillery.set(true);
                     if (!fail.get() && user.get()) {
                         success.accept(true);
                     }
-                    distillery.set(true);
                 },
                 e -> {
+                    Log.e(TAG, "refreshCache: distillery settings error " + e);
                     if (!fail.get()) {
                         fail.set(true);
                         failure.accept(e);
@@ -297,12 +326,14 @@ public class UserSettings {
                 });
         getUserSettings(
                 r -> {
+                    Log.i(TAG, "refreshCache: userSettings Cached");
                     user.set(true);
                     if (!fail.get() && distillery.get()) {
                         success.accept(true);
                     }
                 },
                 e -> {
+                    Log.i(TAG, "refreshCache: userSettings Cached");
                     if (!fail.get()) {
                         fail.set(true);
                         failure.accept(e);

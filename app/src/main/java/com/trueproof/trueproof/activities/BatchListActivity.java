@@ -23,6 +23,7 @@ import com.trueproof.trueproof.R;
 import com.trueproof.trueproof.adapters.ActiveBatchListAdapter;
 import com.trueproof.trueproof.adapters.BatchListAdapter;
 import com.trueproof.trueproof.models.BatchUtils;
+import com.trueproof.trueproof.models.DistilleryUtils;
 import com.trueproof.trueproof.utils.ActivityUtils;
 import com.trueproof.trueproof.utils.JsonConverter;
 import com.trueproof.trueproof.utils.UserSettings;
@@ -58,9 +59,10 @@ public class BatchListActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_batch_list);
         viewModel = new ViewModelProvider(this).get(BatchListViewModel.class);
+
         Distillery distillery = userSettings.getCachedDistillery();
-        if (distillery != null) ((TextView)findViewById(R.id.textViewBatchListdsp)).setText(distillery.getName());
-        else ((TextView)findViewById(R.id.textViewBatchListdsp)).setText("Untitled Distillery");
+        TextView distilleryName = findViewById(R.id.textViewBatchListdsp);
+        distilleryName.setText(DistilleryUtils.toHeaderString(distillery));
 
         setUpAllBatchList();
         setUpActiveBatchList();
