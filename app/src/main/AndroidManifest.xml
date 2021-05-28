@@ -16,6 +16,9 @@
         <activity android:name=".activities.UserAgreementActivity"
             android:label="User Agreement"
             />
+        <activity android:name=".activities.TermsOfUseActivity"
+            android:label="Terms of Use"
+            />
         <activity android:name=".activities.SignUpActivity"
             android:label="Sign up"
             />

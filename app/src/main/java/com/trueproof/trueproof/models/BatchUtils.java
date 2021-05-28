@@ -11,7 +11,7 @@ public class BatchUtils {
     public static final DiffUtil.ItemCallback<Batch> DIFF_CALLBACK = new DiffUtil.ItemCallback<Batch>() {
         @Override
         public boolean areItemsTheSame(@NonNull Batch oldItem, @NonNull Batch newItem) {
-            return oldItem.getId() == newItem.getId();
+            return oldItem.getId().equals(newItem.getId());
         }
 
         @Override
@@ -22,6 +22,14 @@ public class BatchUtils {
 
     @SuppressLint("DefaultLocale")
     public static String batchToString(Batch batch) {
-        return String.format("%s batch #%d", batch.getType(), batch.getBatchNumber());
+        if (batch.getBatchIdentifier() != null && !batch.getBatchIdentifier().isEmpty()) {
+            return String.format("Batch %s", batch.getBatchIdentifier());
+        } else {
+            String type = batch.getType() != null ? batch.getType() : "Spirits";
+            String number = batch.getBatchNumber() != null
+                    ? String.valueOf(batch.getBatchNumber())
+                    : "";
+            return String.format("%s batch no #%d", batch.getType(), batch.getBatchNumber());
+        }
     }
 }

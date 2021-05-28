@@ -1,42 +1,39 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        xmlns:tools="http://schemas.android.com/tools"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        tools:context=".activities.MainActivity">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".activities.MainActivity">
 
     <EditText
         android:id="@+id/editTextTemperatureMain"
-        android:layout_width="129dp"
-        android:layout_height="40dp"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
-        android:layout_marginEnd="16dp"
         android:hint="@string/temperatureText"
         android:importantForAutofill="no"
         android:inputType="numberDecimal"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/editTextTemperatureCorrectionMain"
         app:layout_constraintTop_toBottomOf="@+id/radioGroupMain" />
 
     <TextView
         android:id="@+id/textViewTempMain2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
         android:text="@string/temperatureText"
-        app:layout_constraintBottom_toBottomOf="@+id/editTextTemperatureMain"
-        app:layout_constraintEnd_toStartOf="@+id/editTextTemperatureCorrectionMain"
-        app:layout_constraintTop_toTopOf="@+id/editTextTemperatureMain" />
+        app:layout_constraintBaseline_toBaselineOf="@+id/editTextTemperatureMain"
+        app:layout_constraintEnd_toEndOf="@+id/textViewTempCorrectionMain" />
 
     <Button
-            android:text="@string/logInToSaveYourDataText"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/buttonLoginMain"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            android:layout_marginTop="8dp"
-            android:layout_marginStart="8dp" />
+        android:id="@+id/buttonLoginMain"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:text="@string/logInToSaveYourDataText"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/textViewTitleMain"
@@ -54,108 +51,99 @@
         android:id="@+id/textViewTermsOfUseMain"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="48dp"
+        android:layout_marginBottom="16dp"
         android:text="@string/termsOfUseText"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textViewCalculatedProofMain" />
+        app:layout_constraintStart_toStartOf="parent" />
 
     <EditText
         android:id="@+id/editTextHydrometerMain"
-        android:layout_width="129dp"
+        android:layout_width="150dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="16dp"
+        android:layout_marginTop="8dp"
         android:hint="@string/hydroText"
         android:importantForAutofill="no"
         android:inputType="numberDecimal"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/editTextTemperatureCorrectionMain"
         app:layout_constraintTop_toBottomOf="@+id/editTextTemperatureCorrectionMain" />
 
     <TextView
         android:id="@+id/textViewProofMain"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="16dp"
         android:text="@string/proofAtFText"
         android:textSize="20sp"
-        app:layout_constraintBottom_toBottomOf="@+id/textViewCalculatedProofMain"
-        app:layout_constraintEnd_toStartOf="@+id/textViewCalculatedProofMain"
-        app:layout_constraintTop_toTopOf="@+id/textViewCalculatedProofMain" />
+        app:layout_constraintBaseline_toBaselineOf="@+id/textViewCalculatedProofMain"
+        app:layout_constraintEnd_toEndOf="@+id/textViewHydrometerCorrectionMain" />
 
     <EditText
         android:id="@+id/editTextTemperatureCorrectionMain"
-        android:layout_width="129dp"
-        android:layout_height="40dp"
-        android:layout_marginTop="12dp"
-        android:layout_marginEnd="16dp"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
         android:hint="@string/temperatureCorrectionText"
         android:importantForAutofill="no"
         android:inputType="numberDecimal|numberSigned"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/textViewTempCorrectionMain"
         app:layout_constraintTop_toBottomOf="@+id/editTextTemperatureMain" />
 
     <TextView
         android:id="@+id/textViewCalculatedProofMain"
-        android:layout_width="129dp"
+        android:layout_width="150dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
-        android:layout_marginEnd="16dp"
+        android:layout_marginTop="8dp"
         android:background="@drawable/border"
-        android:text="@string/proofFTempText"
         android:textSize="20sp"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/editTextHydrometerCorrectionMain"
         app:layout_constraintTop_toBottomOf="@+id/editTextHydrometerCorrectionMain" />
 
     <TextView
         android:id="@+id/textViewTempCorrectionMain"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="12dp"
+        android:layout_marginEnd="16dp"
         android:text="@string/temperatureCorrectionText"
-        app:layout_constraintBottom_toBottomOf="@+id/editTextTemperatureCorrectionMain"
+        app:layout_constraintBaseline_toBaselineOf="@+id/editTextTemperatureCorrectionMain"
         app:layout_constraintEnd_toStartOf="@+id/editTextTemperatureCorrectionMain"
-        app:layout_constraintTop_toTopOf="@+id/editTextTemperatureCorrectionMain" />
+        app:layout_constraintHorizontal_bias="0.84"
+        app:layout_constraintHorizontal_chainStyle="packed"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
         android:id="@+id/textViewHydrometerMain"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="16dp"
         android:text="@string/hydrometerText"
-        app:layout_constraintBottom_toBottomOf="@+id/editTextHydrometerMain"
-        app:layout_constraintEnd_toStartOf="@+id/editTextHydrometerMain"
-        app:layout_constraintTop_toTopOf="@+id/editTextHydrometerMain" />
+        app:layout_constraintBaseline_toBaselineOf="@+id/editTextHydrometerMain"
+        app:layout_constraintEnd_toEndOf="@+id/textViewTempCorrectionMain" />
 
     <TextView
         android:id="@+id/textViewHydrometerCorrectionMain"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="12dp"
         android:text="@string/hydrometerCorrectionText"
-        app:layout_constraintBottom_toBottomOf="@+id/editTextHydrometerCorrectionMain"
-        app:layout_constraintEnd_toStartOf="@+id/editTextHydrometerCorrectionMain"
-        app:layout_constraintTop_toTopOf="@+id/editTextHydrometerCorrectionMain" />
+        app:layout_constraintBaseline_toBaselineOf="@+id/editTextHydrometerCorrectionMain"
+        app:layout_constraintEnd_toEndOf="@+id/textViewHydrometerMain" />
 
     <EditText
         android:id="@+id/editTextHydrometerCorrectionMain"
-        android:layout_width="129dp"
+        android:layout_width="150dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
-        android:layout_marginEnd="16dp"
         android:hint="@string/hydrometerCorrectionText"
         android:importantForAutofill="no"
         android:inputType="numberDecimal|numberSigned"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/editTextTemperatureCorrectionMain"
         app:layout_constraintTop_toBottomOf="@+id/editTextHydrometerMain" />
 
     <RadioGroup
         android:id="@+id/radioGroupMain"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="16dp"
         android:orientation="vertical"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/editTextTemperatureMain"
         app:layout_constraintTop_toBottomOf="@+id/textViewTitleMain">
 
         <RadioButton
@@ -177,14 +165,5 @@
             android:text="@string/tempInFText"
             app:layout_constraintEnd_toEndOf="parent" />
     </RadioGroup>
-
-    <TextView
-        android:id="@+id/textViewDateTimeLocal"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintBottom_toTopOf="@+id/textViewProofMain"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textViewHydrometerCorrectionMain" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
