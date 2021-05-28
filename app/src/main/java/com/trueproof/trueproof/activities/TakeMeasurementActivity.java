@@ -4,6 +4,8 @@ import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.ViewModel;
+import androidx.lifecycle.ViewModelProvider;
 
 import android.content.Intent;
 import android.icu.util.Measure;
@@ -33,12 +35,15 @@ import com.trueproof.trueproof.adapters.MeasurementListAdapter;
 import com.trueproof.trueproof.logic.InputFilterMinMax;
 import com.trueproof.trueproof.logic.Proofing;
 import com.trueproof.trueproof.models.DistilleryUtils;
+import com.trueproof.trueproof.utils.AWSDateTime;
 import com.trueproof.trueproof.utils.ActivityUtils;
 import com.trueproof.trueproof.utils.BatchRepository;
 import com.trueproof.trueproof.utils.DistilleryRepository;
 import com.trueproof.trueproof.utils.MeasurementRepository;
 import com.trueproof.trueproof.utils.TestDependencyInjection;
 import com.trueproof.trueproof.utils.UserSettings;
+import com.trueproof.trueproof.viewmodels.BatchListViewModel;
+import com.trueproof.trueproof.viewmodels.TakeMeasurementViewModel;
 
 import java.io.InputStream;
 import java.lang.reflect.Field;
@@ -47,6 +52,7 @@ import java.math.MathContext;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.Instant;
+import java.time.OffsetDateTime;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
@@ -66,14 +72,9 @@ import javax.inject.Inject;
 import dagger.hilt.android.AndroidEntryPoint;
 
 @AndroidEntryPoint
-public class TakeMeasurementActivity extends AppCompatActivity implements MeasurementListAdapter.OnClickHandler {
-
+@RequiresApi(api = Build.VERSION_CODES.O)
+public class TakeMeasurementActivity extends AppCompatActivity {
     public static final String BATCH_JSON = "batch_json";
-    EditText tempField;
-    InputFilterMinMax tempLimits;
-
-    @Inject
-    Proofing proofing;
 
     double inTempDouble = 0.0;
     double inputTempCorrDouble = 0.0;
@@ -82,6 +83,8 @@ public class TakeMeasurementActivity extends AppCompatActivity implements Measur
 
     static String TAG = "t.takeMeasurement";
 
+    @Inject
+    Proofing proofing;
     @Inject
     DistilleryRepository distilleryRepository;
     @Inject
@@ -93,21 +96,28 @@ public class TakeMeasurementActivity extends AppCompatActivity implements Measur
     @Inject
     UserSettings userSettings;
 
-
+    TakeMeasurementViewModel viewModel;
     User user;
 
+    EditText temperatureEditText;
+    EditText temperatureCorrectionEditText;
+    EditText hydrometerEditText;
+    EditText hydrometerCorrectionEditText;
+    TextView trueProofText;
 
     @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_take_measurement);
-
+        viewModel = new ViewModelProvider(this).get(TakeMeasurementViewModel.class);
 
         Distillery distillery = userSettings.getCachedDistillery();
         TextView distilleryName = findViewById(R.id.textViewTakeMeasurementdsp);
         distilleryName.setText(DistilleryUtils.toHeaderString(distillery));
 
+        saveViews();
+        getBatchFromIntent();
         inputLimitListener();
         saveMeasurement();
 
@@ -115,32 +125,29 @@ public class TakeMeasurementActivity extends AppCompatActivity implements Measur
                 .setEnabled(false);
 
         user = userSettings.getCachedUserSettings();
-        user = User.builder().defaultTemperatureUnit(TemperatureUnit.FAHRENHEIT)
-                .defaultHydrometerCorrection(0.0)
-                .defaultTemperatureCorrection(0.0)
-                .build();
+        if (user == null)
+            user = User.builder().defaultTemperatureUnit(TemperatureUnit.FAHRENHEIT)
+                    .defaultHydrometerCorrection(0.0)
+                    .defaultTemperatureCorrection(0.0)
+                    .build();
 
         if (user.getDefaultTemperatureUnit().equals(TemperatureUnit.CELSIUS)) {
-            tempLimits = new InputFilterMinMax(-17.22, 37.78);
-            tempField.setFilters(new InputFilter[]{tempLimits});
+            temperatureEditText.setFilters(new InputFilter[]{new InputFilterMinMax(-17.22, 37.78)});
         }
-
     }
 
-    @Override
-    public void onClick(Measurement measurement){
-        double temp = measurement.getTemperature();
-        double tempCorrection = measurement.getTemperatureCorrection();
-        double hydro = measurement.getHydrometer();
-        double hydroCorrection = measurement.getHydrometerCorrection();
-        double trueProof = measurement.getTrueProof();
-        Intent viewMeasurementDetail = new Intent(TakeMeasurementActivity.this, MeasurementDetailActivity.class);
-        viewMeasurementDetail.putExtra("temp", temp);
-        viewMeasurementDetail.putExtra("tempCorrection", tempCorrection);
-        viewMeasurementDetail.putExtra("hydro", hydro);
-        viewMeasurementDetail.putExtra("hydroCorrection", hydroCorrection);
-        viewMeasurementDetail.putExtra("trueProof", trueProof);
-        startActivity(viewMeasurementDetail);
+    private void saveViews() {
+        Log.i(TAG, "Temperature edit text: " + temperatureEditText);
+        temperatureEditText = findViewById(R.id.editTextTemperatureTakeMeasurement);
+        temperatureCorrectionEditText = findViewById(R.id.editTextTempCorrectionTakeMeasurement);
+        hydrometerEditText = findViewById(R.id.editTextHydrometerTakeMeasurement);
+        hydrometerCorrectionEditText = findViewById(R.id.editTextHydrometerTakeMeasurement);
+        trueProofText = findViewById(R.id.textViewCalculatedProofTakeMeasurement);
+    }
+
+    private void getBatchFromIntent() {
+        Intent intent = getIntent();
+        viewModel.setBatchFromJson(intent.getStringExtra(BATCH_JSON));
     }
 
     public void calculateOnChange() {
@@ -154,7 +161,7 @@ public class TakeMeasurementActivity extends AppCompatActivity implements Measur
         }
         if (user.getDefaultTemperatureUnit().equals(TemperatureUnit.CELSIUS) && inputTemperature.length() > 0) {
             System.out.println("calculate on change, C->F conversion");
-            double getTemp = Double.parseDouble(tempField.getText().toString()) + inputTempCorrDouble;
+            double getTemp = Double.parseDouble(temperatureEditText.getText().toString()) + inputTempCorrDouble;
             double convertTemp = ((getTemp * 1.8) + 32);
             BigDecimal roundTemp = new BigDecimal(convertTemp);
             MathContext decimalPlaces = new MathContext(4);
@@ -240,72 +247,66 @@ public class TakeMeasurementActivity extends AppCompatActivity implements Measur
     private TextWatcher getWatcher() {
         return new TextWatcher() {
             @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) { }
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+                Log.i(TAG, "beforeTextChanged: ");
+            }
 
             @Override
-            public void afterTextChanged(Editable s) { }
+            public void afterTextChanged(Editable s) {
+                Log.i(TAG, "afterTextChanged: ");
+            }
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
+                Log.i(TAG, "onTextChanged: ");
                 calculateOnChange();
             }
         };
     }
 
     @RequiresApi(api = Build.VERSION_CODES.O)
-    public void saveMeasurement(){
+    public void saveMeasurement() {
         ((Button) findViewById(R.id.buttonSaveMeasurementTakeMeasurement)).setOnClickListener(v -> {
-            String temptToSave = ((TextView) findViewById(R.id.editTextTemperatureTakeMeasurement))
+            String temperature = ((TextView) findViewById(R.id.editTextTemperatureTakeMeasurement))
                     .getText().toString();
-            System.out.println("temptToSave = " + temptToSave);
+            System.out.println("temptToSave = " + temperature);
 
-            String tempCorrectionToSave = ((TextView) findViewById(R.id.editTextTempCorrectionTakeMeasurement))
+            String temperatureCorrection = ((TextView) findViewById(R.id.editTextTempCorrectionTakeMeasurement))
                     .getText().toString();
-            if (tempCorrectionToSave.isEmpty()){tempCorrectionToSave = "0.0";}
-            System.out.println("tempCorrectionToSave = " + tempCorrectionToSave);
+            if (temperatureCorrection.isEmpty()){temperatureCorrection = "0.0";}
+            System.out.println("tempCorrectionToSave = " + temperatureCorrection);
 
-            String hydroToSave = ((TextView) findViewById(R.id.editTextHydrometerTakeMeasurement))
+            String hydrometer = ((TextView) findViewById(R.id.editTextHydrometerTakeMeasurement))
                     .getText().toString();
-            System.out.println("hydroToSave = " + hydroToSave);
+            System.out.println("hydroToSave = " + hydrometer);
 
-            String hydroCorrectionToSave = ((TextView) findViewById(R.id.editTextHydroCorrectionTakeMeasurement))
+            String hydrometerCorrection = ((TextView) findViewById(R.id.editTextHydroCorrectionTakeMeasurement))
                     .getText().toString();
-            if (hydroCorrectionToSave.isEmpty()){hydroCorrectionToSave = "0.0";}
-            System.out.println("hydroCorrectionToSave = " + hydroCorrectionToSave);
+            if (hydrometerCorrection.isEmpty()){hydrometerCorrection = "0.0";}
+            System.out.println("hydroCorrectionToSave = " + hydrometerCorrection);
 
-            String measurementToSave = ((TextView) findViewById(R.id.textViewCalculatedProofTakeMeasurement))
+            String trueProof = ((TextView) findViewById(R.id.textViewCalculatedProofTakeMeasurement))
                     .getText().toString();
-            System.out.println("measurementToSave = " + measurementToSave);
+            System.out.println("measurementToSave = " + trueProof);
 
             Measurement measurement = Measurement.builder()
-                    .trueProof(Double.parseDouble(measurementToSave))
-                    .temperature(Double.parseDouble(temptToSave))
-                    .hydrometer(Double.parseDouble(hydroToSave))
-                    .temperatureCorrection(Double.parseDouble(tempCorrectionToSave))
-                    .hydrometerCorrection(Double.parseDouble(hydroCorrectionToSave))
-                    .flag(false)
-                    //.batch()
+                    .trueProof(Double.parseDouble(trueProof))
+                    .temperature(Double.parseDouble(temperature))
+                    .hydrometer(Double.parseDouble(hydrometer))
+                    .temperatureCorrection(Double.parseDouble(temperatureCorrection))
+                    .hydrometerCorrection(Double.parseDouble(hydrometerCorrection))
                     .build();
 
-            System.out.println("measurement = " + measurement);
+            measurementRepository.saveMeasurement(measurement,
+                    r -> {
+                        Log.i(TAG, "saveMeasurement: success " + r);
+                    },
+                    e -> {
+                        Log.e(TAG, "saveMeasurement: failure " + e);
+                    });
 
-            Amplify.API.mutate(
-                    ModelMutation.create(measurement),
-                    response -> Log.i("Mutate", "success"),
-                    error -> Log.e("Mutate", "error " + error)
-            );
+            viewModel.saveMeasurement(measurement);
         });
-    }
-
-    @RequiresApi(api = Build.VERSION_CODES.O)
-    public String userLocalTime(){
-
-        TimeZone timeZone = TimeZone.getDefault();
-        return ZonedDateTime.now(ZoneId.of(timeZone.getID()))
-                .format(
-                        DateTimeFormatter.ofLocalizedDateTime( FormatStyle.MEDIUM)
-                                .withLocale(Locale.US)
-                );
     }
 
     @Override

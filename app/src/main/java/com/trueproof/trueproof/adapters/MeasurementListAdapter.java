@@ -1,20 +1,27 @@
 package com.trueproof.trueproof.adapters;
 
+import android.os.Build;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
 import androidx.recyclerview.widget.ListAdapter;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.amplifyframework.core.model.temporal.Temporal;
 import com.amplifyframework.datastore.generated.model.Batch;
 import com.amplifyframework.datastore.generated.model.Measurement;
 import com.trueproof.trueproof.R;
 import com.trueproof.trueproof.models.MeasurementUtils;
+import com.trueproof.trueproof.utils.AWSDateTimeFormatter;
 
+@RequiresApi(api = Build.VERSION_CODES.O)
 public class MeasurementListAdapter extends ListAdapter<Measurement, MeasurementListAdapter.MeasurementViewHolder> {
+    private static final String TAG = "MeasurementListAd";
     private final OnClickHandler onClickHandler;
 
     public MeasurementListAdapter(OnClickHandler onClickHandler) {
@@ -51,14 +58,14 @@ public class MeasurementListAdapter extends ListAdapter<Measurement, Measurement
             itemView.setOnClickListener(v -> onClick.onClick(this.measurement));
             measuredAtTime = itemView.findViewById(R.id.measuredAtTimeMeasurementListItem);
             measuredAtDate = itemView.findViewById(R.id.measuredAtDateMeasurementListItem);
-            trueProof = itemView.findViewById(R.id.measuredProofActiveBatchListItem);
+            trueProof = itemView.findViewById(R.id.measuredProofMeasurementListItem);
         }
 
         public void bind(Measurement measurement) {
             this.measurement = measurement;
-            // TODO placeholder, date time formatting logic
-            measuredAtDate.setText("" + (measurement.getCreatedAt()));
-            measuredAtTime.setText("" + (measurement.getCreatedAt()));
+            Temporal.DateTime dt = measurement.getCreatedAt();
+            measuredAtDate.setText(AWSDateTimeFormatter.ofPattern("d/M/y").format(dt));
+            measuredAtTime.setText(AWSDateTimeFormatter.ofPattern("hh:mm:ss").format(dt));
             trueProof.setText(String.format("Measured proof: %.1f", measurement.getTrueProof()));
         }
     }

@@ -87,6 +87,12 @@ public class BatchDetailActivity extends AppCompatActivity {
         setUpSpinner();
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        viewModel.update();
+    }
+
     private void setUpSpinner() {
         ArrayAdapter<Status> adapter = new ArrayAdapter<>(this,
                 android.R.layout.simple_spinner_item,
@@ -127,7 +133,7 @@ public class BatchDetailActivity extends AppCompatActivity {
     }
 
     private void goToMeasurementDetail(Measurement measurement) {
-        Intent intent = new Intent(this, TakeMeasurementActivity.class);
+        Intent intent = new Intent(this, MeasurementDetailActivity.class);
         String measurementJson = jsonConverter.measurementToJson(measurement);
         intent.putExtra(MeasurementDetailActivity.MEASUREMENT_JSON, measurementJson);
         startActivity(intent);
