@@ -8,18 +8,18 @@
 
 
     <TextView
-        android:id="@+id/batchNumberActiveBatchListItem"
+        android:id="@+id/batchNumberBatchListItem"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="52dp"
         android:text="Batch no. 1501"
-        app:layout_constraintBottom_toBottomOf="@+id/batchTypeActiveBatchListItem"
+        app:layout_constraintBottom_toBottomOf="@+id/batchTypeBatchListItem"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/batchTypeActiveBatchListItem"
+        app:layout_constraintTop_toTopOf="@+id/batchTypeBatchListItem"
         app:layout_constraintVertical_bias="0.0" />
 
     <TextView
-        android:id="@+id/batchTypeActiveBatchListItem"
+        android:id="@+id/batchTypeBatchListItem"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="52dp"
@@ -37,7 +37,7 @@
         android:text="Completed at 11/12/31"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/batchTypeActiveBatchListItem" />
+        app:layout_constraintTop_toBottomOf="@+id/batchTypeBatchListItem" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

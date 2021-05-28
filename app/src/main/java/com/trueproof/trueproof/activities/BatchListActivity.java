@@ -81,7 +81,6 @@ public class BatchListActivity extends AppCompatActivity {
         if (list != null) batchListAdapter.submitList(list);
         else batchListAdapter.submitList(new ArrayList<Batch>());
 
-        allBatchList.setLayoutManager(new LinearLayoutManager(this));
         allBatchList.setAdapter(batchListAdapter);
         viewModel.getBatchList().observe(this,
                 batches -> batchListAdapter.submitList(batches));
