@@ -19,6 +19,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.amplifyframework.auth.AuthUser;
 import com.amplifyframework.core.Amplify;
 import com.amplifyframework.datastore.generated.model.Batch;
+import com.amplifyframework.datastore.generated.model.Distillery;
 import com.amplifyframework.datastore.generated.model.Status;
 import com.trueproof.trueproof.R;
 import com.trueproof.trueproof.utils.ActivityUtils;
@@ -50,6 +51,10 @@ public class BatchDetailActivity extends AppCompatActivity {
         setContentView(R.layout.activity_batch_detail);
 
         Log.i(TAG, "onCreate: batch detail");
+
+       Distillery distillery = userSettings.getCachedDistillery();
+        if (distillery != null)((TextView)findViewById(R.id.textViewBatchDetaildsp)).setText(distillery.getName());
+
 
         findViewById(R.id.imageButtonAddMeasurementBatchDetail).setOnClickListener(v -> goToTakeMeasurementActivity());
         Intent intent = getIntent();

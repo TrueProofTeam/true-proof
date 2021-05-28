@@ -91,13 +91,17 @@ public class TakeMeasurementActivity extends AppCompatActivity implements Measur
     @Inject
     UserSettings userSettings;
 
+
     User user;
+
 
     @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_take_measurement);
+        Distillery distillery = userSettings.getCachedDistillery();
+        if (distillery != null)((TextView)findViewById(R.id.textViewTakeMeasurementdsp)).setText(distillery.getName());
         inputLimitListener();
         saveMeasurement();
 
