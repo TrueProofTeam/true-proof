@@ -61,7 +61,11 @@
         android:id="@+id/editTextHydrometerMain"
         android:layout_width="150dp"
         android:layout_height="wrap_content"
+<<<<<<< HEAD
         android:layout_marginTop="8dp"
+=======
+        android:layout_marginTop="16dp"
+>>>>>>> 5a06ead06ab8ecebb8461402fa4370d943342870
         android:hint="@string/hydroText"
         android:importantForAutofill="no"
         android:inputType="numberDecimal"
@@ -81,7 +85,11 @@
         android:id="@+id/editTextTemperatureCorrectionMain"
         android:layout_width="150dp"
         android:layout_height="wrap_content"
+<<<<<<< HEAD
         android:layout_marginTop="8dp"
+=======
+        android:layout_marginTop="16dp"
+>>>>>>> 5a06ead06ab8ecebb8461402fa4370d943342870
         android:hint="@string/temperatureCorrectionText"
         android:importantForAutofill="no"
         android:inputType="numberDecimal|numberSigned"
