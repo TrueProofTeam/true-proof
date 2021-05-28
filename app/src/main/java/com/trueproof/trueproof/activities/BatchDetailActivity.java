@@ -73,7 +73,8 @@ public class BatchDetailActivity extends AppCompatActivity {
         Log.i(TAG, "onCreate: batch detail");
 
         Distillery distillery = userSettings.getCachedDistillery();
-        TextView distilleryName = findViewById(R.id.textViewBatchListdsp);
+        Log.i(TAG, "onCreate: distillery " + distillery);
+        TextView distilleryName = findViewById(R.id.textViewBatchDetaildsp);
         distilleryName.setText(DistilleryUtils.toHeaderString(distillery));
 
         findViewById(R.id.imageButtonAddMeasurementBatchDetail).setOnClickListener(v -> goToTakeMeasurementActivity());
