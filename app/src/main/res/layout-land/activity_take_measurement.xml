@@ -32,6 +32,7 @@
         android:layout_marginTop="16dp"
         android:layout_marginEnd="12dp"
         android:ems="10"
+        android:inputType="numberDecimal"
         android:hint="@string/fahrenheitText"
         android:importantForAutofill="no"
         android:inputType="textPersonName"
@@ -66,9 +67,9 @@
         android:layout_marginTop="16dp"
         android:layout_marginEnd="16dp"
         android:ems="10"
+        android:inputType="numberDecimal|numberSigned"
         android:hint="@string/hydrometerCorrectionText"
         android:importantForAutofill="no"
-        android:inputType="textPersonName"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editTextHydrometerTakeMeasurement" />
 
@@ -79,9 +80,9 @@
         android:layout_marginTop="16dp"
         android:layout_marginEnd="16dp"
         android:ems="10"
+        android:inputType="numberDecimal"
         android:hint="@string/hydroText"
         android:importantForAutofill="no"
-        android:inputType="textPersonName"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editTextTempCorrectionTakeMeasurement" />
 
@@ -103,9 +104,10 @@
         android:layout_marginTop="16dp"
         android:layout_marginEnd="16dp"
         android:ems="10"
+        android:inputType="numberDecimal|numberSigned"
         android:hint="@string/temperatureCorrectionFText"
         android:importantForAutofill="no"
-        android:inputType="textPersonName"
+
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editTextTemperatureTakeMeasurement" />
 

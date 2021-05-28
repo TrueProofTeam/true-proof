@@ -23,6 +23,7 @@ import com.amplifyframework.datastore.generated.model.Distillery;
 import com.amplifyframework.datastore.generated.model.Measurement;
 import com.amplifyframework.datastore.generated.model.TemperatureUnit;
 import com.amplifyframework.datastore.generated.model.User;
+
 import com.trueproof.trueproof.R;
 import com.trueproof.trueproof.logic.InputFilterMinMax;
 import com.trueproof.trueproof.logic.Proofing;
@@ -99,6 +100,7 @@ public class TakeMeasurementActivity extends AppCompatActivity {
 
     private void initializeUserSettings() {
         saveMeasurementButton.setEnabled(false);
+
 
         user = userSettings.getCachedUserSettings();
         if (user == null) {
@@ -217,9 +219,9 @@ public class TakeMeasurementActivity extends AppCompatActivity {
         }
         if (inputProofCorrection.length() > 0 && inputProofCorrection.startsWith(".")) {
             String appendDot = "0" + inputProofCorrection;
-            inputTempCorrDouble = Double.parseDouble(appendDot);
+            inputProofCorrDouble = Double.parseDouble(appendDot);
         } else if (inputProofCorrection.length() > 0 && inputProofCorrection.contains(".")) {
-            inputTempCorrDouble = Double.parseDouble(inputProofCorrection);
+            inputProofCorrDouble = Double.parseDouble(inputProofCorrection);
         }
         Log.v(TAG, "inputProofCorrDouble = " + inputProofCorrDouble);
 
@@ -274,7 +276,7 @@ public class TakeMeasurementActivity extends AppCompatActivity {
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 try {
                     calculateOnChange();
-                } catch (Exception e){
+                } catch (Exception e) {
                     Log.e(TAG, "onTextChanged: ", e);
                 }
             }
