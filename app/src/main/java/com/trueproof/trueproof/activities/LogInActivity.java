@@ -8,6 +8,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -71,12 +72,15 @@ public class LogInActivity extends AppCompatActivity {
                             if(r.isSignInComplete()){
                                 handler.sendEmptyMessage(1);
                                 userSettings.refreshCache(r2->{},r2->{});
+                                Log.i(TAG, "onClick: Successful response" + r);
                             }else {
                                 handler.sendEmptyMessage(2);
+                                Log.i(TAG, "onClick: Successful response but inside ELSE"+r);
                             }
                         },
                         r->{
                             handler.sendEmptyMessage(2);
+                            Log.i(TAG, "onClick: Error"+r);
                         }
                 );
             }
