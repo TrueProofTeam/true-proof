@@ -9,6 +9,7 @@ import android.text.TextWatcher;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -67,11 +68,15 @@ public class TakeMeasurementActivity extends AppCompatActivity {
     TakeMeasurementViewModel viewModel;
     User user;
 
-    EditText temperatureEditText;
-    EditText temperatureCorrectionEditText;
-    EditText hydrometerEditText;
-    EditText hydrometerCorrectionEditText;
-    TextView trueProofText;
+    private EditText temperatureEditText;
+    private EditText temperatureCorrectionEditText;
+    private EditText hydrometerEditText;
+    private EditText hydrometerCorrectionEditText;
+    private TextView trueProofText;
+    private Button saveMeasurementButton;
+    private Button goToBatchDetailButton;
+    private TextView temperatureCorrectionText;
+    private TextView temperatureText;
 
     @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
@@ -85,16 +90,15 @@ public class TakeMeasurementActivity extends AppCompatActivity {
         distilleryName.setText(DistilleryUtils.toHeaderString(distillery));
 
         saveViews();
+        setUpClickListeners();
         getBatchFromIntent();
-        inputLimitListener();
-        setUpSaveMeasurement();
+        setUpInputClickListeners();
         observeLiveData();
+        initializeUserSettings();
+    }
 
-        findViewById(R.id.buttonSaveMeasurementTakeMeasurement)
-                .setEnabled(false);
-
-        ((Button) findViewById(R.id.buttonSaveMeasurementTakeMeasurement))
-                .setEnabled(false);
+    private void initializeUserSettings() {
+        saveMeasurementButton.setEnabled(false);
 
         user = userSettings.getCachedUserSettings();
         if (user == null) {
@@ -106,16 +110,35 @@ public class TakeMeasurementActivity extends AppCompatActivity {
 
         if (user.getDefaultTemperatureUnit().equals(TemperatureUnit.CELSIUS)) {
             temperatureEditText.setFilters(new InputFilter[]{new InputFilterMinMax(-17.22, 37.78)});
+            temperatureText.setText("Temperature (°C)");
+            temperatureCorrectionText.setText("Correction (°C)");
         }
+
+        if (user.getDefaultTemperatureUnit().equals(TemperatureUnit.FAHRENHEIT)) {
+            temperatureText.setText("Temperature (°F)");
+            temperatureCorrectionText.setText("Correction (°F)");
+        }
+
+        hydrometerCorrectionEditText.setText(user.getDefaultHydrometerCorrection().toString());
+        temperatureCorrectionEditText.setText(user.getDefaultTemperatureCorrection().toString());
     }
 
     private void saveViews() {
         Log.i(TAG, "Temperature edit text: " + temperatureEditText);
+        temperatureText = findViewById(R.id.textViewTemperatureTakeMeasurement);
+        temperatureCorrectionText = findViewById(R.id.textViewTempCorrectionTakeMeasurement);
         temperatureEditText = findViewById(R.id.editTextTemperatureTakeMeasurement);
         temperatureCorrectionEditText = findViewById(R.id.editTextTempCorrectionTakeMeasurement);
         hydrometerEditText = findViewById(R.id.editTextHydrometerTakeMeasurement);
-        hydrometerCorrectionEditText = findViewById(R.id.editTextHydrometerTakeMeasurement);
+        hydrometerCorrectionEditText = findViewById(R.id.editTextHydroCorrectionTakeMeasurement);
         trueProofText = findViewById(R.id.textViewCalculatedProofTakeMeasurement);
+        saveMeasurementButton = findViewById(R.id.buttonSaveMeasurementTakeMeasurement);
+        goToBatchDetailButton = findViewById(R.id.buttonBatchDetailTakeMeasurement);
+    }
+
+    private void setUpClickListeners() {
+        saveMeasurementButton.setOnClickListener(v -> saveMeasurement());
+        goToBatchDetailButton.setOnClickListener(v -> finish());
     }
 
     private void getBatchFromIntent() {
@@ -213,7 +236,7 @@ public class TakeMeasurementActivity extends AppCompatActivity {
         }
     }
 
-    public void inputLimitListener() {
+    public void setUpInputClickListeners() {
         EditText tempField = findViewById(R.id.editTextTemperatureTakeMeasurement);
         InputFilterMinMax tempLimits = new InputFilterMinMax(1.0, 100.0);
         tempField.setFilters(new InputFilter[]{tempLimits});
@@ -259,48 +282,46 @@ public class TakeMeasurementActivity extends AppCompatActivity {
     }
 
     @RequiresApi(api = Build.VERSION_CODES.O)
-    public void setUpSaveMeasurement() {
-        findViewById(R.id.buttonSaveMeasurementTakeMeasurement).setOnClickListener(v -> {
-            String temperature = ((TextView) findViewById(R.id.editTextTemperatureTakeMeasurement))
-                    .getText().toString();
-            Log.v(TAG, "temptToSave = " + temperature);
+    private void saveMeasurement() {
+        String temperature = ((TextView) findViewById(R.id.editTextTemperatureTakeMeasurement))
+                .getText().toString();
+        Log.v(TAG, "temptToSave = " + temperature);
 
-            String temperatureCorrection = ((TextView) findViewById(R.id.editTextTempCorrectionTakeMeasurement))
-                    .getText().toString();
+        String temperatureCorrection = ((TextView) findViewById(R.id.editTextTempCorrectionTakeMeasurement))
+                .getText().toString();
 
-            if (temperatureCorrection.isEmpty()) {
-                temperatureCorrection = "0.0";
-            }
-            Log.v(TAG, "tempCorrectionToSave = " + temperatureCorrection);
+        if (temperatureCorrection.isEmpty()) {
+            temperatureCorrection = "0.0";
+        }
+        Log.v(TAG, "tempCorrectionToSave = " + temperatureCorrection);
 
-            String hydrometer = ((TextView) findViewById(R.id.editTextHydrometerTakeMeasurement))
-                    .getText().toString();
-            Log.v(TAG, "hydroToSave = " + hydrometer);
+        String hydrometer = ((TextView) findViewById(R.id.editTextHydrometerTakeMeasurement))
+                .getText().toString();
+        Log.v(TAG, "hydroToSave = " + hydrometer);
 
-            String hydrometerCorrection = ((TextView) findViewById(R.id.editTextHydroCorrectionTakeMeasurement))
-                    .getText().toString();
+        String hydrometerCorrection = ((TextView) findViewById(R.id.editTextHydroCorrectionTakeMeasurement))
+                .getText().toString();
 
-            if (hydrometerCorrection.isEmpty()) {
-                hydrometerCorrection = "0.0";
-            }
-            Log.v(TAG, "hydroCorrectionToSave = " + hydrometerCorrection);
+        if (hydrometerCorrection.isEmpty()) {
+            hydrometerCorrection = "0.0";
+        }
+        Log.v(TAG, "hydroCorrectionToSave = " + hydrometerCorrection);
 
-            String trueProof = ((TextView) findViewById(R.id.textViewCalculatedProofTakeMeasurement))
-                    .getText().toString();
-            Log.v(TAG, "measurementToSave = " + trueProof);
+        String trueProof = ((TextView) findViewById(R.id.textViewCalculatedProofTakeMeasurement))
+                .getText().toString();
+        Log.v(TAG, "measurementToSave = " + trueProof);
 
-            Measurement measurement = Measurement.builder()
-                    .trueProof(Double.parseDouble(trueProof))
-                    .temperature(Double.parseDouble(temperature))
-                    .hydrometer(Double.parseDouble(hydrometer))
-                    .temperatureCorrection(Double.parseDouble(temperatureCorrection))
-                    .hydrometerCorrection(Double.parseDouble(hydrometerCorrection))
-                    .build();
+        Measurement measurement = Measurement.builder()
+                .trueProof(Double.parseDouble(trueProof))
+                .temperature(Double.parseDouble(temperature))
+                .hydrometer(Double.parseDouble(hydrometer))
+                .temperatureCorrection(Double.parseDouble(temperatureCorrection))
+                .hydrometerCorrection(Double.parseDouble(hydrometerCorrection))
+                .build();
 
-            viewModel.saveMeasurement(measurement);
-
-        });
+        viewModel.saveMeasurement(measurement);
     }
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
