@@ -26,6 +26,7 @@ import com.trueproof.trueproof.logic.InputFilterMinMax;
 import com.trueproof.trueproof.logic.Proofing;
 import com.trueproof.trueproof.utils.ActivityUtils;
 import com.trueproof.trueproof.utils.TestDependencyInjection;
+import com.trueproof.trueproof.utils.UserSettings;
 
 import java.math.BigDecimal;
 import java.math.MathContext;
@@ -54,10 +55,12 @@ public class MainActivity extends AppCompatActivity {
     Proofing proofing;
     @Inject
     ActivityUtils activityUtils;
+    @Inject
+    UserSettings userSettings;
 
     TemperatureUnit temperatureUnit;
 
-    double inTempDouble = 0.0;
+    double inTempDouble;
     double inputTempCorrDouble = 0.0;
     double inputProofDouble = 0.0;
     double inputProofCorrDouble = 0.0;
@@ -73,10 +76,16 @@ public class MainActivity extends AppCompatActivity {
 
         temperatureUnit = TemperatureUnit.FAHRENHEIT;
 
+
         limitAndCalculate();
 
         TextView dateTimeLocal = findViewById(R.id.textViewDateTimeLocal);
         dateTimeLocal.setText(userLocalTime());
+
+        userSettings.refreshCache(r -> {
+                    Log.i("TrueProofApplication", "works i guess");
+                } , e -> Log.e("TrueProofApplication", "Error idk")
+        );
 
 
     }
@@ -91,7 +100,7 @@ public class MainActivity extends AppCompatActivity {
             inTempDouble = Double.parseDouble(inputTemperature);
         }
         RadioButton radioButtonC = findViewById(R.id.radioButtonTempCMain);
-        if (radioButtonC.isChecked()) {
+        if (radioButtonC.isChecked() && inputTemperature != null && inputTemperature.length() > 0) {
             System.out.println("calculate on change, C->F conversion");
             double getTemp = Double.parseDouble(tempField.getText().toString()) + inputTempCorrDouble;
             double convertTemp = ((getTemp * 1.8) + 32);
@@ -280,18 +289,12 @@ public class MainActivity extends AppCompatActivity {
      * @param view
      */
     public void onMainRadioButtonClicked(View view) {
-//        RadioButton radioButtonF = findViewById(R.id.radioButtonTempFMain);
-//        radioButtonF.setChecked(true);
-        RadioButton fButton = findViewById(R.id.radioButtonTempFMain);
-        RadioButton cButton = findViewById(R.id.radioButtonTempCMain);
 
         boolean checked = ((RadioButton) view).isChecked();
         switch (view.getId()) {
             case R.id.radioButtonTempCMain:
                 if (checked)
-                    // TODO display this page in C
                     tempField = findViewById(R.id.editTextTemperatureMain);
-//                tempField.getText().toString();
                 if (temperatureUnit.equals(TemperatureUnit.FAHRENHEIT) && tempField != null && tempField.length() > 0) {
                     temperatureUnit = TemperatureUnit.CELSIUS;
                     double getTemp = Double.parseDouble(tempField.getText().toString());
@@ -308,7 +311,6 @@ public class MainActivity extends AppCompatActivity {
                 break;
             case R.id.radioButtonTempFMain:
                 if (checked)
-                    // TODO display this page in F
                     tempField = findViewById(R.id.editTextTemperatureMain);
                 if (temperatureUnit.equals(TemperatureUnit.CELSIUS) && tempField != null && tempField.length() > 0) {
                     temperatureUnit = TemperatureUnit.FAHRENHEIT;
@@ -325,16 +327,6 @@ public class MainActivity extends AppCompatActivity {
                 tempField.setFilters(new InputFilter[]{tempLimits});
                 break;
         }
-//        if (inputProofCorrection != null && inputProofCorrection.length() > 0 && !inputProofCorrection.contains(".")) {
-
     }
-
-//    private static double round(double value, int places) {
-//        if (places < 0) throw new IllegalArgumentException();
-//
-//        BigDecimal bd = new BigDecimal(Double.toString(value));
-//        bd = bd.setScale(places, RoundingMode.HALF_UP);
-//        return bd.doubleValue();
-//    }
 
 }

@@ -21,6 +21,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.amplifyframework.datastore.generated.model.Batch;
 import com.amplifyframework.datastore.generated.model.Measurement;
+import com.amplifyframework.datastore.generated.model.Distillery;
 import com.amplifyframework.datastore.generated.model.Status;
 import com.amplifyframework.datastore.generated.model.TemperatureUnit;
 import com.trueproof.trueproof.R;
@@ -69,11 +70,9 @@ public class BatchDetailActivity extends AppCompatActivity {
         findViews();
 
         Log.i(TAG, "onCreate: batch detail");
-        userSettings.getDistillery(success -> {
-            ((TextView) findViewById(R.id.textViewBatchDetaildsp)).setText(success.getName());
-        }, fail -> {
-            Log.i(TAG, "getDistillery: fail" + fail);
-        });
+
+       Distillery distillery = userSettings.getCachedDistillery();
+        if (distillery != null)((TextView)findViewById(R.id.textViewBatchDetaildsp)).setText(distillery.getName());
 
         findViewById(R.id.imageButtonAddMeasurementBatchDetail).setOnClickListener(v -> goToTakeMeasurementActivity());
 
@@ -165,7 +164,6 @@ public class BatchDetailActivity extends AppCompatActivity {
                 .batchIdentifier(batchIdentifier)
                 .status(status)
                 .build();
-
         viewModel.updateBatch(newBatch);
     }
 

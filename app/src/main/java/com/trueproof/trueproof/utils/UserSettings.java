@@ -114,9 +114,6 @@ public class UserSettings {
      *                onto the user and the cause can be grabbed with getCause().
      */
     public void getUserSettings(Consumer<User> success, Consumer<Exception> fail) {
-        if (cachedUserSettings != null) {
-
-        }
 
         AuthUser authUser = Amplify.Auth.getCurrentUser();
         if (authUser == null) fail.accept(
@@ -133,6 +130,7 @@ public class UserSettings {
                         userRepository.getById(userId,
                                 user -> {
                                     if (user != null) {
+                                        cachedUserSettings = user;
                                         success.accept(user);
                                     } else {
                                         fail.accept(new Exception("user object was not found in the database"));
