@@ -72,6 +72,11 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         initializeLoginButton();
 
+        ((TextView) findViewById(R.id.textViewTermsOfUseMain)).setOnClickListener(v -> {
+            Intent intent = new Intent(this, TermsOfUseActivity.class);
+            startActivity(intent);
+        });
+
         temperatureUnit = TemperatureUnit.FAHRENHEIT;
 
         limitAndCalculate();

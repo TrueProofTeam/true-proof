@@ -61,7 +61,7 @@
         android:id="@+id/editTextHydrometerMain"
         android:layout_width="150dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="8dp"
         android:hint="@string/hydroText"
         android:importantForAutofill="no"
         android:inputType="numberDecimal"
@@ -81,7 +81,7 @@
         android:id="@+id/editTextTemperatureCorrectionMain"
         android:layout_width="150dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="8dp"
         android:hint="@string/temperatureCorrectionText"
         android:importantForAutofill="no"
         android:inputType="numberDecimal|numberSigned"
@@ -93,9 +93,8 @@
         android:id="@+id/textViewCalculatedProofMain"
         android:layout_width="150dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="8dp"
         android:background="@drawable/border"
-        android:text="@string/proofFTempText"
         android:textSize="20sp"
         app:layout_constraintStart_toStartOf="@+id/editTextHydrometerCorrectionMain"
         app:layout_constraintTop_toBottomOf="@+id/editTextHydrometerCorrectionMain" />
@@ -132,7 +131,7 @@
         android:id="@+id/editTextHydrometerCorrectionMain"
         android:layout_width="150dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="8dp"
         android:hint="@string/hydrometerCorrectionText"
         android:importantForAutofill="no"
         android:inputType="numberDecimal|numberSigned"
@@ -166,14 +165,5 @@
             android:text="@string/tempInFText"
             app:layout_constraintEnd_toEndOf="parent" />
     </RadioGroup>
-
-    <TextView
-        android:id="@+id/textViewDateTimeLocal"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintBottom_toTopOf="@+id/textViewProofMain"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textViewHydrometerCorrectionMain" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
