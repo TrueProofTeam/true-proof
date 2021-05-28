@@ -12,6 +12,8 @@
         android:layout_height="40dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="16dp"
+        android:hint="@string/temperatureText"
+        android:importantForAutofill="no"
         android:inputType="numberDecimal"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/radioGroupMain" />
@@ -21,13 +23,13 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
-        android:text="Temperature"
+        android:text="@string/temperatureText"
         app:layout_constraintBottom_toBottomOf="@+id/editTextTemperatureMain"
         app:layout_constraintEnd_toStartOf="@+id/editTextTemperatureCorrectionMain"
         app:layout_constraintTop_toTopOf="@+id/editTextTemperatureMain" />
 
     <Button
-            android:text="Log in to save your data"
+            android:text="@string/logInToSaveYourDataText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/buttonLoginMain"
@@ -42,7 +44,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="16dp"
-        android:text="Quick Proofing Calculator"
+        android:text="@string/quickProofingCalculatorText"
         android:textAppearance="@style/TextAppearance.AppCompat.Large"
         android:textSize="30sp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -53,7 +55,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="48dp"
-        android:text="Terms of Use"
+        android:text="@string/termsOfUseText"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textViewCalculatedProofMain" />
@@ -64,6 +66,8 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="16dp"
+        android:hint="@string/hydroText"
+        android:importantForAutofill="no"
         android:inputType="numberDecimal"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editTextTemperatureCorrectionMain" />
@@ -73,7 +77,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="16dp"
-        android:text="Proof at 60°F"
+        android:text="@string/proofAtFText"
         android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="@+id/textViewCalculatedProofMain"
         app:layout_constraintEnd_toStartOf="@+id/textViewCalculatedProofMain"
@@ -85,6 +89,8 @@
         android:layout_height="40dp"
         android:layout_marginTop="12dp"
         android:layout_marginEnd="16dp"
+        android:hint="@string/temperatureCorrectionText"
+        android:importantForAutofill="no"
         android:inputType="numberDecimal|numberSigned"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editTextTemperatureMain" />
@@ -96,7 +102,7 @@
         android:layout_marginTop="32dp"
         android:layout_marginEnd="16dp"
         android:background="@drawable/border"
-        android:text="76.4"
+        android:text="@string/proofFTempText"
         android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editTextHydrometerCorrectionMain" />
@@ -106,7 +112,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="12dp"
-        android:text="Temperature Correction"
+        android:text="@string/temperatureCorrectionText"
         app:layout_constraintBottom_toBottomOf="@+id/editTextTemperatureCorrectionMain"
         app:layout_constraintEnd_toStartOf="@+id/editTextTemperatureCorrectionMain"
         app:layout_constraintTop_toTopOf="@+id/editTextTemperatureCorrectionMain" />
@@ -116,7 +122,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="16dp"
-        android:text="Hydrometer"
+        android:text="@string/hydrometerText"
         app:layout_constraintBottom_toBottomOf="@+id/editTextHydrometerMain"
         app:layout_constraintEnd_toStartOf="@+id/editTextHydrometerMain"
         app:layout_constraintTop_toTopOf="@+id/editTextHydrometerMain" />
@@ -126,7 +132,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="12dp"
-        android:text="Hydrometer Correction"
+        android:text="@string/hydrometerCorrectionText"
         app:layout_constraintBottom_toBottomOf="@+id/editTextHydrometerCorrectionMain"
         app:layout_constraintEnd_toStartOf="@+id/editTextHydrometerCorrectionMain"
         app:layout_constraintTop_toTopOf="@+id/editTextHydrometerCorrectionMain" />
@@ -137,6 +143,8 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="16dp"
+        android:hint="@string/hydrometerCorrectionText"
+        android:importantForAutofill="no"
         android:inputType="numberDecimal|numberSigned"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editTextHydrometerMain" />
@@ -156,7 +164,7 @@
             android:layout_height="wrap_content"
             android:layout_marginEnd="16dp"
             android:onClick="onMainRadioButtonClicked"
-            android:text="Temp in °C"
+            android:text="@string/tempInCText"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/radioButtonTempFMain" />
 
@@ -166,7 +174,7 @@
             android:layout_height="wrap_content"
             android:layout_marginEnd="16dp"
             android:onClick="onMainRadioButtonClicked"
-            android:text="Temp in °F"
+            android:text="@string/tempInFText"
             app:layout_constraintEnd_toEndOf="parent" />
     </RadioGroup>
 

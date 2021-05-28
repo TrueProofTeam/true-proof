@@ -153,6 +153,7 @@ public class SettingsActivity extends AppCompatActivity {
 
     void initializeButtons(){
         Button submit = findViewById(R.id.buttonSubmitDistillerySettings);
+        TextView title = findViewById(R.id.textViewDistillerySettingsTitleDistillerySettings);
 
         submit.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -171,6 +172,7 @@ public class SettingsActivity extends AppCompatActivity {
                         .dspId(dspNumberInput)
                         .users(usersDistillery.getUsers())
                         .build();
+                if(!dspNameInput.isEmpty())title.setText(dspNameInput);
                 User newUser = User.builder()
                         .id(user.getId())
                         .email(user.getEmail())

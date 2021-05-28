@@ -11,7 +11,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        android:text="Measurement Detail"
+        android:text="@string/measurementDetailText"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
@@ -19,7 +19,7 @@
         app:layout_constraintTop_toBottomOf="@+id/textViewMDdsp" />
 
     <TextView
-            android:text="Batch #"
+            android:text="@string/batchText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/textViewBatchNumMeasurementDetail"
@@ -30,7 +30,7 @@
             android:layout_marginTop="8dp" />
 
     <TextView
-            android:text="10:10:15 am 11/21/21"
+            android:text="@string/dateText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/textViewdateTimeMeasurementDetail"
@@ -41,7 +41,7 @@
             app:layout_constraintEnd_toEndOf="parent" />
 
     <Button
-            android:text="Save Note"
+            android:text="@string/saveNoteText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/buttonSaveNoteMeasurementDetail"
@@ -51,7 +51,7 @@
             android:layout_marginBottom="16dp" />
 
     <TextView
-            android:text="Flag as problem"
+            android:text="@string/flagAsProblemText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/textViewMDFlag"
@@ -61,36 +61,36 @@
             android:layout_marginEnd="16dp" />
 
     <TextView
-            android:text="Hydrometer Correction: "
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/textViewMDTitleHydroCorrection"
-            app:layout_constraintTop_toBottomOf="@+id/textViewdateTimeMeasurementDetail"
-            android:layout_marginTop="16dp"
-            app:layout_constraintEnd_toEndOf="@+id/textViewBatchNumMeasurementDetail" />
+        android:id="@+id/textViewMDTitleHydroCorrection"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="@string/hydrometerCorrectionText"
+        app:layout_constraintEnd_toEndOf="@+id/textViewBatchNumMeasurementDetail"
+        app:layout_constraintTop_toBottomOf="@+id/textViewdateTimeMeasurementDetail" />
 
     <TextView
-            android:text="TextView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/textViewMDHydroCorrection"
-            app:layout_constraintTop_toTopOf="@+id/textViewMDTitleHydroCorrection"
-            app:layout_constraintBottom_toBottomOf="@+id/textViewMDTitleHydroCorrection"
-            app:layout_constraintVertical_bias="0.0"
-            app:layout_constraintStart_toEndOf="@+id/textViewMDTitleHydroCorrection"
-            android:layout_marginStart="8dp" />
+        android:id="@+id/textViewMDHydroCorrection"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:text="@string/textviewText"
+        app:layout_constraintBottom_toBottomOf="@+id/textViewMDTitleHydroCorrection"
+        app:layout_constraintStart_toEndOf="@+id/textViewMDTitleHydroCorrection"
+        app:layout_constraintTop_toTopOf="@+id/textViewMDTitleHydroCorrection"
+        app:layout_constraintVertical_bias="0.0" />
 
     <TextView
-            android:text="Temperature Correction:"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/textViewMDTitleTempCorrection"
-            app:layout_constraintTop_toBottomOf="@+id/textViewMDTitleHydroCorrection"
-            app:layout_constraintEnd_toEndOf="@+id/textViewBatchNumMeasurementDetail"
-            android:layout_marginTop="8dp" />
+        android:id="@+id/textViewMDTitleTempCorrection"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="@string/temperatureCorrectionText"
+        app:layout_constraintEnd_toEndOf="@+id/textViewBatchNumMeasurementDetail"
+        app:layout_constraintTop_toBottomOf="@+id/textViewMDTitleHydroCorrection" />
 
     <TextView
-            android:text="TextView"
+            android:text="@string/textviewText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/textView8"
@@ -100,7 +100,7 @@
             android:layout_marginStart="8dp" />
 
     <TextView
-            android:text="Corrected"
+            android:text="@string/correctedText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/textViewMDCorrected"
@@ -109,7 +109,7 @@
             app:layout_constraintEnd_toEndOf="@+id/textViewBatchNumMeasurementDetail" />
 
     <TextView
-            android:text="difference in Hydrometer"
+            android:text="@string/differenceInHydrometerText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/textViewMDdiffHydro"
@@ -118,7 +118,7 @@
             app:layout_constraintEnd_toEndOf="@+id/textViewBatchNumMeasurementDetail" />
 
     <TextView
-            android:text="difference in Temperature"
+            android:text="@string/differenceInTemperatureText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/textViewMDdiffTemp"
@@ -127,7 +127,7 @@
             android:layout_marginTop="16dp" />
 
     <TextView
-            android:text="Interpolation"
+            android:text="@string/interpolationText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/textViewMDTitleInterpolation"
@@ -138,7 +138,7 @@
             android:textSize="18sp" />
 
     <TextView
-            android:text="Final Proof"
+            android:text="@string/finalProofText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/textViewMDFinalProof"
@@ -150,16 +150,16 @@
             app:layout_constraintEnd_toEndOf="parent" />
 
     <TextView
-            android:text="Temperature"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/textViewMDTemp"
-            app:layout_constraintTop_toBottomOf="@+id/textViewMDAlcohol"
-            android:layout_marginTop="4dp"
-            app:layout_constraintEnd_toEndOf="@+id/textViewBatchNumMeasurementDetail" />
+        android:id="@+id/textViewMDTemp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:text="@string/temperatureText"
+        app:layout_constraintEnd_toEndOf="@+id/textViewBatchNumMeasurementDetail"
+        app:layout_constraintTop_toBottomOf="@+id/textViewMDAlcohol" />
 
     <TextView
-            android:text="Alcohol"
+            android:text="@string/alcoholText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/textViewMDAlcohol"
@@ -168,7 +168,7 @@
             app:layout_constraintEnd_toEndOf="@+id/textViewBatchNumMeasurementDetail" />
 
     <TextView
-            android:text="Notes"
+            android:text="@string/notesText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/textViewMDNote"
@@ -179,16 +179,16 @@
             android:layout_marginTop="16dp" />
 
     <TextView
-            android:text="Corrected"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/textViewMDCorrectedHydro"
-            app:layout_constraintTop_toBottomOf="@+id/textViewMDdiffHydro"
-            app:layout_constraintEnd_toEndOf="@+id/textViewBatchNumMeasurementDetail"
-            android:layout_marginTop="8dp" />
+        android:id="@+id/textViewMDCorrectedHydro"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="@string/correctedText"
+        app:layout_constraintEnd_toEndOf="@+id/textViewBatchNumMeasurementDetail"
+        app:layout_constraintTop_toBottomOf="@+id/textViewMDdiffHydro" />
 
     <TextView
-            android:text="Distillery and DSP"
+            android:text="@string/distilleryAndDspText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/textViewMDdsp"

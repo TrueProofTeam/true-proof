@@ -7,22 +7,22 @@
     tools:context=".activities.NewBatchActivity">
 
     <TextView
-            android:text="Distillery and DSP"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/textViewNewBatchdsp"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintEnd_toEndOf="parent"
-            android:layout_marginTop="8dp" />
+        android:id="@+id/textViewNewBatchdsp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="@string/distilleryAndDspText"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/textViewTypeTitleNewBatch"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="16dp"
-        android:text="Type"
+        android:text="@string/typeText"
         app:layout_constraintBottom_toBottomOf="@+id/editTextBatchTypeNewBatch"
         app:layout_constraintEnd_toStartOf="@+id/editTextBatchTypeNewBatch"
         app:layout_constraintTop_toTopOf="@+id/editTextBatchTypeNewBatch" />
@@ -32,7 +32,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="16dp"
-        android:text="Batch Number"
+        android:text="@string/batchNumberText"
         app:layout_constraintBottom_toBottomOf="@+id/editTextBatchNumNewBatch"
         app:layout_constraintEnd_toStartOf="@+id/editTextBatchNumNewBatch"
         app:layout_constraintTop_toTopOf="@+id/editTextBatchNumNewBatch" />
@@ -42,7 +42,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="16dp"
-        android:text="Batch Identifier"
+        android:text="@string/batchIdentifierText"
         app:layout_constraintBottom_toBottomOf="@+id/editTextBatchIdNewBatch"
         app:layout_constraintEnd_toStartOf="@+id/editTextBatchIdNewBatch"
         app:layout_constraintTop_toTopOf="@+id/editTextBatchIdNewBatch" />
@@ -54,6 +54,8 @@
         android:layout_marginTop="24dp"
         android:layout_marginEnd="16dp"
         android:ems="10"
+        android:hint="@string/alchoholTypeText"
+        android:importantForAutofill="no"
         android:inputType="textPersonName"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textViewNewBatchdsp" />
@@ -65,6 +67,8 @@
         android:layout_marginTop="16dp"
         android:layout_marginEnd="16dp"
         android:ems="10"
+        android:hint="@string/identifierText"
+        android:importantForAutofill="no"
         android:inputType="textPersonName"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editTextBatchNumNewBatch" />
@@ -75,7 +79,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
         android:layout_marginEnd="24dp"
-        android:text="Create Batch"
+        android:text="@string/createBatchText"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editTextBatchIdNewBatch" />
 
@@ -86,6 +90,8 @@
         android:layout_marginTop="16dp"
         android:layout_marginEnd="16dp"
         android:ems="10"
+        android:hint="@string/batchNumberText"
+        android:importantForAutofill="no"
         android:inputType="number"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editTextBatchTypeNewBatch" />
