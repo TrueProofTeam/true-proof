@@ -27,6 +27,7 @@ public class MeasurementDetailActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_measurement_detail);
 
+
 //        Intent intent = getIntent();
 //        if (intent.getDoubleExtra("tempCorrection", 0.0) != 0.0 &&
 //            intent.getDoubleExtra("hydroCorrection", 0.0) != 0.0){
