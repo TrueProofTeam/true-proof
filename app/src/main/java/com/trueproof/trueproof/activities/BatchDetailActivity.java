@@ -50,9 +50,7 @@ public class BatchDetailActivity extends AppCompatActivity {
         setContentView(R.layout.activity_batch_detail);
 
         Log.i(TAG, "onCreate: batch detail");
-        userSettings.getDistillery(success ->{
-            ((TextView)findViewById(R.id.textViewBatchDetaildsp)).setText(success.getName());
-        }, fail->{});
+
         findViewById(R.id.imageButtonAddMeasurementBatchDetail).setOnClickListener(v -> goToTakeMeasurementActivity());
         Intent intent = getIntent();
         getBatchFromIntent(intent);
@@ -92,7 +90,6 @@ public class BatchDetailActivity extends AppCompatActivity {
                     String batchIdentifier = ((EditText)findViewById(R.id.editTextIdentifierBatchDetail)).getText().toString();
                     Batch batch1 = Batch.builder().status(Status.ACTIVE).type(type).batchNumber(number).batchIdentifier(batchIdentifier).distillery(batch.getDistillery()).id(batch.getId()).build();
                     batchRepository.updateBatch(batch1, onSuccess ->{
-                        button.setText("UPDATED");
                     }, onFail->{});
 
                 }
