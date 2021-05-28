@@ -92,6 +92,9 @@ public class TakeMeasurementActivity extends AppCompatActivity {
         findViewById(R.id.buttonSaveMeasurementTakeMeasurement)
                 .setEnabled(false);
 
+        ((Button) findViewById(R.id.buttonSaveMeasurementTakeMeasurement))
+                .setEnabled(false);
+
         user = userSettings.getCachedUserSettings();
         if (user == null) {
             user = User.builder().defaultTemperatureUnit(TemperatureUnit.FAHRENHEIT)
@@ -201,6 +204,7 @@ public class TakeMeasurementActivity extends AppCompatActivity {
         double proofFromProofing = proofing.proof(inTempDouble, inputProofDouble, inputProofCorrDouble, inputTempCorrDouble);
         if (proofFromProofing < 1.7) {
             calculatedProof.setText("Invalid Measurements");
+
         } else {
             calculatedProof.setText(String.valueOf(proofFromProofing));
             findViewById(R.id.buttonSaveMeasurementTakeMeasurement)
@@ -262,6 +266,7 @@ public class TakeMeasurementActivity extends AppCompatActivity {
 
             String temperatureCorrection = ((TextView) findViewById(R.id.editTextTempCorrectionTakeMeasurement))
                     .getText().toString();
+
             if (temperatureCorrection.isEmpty()) {
                 temperatureCorrection = "0.0";
             }
@@ -273,6 +278,7 @@ public class TakeMeasurementActivity extends AppCompatActivity {
 
             String hydrometerCorrection = ((TextView) findViewById(R.id.editTextHydroCorrectionTakeMeasurement))
                     .getText().toString();
+
             if (hydrometerCorrection.isEmpty()) {
                 hydrometerCorrection = "0.0";
             }
@@ -291,6 +297,7 @@ public class TakeMeasurementActivity extends AppCompatActivity {
                     .build();
 
             viewModel.saveMeasurement(measurement);
+
         });
     }
 
