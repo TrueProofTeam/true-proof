@@ -11,7 +11,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
-        android:text="Go to Batch Detail"
+        android:text="@string/goToBatchDetailText"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -20,7 +20,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="32dp"
-        android:text="Temperature °F"
+        android:text="@string/temperatureFtext"
         app:layout_constraintBottom_toBottomOf="@+id/editTextTemperatureTakeMeasurement"
         app:layout_constraintEnd_toStartOf="@+id/editTextTemperatureTakeMeasurement"
         app:layout_constraintTop_toTopOf="@+id/editTextTemperatureTakeMeasurement" />
@@ -32,6 +32,8 @@
         android:layout_marginTop="16dp"
         android:layout_marginEnd="12dp"
         android:ems="10"
+        android:hint="@string/fahrenheitText"
+        android:importantForAutofill="no"
         android:inputType="textPersonName"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textViewBatchNumberTakeMeasurment" />
@@ -41,7 +43,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="32dp"
-        android:text="Temperature Correction °F"
+        android:text="@string/temperatureCorrectionFText"
         app:layout_constraintBottom_toBottomOf="@+id/editTextTempCorrectionTakeMeasurement"
         app:layout_constraintEnd_toStartOf="@+id/editTextTempCorrectionTakeMeasurement"
         app:layout_constraintTop_toTopOf="@+id/editTextTempCorrectionTakeMeasurement" />
@@ -52,7 +54,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginTop="32dp"
-        android:text="Save Measurement"
+        android:text="@string/saveMeasurementText"
         app:layout_constraintEnd_toEndOf="@+id/buttonBatchDetailTakeMeasurement"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/buttonBatchDetailTakeMeasurement" />
@@ -64,6 +66,8 @@
         android:layout_marginTop="16dp"
         android:layout_marginEnd="16dp"
         android:ems="10"
+        android:hint="@string/hydrometerCorrectionText"
+        android:importantForAutofill="no"
         android:inputType="textPersonName"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editTextHydrometerTakeMeasurement" />
@@ -75,6 +79,8 @@
         android:layout_marginTop="16dp"
         android:layout_marginEnd="16dp"
         android:ems="10"
+        android:hint="@string/hydroText"
+        android:importantForAutofill="no"
         android:inputType="textPersonName"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editTextTempCorrectionTakeMeasurement" />
@@ -83,7 +89,7 @@
         android:id="@+id/textViewProofTakeMeasurement"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Proof at 60 °F"
+        android:text="@string/proofAtFText"
         android:textSize="16sp"
         app:layout_constraintBottom_toBottomOf="@+id/textViewCalculatedProofTakeMeasurement"
         app:layout_constraintEnd_toEndOf="@+id/textViewHydroCorrectionTakeMeasurement"
@@ -97,6 +103,8 @@
         android:layout_marginTop="16dp"
         android:layout_marginEnd="16dp"
         android:ems="10"
+        android:hint="@string/temperatureCorrectionFText"
+        android:importantForAutofill="no"
         android:inputType="textPersonName"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editTextTemperatureTakeMeasurement" />
@@ -116,7 +124,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="28dp"
-        android:text="Hydrometer Correction"
+        android:text="@string/hydrometerCorrectionText"
         app:layout_constraintBottom_toBottomOf="@+id/editTextHydroCorrectionTakeMeasurement"
         app:layout_constraintEnd_toStartOf="@+id/editTextHydroCorrectionTakeMeasurement"
         app:layout_constraintTop_toTopOf="@+id/editTextHydroCorrectionTakeMeasurement" />
@@ -126,7 +134,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="28dp"
-        android:text="Hydrometer"
+        android:text="@string/hydrometerText"
         app:layout_constraintBottom_toBottomOf="@+id/editTextHydrometerTakeMeasurement"
         app:layout_constraintEnd_toStartOf="@+id/editTextHydrometerTakeMeasurement"
         app:layout_constraintTop_toTopOf="@+id/editTextHydrometerTakeMeasurement" />
@@ -136,7 +144,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
-        android:text="Batch #"
+        android:text="@string/batchText"
         android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="@+id/textViewTakeMeasurementdsp"
         app:layout_constraintStart_toStartOf="@+id/textViewTakeMeasurementdsp"
@@ -148,7 +156,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="16dp"
-        android:text="Distillery and DSP"
+        android:text="@string/distilleryAndDspText"
         android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />

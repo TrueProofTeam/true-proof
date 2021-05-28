@@ -91,5 +91,13 @@
     <string name="thermometerCorrectionText">Thermometer Correction</string>
     <string name="goToBatchDetailText">Go to Batch Detail</string>
     <string name="saveMeasurementText">Save Measurement</string>
+    <string name="addMeasurementText">Add Measurement</string>
+    <string name="batchDetailText">Batch Detail</string>
+    <string name="statusText">Status</string>
+    <string name="measurementsText">Measurements</string>
+    <string name="updateText">Update</string>
+    <string name="temperatureUnitsText">Temperature units</string>
+    <string name="temperatureFtext">Temperature °F</string>
+    <string name="temperatureCorrectionFText">Temperature Correction °F</string>
 
 </resources>
