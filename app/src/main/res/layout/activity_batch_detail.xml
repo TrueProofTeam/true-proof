@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".activities.BatchDetailActivity">
+
+    <TextView
+            android:text="Distillery and DSP"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/textViewBatchDetaildsp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginTop="8dp" />
+
+    <ImageButton
+        android:id="@+id/imageButtonAddMeasurementBatchDetail"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/buttonUpdateBatch"
+        app:srcCompat="@android:drawable/ic_menu_add" />
+
+    <TextView
+            android:text="Add Measurement"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/textViewAddMeasurementBatchDetail"
+            app:layout_constraintBottom_toBottomOf="@+id/imageButtonAddMeasurementBatchDetail"
+            app:layout_constraintTop_toTopOf="@+id/imageButtonAddMeasurementBatchDetail"
+            app:layout_constraintEnd_toStartOf="@+id/imageButtonAddMeasurementBatchDetail"
+            android:layout_marginEnd="8dp" />
+
+    <TextView
+        android:id="@+id/textViewTitleBatchDetail"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="Batch Detail"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textViewBatchDetaildsp" />
+
+    <TextView
+            android:text="Type"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/textViewTypeBatchDetail"
+            app:layout_constraintTop_toTopOf="@+id/editTextTypeBatchDetail"
+            app:layout_constraintBottom_toBottomOf="@+id/editTextTypeBatchDetail"
+            app:layout_constraintEnd_toStartOf="@+id/editTextTypeBatchDetail"
+            android:layout_marginEnd="16dp" />
+
+    <TextView
+            android:text="Batch Number"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/textViewBatchNumberBatchDetail"
+            app:layout_constraintBottom_toBottomOf="@+id/editTextBatchNumberBatchDetail"
+            app:layout_constraintTop_toTopOf="@+id/editTextBatchNumberBatchDetail"
+            app:layout_constraintEnd_toEndOf="@+id/textViewTypeBatchDetail" />
+
+    <TextView
+            android:text="Batch Identifier"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/textViewIdentifierBatchDetail"
+            app:layout_constraintTop_toTopOf="@+id/editTextIdentifierBatchDetail"
+            app:layout_constraintBottom_toBottomOf="@+id/editTextIdentifierBatchDetail"
+            app:layout_constraintEnd_toEndOf="@+id/textViewBatchNumberBatchDetail" />
+
+    <TextView
+            android:text="Status"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/textViewStatusBatchDetail"
+            app:layout_constraintTop_toTopOf="@+id/spinnerStatusBatchDetail"
+            app:layout_constraintBottom_toBottomOf="@+id/spinnerStatusBatchDetail"
+            app:layout_constraintEnd_toEndOf="@+id/textViewIdentifierBatchDetail" />
+
+    <Spinner
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/spinnerStatusBatchDetail"
+            app:layout_constraintTop_toBottomOf="@+id/editTextIdentifierBatchDetail"
+            android:layout_marginTop="16dp"
+            app:layout_constraintStart_toStartOf="@+id/editTextIdentifierBatchDetail" />
+
+    <EditText
+        android:id="@+id/editTextIdentifierBatchDetail"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:ems="10"
+        android:inputType="textPersonName"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editTextBatchNumberBatchDetail" />
+
+    <EditText
+        android:id="@+id/editTextBatchNumberBatchDetail"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:ems="10"
+        android:inputType="textPersonName"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editTextTypeBatchDetail" />
+
+    <EditText
+        android:id="@+id/editTextTypeBatchDetail"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:ems="10"
+        android:inputType="textPersonName"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textViewTitleBatchDetail" />
+
+    <TextView
+        android:id="@+id/textViewMeasurementsBatchDetail"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="Measurements"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageButtonAddMeasurementBatchDetail" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerViewMeasurementsBatchDetail"
+        android:layout_width="413dp"
+        android:layout_height="308dp"
+        android:layout_marginTop="12dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textViewMeasurementsBatchDetail"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <Button
+        android:id="@+id/buttonUpdateBatch"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Update"
+        app:layout_constraintEnd_toEndOf="@+id/editTextIdentifierBatchDetail"
+        app:layout_constraintTop_toBottomOf="@+id/spinnerStatusBatchDetail" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

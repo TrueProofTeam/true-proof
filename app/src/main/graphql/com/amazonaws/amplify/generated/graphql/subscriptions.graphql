@@ -1,0 +1,343 @@
+# this is an auto generated file. This will be overwritten
+subscription OnCreateDistillery {
+  onCreateDistillery {
+    id
+    name
+    dspID
+    users
+    batches {
+      items {
+        id
+        distilleryID
+        batchIdentifier
+        batchNumber
+        status
+        type
+        completedAt
+        createdAt
+        updatedAt
+      }
+      nextToken
+    }
+    createdAt
+    updatedAt
+  }
+}
+subscription OnUpdateDistillery {
+  onUpdateDistillery {
+    id
+    name
+    dspID
+    users
+    batches {
+      items {
+        id
+        distilleryID
+        batchIdentifier
+        batchNumber
+        status
+        type
+        completedAt
+        createdAt
+        updatedAt
+      }
+      nextToken
+    }
+    createdAt
+    updatedAt
+  }
+}
+subscription OnDeleteDistillery {
+  onDeleteDistillery {
+    id
+    name
+    dspID
+    users
+    batches {
+      items {
+        id
+        distilleryID
+        batchIdentifier
+        batchNumber
+        status
+        type
+        completedAt
+        createdAt
+        updatedAt
+      }
+      nextToken
+    }
+    createdAt
+    updatedAt
+  }
+}
+subscription OnCreateBatch {
+  onCreateBatch {
+    id
+    distilleryID
+    batchIdentifier
+    batchNumber
+    status
+    type
+    completedAt
+    createdAt
+    updatedAt
+    distillery {
+      id
+      name
+      dspID
+      users
+      batches {
+        nextToken
+      }
+      createdAt
+      updatedAt
+    }
+    measurements {
+      items {
+        id
+        batchID
+        trueProof
+        temperature
+        hydrometer
+        temperatureCorrection
+        hydrometerCorrection
+        note
+        flag
+        takenAt
+        createdAt
+        updatedAt
+      }
+      nextToken
+    }
+  }
+}
+subscription OnUpdateBatch {
+  onUpdateBatch {
+    id
+    distilleryID
+    batchIdentifier
+    batchNumber
+    status
+    type
+    completedAt
+    createdAt
+    updatedAt
+    distillery {
+      id
+      name
+      dspID
+      users
+      batches {
+        nextToken
+      }
+      createdAt
+      updatedAt
+    }
+    measurements {
+      items {
+        id
+        batchID
+        trueProof
+        temperature
+        hydrometer
+        temperatureCorrection
+        hydrometerCorrection
+        note
+        flag
+        takenAt
+        createdAt
+        updatedAt
+      }
+      nextToken
+    }
+  }
+}
+subscription OnDeleteBatch {
+  onDeleteBatch {
+    id
+    distilleryID
+    batchIdentifier
+    batchNumber
+    status
+    type
+    completedAt
+    createdAt
+    updatedAt
+    distillery {
+      id
+      name
+      dspID
+      users
+      batches {
+        nextToken
+      }
+      createdAt
+      updatedAt
+    }
+    measurements {
+      items {
+        id
+        batchID
+        trueProof
+        temperature
+        hydrometer
+        temperatureCorrection
+        hydrometerCorrection
+        note
+        flag
+        takenAt
+        createdAt
+        updatedAt
+      }
+      nextToken
+    }
+  }
+}
+subscription OnCreateMeasurement {
+  onCreateMeasurement {
+    id
+    batchID
+    trueProof
+    temperature
+    hydrometer
+    temperatureCorrection
+    hydrometerCorrection
+    note
+    flag
+    takenAt
+    createdAt
+    updatedAt
+    batch {
+      id
+      distilleryID
+      batchIdentifier
+      batchNumber
+      status
+      type
+      completedAt
+      createdAt
+      updatedAt
+      distillery {
+        id
+        name
+        dspID
+        users
+        createdAt
+        updatedAt
+      }
+      measurements {
+        nextToken
+      }
+    }
+  }
+}
+subscription OnUpdateMeasurement {
+  onUpdateMeasurement {
+    id
+    batchID
+    trueProof
+    temperature
+    hydrometer
+    temperatureCorrection
+    hydrometerCorrection
+    note
+    flag
+    takenAt
+    createdAt
+    updatedAt
+    batch {
+      id
+      distilleryID
+      batchIdentifier
+      batchNumber
+      status
+      type
+      completedAt
+      createdAt
+      updatedAt
+      distillery {
+        id
+        name
+        dspID
+        users
+        createdAt
+        updatedAt
+      }
+      measurements {
+        nextToken
+      }
+    }
+  }
+}
+subscription OnDeleteMeasurement {
+  onDeleteMeasurement {
+    id
+    batchID
+    trueProof
+    temperature
+    hydrometer
+    temperatureCorrection
+    hydrometerCorrection
+    note
+    flag
+    takenAt
+    createdAt
+    updatedAt
+    batch {
+      id
+      distilleryID
+      batchIdentifier
+      batchNumber
+      status
+      type
+      completedAt
+      createdAt
+      updatedAt
+      distillery {
+        id
+        name
+        dspID
+        users
+        createdAt
+        updatedAt
+      }
+      measurements {
+        nextToken
+      }
+    }
+  }
+}
+subscription OnCreateUser {
+  onCreateUser {
+    id
+    email
+    defaultTemperatureUnit
+    defaultTemperatureCorrection
+    defaultHydrometerCorrection
+    createdAt
+    updatedAt
+  }
+}
+subscription OnUpdateUser {
+  onUpdateUser {
+    id
+    email
+    defaultTemperatureUnit
+    defaultTemperatureCorrection
+    defaultHydrometerCorrection
+    createdAt
+    updatedAt
+  }
+}
+subscription OnDeleteUser {
+  onDeleteUser {
+    id
+    email
+    defaultTemperatureUnit
+    defaultTemperatureCorrection
+    defaultHydrometerCorrection
+    createdAt
+    updatedAt
+  }
+}

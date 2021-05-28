@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/nav_settings"
+        android:title="@string/settingsText" />
+
+    <item
+        android:id="@+id/nav_batch_list"
+        android:title="@string/batchListText" />
+    <item
+        android:id="@+id/nav_quick_calculator"
+        android:title="@string/quickCaculatorText" />
+    <item
+        android:id="@+id/nav_log_out"
+        android:title="@string/logOutText" />
+
+</menu>

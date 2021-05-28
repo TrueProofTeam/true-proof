@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".activities.NewBatchActivity">
+
+    <TextView
+        android:id="@+id/textViewNewBatchdsp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="@string/distilleryAndDspText"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textViewTypeTitleNewBatch"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:text="@string/typeText"
+        app:layout_constraintBottom_toBottomOf="@+id/editTextBatchTypeNewBatch"
+        app:layout_constraintEnd_toStartOf="@+id/editTextBatchTypeNewBatch"
+        app:layout_constraintTop_toTopOf="@+id/editTextBatchTypeNewBatch" />
+
+    <TextView
+        android:id="@+id/textViewBatchNumNewBatch"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:text="@string/batchNumberText"
+        app:layout_constraintBottom_toBottomOf="@+id/editTextBatchNumNewBatch"
+        app:layout_constraintEnd_toStartOf="@+id/editTextBatchNumNewBatch"
+        app:layout_constraintTop_toTopOf="@+id/editTextBatchNumNewBatch" />
+
+    <TextView
+        android:id="@+id/textViewBatchIdNewBatch"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:text="@string/batchIdentifierText"
+        app:layout_constraintBottom_toBottomOf="@+id/editTextBatchIdNewBatch"
+        app:layout_constraintEnd_toStartOf="@+id/editTextBatchIdNewBatch"
+        app:layout_constraintTop_toTopOf="@+id/editTextBatchIdNewBatch" />
+
+    <EditText
+        android:id="@+id/editTextBatchTypeNewBatch"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="16dp"
+        android:ems="10"
+        android:hint="@string/alchoholTypeText"
+        android:importantForAutofill="no"
+        android:inputType="textPersonName"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textViewNewBatchdsp" />
+
+    <EditText
+        android:id="@+id/editTextBatchIdNewBatch"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:ems="10"
+        android:hint="@string/identifierText"
+        android:importantForAutofill="no"
+        android:inputType="textPersonName"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editTextBatchNumNewBatch" />
+
+    <Button
+        android:id="@+id/buttonCreateBatchNewBatch"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="24dp"
+        android:text="@string/createBatchText"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editTextBatchIdNewBatch" />
+
+    <EditText
+        android:id="@+id/editTextBatchNumNewBatch"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:ems="10"
+        android:hint="@string/batchNumberText"
+        android:importantForAutofill="no"
+        android:inputType="number"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editTextBatchTypeNewBatch" />
+</androidx.constraintlayout.widget.ConstraintLayout>

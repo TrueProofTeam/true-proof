@@ -1,0 +1,185 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".activities.SettingsActivity">
+
+    <EditText
+        android:id="@+id/editTextDefaultTempCorrectionUserSettings6"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="16dp"
+        android:ems="10"
+        android:hint="@string/thermometerCorrectionText"
+        android:importantForAutofill="no"
+        android:inputType="textPersonName"
+        android:text="@string/defaultCorrectionNumber"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textViewThermCorrUserSettings6" />
+
+    <TextView
+        android:id="@+id/textViewThermCorrUserSettings6"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="24dp"
+        android:text="@string/defaultThermometerCorrectionText"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editTextDefaultHydroCorrectionUserSettings6" />
+
+    <EditText
+        android:id="@+id/editTextDefaultHydroCorrectionUserSettings6"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="16dp"
+        android:ems="10"
+        android:hint="@string/hydrometerCorrectionText"
+        android:importantForAutofill="no"
+        android:inputType="textPersonName"
+        android:text="@string/defaultCorrectionNumber"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textViewHydroCorrUserSettings6" />
+
+    <TextView
+        android:id="@+id/textViewHydroCorrUserSettings6"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="24dp"
+        android:text="@string/defaultHydrometerCorrectionText"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/radioGroup2" />
+
+    <TextView
+        android:id="@+id/textViewTempUnitsUserSettings7"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="48dp"
+        android:layout_marginEnd="16dp"
+        android:text="@string/defaultTemperatureUnitsText"
+        app:layout_constraintEnd_toStartOf="@+id/radioGroup2"
+        app:layout_constraintTop_toBottomOf="@+id/textViewDSPTitleUserSettings6" />
+
+    <RadioGroup
+        android:id="@+id/radioGroup2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="@+id/textViewTempUnitsUserSettings7"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/textViewTempUnitsUserSettings7">
+
+        <RadioButton
+            android:id="@+id/radioButtonTempCUserSettings"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="onRadioButtonUserSettings"
+            android:text="@string/celciusText"
+            tools:layout_editor_absoluteX="255dp"
+            tools:layout_editor_absoluteY="343dp" />
+
+        <RadioButton
+            android:id="@+id/radioButtonTempFUserSettings"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:checked="true"
+            android:onClick="onRadioButtonUserSettings"
+            android:text="@string/fahrenheitText"
+            app:layout_constraintTop_toBottomOf="@+id/radioButtonTempCUserSettings"
+            tools:layout_editor_absoluteX="255dp" />
+    </RadioGroup>
+
+    <TextView
+        android:id="@+id/textViewDSPTitleUserSettings6"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="24dp"
+        android:text="@string/userSettingText"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textViewDSPTitleDistillerySettings"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:textSize="24sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textViewDistillerySettingsTitleDistillerySettings"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:text="@string/distillerySettingsText"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textViewDSPTitleDistillerySettings" />
+
+    <TextView
+        android:id="@+id/textViewDSPNumDistillerySettings"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/dspNumberText"
+        app:layout_constraintBottom_toBottomOf="@+id/editTextDSPDistillerySettings"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/editTextDSPDistillerySettings" />
+
+    <TextView
+        android:id="@+id/textViewDistilleryNameDistillerySettings"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/distilleryNameText"
+        app:layout_constraintBottom_toBottomOf="@+id/editTextDistilleryNameDistillerySettings"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/editTextDistilleryNameDistillerySettings" />
+
+    <EditText
+        android:id="@+id/editTextDSPDistillerySettings"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:ems="10"
+        android:hint="@string/dspNumberText"
+        android:importantForAutofill="no"
+        android:inputType="textPersonName"
+        app:layout_constraintStart_toEndOf="@+id/textViewDSPNumDistillerySettings"
+        app:layout_constraintTop_toBottomOf="@+id/textViewDistillerySettingsTitleDistillerySettings" />
+
+    <EditText
+        android:id="@+id/editTextDistilleryNameDistillerySettings"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:ems="10"
+        android:hint="@string/distilleryNameText"
+        android:importantForAutofill="no"
+        android:inputType="textPersonName"
+        app:layout_constraintStart_toEndOf="@+id/textViewDistilleryNameDistillerySettings"
+        app:layout_constraintTop_toBottomOf="@+id/editTextDSPDistillerySettings" />
+
+    <Button
+        android:id="@+id/buttonSubmitDistillerySettings"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="16dp"
+        android:text="@string/submitText"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+</androidx.constraintlayout.widget.ConstraintLayout>

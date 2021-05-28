@@ -1,0 +1,218 @@
+# this is an auto generated file. This will be overwritten
+query GetDistillery($id: ID!) {
+  getDistillery(id: $id) {
+    id
+    name
+    dspID
+    users
+    batches {
+      items {
+        id
+        distilleryID
+        batchIdentifier
+        batchNumber
+        status
+        type
+        completedAt
+        createdAt
+        updatedAt
+      }
+      nextToken
+    }
+    createdAt
+    updatedAt
+  }
+}
+query ListDistillerys(
+  $filter: ModelDistilleryFilterInput
+  $limit: Int
+  $nextToken: String
+) {
+  listDistillerys(filter: $filter, limit: $limit, nextToken: $nextToken) {
+    items {
+      id
+      name
+      dspID
+      users
+      batches {
+        nextToken
+      }
+      createdAt
+      updatedAt
+    }
+    nextToken
+  }
+}
+query GetBatch($id: ID!) {
+  getBatch(id: $id) {
+    id
+    distilleryID
+    batchIdentifier
+    batchNumber
+    status
+    type
+    completedAt
+    createdAt
+    updatedAt
+    distillery {
+      id
+      name
+      dspID
+      users
+      batches {
+        nextToken
+      }
+      createdAt
+      updatedAt
+    }
+    measurements {
+      items {
+        id
+        batchID
+        trueProof
+        temperature
+        hydrometer
+        temperatureCorrection
+        hydrometerCorrection
+        note
+        flag
+        takenAt
+        createdAt
+        updatedAt
+      }
+      nextToken
+    }
+  }
+}
+query ListBatchs(
+  $filter: ModelBatchFilterInput
+  $limit: Int
+  $nextToken: String
+) {
+  listBatchs(filter: $filter, limit: $limit, nextToken: $nextToken) {
+    items {
+      id
+      distilleryID
+      batchIdentifier
+      batchNumber
+      status
+      type
+      completedAt
+      createdAt
+      updatedAt
+      distillery {
+        id
+        name
+        dspID
+        users
+        createdAt
+        updatedAt
+      }
+      measurements {
+        nextToken
+      }
+    }
+    nextToken
+  }
+}
+query GetMeasurement($id: ID!) {
+  getMeasurement(id: $id) {
+    id
+    batchID
+    trueProof
+    temperature
+    hydrometer
+    temperatureCorrection
+    hydrometerCorrection
+    note
+    flag
+    takenAt
+    createdAt
+    updatedAt
+    batch {
+      id
+      distilleryID
+      batchIdentifier
+      batchNumber
+      status
+      type
+      completedAt
+      createdAt
+      updatedAt
+      distillery {
+        id
+        name
+        dspID
+        users
+        createdAt
+        updatedAt
+      }
+      measurements {
+        nextToken
+      }
+    }
+  }
+}
+query ListMeasurements(
+  $filter: ModelMeasurementFilterInput
+  $limit: Int
+  $nextToken: String
+) {
+  listMeasurements(filter: $filter, limit: $limit, nextToken: $nextToken) {
+    items {
+      id
+      batchID
+      trueProof
+      temperature
+      hydrometer
+      temperatureCorrection
+      hydrometerCorrection
+      note
+      flag
+      takenAt
+      createdAt
+      updatedAt
+      batch {
+        id
+        distilleryID
+        batchIdentifier
+        batchNumber
+        status
+        type
+        completedAt
+        createdAt
+        updatedAt
+      }
+    }
+    nextToken
+  }
+}
+query GetUser($id: ID!) {
+  getUser(id: $id) {
+    id
+    email
+    defaultTemperatureUnit
+    defaultTemperatureCorrection
+    defaultHydrometerCorrection
+    createdAt
+    updatedAt
+  }
+}
+query ListUsers(
+  $filter: ModelUserFilterInput
+  $limit: Int
+  $nextToken: String
+) {
+  listUsers(filter: $filter, limit: $limit, nextToken: $nextToken) {
+    items {
+      id
+      email
+      defaultTemperatureUnit
+      defaultTemperatureCorrection
+      defaultHydrometerCorrection
+      createdAt
+      updatedAt
+    }
+    nextToken
+  }
+}

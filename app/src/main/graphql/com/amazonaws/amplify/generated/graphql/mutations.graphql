@@ -1,0 +1,379 @@
+# this is an auto generated file. This will be overwritten
+mutation CreateDistillery(
+  $input: CreateDistilleryInput!
+  $condition: ModelDistilleryConditionInput
+) {
+  createDistillery(input: $input, condition: $condition) {
+    id
+    name
+    dspID
+    users
+    batches {
+      items {
+        id
+        distilleryID
+        batchIdentifier
+        batchNumber
+        status
+        type
+        completedAt
+        createdAt
+        updatedAt
+      }
+      nextToken
+    }
+    createdAt
+    updatedAt
+  }
+}
+mutation UpdateDistillery(
+  $input: UpdateDistilleryInput!
+  $condition: ModelDistilleryConditionInput
+) {
+  updateDistillery(input: $input, condition: $condition) {
+    id
+    name
+    dspID
+    users
+    batches {
+      items {
+        id
+        distilleryID
+        batchIdentifier
+        batchNumber
+        status
+        type
+        completedAt
+        createdAt
+        updatedAt
+      }
+      nextToken
+    }
+    createdAt
+    updatedAt
+  }
+}
+mutation DeleteDistillery(
+  $input: DeleteDistilleryInput!
+  $condition: ModelDistilleryConditionInput
+) {
+  deleteDistillery(input: $input, condition: $condition) {
+    id
+    name
+    dspID
+    users
+    batches {
+      items {
+        id
+        distilleryID
+        batchIdentifier
+        batchNumber
+        status
+        type
+        completedAt
+        createdAt
+        updatedAt
+      }
+      nextToken
+    }
+    createdAt
+    updatedAt
+  }
+}
+mutation CreateBatch(
+  $input: CreateBatchInput!
+  $condition: ModelBatchConditionInput
+) {
+  createBatch(input: $input, condition: $condition) {
+    id
+    distilleryID
+    batchIdentifier
+    batchNumber
+    status
+    type
+    completedAt
+    createdAt
+    updatedAt
+    distillery {
+      id
+      name
+      dspID
+      users
+      batches {
+        nextToken
+      }
+      createdAt
+      updatedAt
+    }
+    measurements {
+      items {
+        id
+        batchID
+        trueProof
+        temperature
+        hydrometer
+        temperatureCorrection
+        hydrometerCorrection
+        note
+        flag
+        takenAt
+        createdAt
+        updatedAt
+      }
+      nextToken
+    }
+  }
+}
+mutation UpdateBatch(
+  $input: UpdateBatchInput!
+  $condition: ModelBatchConditionInput
+) {
+  updateBatch(input: $input, condition: $condition) {
+    id
+    distilleryID
+    batchIdentifier
+    batchNumber
+    status
+    type
+    completedAt
+    createdAt
+    updatedAt
+    distillery {
+      id
+      name
+      dspID
+      users
+      batches {
+        nextToken
+      }
+      createdAt
+      updatedAt
+    }
+    measurements {
+      items {
+        id
+        batchID
+        trueProof
+        temperature
+        hydrometer
+        temperatureCorrection
+        hydrometerCorrection
+        note
+        flag
+        takenAt
+        createdAt
+        updatedAt
+      }
+      nextToken
+    }
+  }
+}
+mutation DeleteBatch(
+  $input: DeleteBatchInput!
+  $condition: ModelBatchConditionInput
+) {
+  deleteBatch(input: $input, condition: $condition) {
+    id
+    distilleryID
+    batchIdentifier
+    batchNumber
+    status
+    type
+    completedAt
+    createdAt
+    updatedAt
+    distillery {
+      id
+      name
+      dspID
+      users
+      batches {
+        nextToken
+      }
+      createdAt
+      updatedAt
+    }
+    measurements {
+      items {
+        id
+        batchID
+        trueProof
+        temperature
+        hydrometer
+        temperatureCorrection
+        hydrometerCorrection
+        note
+        flag
+        takenAt
+        createdAt
+        updatedAt
+      }
+      nextToken
+    }
+  }
+}
+mutation CreateMeasurement(
+  $input: CreateMeasurementInput!
+  $condition: ModelMeasurementConditionInput
+) {
+  createMeasurement(input: $input, condition: $condition) {
+    id
+    batchID
+    trueProof
+    temperature
+    hydrometer
+    temperatureCorrection
+    hydrometerCorrection
+    note
+    flag
+    takenAt
+    createdAt
+    updatedAt
+    batch {
+      id
+      distilleryID
+      batchIdentifier
+      batchNumber
+      status
+      type
+      completedAt
+      createdAt
+      updatedAt
+      distillery {
+        id
+        name
+        dspID
+        users
+        createdAt
+        updatedAt
+      }
+      measurements {
+        nextToken
+      }
+    }
+  }
+}
+mutation UpdateMeasurement(
+  $input: UpdateMeasurementInput!
+  $condition: ModelMeasurementConditionInput
+) {
+  updateMeasurement(input: $input, condition: $condition) {
+    id
+    batchID
+    trueProof
+    temperature
+    hydrometer
+    temperatureCorrection
+    hydrometerCorrection
+    note
+    flag
+    takenAt
+    createdAt
+    updatedAt
+    batch {
+      id
+      distilleryID
+      batchIdentifier
+      batchNumber
+      status
+      type
+      completedAt
+      createdAt
+      updatedAt
+      distillery {
+        id
+        name
+        dspID
+        users
+        createdAt
+        updatedAt
+      }
+      measurements {
+        nextToken
+      }
+    }
+  }
+}
+mutation DeleteMeasurement(
+  $input: DeleteMeasurementInput!
+  $condition: ModelMeasurementConditionInput
+) {
+  deleteMeasurement(input: $input, condition: $condition) {
+    id
+    batchID
+    trueProof
+    temperature
+    hydrometer
+    temperatureCorrection
+    hydrometerCorrection
+    note
+    flag
+    takenAt
+    createdAt
+    updatedAt
+    batch {
+      id
+      distilleryID
+      batchIdentifier
+      batchNumber
+      status
+      type
+      completedAt
+      createdAt
+      updatedAt
+      distillery {
+        id
+        name
+        dspID
+        users
+        createdAt
+        updatedAt
+      }
+      measurements {
+        nextToken
+      }
+    }
+  }
+}
+mutation CreateUser(
+  $input: CreateUserInput!
+  $condition: ModelUserConditionInput
+) {
+  createUser(input: $input, condition: $condition) {
+    id
+    email
+    defaultTemperatureUnit
+    defaultTemperatureCorrection
+    defaultHydrometerCorrection
+    createdAt
+    updatedAt
+  }
+}
+mutation UpdateUser(
+  $input: UpdateUserInput!
+  $condition: ModelUserConditionInput
+) {
+  updateUser(input: $input, condition: $condition) {
+    id
+    email
+    defaultTemperatureUnit
+    defaultTemperatureCorrection
+    defaultHydrometerCorrection
+    createdAt
+    updatedAt
+  }
+}
+mutation DeleteUser(
+  $input: DeleteUserInput!
+  $condition: ModelUserConditionInput
+) {
+  deleteUser(input: $input, condition: $condition) {
+    id
+    email
+    defaultTemperatureUnit
+    defaultTemperatureCorrection
+    defaultHydrometerCorrection
+    createdAt
+    updatedAt
+  }
+}
