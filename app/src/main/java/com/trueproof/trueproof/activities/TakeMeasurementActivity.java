@@ -26,6 +26,7 @@ import com.amplifyframework.datastore.generated.model.User;
 import com.trueproof.trueproof.R;
 import com.trueproof.trueproof.logic.InputFilterMinMax;
 import com.trueproof.trueproof.logic.Proofing;
+import com.trueproof.trueproof.models.BatchUtils;
 import com.trueproof.trueproof.models.DistilleryUtils;
 import com.trueproof.trueproof.utils.ActivityUtils;
 import com.trueproof.trueproof.utils.BatchRepository;
@@ -77,6 +78,7 @@ public class TakeMeasurementActivity extends AppCompatActivity {
     private Button goToBatchDetailButton;
     private TextView temperatureCorrectionText;
     private TextView temperatureText;
+    private TextView batchNumberText;
 
     @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
@@ -85,16 +87,19 @@ public class TakeMeasurementActivity extends AppCompatActivity {
         setContentView(R.layout.activity_take_measurement);
         viewModel = new ViewModelProvider(this).get(TakeMeasurementViewModel.class);
 
-        Distillery distillery = userSettings.getCachedDistillery();
-        TextView distilleryName = findViewById(R.id.textViewTakeMeasurementdsp);
-        distilleryName.setText(DistilleryUtils.toHeaderString(distillery));
-
+        initializeTextViews();
         saveViews();
         setUpClickListeners();
         getBatchFromIntent();
         setUpInputClickListeners();
         observeLiveData();
         initializeUserSettings();
+    }
+
+    private void initializeTextViews() {
+        Distillery distillery = userSettings.getCachedDistillery();
+        TextView distilleryName = findViewById(R.id.textViewTakeMeasurementdsp);
+        distilleryName.setText(DistilleryUtils.toHeaderString(distillery));
     }
 
     private void initializeUserSettings() {
@@ -134,6 +139,7 @@ public class TakeMeasurementActivity extends AppCompatActivity {
         trueProofText = findViewById(R.id.textViewCalculatedProofTakeMeasurement);
         saveMeasurementButton = findViewById(R.id.buttonSaveMeasurementTakeMeasurement);
         goToBatchDetailButton = findViewById(R.id.buttonBatchDetailTakeMeasurement);
+        batchNumberText = findViewById(R.id.textViewBatchNumberTakeMeasurment);
     }
 
     private void setUpClickListeners() {
@@ -144,6 +150,9 @@ public class TakeMeasurementActivity extends AppCompatActivity {
     private void getBatchFromIntent() {
         Intent intent = getIntent();
         viewModel.setBatchFromJson(intent.getStringExtra(BATCH_JSON));
+
+        String batchString = BatchUtils.batchToString(viewModel.getBatch());
+        batchNumberText.setText(batchString);
     }
 
     private void observeLiveData() {
