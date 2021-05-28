@@ -69,15 +69,6 @@ public class BatchListViewModel extends ViewModel {
     }
 
     public void update() {
-        userSettings.getDistillery(
-                d -> {
-                    this.distillery.postValue(d);
-                    updateBatchLists(d);
-                },
-                e -> {
-                    // TODO
-                    Log.e(TAG, "Distillery not found in UserSettings");
-                }
-        );
+        updateBatchLists(userSettings.getCachedDistillery());
     }
 }
