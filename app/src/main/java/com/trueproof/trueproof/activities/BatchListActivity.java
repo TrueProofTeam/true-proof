@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.TextView;
 
 import androidx.activity.result.ActivityResult;
 import androidx.activity.result.ActivityResultLauncher;
@@ -17,12 +18,14 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.amplifyframework.core.Amplify;
 import com.amplifyframework.datastore.generated.model.Batch;
+import com.amplifyframework.datastore.generated.model.Distillery;
 import com.trueproof.trueproof.R;
 import com.trueproof.trueproof.adapters.ActiveBatchListAdapter;
 import com.trueproof.trueproof.adapters.BatchListAdapter;
 import com.trueproof.trueproof.models.BatchUtils;
 import com.trueproof.trueproof.utils.ActivityUtils;
 import com.trueproof.trueproof.utils.JsonConverter;
+import com.trueproof.trueproof.utils.UserSettings;
 import com.trueproof.trueproof.viewmodels.BatchListViewModel;
 
 import java.util.ArrayList;
@@ -44,6 +47,8 @@ public class BatchListActivity extends AppCompatActivity {
     JsonConverter jsonConverter;
     @Inject
     ActivityUtils activityUtils;
+    @Inject
+    UserSettings userSettings;
     private BatchListViewModel viewModel;
     private BatchListAdapter batchListAdapter;
     private ActiveBatchListAdapter activeBatchListAdapter;
@@ -53,7 +58,8 @@ public class BatchListActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_batch_list);
         viewModel = new ViewModelProvider(this).get(BatchListViewModel.class);
-
+        Distillery distillery = userSettings.getCachedDistillery();
+        if (distillery != null) ((TextView)findViewById(R.id.textViewBatchListdsp)).setText(distillery.getName());
         setUpAllBatchList();
         setUpActiveBatchList();
         findViewById(R.id.imageButtonNewBatchBatchList).setOnClickListener(
