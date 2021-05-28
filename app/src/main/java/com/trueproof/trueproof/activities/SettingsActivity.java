@@ -153,7 +153,7 @@ public class SettingsActivity extends AppCompatActivity {
 
     void initializeButtons(){
         Button submit = findViewById(R.id.buttonSubmitDistillerySettings);
-        TextView title = findViewById(R.id.textViewDistillerySettingsTitleDistillerySettings);
+        TextView title = findViewById(R.id.textViewDSPTitleDistillerySettings);
 
         submit.setOnClickListener(new View.OnClickListener() {
             @Override
