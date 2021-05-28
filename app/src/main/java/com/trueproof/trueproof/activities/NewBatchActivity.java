@@ -33,8 +33,6 @@ import dagger.hilt.android.AndroidEntryPoint;
 public class NewBatchActivity extends AppCompatActivity {
     final static String REDIRECT_TO_BATCH_DETAIL_TO_TAKE_MEASUREMENT = "redirect_to_take_measurement";
     static String TAG = "t.newBatch";
-    final List<Distillery> distilleries = new ArrayList<>();
-
     @Inject
     DistilleryRepository distilleryRepository;
     @Inject
@@ -80,7 +78,7 @@ public class NewBatchActivity extends AppCompatActivity {
                     .type(batchType)
                     .batchIdentifier(batchIdentifier)
                     .batchNumber(batchNum)
-                    .distillery(distilleries.get(0))
+                    .distillery(userSettings.getCachedDistillery())
                     .build();
 
             batchRepository.saveBatch(batch, onSuccess -> {
@@ -101,9 +99,11 @@ public class NewBatchActivity extends AppCompatActivity {
     }
 
     private void batchIdentifierOnChange() {
-        if (distilleries.get(0).getDspId() != null && ((EditText) findViewById(R.id.editTextBatchTypeNewBatch)).getText() != null
+        Distillery distillery = userSettings.getCachedDistillery();
+
+        if (distillery.getDspId() != null && ((EditText) findViewById(R.id.editTextBatchTypeNewBatch)).getText() != null
                 && ((EditText) findViewById(R.id.editTextBatchNumNewBatch)).getText() != null) {
-            String batchIdentifier = distilleries.get(0).getDspId() + "-" + ((EditText) findViewById(R.id.editTextBatchTypeNewBatch)).getText().toString() + "-" +
+            String batchIdentifier = distillery.getDspId() + "-" + ((EditText) findViewById(R.id.editTextBatchTypeNewBatch)).getText().toString() + "-" +
                     ((EditText) findViewById(R.id.editTextBatchNumNewBatch)).getText().toString();
             ((EditText) findViewById(R.id.editTextBatchIdNewBatch)).setText(batchIdentifier);
         }
