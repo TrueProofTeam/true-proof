@@ -1,7 +1,9 @@
 package com.trueproof.trueproof.viewmodels;
 
+import android.os.Build;
 import android.util.Log;
 
+import androidx.annotation.RequiresApi;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
@@ -19,6 +21,7 @@ import javax.inject.Inject;
 import dagger.hilt.android.lifecycle.HiltViewModel;
 
 @HiltViewModel
+@RequiresApi(api = Build.VERSION_CODES.N)
 public class BatchListViewModel extends ViewModel {
     private static final String TAG = "BatchListViewModel";
     private final MutableLiveData<List<Batch>> activeBatchList;

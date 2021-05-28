@@ -28,7 +28,6 @@ import javax.inject.Inject;
 import javax.inject.Singleton;
 
 import dagger.hilt.android.qualifiers.ApplicationContext;
-import hilt_aggregated_deps._com_trueproof_trueproof_activities_LogInActivity_GeneratedInjector;
 
 @Singleton
 @RequiresApi(api = Build.VERSION_CODES.N)
@@ -263,15 +262,22 @@ public class UserSettings {
         CompletableFuture<Distillery> distilleryCompletableFuture = new CompletableFuture<>();
 
         Object lock = new Object();
+
         try {
-            lock.wait(2000);
+            synchronized (lock) {
+                lock.wait(2000);
+            }
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
         getDistillery(success -> {
-            lock.notify();
+            synchronized (lock) {
+                lock.notify();
+            }
         }, fail -> {
-            lock.notify();
+            synchronized (lock) {
+                lock.notify();
+            }
         });
 
         return cachedDistillery;
@@ -287,15 +293,22 @@ public class UserSettings {
         if (cachedUserSettings != null) return cachedUserSettings;
 
         Object lock = new Object();
+
         try {
-            lock.wait(2000);
+            synchronized (lock) {
+                lock.wait(2000);
+            }
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
         getUserSettings(success -> {
-            lock.notify();
+            synchronized (lock) {
+                lock.notify();
+            }
         }, fail -> {
-            lock.notify();
+            synchronized (lock) {
+                lock.notify();
+            }
         });
 
         return cachedUserSettings;

@@ -1,6 +1,7 @@
 package com.trueproof.trueproof.adapters;
 
 import android.os.Build;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,7 +12,6 @@ import androidx.annotation.RequiresApi;
 import androidx.recyclerview.widget.ListAdapter;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.amplifyframework.core.model.temporal.Temporal;
 import com.amplifyframework.datastore.generated.model.Batch;
 import com.trueproof.trueproof.R;
 import com.trueproof.trueproof.models.BatchUtils;
@@ -20,6 +20,7 @@ import com.trueproof.trueproof.utils.AWSDateTimeFormatter;
 
 @RequiresApi(api = Build.VERSION_CODES.O)
 public class ActiveBatchListAdapter extends ListAdapter<Batch, ActiveBatchListAdapter.ActiveBatchViewHolder> {
+    private static final String TAG = "ActiveBatch/LA";
     private final OnClickHandler onClickHandler;
 
     public ActiveBatchListAdapter(OnClickHandler onClickHandler) {
@@ -49,7 +50,7 @@ public class ActiveBatchListAdapter extends ListAdapter<Batch, ActiveBatchListAd
         private Batch batch;
         private TextView batchType;
         private TextView batchNumber;
-        private TextView trueProof;
+        private TextView lastMeasuredProof;
         private TextView startedAtTime;
         private TextView lastMeasuredTime;
 
@@ -58,7 +59,7 @@ public class ActiveBatchListAdapter extends ListAdapter<Batch, ActiveBatchListAd
             itemView.setOnClickListener(v -> onClick.onClick(this.batch));
             batchType = itemView.findViewById(R.id.batchTypeBatchListItem);
             batchNumber = itemView.findViewById(R.id.batchNumberBatchListItem);
-            trueProof = itemView.findViewById(R.id.measuredProofActiveBatchListItem);
+            lastMeasuredProof = itemView.findViewById(R.id.measuredProofActiveBatchListItem);
             startedAtTime = itemView.findViewById(R.id.startedAtTimeActiveBatchListItem);
             lastMeasuredTime = itemView.findViewById(R.id.lastMeasuredTimeActiveBatchListItem);
         }
@@ -67,8 +68,18 @@ public class ActiveBatchListAdapter extends ListAdapter<Batch, ActiveBatchListAd
             this.batch = batch;
             batchType.setText(batch.getType());
             batchNumber.setText(String.format("Batch no. %d", batch.getBatchNumber()));
-            final double lastMeasuredTrueProof = 110.1;
-            trueProof.setText(String.format("%.1f proof", lastMeasuredTrueProof));
+
+            String lastMeasuredProofString = batch.getMeasurements()
+                    .stream()
+                    .max(AWSDateTime.measurementByDate)
+                    .map(measurement -> {
+                        Log.i(TAG, "bind: measurement.getTrueProof()" + measurement.getTrueProof());
+                        return measurement.getTrueProof();
+                    })
+                    .map(trueProof -> String.format("%.1f proof", trueProof))
+                    .orElseGet(() -> "");
+
+            lastMeasuredProof.setText(lastMeasuredProofString);
             startedAtTime.setText(
                     AWSDateTimeFormatter.ofPattern("M/d hh:mm:ss")
                             .format(batch.getCreatedAt())
