@@ -68,9 +68,11 @@ public class TakeMeasurementViewModel extends ViewModel {
 
         measurementRepository.saveMeasurement(newMeasurement,
                 r -> {
+                    Log.i(TAG, "saveMeasurement: success");
                     updatedLiveData.postValue(true);
                 },
                 f -> {
+                    Log.i(TAG, "saveMeasurement: failure");
                     updatedLiveData.postValue(false);
                 });
     }

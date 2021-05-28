@@ -34,10 +34,10 @@ public class Proofing {
     // Takes in Fahrenheit, C converted to F before being passed as in
     public double proof(double temperature, double proof, double proofCorrection, double tempCorrection) {
 
-        System.out.println("temperature = " + temperature);
-        System.out.println("proof = " + proof);
-        System.out.println("proofCorrection = " + proofCorrection);
-        System.out.println("tempCorrection = " + tempCorrection);
+//        System.out.println("temperature = " + temperature);
+//        System.out.println("proof = " + proof);
+//        System.out.println("proofCorrection = " + proofCorrection);
+//        System.out.println("tempCorrection = " + tempCorrection);
 
             /* TODO
             [✓] 5/24 bring in CSV through getResources() instead of file path
@@ -73,15 +73,15 @@ public class Proofing {
 //                roundTemp = 100
 //            }
 
-            System.out.println("temperature = " + temperature);
-            System.out.println("roundTemp = " + roundTemp);
-            System.out.println("proof = " + proof);
-            System.out.println("roundProof = " + roundProof);
+//            System.out.println("temperature = " + temperature);
+//            System.out.println("roundTemp = " + roundTemp);
+//            System.out.println("proof = " + proof);
+//            System.out.println("roundProof = " + roundProof);
 
             double chartProof = Double.parseDouble(table.get((int) roundTemp - 1).get((int) roundProof));
-            System.out.println("chartProof = " + (chartProof / 10));
-
-            Log.e("Chart Proof: ", String.valueOf(chartProof / 10));
+//            System.out.println("chartProof = " + (chartProof / 10));
+//
+            Log.v("Chart Proof: ", String.valueOf(chartProof / 10));
 
             return chartProof / 10;
         }
@@ -118,10 +118,10 @@ public class Proofing {
 
         // interpolate true proof
         double interpolatedProof = (double) Math.round((lowProof + proofInterpolation + (tempInterpolation)));
-        System.out.println("interpolatedProof = " + interpolatedProof);
+        //System.out.println("interpolatedProof = " + interpolatedProof);
 
         // divide big dumb Integer by 10 to find it's actual proof value;
-        Log.e("Interpolated Proof: ", String.valueOf(interpolatedProof / 10));
+        //Log.e("Interpolated Proof: ", String.valueOf(interpolatedProof / 10));
         return (interpolatedProof / 10);
     }
 }
