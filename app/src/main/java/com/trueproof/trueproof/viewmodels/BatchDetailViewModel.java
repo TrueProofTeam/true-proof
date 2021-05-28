@@ -102,7 +102,9 @@ public class BatchDetailViewModel extends ViewModel {
     }
 
     private void updateLiveData(Batch batch) {
-        ArrayList<Measurement> measurements = new ArrayList<>(batch.getMeasurements());
+        ArrayList<Measurement> measurements = batch.getMeasurements() == null
+                ? new ArrayList<>()
+                : new ArrayList<>(batch.getMeasurements());
         measurements.sort(AWSDateTime.measurementByDate.reversed());
         measurementsLiveData.postValue(measurements);
         batchLiveData.postValue(batch);
