@@ -65,14 +65,11 @@ public class NewBatchActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_new_batch);
-        userSettings.getDistillery(success -> {
-            distilleries.add(success);
-            ((TextView) findViewById(R.id.textViewNewBatchdsp)).setText(distilleries.get(0).getName());
-        }, fail -> {
-        });
+
         Distillery distillery = userSettings.getCachedDistillery();
         if (distillery != null)((TextView)findViewById(R.id.textViewNewBatchdsp)).setText(distillery.getName());
         findViewById(R.id.buttonCreateBatchNewBatch).setOnClickListener(v -> {
+
             String batchType = ((EditText) findViewById(R.id.editTextBatchTypeNewBatch)).getText().toString();
             Integer batchNum = Integer.parseInt(((EditText) findViewById(R.id.editTextBatchNumNewBatch)).getText().toString());
             String batchIdentifier = ((EditText) findViewById(R.id.editTextBatchIdNewBatch)).getText().toString();

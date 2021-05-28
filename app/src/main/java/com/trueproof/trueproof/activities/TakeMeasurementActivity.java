@@ -26,6 +26,8 @@ import com.amplifyframework.core.model.temporal.Temporal;
 import com.amplifyframework.datastore.generated.model.Batch;
 import com.amplifyframework.datastore.generated.model.Distillery;
 import com.amplifyframework.datastore.generated.model.Measurement;
+import com.amplifyframework.datastore.generated.model.TemperatureUnit;
+import com.amplifyframework.datastore.generated.model.User;
 import com.trueproof.trueproof.R;
 import com.trueproof.trueproof.adapters.MeasurementListAdapter;
 import com.trueproof.trueproof.logic.InputFilterMinMax;
@@ -39,6 +41,8 @@ import com.trueproof.trueproof.utils.UserSettings;
 
 import java.io.InputStream;
 import java.lang.reflect.Field;
+import java.math.BigDecimal;
+import java.math.MathContext;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.Instant;
@@ -63,6 +67,9 @@ import dagger.hilt.android.AndroidEntryPoint;
 @AndroidEntryPoint
 public class TakeMeasurementActivity extends AppCompatActivity implements MeasurementListAdapter.OnClickHandler {
 
+    EditText tempField;
+    InputFilterMinMax tempLimits;
+
     @Inject
     Proofing proofing;
 
@@ -85,6 +92,9 @@ public class TakeMeasurementActivity extends AppCompatActivity implements Measur
     UserSettings userSettings;
 
 
+    User user;
+
+
     @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -94,6 +104,17 @@ public class TakeMeasurementActivity extends AppCompatActivity implements Measur
         if (distillery != null)((TextView)findViewById(R.id.textViewTakeMeasurementdsp)).setText(distillery.getName());
         inputLimitListener();
         saveMeasurement();
+
+        user = userSettings.getCachedUserSettings();
+        user = User.builder().defaultTemperatureUnit(TemperatureUnit.FAHRENHEIT)
+                .defaultHydrometerCorrection(0.0)
+                .defaultTemperatureCorrection(0.0)
+                .build();
+
+        if (user.getDefaultTemperatureUnit().equals(TemperatureUnit.CELSIUS)) {
+            tempLimits = new InputFilterMinMax(-17.22, 37.78);
+            tempField.setFilters(new InputFilter[]{tempLimits});
+        }
 
     }
 
@@ -114,47 +135,56 @@ public class TakeMeasurementActivity extends AppCompatActivity implements Measur
     }
 
     public void calculateOnChange() {
-        String inputTemperature = ((EditText) findViewById(R.id.editTextTemperatureMain)).getText().toString();
-        if (inputTemperature != null && inputTemperature.length() > 0 && !inputTemperature.contains(".")) {
+        String inputTemperature = ((EditText) findViewById(R.id.editTextTemperatureTakeMeasurement)).getText().toString();
+        if (inputTemperature.length() > 0 && !inputTemperature.contains(".")) {
             String doubleAppend = inputTemperature + ".0";
             inTempDouble = Double.parseDouble(doubleAppend);
         }
-        if (inputTemperature != null && inputTemperature.length() > 0 && inputTemperature.contains(".")) {
+        if (inputTemperature.length() > 0 && inputTemperature.contains(".")) {
             inTempDouble = Double.parseDouble(inputTemperature);
+        }
+        if (user.getDefaultTemperatureUnit().equals(TemperatureUnit.CELSIUS) && inputTemperature.length() > 0) {
+            System.out.println("calculate on change, C->F conversion");
+            double getTemp = Double.parseDouble(tempField.getText().toString()) + inputTempCorrDouble;
+            double convertTemp = ((getTemp * 1.8) + 32);
+            BigDecimal roundTemp = new BigDecimal(convertTemp);
+            MathContext decimalPlaces = new MathContext(4);
+            BigDecimal rounded = roundTemp.round(decimalPlaces);
+            inTempDouble = Double.parseDouble(String.valueOf(rounded));
         }
         System.out.println("inTempDouble = " + inTempDouble);
         ////////////////////////
-        String inputTemperatureCorrection = ((EditText) findViewById(R.id.editTextTemperatureCorrectionMain)).getText().toString();
-        if (inputTemperatureCorrection != null && inputTemperatureCorrection.length() > 0 && !inputTemperatureCorrection.contains(".")) {
+        String inputTemperatureCorrection = ((EditText) findViewById(R.id.editTextTempCorrectionTakeMeasurement)).getText().toString();
+        if (inputTemperatureCorrection.length() > 0 && !inputTemperatureCorrection.contains(".")) {
             String doubleAppend = inputTemperatureCorrection + ".0";
             inputTempCorrDouble = Double.parseDouble(doubleAppend);
         }
-        if (inputTemperatureCorrection != null && inputTemperatureCorrection.length() > 0 && inputTemperatureCorrection.contains(".")) {
+        if (inputTemperatureCorrection.length() > 0 && inputTemperatureCorrection.contains(".")) {
             inputTempCorrDouble = Double.parseDouble(inputTemperatureCorrection);
         }
         System.out.println("inputTempCorrDouble = " + inputTempCorrDouble);
         /////////////////////////
-        String inputProof = ((EditText) findViewById(R.id.editTextHydrometerMain)).getText().toString();
-        if (inputProof != null && inputProof.length() > 0 && !inputProof.contains(".")) {
+        String inputProof = ((EditText) findViewById(R.id.editTextHydrometerTakeMeasurement)).getText().toString();
+        if (inputProof.length() > 0 && !inputProof.contains(".")) {
             String doubleAppend = inputProof + ".0";
             inputProofDouble = Double.parseDouble(doubleAppend);
         }
-        if (inputProof != null && inputProof.length() > 0 && inputProof.contains(".")) {
+        if (inputProof.length() > 0 && inputProof.contains(".")) {
             inputProofDouble = Double.parseDouble(inputProof);
         }
         System.out.println("inputProofDouble = " + inputProofDouble);
         /////////////////////////
-        String inputProofCorrection = ((EditText) findViewById(R.id.editTextHydrometerCorrectionMain)).getText().toString();
-        if (inputProofCorrection != null && inputProofCorrection.length() > 0 && !inputProofCorrection.contains(".")) {
+        String inputProofCorrection = ((EditText) findViewById(R.id.editTextHydroCorrectionTakeMeasurement)).getText().toString();
+        if (inputProofCorrection.length() > 0 && !inputProofCorrection.contains(".")) {
             String doubleAppend = inputProofCorrection + ".0";
             inputProofCorrDouble = Double.parseDouble(doubleAppend);
         }
-        if (inputProofCorrection != null && inputProofCorrection.length() > 0 && inputProofCorrection.contains(".")) {
+        if (inputProofCorrection.length() > 0 && inputProofCorrection.contains(".")) {
             inputProofCorrDouble = Double.parseDouble(inputProofCorrection);
         }
         System.out.println("inputProofCorrDouble = " + inputProofCorrDouble);
 
-        TextView calculatedProof = findViewById(R.id.textViewCalculatedProofMain);
+        TextView calculatedProof = findViewById(R.id.textViewCalculatedProofTakeMeasurement);
 
         double proofFromProofing = proofing.proof(inTempDouble, inputProofDouble, inputProofCorrDouble, inputTempCorrDouble);
         if (proofFromProofing < 0) {
@@ -292,6 +322,7 @@ public class TakeMeasurementActivity extends AppCompatActivity implements Measur
                                 .withLocale(Locale.US)
                 );
     }
+
     @Override
     public boolean onCreateOptionsMenu (Menu menu){
         getMenuInflater().inflate(R.menu.menu, menu);
