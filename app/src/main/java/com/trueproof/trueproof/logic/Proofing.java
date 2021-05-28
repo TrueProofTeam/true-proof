@@ -34,10 +34,10 @@ public class Proofing {
     // Takes in Fahrenheit, C converted to F before being passed as in
     public double proof(double temperature, double proof, double proofCorrection, double tempCorrection) {
 
-//        System.out.println("temperature = " + temperature);
-//        System.out.println("proof = " + proof);
-//        System.out.println("proofCorrection = " + proofCorrection);
-//        System.out.println("tempCorrection = " + tempCorrection);
+        System.out.println("temperature = " + temperature);
+        System.out.println("proof = " + proof);
+        System.out.println("proofCorrection = " + proofCorrection);
+        System.out.println("tempCorrection = " + tempCorrection);
 
             /* TODO
             [✓] 5/24 bring in CSV through getResources() instead of file path

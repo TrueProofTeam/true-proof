@@ -219,9 +219,9 @@ public class TakeMeasurementActivity extends AppCompatActivity {
         }
         if (inputProofCorrection.length() > 0 && inputProofCorrection.startsWith(".")) {
             String appendDot = "0" + inputProofCorrection;
-            inputTempCorrDouble = Double.parseDouble(appendDot);
+            inputProofCorrDouble = Double.parseDouble(appendDot);
         } else if (inputProofCorrection.length() > 0 && inputProofCorrection.contains(".")) {
-            inputTempCorrDouble = Double.parseDouble(inputProofCorrection);
+            inputProofCorrDouble = Double.parseDouble(inputProofCorrection);
         }
         Log.v(TAG, "inputProofCorrDouble = " + inputProofCorrDouble);
 

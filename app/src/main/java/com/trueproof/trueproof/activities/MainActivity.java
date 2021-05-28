@@ -71,11 +71,8 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         initializeLoginButton();
-        Log.i(TAG, "onCreate: " + testDependencyInjection.hello());
-        Log.i(TAG, "onCreate: " + proofing.proof(80.5, 100.1, 1.1, 1.1));
 
         temperatureUnit = TemperatureUnit.FAHRENHEIT;
-
 
         limitAndCalculate();
 
