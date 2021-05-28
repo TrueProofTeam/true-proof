@@ -24,7 +24,7 @@ import javax.inject.Inject;
 import dagger.hilt.android.lifecycle.HiltViewModel;
 
 @HiltViewModel
-@RequiresApi(api = Build.VERSION_CODES.N)
+@RequiresApi(api = Build.VERSION_CODES.O)
 public class BatchDetailViewModel extends ViewModel {
     private static final String TAG = "BatchDetailViewModel";
     private final MutableLiveData<Batch> batchLiveData;
@@ -52,6 +52,11 @@ public class BatchDetailViewModel extends ViewModel {
 
         this.batchLiveData = new MutableLiveData<>();
         this.measurementsLiveData = new MutableLiveData<>();
+        this.updatedLiveData = new MutableLiveData<>();
+    }
+
+    public LiveData<Batch> getBatch() {
+        return batchLiveData;
     }
 
     public LiveData<Batch> getBatch() {
@@ -71,9 +76,11 @@ public class BatchDetailViewModel extends ViewModel {
         batchRepository.updateBatch(batch,
                 r -> {
                     Log.i(TAG, "updateBatch: batch updated succesfully");
-                    this.batchLiveData.postValue(batch);
+                    this.batchLiveData.postValue(updateBatch);
+                    updatedLiveData.postValue(true);
                 },
                 e -> {
+                    updatedLiveData.postValue(false);
                     Log.e(TAG, "updateBatch: ApiException on updateBatch", e);
                 });
     }
@@ -81,11 +88,7 @@ public class BatchDetailViewModel extends ViewModel {
     public void update() {
         if (batchLiveData.getValue() != null) {
             batchRepository.getBatch(batchLiveData.getValue().getId(),
-                    updatedBatch -> {
-                        updatedBatch.getMeasurements().sort(byDate);
-                        batchLiveData.postValue(updatedBatch);
-                        measurementsLiveData.postValue(updatedBatch.getMeasurements());
-                    },
+                    this::updateLiveData,
                     e -> {
                         Log.e(TAG, "update: ApiException on getBatch", e);
                     });
@@ -93,5 +96,16 @@ public class BatchDetailViewModel extends ViewModel {
             throw new NoSuchElementException("ViewModel has not been populated with an initial batch. "
                     + "Call viewModel.setBatchFromJson before updating from database");
         }
+    }
+
+    private void updateLiveData(Batch batch) {
+        ArrayList<Measurement> measurements = new ArrayList<>(batch.getMeasurements());
+        measurements.sort(AWSDateTime.measurementByDate);
+        measurementsLiveData.postValue(measurements);
+        batchLiveData.postValue(batch);
+    }
+
+    public LiveData<Boolean> getUpdatedLiveData() {
+        return updatedLiveData;
     }
 }
