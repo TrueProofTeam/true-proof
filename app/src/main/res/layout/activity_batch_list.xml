@@ -16,16 +16,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerViewBatchList"
-        android:layout_width="373dp"
-        android:layout_height="152dp"
-        android:layout_marginTop="8dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textViewYourBatchesBatchList" />
-
     <TextView
         android:id="@+id/textViewActiveBatchesBatchList"
         android:layout_width="wrap_content"
@@ -52,26 +42,37 @@
     </androidx.recyclerview.widget.RecyclerView>
 
     <androidx.recyclerview.widget.RecyclerView
-        android:layout_width="373dp"
-        android:layout_height="152dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textViewActiveBatchesBatchList"
+        android:id="@+id/recyclerView"
+        android:layout_width="372dp"
+        android:layout_height="247dp"
         android:layout_marginTop="8dp"
-        app:layout_constraintHorizontal_bias="0.5" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textViewActiveBatchesBatchList" />
 
     <TextView
         android:id="@+id/textViewYourBatchesBatchList"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:text="Your Batches"
+        android:layout_marginTop="8dp"
+        android:text="Completed Batches"
         android:textSize="16sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/recyclerViewActiveBatchList" />
+        app:layout_constraintTop_toBottomOf="@+id/recyclerView" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerViewBatchList"
+        android:layout_width="379dp"
+        android:layout_height="383dp"
+        android:layout_marginTop="4dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.473"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textViewYourBatchesBatchList" />
 
     <ImageButton
             android:layout_width="wrap_content"
