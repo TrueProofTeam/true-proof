@@ -87,12 +87,12 @@ public class ActiveBatchListAdapter extends ListAdapter<Batch, ActiveBatchListAd
 
             AWSDateTimeFormatter lastMeasuredFormatter = AWSDateTimeFormatter.ofPattern("M/d hh:mm:ss");
 
-                String lastMeasuredTimeString = batch.getMeasurements()
-                        .stream()
-                        .map(measurement -> measurement.getCreatedAt())
-                        .max(AWSDateTime.byDate)
-                        .map(lastMeasuredFormatter::format)
-                        .orElseGet(() -> "No measurements yet");
+            String lastMeasuredTimeString = batch.getMeasurements()
+                    .stream()
+                    .map(measurement -> measurement.getCreatedAt())
+                    .max(AWSDateTime.byDate)
+                    .map(lastMeasuredFormatter::format)
+                    .orElseGet(() -> "No measurements yet");
 
             lastMeasuredTime.setText(lastMeasuredTimeString);
         }
