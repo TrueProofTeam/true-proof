@@ -35,7 +35,6 @@
         android:inputType="numberDecimal"
         android:hint="@string/fahrenheitText"
         android:importantForAutofill="no"
-        android:inputType="textPersonName"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textViewBatchNumberTakeMeasurment" />
 
