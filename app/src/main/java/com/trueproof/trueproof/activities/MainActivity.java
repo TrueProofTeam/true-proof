@@ -60,7 +60,7 @@ public class MainActivity extends AppCompatActivity {
 
     TemperatureUnit temperatureUnit;
 
-    double inTempDouble;
+    double inTempDouble = 0.0;
     double inputTempCorrDouble = 0.0;
     double inputProofDouble = 0.0;
     double inputProofCorrDouble = 0.0;
@@ -92,15 +92,15 @@ public class MainActivity extends AppCompatActivity {
 
     public void calculateOnChange() {
         String inputTemperature = ((EditText) findViewById(R.id.editTextTemperatureMain)).getText().toString();
-        if (inputTemperature != null && inputTemperature.length() > 0 && !inputTemperature.contains(".")) {
+        if (inputTemperature.length() > 0 && !inputTemperature.contains(".")) {
             String doubleAppend = inputTemperature + ".0";
             inTempDouble = Double.parseDouble(doubleAppend);
         }
-        if (inputTemperature != null && inputTemperature.length() > 0 && inputTemperature.contains(".")) {
+        if (inputTemperature.length() > 0 && inputTemperature.contains(".")) {
             inTempDouble = Double.parseDouble(inputTemperature);
         }
         RadioButton radioButtonC = findViewById(R.id.radioButtonTempCMain);
-        if (radioButtonC.isChecked() && inputTemperature != null && inputTemperature.length() > 0) {
+        if (radioButtonC.isChecked() && inputTemperature.length() > 0) {
             System.out.println("calculate on change, C->F conversion");
             double getTemp = Double.parseDouble(tempField.getText().toString()) + inputTempCorrDouble;
             double convertTemp = ((getTemp * 1.8) + 32);
@@ -112,32 +112,38 @@ public class MainActivity extends AppCompatActivity {
         System.out.println("inTempDouble = " + inTempDouble);
         ////////////////////////
         String inputTemperatureCorrection = ((EditText) findViewById(R.id.editTextTemperatureCorrectionMain)).getText().toString();
-        if (inputTemperatureCorrection != null && inputTemperatureCorrection.length() > 0 && !inputTemperatureCorrection.contains(".")) {
+        if (inputTemperatureCorrection.length() > 0 && !inputTemperatureCorrection.contains(".")) {
             String doubleAppend = inputTemperatureCorrection + ".0";
             inputTempCorrDouble = Double.parseDouble(doubleAppend);
         }
-        if (inputTemperatureCorrection != null && inputTemperatureCorrection.length() > 0 && inputTemperatureCorrection.contains(".")) {
+        if (inputTemperatureCorrection.length() > 0 && inputTemperatureCorrection.startsWith(".")) {
+            String appendDot = "0" + inputTemperatureCorrection;
+            inputTempCorrDouble = Double.parseDouble(appendDot);
+        } else if (inputTemperatureCorrection.length() > 0 && inputTemperatureCorrection.contains(".")) {
             inputTempCorrDouble = Double.parseDouble(inputTemperatureCorrection);
         }
         System.out.println("inputTempCorrDouble = " + inputTempCorrDouble);
         /////////////////////////
         String inputProof = ((EditText) findViewById(R.id.editTextHydrometerMain)).getText().toString();
-        if (inputProof != null && inputProof.length() > 0 && !inputProof.contains(".")) {
+        if (inputProof.length() > 0 && !inputProof.contains(".")) {
             String doubleAppend = inputProof + ".0";
             inputProofDouble = Double.parseDouble(doubleAppend);
         }
-        if (inputProof != null && inputProof.length() > 0 && inputProof.contains(".")) {
+        if (inputProof.length() > 0 && inputProof.contains(".")) {
             inputProofDouble = Double.parseDouble(inputProof);
         }
         System.out.println("inputProofDouble = " + inputProofDouble);
         /////////////////////////
         String inputProofCorrection = ((EditText) findViewById(R.id.editTextHydrometerCorrectionMain)).getText().toString();
-        if (inputProofCorrection != null && inputProofCorrection.length() > 0 && !inputProofCorrection.contains(".")) {
+        if (inputProofCorrection.length() > 0 && !inputProofCorrection.contains(".")) {
             String doubleAppend = inputProofCorrection + ".0";
             inputProofCorrDouble = Double.parseDouble(doubleAppend);
         }
-        if (inputProofCorrection != null && inputProofCorrection.length() > 0 && inputProofCorrection.contains(".")) {
-            inputProofCorrDouble = Double.parseDouble(inputProofCorrection);
+        if (inputProofCorrection.length() > 0 && inputProofCorrection.startsWith(".")) {
+            String appendDot = "0" + inputProofCorrection;
+            inputTempCorrDouble = Double.parseDouble(appendDot);
+        } else if (inputProofCorrection.length() > 0 && inputProofCorrection.contains(".")) {
+            inputTempCorrDouble = Double.parseDouble(inputProofCorrection);
         }
         System.out.println("inputProofCorrDouble = " + inputProofCorrDouble);
 
@@ -289,39 +295,52 @@ public class MainActivity extends AppCompatActivity {
      * @param view
      */
     public void onMainRadioButtonClicked(View view) {
+        tempField = findViewById(R.id.editTextTemperatureMain);
 
         boolean checked = ((RadioButton) view).isChecked();
-        switch (view.getId()) {
+            switch (view.getId()) {
             case R.id.radioButtonTempCMain:
                 if (checked)
-                    tempField = findViewById(R.id.editTextTemperatureMain);
-                if (temperatureUnit.equals(TemperatureUnit.FAHRENHEIT) && tempField != null && tempField.length() > 0) {
+                    if (temperatureUnit.equals(TemperatureUnit.FAHRENHEIT) && tempField != null && tempField.length() > 0) {
                     temperatureUnit = TemperatureUnit.CELSIUS;
+
                     double getTemp = Double.parseDouble(tempField.getText().toString());
                     double convertTemp = ((getTemp - 32) * .5556);
+
                     BigDecimal roundTemp = new BigDecimal(convertTemp);
                     MathContext decimalPlaces = new MathContext(4);
                     BigDecimal rounded = roundTemp.round(decimalPlaces);
+
+                    String roundedString = String.valueOf(rounded);
+
                     System.out.println("rounded = " + rounded);
-                    tempField.setText(String.valueOf(rounded));
-                    inTempDouble = Double.parseDouble(String.valueOf(rounded));
+                    System.out.println("roundedString = " + roundedString);
+
+                    tempField.setText(roundedString);
+                    inTempDouble = Double.parseDouble(roundedString);
                 }
                 tempLimits = new InputFilterMinMax(-17.22, 37.78);
                 tempField.setFilters(new InputFilter[]{tempLimits});
                 break;
             case R.id.radioButtonTempFMain:
                 if (checked)
-                    tempField = findViewById(R.id.editTextTemperatureMain);
                 if (temperatureUnit.equals(TemperatureUnit.CELSIUS) && tempField != null && tempField.length() > 0) {
                     temperatureUnit = TemperatureUnit.FAHRENHEIT;
+
                     double getTemp = Double.parseDouble(tempField.getText().toString());
                     double convertTemp = ((getTemp * 1.8) + 32);
+
                     BigDecimal roundTemp = new BigDecimal(convertTemp);
                     MathContext decimalPlaces = new MathContext(4);
                     BigDecimal rounded = roundTemp.round(decimalPlaces);
+
+                    String roundedString = String.valueOf(rounded);
+
                     System.out.println("rounded = " + rounded);
-                    tempField.setText(String.valueOf(rounded));
-                    inTempDouble = Double.parseDouble(String.valueOf(rounded));
+                    System.out.println("roundedString = " + roundedString);
+
+                    tempField.setText(roundedString);
+                    inTempDouble = Double.parseDouble(roundedString);
                 }
                 tempLimits = new InputFilterMinMax(1.0, 100.0);
                 tempField.setFilters(new InputFilter[]{tempLimits});

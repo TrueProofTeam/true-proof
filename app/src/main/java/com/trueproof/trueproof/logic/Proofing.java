@@ -54,10 +54,10 @@ public class Proofing {
         if (temperature >= 100){
             temperature = 99;
         }
-        if (proof <= 1){
-            proof = 1;
-        }
-        if (proof >= 207){
+//        if (proof <= 1){
+//            proof = 1;
+//        }
+        if (proof > 206){
             proof = 206;
         }
 

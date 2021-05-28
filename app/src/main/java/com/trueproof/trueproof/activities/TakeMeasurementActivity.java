@@ -106,6 +106,9 @@ public class TakeMeasurementActivity extends AppCompatActivity implements Measur
         inputLimitListener();
         saveMeasurement();
 
+        ((Button) findViewById(R.id.buttonSaveMeasurementTakeMeasurement))
+                .setEnabled(false);
+
         user = userSettings.getCachedUserSettings();
         user = User.builder().defaultTemperatureUnit(TemperatureUnit.FAHRENHEIT)
                 .defaultHydrometerCorrection(0.0)
@@ -160,7 +163,10 @@ public class TakeMeasurementActivity extends AppCompatActivity implements Measur
             String doubleAppend = inputTemperatureCorrection + ".0";
             inputTempCorrDouble = Double.parseDouble(doubleAppend);
         }
-        if (inputTemperatureCorrection.length() > 0 && inputTemperatureCorrection.contains(".")) {
+        if (inputTemperatureCorrection.length() > 0 && inputTemperatureCorrection.startsWith(".")) {
+            String appendDot = "0" + inputTemperatureCorrection;
+            inputTempCorrDouble = Double.parseDouble(appendDot);
+        } else if (inputTemperatureCorrection.length() > 0 && inputTemperatureCorrection.contains(".")) {
             inputTempCorrDouble = Double.parseDouble(inputTemperatureCorrection);
         }
         System.out.println("inputTempCorrDouble = " + inputTempCorrDouble);
@@ -180,18 +186,26 @@ public class TakeMeasurementActivity extends AppCompatActivity implements Measur
             String doubleAppend = inputProofCorrection + ".0";
             inputProofCorrDouble = Double.parseDouble(doubleAppend);
         }
-        if (inputProofCorrection.length() > 0 && inputProofCorrection.contains(".")) {
-            inputProofCorrDouble = Double.parseDouble(inputProofCorrection);
+        if (inputProofCorrection.length() > 0 && inputProofCorrection.startsWith(".")) {
+            String appendDot = "0" + inputProofCorrection;
+            inputTempCorrDouble = Double.parseDouble(appendDot);
+        } else if (inputProofCorrection.length() > 0 && inputProofCorrection.contains(".")) {
+            inputTempCorrDouble = Double.parseDouble(inputProofCorrection);
         }
         System.out.println("inputProofCorrDouble = " + inputProofCorrDouble);
 
         TextView calculatedProof = findViewById(R.id.textViewCalculatedProofTakeMeasurement);
 
         double proofFromProofing = proofing.proof(inTempDouble, inputProofDouble, inputProofCorrDouble, inputTempCorrDouble);
-        if (proofFromProofing < 0) {
-            calculatedProof.setText("Does not exist. Check measurements and try again.");
-        } else calculatedProof.setText(String.valueOf(proofFromProofing));
-
+        if (proofFromProofing < 1.7) {
+            calculatedProof.setText("Invalid Measurements");
+//            ((Button) findViewById(R.id.buttonSaveMeasurementTakeMeasurement))
+//                    .setEnabled(false);
+        } else {
+            calculatedProof.setText(String.valueOf(proofFromProofing));
+            ((Button) findViewById(R.id.buttonSaveMeasurementTakeMeasurement))
+                    .setEnabled(true);
+        }
     }
 
     public void inputLimitListener(){
@@ -242,6 +256,7 @@ public class TakeMeasurementActivity extends AppCompatActivity implements Measur
 
             String tempCorrectionToSave = ((TextView) findViewById(R.id.editTextTempCorrectionTakeMeasurement))
                     .getText().toString();
+            if (tempCorrectionToSave.isEmpty()){tempCorrectionToSave = "0.0";}
             System.out.println("tempCorrectionToSave = " + tempCorrectionToSave);
 
             String hydroToSave = ((TextView) findViewById(R.id.editTextHydrometerTakeMeasurement))
@@ -250,6 +265,7 @@ public class TakeMeasurementActivity extends AppCompatActivity implements Measur
 
             String hydroCorrectionToSave = ((TextView) findViewById(R.id.editTextHydroCorrectionTakeMeasurement))
                     .getText().toString();
+            if (hydroCorrectionToSave.isEmpty()){hydroCorrectionToSave = "0.0";}
             System.out.println("hydroCorrectionToSave = " + hydroCorrectionToSave);
 
             String measurementToSave = ((TextView) findViewById(R.id.textViewCalculatedProofTakeMeasurement))
@@ -269,7 +285,7 @@ public class TakeMeasurementActivity extends AppCompatActivity implements Measur
             Amplify.API.mutate(
                     ModelMutation.create(measurement),
                     response -> Log.i("Mutate", "success"),
-                    error -> Log.e("Mutate", "error+ " + error)
+                    error -> Log.e("Mutate", "error " + error)
             );
         });
     }
