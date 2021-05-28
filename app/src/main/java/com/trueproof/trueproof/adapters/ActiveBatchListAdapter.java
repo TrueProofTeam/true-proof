@@ -64,10 +64,12 @@ public class ActiveBatchListAdapter extends ListAdapter<Batch, ActiveBatchListAd
             lastMeasuredTime = itemView.findViewById(R.id.lastMeasuredTimeActiveBatchListItem);
         }
 
+
         public void bind(Batch batch) {
             this.batch = batch;
             batchType.setText(batch.getType());
             batchNumber.setText(String.format("Batch no. %d", batch.getBatchNumber()));
+<<<<<<< HEAD
 
             String lastMeasuredProofString = batch.getMeasurements()
                     .stream()
@@ -80,6 +82,11 @@ public class ActiveBatchListAdapter extends ListAdapter<Batch, ActiveBatchListAd
                     .orElseGet(() -> "");
 
             lastMeasuredProof.setText(lastMeasuredProofString);
+=======
+            final double lastMeasuredTrueProof = 110.1;
+            trueProof.setText(String.format("%.1f proof", lastMeasuredTrueProof));
+            Log.i("batchlistadapter", " " + batch);
+>>>>>>> fix
             startedAtTime.setText(
                     AWSDateTimeFormatter.ofPattern("M/d hh:mm:ss")
                             .format(batch.getCreatedAt())

@@ -34,7 +34,7 @@
         android:ems="10"
         android:hint="@string/temperatureText"
         android:importantForAutofill="no"
-        android:inputType="textPersonName"
+        android:inputType="numberDecimal"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textViewBatchNumberTakeMeasurment" />
 
@@ -66,9 +66,9 @@
         android:ems="10"
         android:hint="@string/hydrometerCorrectionText"
         android:importantForAutofill="no"
-        android:inputType="textPersonName"
         app:layout_constraintEnd_toEndOf="@+id/editTextHydrometerTakeMeasurement"
         app:layout_constraintStart_toStartOf="@+id/editTextHydrometerTakeMeasurement"
+        android:inputType="numberDecimal|numberSigned"
         app:layout_constraintTop_toBottomOf="@+id/editTextHydrometerTakeMeasurement" />
 
     <EditText
@@ -79,9 +79,9 @@
         android:ems="10"
         android:hint="@string/hydroText"
         android:importantForAutofill="no"
-        android:inputType="textPersonName"
         app:layout_constraintEnd_toEndOf="@+id/editTextTempCorrectionTakeMeasurement"
         app:layout_constraintStart_toStartOf="@+id/editTextTempCorrectionTakeMeasurement"
+        android:inputType="numberDecimal"
         app:layout_constraintTop_toBottomOf="@+id/editTextTempCorrectionTakeMeasurement" />
 
     <TextView
@@ -104,10 +104,10 @@
         android:ems="10"
         android:hint="@string/temperatureCorrectionText"
         android:importantForAutofill="no"
-        android:inputType="textPersonName"
         app:layout_constraintEnd_toEndOf="@+id/editTextTemperatureTakeMeasurement"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/editTextTemperatureTakeMeasurement"
+        android:inputType="numberDecimal|numberSigned"
         app:layout_constraintTop_toBottomOf="@+id/editTextTemperatureTakeMeasurement" />
 
     <TextView

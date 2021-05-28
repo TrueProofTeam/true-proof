@@ -132,6 +132,9 @@ public class MainActivity extends AppCompatActivity {
         if (inputProof.length() > 0 && inputProof.contains(".")) {
             inputProofDouble = Double.parseDouble(inputProof);
         }
+        if (inputProof.isEmpty()){
+            inputProofDouble = 0.0;
+        }
         System.out.println("inputProofDouble = " + inputProofDouble);
         /////////////////////////
         String inputProofCorrection = ((EditText) findViewById(R.id.editTextHydrometerCorrectionMain)).getText().toString();
@@ -141,9 +144,9 @@ public class MainActivity extends AppCompatActivity {
         }
         if (inputProofCorrection.length() > 0 && inputProofCorrection.startsWith(".")) {
             String appendDot = "0" + inputProofCorrection;
-            inputTempCorrDouble = Double.parseDouble(appendDot);
+            inputProofCorrDouble = Double.parseDouble(appendDot);
         } else if (inputProofCorrection.length() > 0 && inputProofCorrection.contains(".")) {
-            inputTempCorrDouble = Double.parseDouble(inputProofCorrection);
+            inputProofCorrDouble = Double.parseDouble(inputProofCorrection);
         }
         System.out.println("inputProofCorrDouble = " + inputProofCorrDouble);
 
@@ -296,15 +299,18 @@ public class MainActivity extends AppCompatActivity {
      */
     public void onMainRadioButtonClicked(View view) {
         tempField = findViewById(R.id.editTextTemperatureMain);
+//        double savedC;
+//        double savedF;
 
         boolean checked = ((RadioButton) view).isChecked();
             switch (view.getId()) {
             case R.id.radioButtonTempCMain:
                 if (checked)
-                    if (temperatureUnit.equals(TemperatureUnit.FAHRENHEIT) && tempField != null && tempField.length() > 0) {
+                    if (temperatureUnit.equals(TemperatureUnit.FAHRENHEIT) && tempField.length() > 0) {
                     temperatureUnit = TemperatureUnit.CELSIUS;
 
-                    double getTemp = Double.parseDouble(tempField.getText().toString());
+                    double getTemp = inTempDouble;
+//                    double getTemp = Double.parseDouble(tempField.getText().toString());
                     double convertTemp = ((getTemp - 32) * .5556);
 
                     BigDecimal roundTemp = new BigDecimal(convertTemp);
@@ -318,17 +324,21 @@ public class MainActivity extends AppCompatActivity {
 
                     tempField.setText(roundedString);
                     inTempDouble = Double.parseDouble(roundedString);
-                }
+//                        inTempDouble = rounded.toBigInteger().doubleValue();
+//                        savedC = rounded.toBigInteger().doubleValue();
+                    }
                 tempLimits = new InputFilterMinMax(-17.22, 37.78);
                 tempField.setFilters(new InputFilter[]{tempLimits});
                 break;
             case R.id.radioButtonTempFMain:
                 if (checked)
-                if (temperatureUnit.equals(TemperatureUnit.CELSIUS) && tempField != null && tempField.length() > 0) {
+                if (temperatureUnit.equals(TemperatureUnit.CELSIUS) && tempField.length() > 0) {
                     temperatureUnit = TemperatureUnit.FAHRENHEIT;
 
-                    double getTemp = Double.parseDouble(tempField.getText().toString());
+                    double getTemp = inTempDouble;
+//                    double getTemp = Double.parseDouble(tempField.getText().toString());
                     double convertTemp = ((getTemp * 1.8) + 32);
+                    System.out.println("convertTemp = " + convertTemp);
 
                     BigDecimal roundTemp = new BigDecimal(convertTemp);
                     MathContext decimalPlaces = new MathContext(4);
@@ -341,6 +351,8 @@ public class MainActivity extends AppCompatActivity {
 
                     tempField.setText(roundedString);
                     inTempDouble = Double.parseDouble(roundedString);
+//                    inTempDouble = rounded.toBigInteger().doubleValue();
+//                    savedF = rounded.toBigInteger().doubleValue();
                 }
                 tempLimits = new InputFilterMinMax(1.0, 100.0);
                 tempField.setFilters(new InputFilter[]{tempLimits});

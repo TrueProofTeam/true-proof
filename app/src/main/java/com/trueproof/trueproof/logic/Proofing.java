@@ -96,15 +96,15 @@ public class Proofing {
 //        double celsiusToFahrenheitConversion = ((correctedTemp * 1.8) + 32);
 
         // find proof at standardized temp (68F) when measured proof rounded high/low
-        double highProof = Double.parseDouble(table.get(68 - 1).get((int) Math.ceil(correctedProof)));
-        double lowProof = Double.parseDouble(table.get(68 - 1).get((int) Math.floor(correctedProof)));
+        double highProof = Double.parseDouble(table.get((int) (Math.floor(temperature) - 1)).get((int) Math.ceil(correctedProof)));
+        double lowProof = Double.parseDouble(table.get((int) (Math.floor(temperature) - 1)).get((int) Math.floor(correctedProof)));
 
         double proofDifference = highProof - lowProof;
 
         // find proof at standardized proof (80) when measured temp rounded high/low
-        System.out.println("correctedTemp = " + (correctedTemp-1));
-        double highTemp = Double.parseDouble(table.get((int) Math.ceil(correctedTemp - 1)).get(80));
-        double lowTemp = Double.parseDouble(table.get((int) Math.floor(correctedTemp - 1)).get(80));
+        System.out.println("correctedTemp = " + (correctedTemp));
+        double highTemp = Double.parseDouble(table.get((int) Math.ceil(correctedTemp - 1)).get((int) Math.floor(proof)));
+        double lowTemp = Double.parseDouble(table.get((int) Math.floor(correctedTemp - 1)).get((int) Math.floor(proof)));
 
         double tempDifference = highTemp - lowTemp;
 
