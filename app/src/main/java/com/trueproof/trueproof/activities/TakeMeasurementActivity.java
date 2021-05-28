@@ -68,6 +68,7 @@ import dagger.hilt.android.AndroidEntryPoint;
 @AndroidEntryPoint
 public class TakeMeasurementActivity extends AppCompatActivity implements MeasurementListAdapter.OnClickHandler {
 
+    public static final String BATCH_JSON = "batch_json";
     EditText tempField;
     InputFilterMinMax tempLimits;
 
@@ -282,6 +283,8 @@ public class TakeMeasurementActivity extends AppCompatActivity implements Measur
                     .hydrometer(Double.parseDouble(hydroToSave))
                     .temperatureCorrection(Double.parseDouble(tempCorrectionToSave))
                     .hydrometerCorrection(Double.parseDouble(hydroCorrectionToSave))
+                    .flag(false)
+                    //.batch()
                     .build();
 
             System.out.println("measurement = " + measurement);

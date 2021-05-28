@@ -135,7 +135,8 @@ public class BatchDetailActivity extends AppCompatActivity {
 
     private void goToTakeMeasurementActivity() {
         Intent intent = new Intent(this, TakeMeasurementActivity.class);
-        getBatchFromIntent(intent);
+        String batchJson = jsonConverter.batchToJson(viewModel.getBatch().getValue());
+        intent.putExtra(TakeMeasurementActivity.BATCH_JSON, batchJson);
         startActivity(intent);
     }
 
