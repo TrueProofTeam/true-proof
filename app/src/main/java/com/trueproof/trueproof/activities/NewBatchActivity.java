@@ -68,6 +68,7 @@ public class NewBatchActivity extends AppCompatActivity {
 
         Distillery distillery = userSettings.getCachedDistillery();
         if (distillery != null)((TextView)findViewById(R.id.textViewNewBatchdsp)).setText(distillery.getName());
+        else ((TextView)findViewById(R.id.textViewBatchListdsp)).setText("Untitled Distillery");
         findViewById(R.id.buttonCreateBatchNewBatch).setOnClickListener(v -> {
 
             String batchType = ((EditText) findViewById(R.id.editTextBatchTypeNewBatch)).getText().toString();

@@ -73,6 +73,7 @@ public class BatchDetailActivity extends AppCompatActivity {
 
        Distillery distillery = userSettings.getCachedDistillery();
         if (distillery != null)((TextView)findViewById(R.id.textViewBatchDetaildsp)).setText(distillery.getName());
+        else ((TextView)findViewById(R.id.textViewBatchListdsp)).setText("Untitled Distillery");
 
         findViewById(R.id.imageButtonAddMeasurementBatchDetail).setOnClickListener(v -> goToTakeMeasurementActivity());
 

@@ -60,6 +60,8 @@ public class BatchListActivity extends AppCompatActivity {
         viewModel = new ViewModelProvider(this).get(BatchListViewModel.class);
         Distillery distillery = userSettings.getCachedDistillery();
         if (distillery != null) ((TextView)findViewById(R.id.textViewBatchListdsp)).setText(distillery.getName());
+        else ((TextView)findViewById(R.id.textViewBatchListdsp)).setText("Untitled Distillery");
+
         setUpAllBatchList();
         setUpActiveBatchList();
         findViewById(R.id.imageButtonNewBatchBatchList).setOnClickListener(
