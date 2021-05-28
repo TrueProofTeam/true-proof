@@ -45,6 +45,7 @@ public class NewBatchActivity extends AppCompatActivity {
     JsonConverter jsonConverter;
     @Inject
     ActivityUtils activityUtils;
+
     private final TextWatcher textWatcher = new TextWatcher() {
         @Override
         public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -69,6 +70,8 @@ public class NewBatchActivity extends AppCompatActivity {
             ((TextView) findViewById(R.id.textViewNewBatchdsp)).setText(distilleries.get(0).getName());
         }, fail -> {
         });
+        Distillery distillery = userSettings.getCachedDistillery();
+        if (distillery != null)((TextView)findViewById(R.id.textViewNewBatchdsp)).setText(distillery.getName());
         findViewById(R.id.buttonCreateBatchNewBatch).setOnClickListener(v -> {
             String batchType = ((EditText) findViewById(R.id.editTextBatchTypeNewBatch)).getText().toString();
             Integer batchNum = Integer.parseInt(((EditText) findViewById(R.id.editTextBatchNumNewBatch)).getText().toString());
