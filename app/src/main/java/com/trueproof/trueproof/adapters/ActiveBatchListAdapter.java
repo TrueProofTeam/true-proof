@@ -79,7 +79,7 @@ public class ActiveBatchListAdapter extends ListAdapter<Batch, ActiveBatchListAd
                 String lastMeasuredTimeString = batch.getMeasurements()
                         .stream()
                         .map(measurement -> measurement.getCreatedAt())
-                        .min(AWSDateTime.byDate)
+                        .max(AWSDateTime.byDate)
                         .map(lastMeasuredFormatter::format)
                         .orElseGet(() -> "No measurements yet");
 
