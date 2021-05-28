@@ -68,7 +68,6 @@ public class UserSettings {
      *                onto the user and the cause can be grabbed with getCause().
      */
     public void getDistillery(Consumer<Distillery> success, Consumer<ApiException> fail) {
-
         AuthUser authUser = Amplify.Auth.getCurrentUser();
         if (authUser == null) fail.accept(
                 new ApiException("user is not logged in",
@@ -76,10 +75,16 @@ public class UserSettings {
                         "maybe prompt the user to log in")
         );
 
+        if (cachedDistillery != null) {
+            success.accept(cachedDistillery);
+            return;
+        }
+
         Amplify.Auth.fetchUserAttributes(
                 attributes -> {
                     String distilleryId = getValueFromAuthUserAttributesByKey(attributes,
                             "custom:distilleryId");
+                    Log.i(TAG, "userAttribute: custom:distilleryId = " + distilleryId);
                     if (distilleryId != null) {
                         distilleryRepository.getDistillery(distilleryId,
                                 distillery -> {

@@ -1,18 +1,24 @@
 package com.trueproof.trueproof.adapters;
 
+import android.os.Build;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
 import androidx.recyclerview.widget.ListAdapter;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.amplifyframework.core.model.temporal.Temporal;
 import com.amplifyframework.datastore.generated.model.Batch;
 import com.trueproof.trueproof.R;
 import com.trueproof.trueproof.models.BatchUtils;
+import com.trueproof.trueproof.utils.AWSDateTime;
+import com.trueproof.trueproof.utils.AWSDateTimeFormatter;
 
+@RequiresApi(api = Build.VERSION_CODES.O)
 public class ActiveBatchListAdapter extends ListAdapter<Batch, ActiveBatchListAdapter.ActiveBatchViewHolder> {
     private final OnClickHandler onClickHandler;
 
@@ -61,12 +67,23 @@ public class ActiveBatchListAdapter extends ListAdapter<Batch, ActiveBatchListAd
             this.batch = batch;
             batchType.setText(batch.getType());
             batchNumber.setText(String.format("Batch no. %d", batch.getBatchNumber()));
-            // TODO logic for retrieving most recent measurement
             final double lastMeasuredTrueProof = 110.1;
             trueProof.setText(String.format("%.1f proof", lastMeasuredTrueProof));
-            // TODO Date time formatting for these
-            startedAtTime.setText("placeholder");
-            lastMeasuredTime.setText("placeholder");
+            startedAtTime.setText(
+                    AWSDateTimeFormatter.ofPattern("M/d hh:mm:ss")
+                            .format(batch.getCreatedAt())
+            );
+
+            AWSDateTimeFormatter lastMeasuredFormatter = AWSDateTimeFormatter.ofPattern("M/d hh:mm:ss");
+
+                String lastMeasuredTimeString = batch.getMeasurements()
+                        .stream()
+                        .map(measurement -> measurement.getCreatedAt())
+                        .min(AWSDateTime.byDate)
+                        .map(lastMeasuredFormatter::format)
+                        .orElseGet(() -> "No measurements yet");
+
+            lastMeasuredTime.setText(lastMeasuredTimeString);
         }
     }
 }

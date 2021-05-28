@@ -17,6 +17,7 @@ import javax.inject.Inject;
 
 public class MeasurementDetailActivity extends AppCompatActivity {
 
+    public static final String MEASUREMENT_JSON = "measurement_json";
     String TAG = "TrueProof.MeasurementDetailActivity";
 
     @Inject

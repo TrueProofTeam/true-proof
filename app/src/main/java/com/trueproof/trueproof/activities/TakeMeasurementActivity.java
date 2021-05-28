@@ -210,65 +210,26 @@ public class TakeMeasurementActivity extends AppCompatActivity implements Measur
         InputFilterMinMax proofCorrLimits = new InputFilterMinMax(-1.0, 1.0);
         proofCorrectionField.setFilters(new InputFilter[]{proofCorrLimits});
 
-        tempField.addTextChangedListener(new TextWatcher() {
+        tempField.addTextChangedListener(getWatcher());
+        tempCorrectionField.addTextChangedListener(getWatcher());
+        proofField.addTextChangedListener(getWatcher());
+        proofCorrectionField.addTextChangedListener(getWatcher());
+    }
+
+    @NotNull
+    private TextWatcher getWatcher() {
+        return new TextWatcher() {
             @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-            }
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) { }
 
             @Override
-            public void afterTextChanged(Editable s) {
-            }
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-                calculateOnChange();
-            }
-        });
-
-        tempCorrectionField.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-            }
+            public void afterTextChanged(Editable s) { }
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 calculateOnChange();
             }
-        });
-
-        proofField.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-            }
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-                calculateOnChange();
-            }
-        });
-
-        proofCorrectionField.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-            }
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-                calculateOnChange();
-            }
-        });
+        };
     }
 
     @RequiresApi(api = Build.VERSION_CODES.O)
