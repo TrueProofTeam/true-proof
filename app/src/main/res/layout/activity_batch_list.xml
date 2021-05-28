@@ -21,13 +21,8 @@
         android:id="@+id/textViewActiveBatchesBatchList"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-<<<<<<< Updated upstream
-        android:text="Active Batches"
         android:textAppearance="@style/TextAppearance.AppCompat.Display2"
-=======
-        android:layout_marginTop="8dp"
         android:text="@string/activeBatches"
->>>>>>> Stashed changes
         android:textSize="16sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/recyclerViewActiveBatchList"
@@ -56,13 +51,8 @@
         android:id="@+id/textViewYourBatchesBatchList"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-<<<<<<< Updated upstream
-        android:text="Completed Batches"
         android:textAppearance="@style/TextAppearance.AppCompat.Display2"
-=======
-        android:layout_marginTop="8dp"
         android:text="@string/completedBatchesText"
->>>>>>> Stashed changes
         android:textSize="16sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/recyclerViewBatchList"
@@ -91,33 +81,20 @@
         android:layout_height="wrap_content"
         android:layout_marginEnd="16dp"
         android:layout_marginBottom="16dp"
-<<<<<<< Updated upstream
-=======
         android:contentDescription="@string/descriptionForImageNewBatchText"
->>>>>>> Stashed changes
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:srcCompat="@android:drawable/ic_menu_add" />
 
     <TextView
-<<<<<<< Updated upstream
         android:id="@+id/textViewNewBatchBatchList"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
-        android:text="New Batch"
+        android:text="@string/newBatchText"
         app:layout_constraintBottom_toBottomOf="@+id/imageButtonNewBatchBatchList"
         app:layout_constraintEnd_toStartOf="@+id/imageButtonNewBatchBatchList"
         app:layout_constraintTop_toTopOf="@+id/imageButtonNewBatchBatchList" />
-=======
-            android:text="@string/newBatchText"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/textViewNewBatchBatchList"
-            app:layout_constraintTop_toTopOf="@+id/imageButtonNewBatchBatchList"
-            app:layout_constraintBottom_toBottomOf="@+id/imageButtonNewBatchBatchList"
-            app:layout_constraintEnd_toStartOf="@+id/imageButtonNewBatchBatchList"
-            android:layout_marginEnd="8dp" />
->>>>>>> Stashed changes
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

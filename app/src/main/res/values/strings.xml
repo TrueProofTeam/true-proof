@@ -44,7 +44,6 @@
     <string name="newBatchText">New Batch</string>
     <string name="descriptionForImageNewBatchText">New Batch Icon</string>
     <string name="welcomeText">Welcome</string>
-    <string name="loginText">Login</string>
     <string name="quickProofText">Quick Proof</string>
     <string name="dontHaveAnAccountYetText">Don\'t have an account yet?</string>
     <string name="temperatureText">Temperature</string>
