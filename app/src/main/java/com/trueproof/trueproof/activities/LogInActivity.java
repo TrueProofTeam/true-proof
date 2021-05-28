@@ -103,6 +103,7 @@ public class LogInActivity extends AppCompatActivity {
                 if(msg.what==1){
                     Toast.makeText(getBaseContext(),"Login Successful!",Toast.LENGTH_SHORT).show();
                     Intent intent = new Intent(LogInActivity.this,MainActivity.class);
+                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
                     startActivity(intent);
                     finish();
                 }else if(msg.what==2){
