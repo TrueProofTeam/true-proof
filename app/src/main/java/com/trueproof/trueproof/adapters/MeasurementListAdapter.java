@@ -17,7 +17,7 @@ import com.trueproof.trueproof.models.MeasurementUtils;
 public class MeasurementListAdapter extends ListAdapter<Measurement, MeasurementListAdapter.MeasurementViewHolder> {
     private final OnClickHandler onClickHandler;
 
-    private MeasurementListAdapter(OnClickHandler onClickHandler) {
+    public MeasurementListAdapter(OnClickHandler onClickHandler) {
         super(MeasurementUtils.DIFF_CALLBACK);
         this.onClickHandler = onClickHandler;
     }
