@@ -12,8 +12,8 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="76dp"
-        android:text="Batch no. 1501"
         android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+        android:text="@string/batchNo1501Text"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -22,8 +22,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="28dp"
-        android:text="Whiskey"
         android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+        android:text="@string/whiskeyText"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="@+id/batchNumberBatchListItem"
         app:layout_constraintStart_toStartOf="parent"
@@ -34,7 +34,7 @@
         android:id="@+id/startedAtTimeActiveBatchListItem"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="8:24am today"
+        android:text="@string/eigghtAndTwentyFouramTodayText"
         app:layout_constraintBottom_toBottomOf="@+id/startedAtTextActiveBatchListItem"
         app:layout_constraintStart_toStartOf="@+id/lastMeasuredTimeActiveBatchListItem"
         app:layout_constraintTop_toBottomOf="@+id/batchTypeBatchListItem"
@@ -46,7 +46,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginTop="8dp"
-        android:text="Started at:"
+        android:text="@string/startedAt"
         app:layout_constraintStart_toStartOf="@+id/batchTypeBatchListItem"
         app:layout_constraintTop_toBottomOf="@+id/batchTypeBatchListItem" />
 
@@ -56,7 +56,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="28dp"
         android:layout_marginTop="8dp"
-        android:text="Last Measurement:"
+        android:text="@string/lastMeasurement"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/startedAtTextActiveBatchListItem" />
 
@@ -64,20 +64,24 @@
         android:id="@+id/measuredProofActiveBatchListItem"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="101.1 proof"
         app:layout_constraintBaseline_toBaselineOf="@+id/lastMeasuredTimeActiveBatchListItem"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/lastMeasuredTimeActiveBatchListItem" />
+        app:layout_constraintStart_toEndOf="@+id/lastMeasuredTimeActiveBatchListItem"
+        android:text="@string/maxNumberProof" />
 
-    <TextView
+
+        <TextView
         android:id="@+id/lastMeasuredTimeActiveBatchListItem"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
-        android:text="10:06:21 am today"
+
         app:layout_constraintEnd_toStartOf="@+id/measuredProofActiveBatchListItem"
         app:layout_constraintHorizontal_bias="0.5"
+
+        android:text="@string/amTodayText"
+
         app:layout_constraintStart_toEndOf="@+id/lastMeasurementTextActiveBatchListItem"
         app:layout_constraintTop_toTopOf="@+id/lastMeasurementTextActiveBatchListItem" />
 
