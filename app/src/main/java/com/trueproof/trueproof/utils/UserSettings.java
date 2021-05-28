@@ -2,9 +2,11 @@ package com.trueproof.trueproof.utils;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.os.Build;
 import android.util.Log;
 
 import androidx.annotation.Nullable;
+import androidx.annotation.RequiresApi;
 
 import com.amplifyframework.AmplifyException;
 import com.amplifyframework.api.ApiException;
@@ -19,6 +21,7 @@ import com.amplifyframework.datastore.generated.model.TemperatureUnit;
 import com.amplifyframework.datastore.generated.model.User;
 
 import java.util.List;
+import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 import javax.inject.Inject;
@@ -28,6 +31,7 @@ import dagger.hilt.android.qualifiers.ApplicationContext;
 import hilt_aggregated_deps._com_trueproof_trueproof_activities_LogInActivity_GeneratedInjector;
 
 @Singleton
+@RequiresApi(api = Build.VERSION_CODES.N)
 public class UserSettings {
     final static String TAG = "UserSettings";
     final static String SHARED_PREFERENCES_NAME = "trueproof.trueproof";
@@ -255,6 +259,21 @@ public class UserSettings {
      */
     @Nullable
     public Distillery getCachedDistillery() {
+        if (cachedDistillery != null) return cachedDistillery;
+        CompletableFuture<Distillery> distilleryCompletableFuture = new CompletableFuture<>();
+
+        Object lock = new Object();
+        try {
+            lock.wait(2000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        getDistillery(success -> {
+            lock.notify();
+        }, fail -> {
+            lock.notify();
+        });
+
         return cachedDistillery;
     }
 
@@ -265,6 +284,20 @@ public class UserSettings {
      */
     @Nullable
     public User getCachedUserSettings() {
+        if (cachedUserSettings != null) return cachedUserSettings;
+
+        Object lock = new Object();
+        try {
+            lock.wait(2000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        getUserSettings(success -> {
+            lock.notify();
+        }, fail -> {
+            lock.notify();
+        });
+
         return cachedUserSettings;
     }
 
