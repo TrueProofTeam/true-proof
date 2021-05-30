@@ -6,7 +6,7 @@ True Proof is a beta android app pending approval in the App Store. It offers an
 
 Table of Contents |-
 ------------------|----
-[Link to APK goes here](trueproof_v1_0.apk) | -
+[Link to APK](trueproof_v1_0.apk) | -
 [User Stories](docs/user-stories.md) | -
 [Team Agreement](docs/team-agreement) | -
 [Whiteboard](docs/whiteboard.jpg) | -
