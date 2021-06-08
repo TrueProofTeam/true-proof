@@ -9,7 +9,6 @@ import android.text.TextWatcher;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -236,7 +235,7 @@ public class TakeMeasurementActivity extends AppCompatActivity {
 
         TextView calculatedProof = findViewById(R.id.textViewCalculatedProofTakeMeasurement);
 
-        double proofFromProofing = proofing.proof(inTempDouble, inputProofDouble, inputProofCorrDouble, inputTempCorrDouble);
+        double proofFromProofing = proofing.proofWithCorrection(inTempDouble, inputProofDouble, inputTempCorrDouble, inputProofCorrDouble);
         if (proofFromProofing < 1.7) {
             calculatedProof.setText("Invalid Measurements");
 

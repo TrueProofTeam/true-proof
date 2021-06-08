@@ -154,7 +154,7 @@ public class MainActivity extends AppCompatActivity {
 
         TextView calculatedProof = findViewById(R.id.textViewCalculatedProofMain);
 
-        double proofFromProofing = proofing.proof(inTempDouble, inputProofDouble, inputProofCorrDouble, inputTempCorrDouble);
+        double proofFromProofing = proofing.proofWithCorrection(inTempDouble, inputProofDouble, inputTempCorrDouble, inputProofCorrDouble);
         if (proofFromProofing < 0) {
             calculatedProof.setText("Does not exist. Check measurements and try again.");
         } else calculatedProof.setText(String.valueOf(proofFromProofing));

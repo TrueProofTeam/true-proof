@@ -1,127 +1,85 @@
 package com.trueproof.trueproof.logic;
 
-import android.util.Log;
-
+import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Scanner;
+import java.io.InputStreamReader;
 
 public class Proofing {
-
-    List<List<String>> table;
+    short[][] table;
 
     public Proofing(InputStream inputStream) {
-        table = new ArrayList<>();
-        Scanner scanner;
-
-        try {
-            scanner = new Scanner(inputStream);
-            while (scanner.hasNext()) {
-                String line = scanner.next();
+        table = new short[100][207];
+        try (BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream))) {
+            for (int i = 0; i < 100; i++) {
+                String line = bufferedReader.readLine();
                 String[] values = line.split(",");
-                table.add(Arrays.asList(values));
+                for (int j = 0; j < 207; j++) {
+                    table[i][j] = Short.parseShort(values[j]);
+                }
             }
-            scanner.close();
-            inputStream.close();
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
-    // Takes in Fahrenheit, C converted to F before being passed as in
-    public double proof(double temperature, double proof, double proofCorrection, double tempCorrection) {
+    /**
+     * Takes a temperature value in Fahrenheit units and a Hydrometer reading in Proof units and
+     * calculates the true proof at 60 degrees Fahrenheit using the TTB tables and bilinear
+     * interpolation.
+     *
+     * @param temperature A temperature value in degrees Fahrenheit
+     * @param hydrometer A hydrometer reading in degrees proof
+     * @return The true proof at 60 degrees Fahrenheit calculated using the TTB tables and bilinear
+     * interpolation
+     * @throws IllegalArgumentException If the temperature and hydrometer reading doesn't correspond
+     *                                  to a measurable true proof value using the TTB tables
+     */
+    public double proof(double temperature, double hydrometer) throws IllegalArgumentException {
+        int t0 = lowerInt(temperature);
+        int t1 = higherInt(temperature);
+        int h0 = lowerInt(hydrometer);
+        int h1 = higherInt(hydrometer);
 
-        System.out.println("temperature = " + temperature);
-        System.out.println("proof = " + proof);
-        System.out.println("proofCorrection = " + proofCorrection);
-        System.out.println("tempCorrection = " + tempCorrection);
+        double x0 = t0;
+        double x1 = t1;
+        double y0 = h0;
+        double y1 = h1;
 
-            /* TODO
-            [✓] 5/24 bring in CSV through getResources() instead of file path
-            [] accept temperature in both F and C and convert where appropriate
-                F -> C equation: (F - 32) * (5/9) = C
-            [] convert F to C in activity/intent, Proof method always takes temperature in C
-            [✓] 5/24 handle simple proofing (no interpolation) with fractional temp/proof values. round up/down?
-            [✓] 5/25 handle exceptions if args return invalid value from table
-             */
+        double z00 = lookup(t0, h0);
+        double z01 = lookup(t0, h1);
+        double z10 = lookup(t1, h0);
+        double z11 = lookup(t1, h1);
 
-        if (temperature <= 1){
-            temperature = 1;
-        }
-        if (temperature >= 100){
-            temperature = 99;
-        }
-//        if (proof <= 1){
-//            proof = 1;
-//        }
-        if (proof > 206){
-            proof = 206;
-        }
+        return Interpolation.bilinear(x0, x1, y0, y1, z00, z01, z10, z11, temperature, hydrometer);
+        //return Interpolation.simple2D(x0, x1, y0, y1, z00, z01, z10, temperature, hydrometer);
+    }
 
-        // simple proofing for quick calculation when correction factors not selected or set to 0, no interpolation just intersection of TTB table
-        if (proofCorrection == 0.0 && tempCorrection == 0.0) {
-            double roundTemp = Math.round(temperature);
-            double roundProof = Math.round(proof);
+    public double lookup(int temperature, int hydrometer) {
+        if (temperature < 1 || temperature > 100)
+            throw new IllegalArgumentException("Temperature out of range");
+        if (hydrometer < 0 || hydrometer > 206)
+            throw new IllegalArgumentException("Temperature out of range");
+        short value = table[temperature - 1][hydrometer];
+        if (value < 0)
+            throw new IllegalArgumentException("Temperature and hydrometer values out of range");
 
-//            if (roundTemp < 1){
-//                roundTemp = 1;
-//            }
-//            if (roundProof > 100){
-//                roundTemp = 100
-//            }
+        return ((double) value) / 10.0;
+    }
 
-//            System.out.println("temperature = " + temperature);
-//            System.out.println("roundTemp = " + roundTemp);
-//            System.out.println("proof = " + proof);
-//            System.out.println("roundProof = " + roundProof);
+    private int lowerInt(double value) {
+        return (int) Math.floor(value);
+    }
 
-            double chartProof = Double.parseDouble(table.get((int) roundTemp - 1).get((int) roundProof));
-//            System.out.println("chartProof = " + (chartProof / 10));
-//
-            Log.v("Chart Proof: ", String.valueOf(chartProof / 10));
+    private int higherInt(double value) {
+        return lowerInt(value) + 1;
+    }
 
-            return chartProof / 10;
-        }
-
-        // Interpolation begins
-
-        // Adjust measured values by instrument correction factors
-        double correctedProof = proof + proofCorrection;
-        double correctedTemp = temperature + tempCorrection;
-
-        // C->F conversion,
-//        double celsiusToFahrenheitConversion = ((correctedTemp * 1.8) + 32);
-
-        // find proof at standardized temp (68F) when measured proof rounded high/low
-        double highProof = Double.parseDouble(table.get((int) (Math.floor(temperature) - 1)).get((int) Math.ceil(correctedProof)));
-        double lowProof = Double.parseDouble(table.get((int) (Math.floor(temperature) - 1)).get((int) Math.floor(correctedProof)));
-
-        double proofDifference = highProof - lowProof;
-
-        // find proof at standardized proof (80) when measured temp rounded high/low
-        System.out.println("correctedTemp = " + (correctedTemp));
-        double highTemp = Double.parseDouble(table.get((int) Math.ceil(correctedTemp - 1)).get((int) Math.floor(proof)));
-        double lowTemp = Double.parseDouble(table.get((int) Math.floor(correctedTemp - 1)).get((int) Math.floor(proof)));
-
-        double tempDifference = highTemp - lowTemp;
-
-        // isolate fractional portion of measured temp/proof
-        double proofFractional = correctedProof - Math.floor(proof);
-        double tempFractional = correctedTemp - Math.floor(temperature);
-
-        //interpolate proof and temp
-        double proofInterpolation = proofFractional * proofDifference;
-        double tempInterpolation = tempFractional * tempDifference;
-
-        // interpolate true proof
-        double interpolatedProof = (double) Math.round((lowProof + proofInterpolation + (tempInterpolation)));
-        //System.out.println("interpolatedProof = " + interpolatedProof);
-
-        // divide big dumb Integer by 10 to find it's actual proof value;
-        //Log.e("Interpolated Proof: ", String.valueOf(interpolatedProof / 10));
-        return (interpolatedProof / 10);
+    public double proofWithCorrection(
+            double temperature,
+            double hydrometer,
+            double temperatureCorrection,
+            double hydrometerCorrection) {
+        return proof(temperature + temperatureCorrection, hydrometer + hydrometerCorrection);
     }
 }
