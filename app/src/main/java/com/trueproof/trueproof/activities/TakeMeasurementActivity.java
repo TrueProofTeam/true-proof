@@ -235,14 +235,14 @@ public class TakeMeasurementActivity extends AppCompatActivity {
 
         TextView calculatedProof = findViewById(R.id.textViewCalculatedProofTakeMeasurement);
 
-        double proofFromProofing = proofing.proofWithCorrection(inTempDouble, inputProofDouble, inputTempCorrDouble, inputProofCorrDouble);
-        if (proofFromProofing < 1.7) {
-            calculatedProof.setText("Invalid Measurements");
 
-        } else {
-            calculatedProof.setText(String.valueOf(proofFromProofing));
+        try {
+            double trueProof = proofing.proofWithCorrection(inTempDouble, inputProofDouble, inputTempCorrDouble, inputProofCorrDouble);
+            calculatedProof.setText(String.format("%.1f", trueProof));
             findViewById(R.id.buttonSaveMeasurementTakeMeasurement)
                     .setEnabled(true);
+        } catch (IllegalArgumentException e) {
+            calculatedProof.setText("Invalid Measurements");
         }
     }
 

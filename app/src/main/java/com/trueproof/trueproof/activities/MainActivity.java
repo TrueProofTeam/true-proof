@@ -154,13 +154,12 @@ public class MainActivity extends AppCompatActivity {
 
         TextView calculatedProof = findViewById(R.id.textViewCalculatedProofMain);
 
-        double proofFromProofing = proofing.proofWithCorrection(inTempDouble, inputProofDouble, inputTempCorrDouble, inputProofCorrDouble);
-        if (proofFromProofing < 0) {
+        try {
+            double trueProof = proofing.proofWithCorrection(inTempDouble, inputProofDouble, inputTempCorrDouble, inputProofCorrDouble);
+            calculatedProof.setText(String.format("%.1f", trueProof));
+        } catch (IllegalArgumentException e) {
             calculatedProof.setText("Does not exist. Check measurements and try again.");
-        } else calculatedProof.setText(String.valueOf(proofFromProofing));
-
-
-//        calculatedProof.setText(String.valueOf(proofing.proof(inTempDouble, inputProofDouble, inputProofCorrDouble, inputTempCorrDouble)));
+        }
     }
 
     public void limitAndCalculate() {
