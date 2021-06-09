@@ -182,7 +182,7 @@ public class BatchDetailActivity extends AppCompatActivity {
                 .status(status)
                 .build();
         viewModel.updateBatch(newBatch);
-        
+
     }
 
     private void populateTextFields(Batch batch) {
