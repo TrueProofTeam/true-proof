@@ -17,7 +17,6 @@ import com.trueproof.trueproof.R;
 import com.trueproof.trueproof.models.BatchUtils;
 import com.trueproof.trueproof.utils.AWSDateTimeFormatter;
 
-@RequiresApi(api = Build.VERSION_CODES.O)
 public class BatchListAdapter extends ListAdapter<Batch, BatchListAdapter.BatchViewHolder> {
     private final OnClickHandler onClickHandler;
 
