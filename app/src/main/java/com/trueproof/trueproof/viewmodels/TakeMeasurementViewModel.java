@@ -11,6 +11,9 @@ import androidx.lifecycle.ViewModel;
 import com.amplifyframework.datastore.generated.model.Batch;
 import com.amplifyframework.datastore.generated.model.Measurement;
 import com.amplifyframework.datastore.generated.model.TemperatureUnit;
+import com.amplifyframework.datastore.generated.model.User;
+import com.trueproof.trueproof.logic.Proofing;
+import com.trueproof.trueproof.logic.UnitConversions;
 import com.trueproof.trueproof.utils.AWSDateTime;
 import com.trueproof.trueproof.utils.JsonConverter;
 import com.trueproof.trueproof.utils.MeasurementRepository;
@@ -23,32 +26,28 @@ import dagger.hilt.android.lifecycle.HiltViewModel;
 
 @HiltViewModel
 @RequiresApi(api = Build.VERSION_CODES.O)
-public class TakeMeasurementViewModel extends ViewModel {
+public class TakeMeasurementViewModel extends MeasurementViewModel {
     private static final String TAG = "TakeMeasurement/VM/";
-    private final MeasurementRepository measurementRepository;
     private final JsonConverter jsonConverter;
-    private MutableLiveData<Boolean> updatedLiveData;
+    private MutableLiveData<Boolean> updatedLiveData = new MutableLiveData<>();
     private Batch batch;
-
-    private Measurement measurement;
-    private TemperatureUnit unit;
-
 
     @Inject
     TakeMeasurementViewModel(
             MeasurementRepository measurementRepository,
-            JsonConverter jsonConverter
+            JsonConverter jsonConverter,
+            Proofing proofing
     ) {
+        this.proofing = proofing;
         this.measurementRepository = measurementRepository;
         this.jsonConverter = jsonConverter;
-        this.updatedLiveData = new MutableLiveData<>();
     }
 
     public Batch getBatch() {
         return batch;
     }
 
-    public LiveData<Boolean> getUpdatedLiveData() {
+    public LiveData<Boolean> getSavedLiveData() {
         return updatedLiveData;
     }
 
@@ -56,8 +55,26 @@ public class TakeMeasurementViewModel extends ViewModel {
         this.batch = jsonConverter.batchFromJson(batchJson);
     }
 
-    public void saveMeasurement(Measurement measurement) {
-        Measurement newMeasurement = measurement.copyOfBuilder()
+    public void saveMeasurement() {
+        double temp = 0.0;
+        double tempCorr = 0.0;
+        if (getTemperatureUnit() == TemperatureUnit.FAHRENHEIT) {
+            temp = getTemperature();
+            tempCorr = getTemperatureCorrection() ;
+        } else {
+            temp = UnitConversions.celsiusToFahrenheit(getTemperature());
+            tempCorr = getTemperatureCorrection() != null ?
+                    UnitConversions.celsiusCorrectionToFahrenheit(getTemperatureCorrection()) :
+                    0.0;
+        }
+        double hydroCorr = getHydrometerCorrection() == null
+                ? 0.0 : getHydrometerCorrection();
+        Measurement newMeasurement = Measurement.builder()
+                .trueProof(calculateTrueProof())
+                .temperature(temp)
+                .hydrometer(getHydrometer())
+                .temperatureCorrection(tempCorr)
+                .hydrometerCorrection(hydroCorr)
                 .batch(Batch.justId(batch.getId()))
                 .takenAt(AWSDateTime.of(OffsetDateTime.now()))
                 .flag(false)
@@ -77,4 +94,9 @@ public class TakeMeasurementViewModel extends ViewModel {
                 });
     }
 
+    public void setUserSettings(User user) {
+        setTemperatureCorrection(user.getDefaultTemperatureCorrection().toString());
+        setHydrometerCorrection(user.getDefaultHydrometerCorrection().toString());
+        setTemperatureUnit(user.getDefaultTemperatureUnit());
+    }
 }
