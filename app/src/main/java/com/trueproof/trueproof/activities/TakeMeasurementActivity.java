@@ -24,7 +24,7 @@ import com.amplifyframework.datastore.generated.model.TemperatureUnit;
 import com.amplifyframework.datastore.generated.model.User;
 
 import com.trueproof.trueproof.R;
-import com.trueproof.trueproof.logic.InputFilterMinMax;
+import com.trueproof.trueproof.filters.InputFilterMinMax;
 import com.trueproof.trueproof.logic.Proofing;
 import com.trueproof.trueproof.models.BatchUtils;
 import com.trueproof.trueproof.models.DistilleryUtils;
@@ -73,11 +73,11 @@ public class TakeMeasurementActivity extends AppCompatActivity {
     private EditText temperatureCorrectionEditText;
     private EditText hydrometerEditText;
     private EditText hydrometerCorrectionEditText;
+    private TextView temperatureCorrectionText;
+    private TextView temperatureText;
     private TextView trueProofText;
     private Button saveMeasurementButton;
     private Button goToBatchDetailButton;
-    private TextView temperatureCorrectionText;
-    private TextView temperatureText;
     private TextView batchNumberText;
 
     @RequiresApi(api = Build.VERSION_CODES.O)

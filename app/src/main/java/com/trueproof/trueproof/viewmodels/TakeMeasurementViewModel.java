@@ -23,16 +23,11 @@ import dagger.hilt.android.lifecycle.HiltViewModel;
 
 @HiltViewModel
 @RequiresApi(api = Build.VERSION_CODES.O)
-public class TakeMeasurementViewModel extends ViewModel {
+public class TakeMeasurementViewModel extends MeasurementViewModel {
     private static final String TAG = "TakeMeasurement/VM/";
-    private final MeasurementRepository measurementRepository;
     private final JsonConverter jsonConverter;
     private MutableLiveData<Boolean> updatedLiveData;
     private Batch batch;
-
-    private Measurement measurement;
-    private TemperatureUnit unit;
-
 
     @Inject
     TakeMeasurementViewModel(
