@@ -8,6 +8,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.RadioGroup;
 import android.widget.TextView;
 
 import androidx.annotation.RequiresApi;
@@ -15,6 +16,7 @@ import androidx.lifecycle.ViewModelProvider;
 
 import com.amplifyframework.auth.AuthUser;
 import com.amplifyframework.core.Amplify;
+import com.amplifyframework.datastore.generated.model.TemperatureUnit;
 import com.trueproof.trueproof.R;
 import com.trueproof.trueproof.logic.Proofing;
 import com.trueproof.trueproof.utils.ActivityUtils;
@@ -31,6 +33,7 @@ public class MainActivity extends MeasurementActivity {
     @Inject Proofing proofing;
     @Inject ActivityUtils activityUtils;
     @Inject UserSettings userSettings;
+    RadioGroup temperatureUnitRadioGroup;
 
     @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
@@ -45,7 +48,7 @@ public class MainActivity extends MeasurementActivity {
         );
 
         setupMeasurementActivity();
-
+        setupTemperatureRadio();
         initializeLoginButton();
 
         ((TextView) findViewById(R.id.textViewTermsOfUseMain)).setOnClickListener(v -> {
@@ -53,7 +56,19 @@ public class MainActivity extends MeasurementActivity {
             startActivity(intent);
         });
     }
-    
+
+    private void setupTemperatureRadio() {
+        temperatureUnitRadioGroup = findViewById(R.id.radioGroupMain);
+        viewModel.setTemperatureUnit(TemperatureUnit.FAHRENHEIT);
+        temperatureUnitRadioGroup.check(R.id.radioButtonTempFMain);
+        temperatureUnitRadioGroup.setOnCheckedChangeListener((group, checkedId) -> {
+            if (checkedId == R.id.radioButtonTempFMain)
+                viewModel.setTemperatureUnit(TemperatureUnit.FAHRENHEIT);
+            if (checkedId == R.id.radioButtonTempCMain)
+                viewModel.setTemperatureUnit(TemperatureUnit.CELSIUS);
+        });
+    }
+
     @Override
     void saveMeasurementViews() {
         temperatureEditText = findViewById(R.id.editTextTemperatureMain);
@@ -63,9 +78,6 @@ public class MainActivity extends MeasurementActivity {
         trueProofText = findViewById(R.id.textViewCalculatedProofMain);
         temperatureText = findViewById(R.id.textViewTempMain);
         temperatureCorrectionText = findViewById(R.id.textViewTempCorrectionMain);
-        temperatureUnitRadioGroup = findViewById(R.id.radioGroupMain);
-        temperatureUnitCRadioId = R.id.radioButtonTempCMain;
-        temperatureUnitFRadioId = R.id.radioButtonTempFMain;
     }
 
     @Override

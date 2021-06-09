@@ -4,17 +4,16 @@ import android.text.Editable;
 import android.text.InputFilter;
 import android.text.TextWatcher;
 import android.widget.EditText;
-import android.widget.RadioGroup;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.amplifyframework.datastore.generated.model.TemperatureUnit;
 import com.trueproof.trueproof.filters.InputFilterMinMax;
-import com.trueproof.trueproof.viewmodels.MainActivityViewModel;
+import com.trueproof.trueproof.viewmodels.MeasurementViewModel;
 
 abstract class MeasurementActivity extends AppCompatActivity {
-    MainActivityViewModel viewModel;
+    MeasurementViewModel viewModel;
     EditText temperatureEditText;
     EditText temperatureCorrectionEditText;
     EditText hydrometerEditText;
@@ -22,9 +21,6 @@ abstract class MeasurementActivity extends AppCompatActivity {
     TextView temperatureCorrectionText;
     TextView temperatureText;
     TextView trueProofText;
-    RadioGroup temperatureUnitRadioGroup;
-    int temperatureUnitCRadioId = 0;
-    int temperatureUnitFRadioId = 0;
 
     abstract void saveMeasurementViews();
 
@@ -35,28 +31,34 @@ abstract class MeasurementActivity extends AppCompatActivity {
         setupHydrometerFilters();
     }
 
-    private void observeLiveData() {
-        viewModel.setTemperatureUnit(TemperatureUnit.FAHRENHEIT);
-        temperatureUnitRadioGroup.check(temperatureUnitFRadioId);
+    void onInvalidTrueProofCalculation() {
+        trueProofText.setText("Invalid parameters");
+    }
 
-        viewModel.getUpdateEditText().observe(this, bool -> {
-            setTextEmptyIfNull(viewModel.getHydrometer(), hydrometerEditText, -1);
-            setTextEmptyIfNull(viewModel.getHydrometerCorrection(), hydrometerCorrectionEditText, -1);
-            clearTemperatureFilters();
-            setTextEmptyIfNull(viewModel.getTemperature(), temperatureEditText, 2);
-            setTextEmptyIfNull(viewModel.getTemperatureCorrection(), temperatureCorrectionEditText, 2);
-            setupTemperatureFilters(viewModel.getTemperatureUnit());
-            updateTemperatureTextViews();
-        });
+    void onValidTrueProofCalculation(double proof) {
+        trueProofText.setText(String.format("%.1f", proof));
+    }
+
+    void onMeasurementEditTextChange(Boolean bool) {
+        setTextEmptyIfNull(viewModel.getHydrometer(), hydrometerEditText, -1);
+        setTextEmptyIfNull(viewModel.getHydrometerCorrection(), hydrometerCorrectionEditText, -1);
+        clearTemperatureFilters();
+        setTextEmptyIfNull(viewModel.getTemperature(), temperatureEditText, 2);
+        setTextEmptyIfNull(viewModel.getTemperatureCorrection(), temperatureCorrectionEditText, 2);
+        setupTemperatureFilters(viewModel.getTemperatureUnit());
+        updateTemperatureTextViews();
+    }
+
+    private void observeLiveData() {
+        viewModel.getUpdateEditText().observe(this, this::onMeasurementEditTextChange);
         viewModel.getTrueProof().observe(this, proof -> {
             if (proof == null) {
-                trueProofText.setText("Invalid parameters");
+                onInvalidTrueProofCalculation();
             } else {
-                trueProofText.setText(String.format("%.1f", proof));
+                onValidTrueProofCalculation(proof);
             }
         });
     }
-
 
     private void setupClickListeners() {
         temperatureEditText.addTextChangedListener(
@@ -71,12 +73,6 @@ abstract class MeasurementActivity extends AppCompatActivity {
         hydrometerCorrectionEditText.addTextChangedListener(
                 fromOnTextChanged(viewModel::setHydrometerCorrection)
         );
-        temperatureUnitRadioGroup.setOnCheckedChangeListener((group, checkedId) -> {
-            if (checkedId == temperatureUnitFRadioId)
-                viewModel.setTemperatureUnit(TemperatureUnit.FAHRENHEIT);
-            if (checkedId == temperatureUnitCRadioId)
-                viewModel.setTemperatureUnit(TemperatureUnit.CELSIUS);
-        });
     }
 
     private void setTextEmptyIfNull(Double value, EditText editText, int decimalPlaces) {
@@ -111,7 +107,7 @@ abstract class MeasurementActivity extends AppCompatActivity {
             });
         } else {
             temperatureEditText.setFilters(new InputFilter[]{
-                    new InputFilterMinMax(-17.222222222, 2.125)
+                    new InputFilterMinMax(-17.222222222, 37.7777777777)
             });
             temperatureCorrectionEditText.setFilters(new InputFilter[]{
                     new InputFilterMinMax(-1.0, 1.0)

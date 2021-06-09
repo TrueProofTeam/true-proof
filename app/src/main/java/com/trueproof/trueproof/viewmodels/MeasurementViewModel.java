@@ -9,17 +9,16 @@ import com.trueproof.trueproof.logic.Proofing;
 import com.trueproof.trueproof.logic.UnitConversions;
 import com.trueproof.trueproof.utils.MeasurementRepository;
 
-abstract class MeasurementViewModel extends ViewModel {
+public abstract class MeasurementViewModel extends ViewModel {
+    MeasurementRepository measurementRepository;
+    Proofing proofing;
     private TemperatureUnit temperatureUnit = TemperatureUnit.FAHRENHEIT;
     private Double temperature;
     private Double temperatureCorrection;
     private Double hydrometer;
     private Double hydrometerCorrection;
-    private MutableLiveData<Double> trueProof = new MutableLiveData<>();
-    private MutableLiveData<Boolean> updateEditTextLiveData = new MutableLiveData<>();
-
-    MeasurementRepository measurementRepository;
-    Proofing proofing;
+    private final MutableLiveData<Double> trueProof = new MutableLiveData<>();
+    private final MutableLiveData<Boolean> updateEditTextLiveData = new MutableLiveData<>();
 
     public LiveData<Boolean> getUpdateEditText() {
         return updateEditTextLiveData;
@@ -29,38 +28,22 @@ abstract class MeasurementViewModel extends ViewModel {
         return temperatureUnit;
     }
 
-    public Double getTemperature() {
-        return temperature;
-    }
-
-    public Double getTemperatureCorrection() {
-        return temperatureCorrection;
-    }
-
-    public Double getHydrometer() {
-        return hydrometer;
-    }
-
-    public Double getHydrometerCorrection() {
-        return hydrometerCorrection;
-    }
-
-    public LiveData<Double> getTrueProof() {
-        return trueProof;
-    }
-
     public void setTemperatureUnit(TemperatureUnit temperatureUnit) {
         if (this.temperatureUnit == null) {
             this.temperatureUnit = temperatureUnit;
             updateEditTextLiveData.postValue(true);
-            calculate();
+            updateTrueProof();
         }
         if (!this.temperatureUnit.equals(temperatureUnit)) {
             convertTemperatureValues(temperatureUnit);
             this.temperatureUnit = temperatureUnit;
             updateEditTextLiveData.postValue(true);
-            calculate();
+            updateTrueProof();
         }
+    }
+
+    public Double getTemperature() {
+        return temperature;
     }
 
     public void setTemperature(String temperature) {
@@ -72,13 +55,21 @@ abstract class MeasurementViewModel extends ViewModel {
         }
     }
 
+    public Double getTemperatureCorrection() {
+        return temperatureCorrection;
+    }
+
     public void setTemperatureCorrection(String temperatureCorrection) {
         try {
             this.temperatureCorrection = Double.parseDouble(temperatureCorrection);
         } catch (NumberFormatException e) {
             this.temperatureCorrection = null;
         }
-        calculate();
+        updateTrueProof();
+    }
+
+    public Double getHydrometer() {
+        return hydrometer;
     }
 
     public void setHydrometer(String hydrometer) {
@@ -87,7 +78,11 @@ abstract class MeasurementViewModel extends ViewModel {
         } catch (NumberFormatException e) {
             this.hydrometer = null;
         }
-        calculate();
+        updateTrueProof();
+    }
+
+    public Double getHydrometerCorrection() {
+        return hydrometerCorrection;
     }
 
     public void setHydrometerCorrection(String hydrometerCorrection) {
@@ -96,8 +91,12 @@ abstract class MeasurementViewModel extends ViewModel {
         } catch (NumberFormatException e) {
             this.hydrometerCorrection = null;
         }
-        calculate();
-        calculate();
+        updateTrueProof();
+        updateTrueProof();
+    }
+
+    public LiveData<Double> getTrueProof() {
+        return trueProof;
     }
 
     private void convertTemperatureValues(TemperatureUnit unit) {
@@ -114,32 +113,38 @@ abstract class MeasurementViewModel extends ViewModel {
         }
     }
 
-    private void calculate() {
+    private void updateTrueProof() {
         if (temperature != null && hydrometer != null) {
-            double temp = 0.0;
-            double tempCorr = 0.0;
-            if (temperatureUnit == TemperatureUnit.FAHRENHEIT) {
-                temp = temperature;
-                tempCorr = temperatureCorrection;
-            } else {
-                temp = UnitConversions.celsiusToFahrenheit(temperature);
-                tempCorr = temperatureCorrection != null ?
-                        UnitConversions.celsiusCorrectionToFahrenheit(temperatureCorrection) :
-                        0.0;
-            }
-            double hydroCorr = hydrometerCorrection == null
-                    ? 0.0 : hydrometerCorrection;
-
-            try {
-                double proof = proofing.proofWithCorrection(
-                        temp,
-                        hydrometer,
-                        tempCorr,
-                        hydroCorr);
-                trueProof.postValue(proof);
-            } catch (IllegalArgumentException e) {
-                trueProof.postValue(null);
-            }
+            trueProof.postValue(calculateTrueProof());
         }
+    }
+
+    Double calculateTrueProof() {
+        if (temperature == null || hydrometer == null) return null;
+        double temp = 0.0;
+        double tempCorr = 0.0;
+        if (temperatureUnit == TemperatureUnit.FAHRENHEIT) {
+            temp = temperature;
+            tempCorr = temperatureCorrection != null ?
+                    temperatureCorrection : 0.0;
+        } else {
+            temp = UnitConversions.celsiusToFahrenheit(temperature);
+            tempCorr = temperatureCorrection != null ?
+                    UnitConversions.celsiusCorrectionToFahrenheit(temperatureCorrection) :
+                    0.0;
+        }
+        double hydroCorr = hydrometerCorrection == null
+                ? 0.0 : hydrometerCorrection;
+
+        try {
+            double proof = proofing.proofWithCorrection(
+                    temp,
+                    hydrometer,
+                    tempCorr,
+                    hydroCorr);
+            return proof;
+        } catch (IllegalArgumentException ignored) {
+        }
+        return null;
     }
 }
