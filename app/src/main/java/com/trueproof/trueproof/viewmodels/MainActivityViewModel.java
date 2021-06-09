@@ -1,6 +1,6 @@
 package com.trueproof.trueproof.viewmodels;
 
-import com.trueproof.trueproof.logic.Proofing;
+import com.trueproof.core.logic.Proofing;
 
 import javax.inject.Inject;
 

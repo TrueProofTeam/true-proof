@@ -1,4 +1,4 @@
-package com.trueproof.trueproof.logic;
+package com.trueproof.core.logic;
 
 public class Interpolation {
     /**

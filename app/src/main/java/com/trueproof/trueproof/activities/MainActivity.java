@@ -18,7 +18,6 @@ import com.amplifyframework.auth.AuthUser;
 import com.amplifyframework.core.Amplify;
 import com.amplifyframework.datastore.generated.model.TemperatureUnit;
 import com.trueproof.trueproof.R;
-import com.trueproof.trueproof.logic.Proofing;
 import com.trueproof.trueproof.utils.ActivityUtils;
 import com.trueproof.trueproof.utils.UserSettings;
 import com.trueproof.trueproof.viewmodels.MainActivityViewModel;
@@ -30,7 +29,6 @@ import dagger.hilt.android.AndroidEntryPoint;
 @AndroidEntryPoint
 public class MainActivity extends MeasurementActivity {
     static final String TAG = "TrueProof.MainActivity";
-    @Inject Proofing proofing;
     @Inject ActivityUtils activityUtils;
     @Inject UserSettings userSettings;
     RadioGroup temperatureUnitRadioGroup;

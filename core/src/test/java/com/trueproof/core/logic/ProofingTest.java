@@ -1,4 +1,4 @@
-package com.trueproof.trueproof.logic;
+package com.trueproof.core.logic;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -6,6 +6,8 @@ import org.junit.Test;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 
 import static org.junit.Assert.*;
 
@@ -15,7 +17,7 @@ public class ProofingTest {
 
     @Before
     public void initialize() throws FileNotFoundException {
-        String filePath = "src/main/res/raw/table1.csv";
+        String filePath = "src/main/resources/table1.csv";
         File file = new File(filePath);
         proofing = new Proofing(new FileInputStream(file));
     }
