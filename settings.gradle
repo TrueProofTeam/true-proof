@@ -2,3 +2,4 @@ include ':app'
 rootProject.name = "True Proof"
 include ':core'
 project(":core").projectDir = new File("core")
+include ':api'
