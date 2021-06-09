@@ -2,6 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.trueproof.trueproof">
 
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <!--    requests write to storage permission for csv export-->
     <application
         android:name=".TrueProofApplication"
         android:allowBackup="true"
