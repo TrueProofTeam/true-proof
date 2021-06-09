@@ -44,7 +44,7 @@ import dagger.hilt.android.AndroidEntryPoint;
 @RequiresApi(api = Build.VERSION_CODES.O)
 public class BatchDetailActivity extends AppCompatActivity {
     final static String BATCH_JSON = "batch_json";
-    final static String TAG = "BatchDetailActivity";
+    final static String TAG = "TrueProof.BDActivity";
 
     @Inject
     JsonConverter jsonConverter;
@@ -104,9 +104,9 @@ public class BatchDetailActivity extends AppCompatActivity {
     private void observeLiveData() {
         viewModel.getBatch().observe(this, batch -> populateTextFields(batch));
         viewModel.getUpdatedLiveData().observe(this, success -> {
-                    if (success == true)
+                    if (success)
                         Toast.makeText(this, "Batch updated!", Toast.LENGTH_LONG).show();
-                    if (success == false)
+                    if (!success)
                         Toast.makeText(this, "Error updating batch. Check your network connection or try again.", Toast.LENGTH_LONG).show();
                 }
         );
@@ -127,9 +127,16 @@ public class BatchDetailActivity extends AppCompatActivity {
         final List<Measurement> l = viewModel.getMeasurements().getValue();
         measurementListAdapter.submitList(l == null ? new ArrayList<Measurement>() : l);
 
+        Log.i(TAG, "this is the list from the batch ->>"+l);
+
         measurementList.setAdapter(measurementListAdapter);
         viewModel.getMeasurements().observe(this,
-                measurement -> measurementListAdapter.submitList(measurement));
+                measurement -> {
+                    Log.i(TAG, "this is the list from the batch inside of observe->>"+l);
+                    Log.i(TAG, "setUpMeasurementList: inside set adapter , this is measurement"+measurement);
+            measurementListAdapter.submitList(measurement);
+
+        });
     }
 
     private void goToMeasurementDetail(Measurement measurement) {

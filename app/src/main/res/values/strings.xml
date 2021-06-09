@@ -99,5 +99,7 @@
     <string name="temperatureUnitsText">Temperature units</string>
     <string name="temperatureFtext">Temperature °F</string>
     <string name="temperatureCorrectionFText">Temperature Correction °F</string>
+    <string name="updateTextBatch">Update Batch</string>
+    <string name="exportBatch">Export</string>
 
 </resources>
