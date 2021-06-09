@@ -3,7 +3,7 @@ package com.trueproof.trueproof.di;
 import android.content.Context;
 import android.content.res.Resources;
 
-import com.trueproof.trueproof.logic.Proofing;
+import com.trueproof.core.logic.Proofing;
 
 import java.io.InputStream;
 

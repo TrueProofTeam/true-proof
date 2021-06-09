@@ -1,4 +1,4 @@
-package com.trueproof.trueproof.logic;
+package com.trueproof.core.logic;
 
 import org.junit.Before;
 import org.junit.Test;

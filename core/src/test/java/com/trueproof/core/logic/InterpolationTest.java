@@ -1,8 +1,8 @@
-package com.trueproof.trueproof.logic;
+package com.trueproof.core.logic;
 
 import org.junit.Test;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 public class InterpolationTest {
     static final double DELTA = 0.001;

@@ -6,14 +6,13 @@ import android.util.Log;
 import androidx.annotation.RequiresApi;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
-import androidx.lifecycle.ViewModel;
 
 import com.amplifyframework.datastore.generated.model.Batch;
 import com.amplifyframework.datastore.generated.model.Measurement;
 import com.amplifyframework.datastore.generated.model.TemperatureUnit;
 import com.amplifyframework.datastore.generated.model.User;
-import com.trueproof.trueproof.logic.Proofing;
-import com.trueproof.trueproof.logic.UnitConversions;
+import com.trueproof.core.logic.Proofing;
+import com.trueproof.core.logic.UnitConversions;
 import com.trueproof.trueproof.utils.AWSDateTime;
 import com.trueproof.trueproof.utils.JsonConverter;
 import com.trueproof.trueproof.utils.MeasurementRepository;
@@ -29,7 +28,7 @@ import dagger.hilt.android.lifecycle.HiltViewModel;
 public class TakeMeasurementViewModel extends MeasurementViewModel {
     private static final String TAG = "TakeMeasurement/VM/";
     private final JsonConverter jsonConverter;
-    private MutableLiveData<Boolean> updatedLiveData = new MutableLiveData<>();
+    private final MutableLiveData<Boolean> updatedLiveData = new MutableLiveData<>();
     private Batch batch;
 
     @Inject
@@ -60,7 +59,7 @@ public class TakeMeasurementViewModel extends MeasurementViewModel {
         double tempCorr = 0.0;
         if (getTemperatureUnit() == TemperatureUnit.FAHRENHEIT) {
             temp = getTemperature();
-            tempCorr = getTemperatureCorrection() ;
+            tempCorr = getTemperatureCorrection();
         } else {
             temp = UnitConversions.celsiusToFahrenheit(getTemperature());
             tempCorr = getTemperatureCorrection() != null ?

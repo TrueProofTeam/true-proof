@@ -5,8 +5,8 @@ import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
 import com.amplifyframework.datastore.generated.model.TemperatureUnit;
-import com.trueproof.trueproof.logic.Proofing;
-import com.trueproof.trueproof.logic.UnitConversions;
+import com.trueproof.core.logic.Proofing;
+import com.trueproof.core.logic.UnitConversions;
 import com.trueproof.trueproof.utils.MeasurementRepository;
 
 public abstract class MeasurementViewModel extends ViewModel {
