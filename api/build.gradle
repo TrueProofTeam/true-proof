@@ -23,3 +23,11 @@ task buildZip(type: Zip) {
         from configurations.runtimeClasspath
     }
 }
+
+task buildJar(type: Jar) {
+    from compileJava
+    from processResources
+    into('lib') {
+        from configurations.runtimeClasspath
+    }
+}
