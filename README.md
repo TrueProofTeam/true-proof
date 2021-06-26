@@ -2,7 +2,10 @@
 
 ## About/summary
 
-True Proof is a beta android app pending approval in the App Store. It offers an intuitive calculator for calculating true proof's required by the US' Alcohol and Tobacco Tax and Trade Bureau to distill spirits. It also offer's a user friendly database that stores information about batches and measurements taken for those batches. Functionality for multiple users to contribute to batches from the same distillery coming soon!
+True Proof is a beta Android app available for free in the Google Play Store. It offers an intuitive calculator for measuring the true proofs required by the US Alcohol and Tobacco Tax and Trade Bureau to distill spirits. It also offers a user-friendly database that stores information about batches and measurements taken for those batches. Functionality coming soon includes: 
+
+ - CSV export of data 
+ - the ability for multiple users to contribute batches from the same distillery
 
 [<img alt="Get it on Google Play" src="https://play.google.com/intl/en_us/badges/images/generic/en_badge_web_generic.png" height="80">](https://play.google.com/store/apps/details?id=com.trueproof.trueproof)
 
