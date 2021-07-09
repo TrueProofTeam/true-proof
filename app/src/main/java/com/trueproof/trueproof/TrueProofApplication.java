@@ -20,7 +20,6 @@ public class TrueProofApplication extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
-
         try {
             Amplify.addPlugin(new AWSApiPlugin());
             Amplify.addPlugin(new AWSCognitoAuthPlugin());

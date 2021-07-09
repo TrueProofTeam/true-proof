@@ -1,8 +1,10 @@
 package com.trueproof.trueproof.activities;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Environment;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -33,6 +35,10 @@ import com.trueproof.trueproof.utils.JsonConverter;
 import com.trueproof.trueproof.utils.UserSettings;
 import com.trueproof.trueproof.viewmodels.BatchDetailViewModel;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -85,6 +91,7 @@ public class BatchDetailActivity extends AppCompatActivity {
         observeLiveData();
         setUpMeasurementList();
         setUpSpinner();
+
     }
 
     @Override
@@ -182,6 +189,7 @@ public class BatchDetailActivity extends AppCompatActivity {
                 .status(status)
                 .build();
         viewModel.updateBatch(newBatch);
+
     }
 
     private void populateTextFields(Batch batch) {
@@ -196,6 +204,40 @@ public class BatchDetailActivity extends AppCompatActivity {
                 if (spinner.getItemAtPosition(i).equals(status)) spinner.setSelection(i);
             }
         }
+    }
+    public void sendAsEmail (Batch batch){
+        String batchHeader = "\"Type\",\"Number\", \"Identifier\", \"Created At\", \"Updated At\"";
+        String batchInfo = "\"" + batch.getType() + "\",\"" + batch.getBatchNumber() +"\",\"" +
+                batch.getBatchIdentifier()+ "\"";
+//        +"\",\"" + batch.getCreatedAt().toString()+"\",\"" + batch.getUpdatedAt().toString()
+        String combinedString = batchHeader + "\n" + batchInfo;
+        File file = null;
+        File root = Environment.getExternalStorageDirectory();
+        if (root.canWrite()){
+            File directory = new File (root.getAbsolutePath() + "/BatchData");
+            directory.mkdirs();
+            file = new File (directory, "Data.csv");
+            FileOutputStream out = null;
+            try{
+                out = new FileOutputStream(file);
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+            }
+            try{
+                out.write(combinedString.getBytes());
+                out.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+        }
+        Uri uri;
+        uri = Uri.fromFile(file);
+        Intent send = new Intent(Intent.ACTION_SEND);
+        send.putExtra(Intent.EXTRA_SUBJECT, batch.getBatchIdentifier());
+        send.putExtra(Intent.EXTRA_STREAM, uri);
+        send.setType("text/html");
+        startActivity(send);
     }
 
     @Override
